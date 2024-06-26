@@ -229,7 +229,7 @@
                                                     </figure>
                                                     <div class="tu-listing-heading">
                                                         <h5><a
-                                                                href="/student/tutorprofile/{{ $tutorlist->sub_map_id }}">{{ $tutorlist->name }}</a>
+                                                                href="/student/tutorprofile/{{ $tutorlist->tutor_id }}">{{ $tutorlist->name }}</a>
                                                             <i class="icon icon-check-circle tu-greenclr"
                                                                 data-tippy-trigger="mouseenter"
                                                                 data-tippy-html="#tu-verifed" data-tippy-interactive="true"
