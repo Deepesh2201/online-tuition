@@ -13,7 +13,7 @@
                 @endif --}}
                 <div class="page-content">
                     <div class="container-fluid">
-                        
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
@@ -21,7 +21,7 @@
                                     <h4 class="mb-sm-0">Dashboard</h4>
                                     @if (session('userid')->is_active == 0)
                                     <div class="alert alert-danger">Your account is <b>Inactive</b>. Kindly contact admin for activation.  To chat with admin <a href="adminmessages" class="btn btn-sm btn-success">Click here</a></div>
-                                        
+
                                     @endif
 
                                 <div class="page-title-right">
@@ -47,7 +47,7 @@
                                     <div class="topCradCount">
                                         <h2 class="pt-2" style="color:#D63531;"><span class="counter-value" data-target="{{$studentscount ?? "0"}}">{{$studentscount ?? "0"}}</span>
                                         </h2>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -164,14 +164,14 @@
                                                <a href="{{$class->join_url}}"> <span class="endClass"> Join Class</span></a>
                                                 @else
                                                  <a href="getclasslist">   <span class="endClass"> Start Class</span> </a>
-                                                
+
                                                 @endif
                                             </td>
                                             {{-- <td><span class="endClass"> End Class</span></td> --}}
                                         </tr>
                                         @endforeach
                                     </tbody>
-                                   
+
                                 </table>
                             </div>
 
@@ -192,7 +192,7 @@
                                 <table class="table dash_table">
                                     <thead>
                                         <tr class="">
-                                            
+
                                             <th>Student</th>
                                             <th>Subject</th>
                                             <th>slot</th>
@@ -211,7 +211,7 @@
                                                 </div>
                                             </td>
                                             <td>{{$demo->subject}}</td>
-                                            
+
                                             <td>{{ $demo->slot_confirmed ? $demo->slot_confirmed->format('d/m/Y h:i:s A') :  $demo->slot_1->format('d/m/Y h:i:s A') }}</td>
                                             <td>
                                             @if ($demo->status == 1)
@@ -231,8 +231,8 @@
                                             <td><a href="{{ $demo->remarks ?? $demo->demo_link}}"><span class="endClass"> Launch Trial Class</span></a></td>
                                         </tr>
                                         @endforeach
-                                       
-{{-- 
+
+{{--
                                         <tr>
                                             <td>
                                                 <div class="namePic">
@@ -242,13 +242,13 @@
                                                 </div>
                                             </td>
                                             <td>Maths</td>
-                                            
+
                                             <td>Today<br>10:00am</td>
                                             <td> <span class="confirm">Conffirmed</span></td>
                                             <td><span class="hrsLeft">9 Hours Left</span></td>
                                         </tr>
 
-                                       
+
 
                                         <tr>
                                         <td>
@@ -259,7 +259,7 @@
                                                 </div>
                                             </td>
                                             <td>Maths</td>
-                                           
+
                                             <td>Today<br>10:00am</td>
                                             <td> <span class="pending">Pending</span></td>
                                             <td>
@@ -279,7 +279,7 @@
                                                 </div>
                                             </td>
                                             <td>Maths</td>
-                                        
+
                                             <td>Today<br>10:00am</td>
                                             <td> <span class="pending">Pending</span></td>
                                             <td>
@@ -291,7 +291,7 @@
                                             </td>
                                         </tr> --}}
                                     </tbody>
-                                   
+
                                 </table>
                             </div>
 
@@ -301,7 +301,7 @@
                 </div>
             </div> <!-- end row-->
 
-            <div class="row">
+            <div class="row" hidden>
                 <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
                     <div class="card card-animate">
                         <div class="cardTitle">
@@ -326,9 +326,9 @@
                                         </tr>
                                     </thead> -->
                                     <tbody>
-                                       
+
                                     </tbody>
-                                  
+
 
                                 </table>
 
@@ -347,7 +347,7 @@
                                             <td>Maths</td>
                                             <td>Algebra</td>
                                             <td>Today 10:00am</td>
-                                           
+
                                             <td><span class="test">Test</span></td>
                                         </tr>
 
@@ -355,11 +355,11 @@
                                             <td>Maths</td>
                                             <td>Algebra</td>
                                             <td>Today 10:00am</td>
-                                            
+
                                             <td><span class="quizs">Quiz</span></td>
                                         </tr>
                                     </tbody>
-                                   
+
 
                                 </table>
 
@@ -388,7 +388,7 @@
                                 <table class="table trialtable dash_table" id="">
                                     <thead>
                                         <tr class="">
-                                           
+
                                             <th>Total Marks</th>
                                             <th>Test</th>
                                             <th>Obtained</th>
@@ -397,10 +397,10 @@
                                     </thead>
 
                                     <tbody>
-                                       
+
                                     </tbody>
 
-                                   
+
 
                                 </table>
                             </div>
@@ -417,7 +417,7 @@
                                     </tr>
                                 </thead>
 
-                             
+
 
                             </table>
                         </div>

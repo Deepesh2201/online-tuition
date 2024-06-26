@@ -72,15 +72,17 @@
                     </span>
                 </button>
 
+               <div class="topBtn">
                 <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon">
-                    <a href="/tutor/tutorslots"><div class="btn btn-primary">Slot Management</div></a>
-                </button>
-                <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon">
-                    <a href="/tutor/getclasslist"><div class="btn btn-primary">Upcoming Classes</div></a>
-                </button>
-                <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon">
-                    <a href="/" target="_blank"><div class="btn btn-primary">Visit Website</div></a>
-                </button>
+                        <a href="/tutor/tutorslots"><div class="btn btn-primary">Slot Management</div></a>
+                    </button>
+                    <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon">
+                        <a href="/tutor/getclasslist"><div class="btn btn-primary">Upcoming Classes</div></a>
+                    </button>
+                    <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon">
+                        <a href="/" target="_blank"><div class="btn btn-primary">Visit Website</div></a>
+                    </button>
+               </div>
 
             </div>
 

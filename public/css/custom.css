@@ -525,14 +525,14 @@ input[type="range"]::-ms-thumb {
 }
 
 .pre, .next{
-    width: 50%; 
+    width: 50%;
  }
- 
+
  .ansSec{
    border: 1px solid darkgray;
    padding: 20px;
  }
- 
+
  .optionDiv{
    border-bottom: 1px solid lightgray;
  }
@@ -581,9 +581,9 @@ input[type="range"]::-ms-thumb {
 }
 .dayTime{
     display: grid;
-    
+
 }
-  
+
 .namePic{
     display: flex;
 
@@ -613,11 +613,11 @@ input[type="range"]::-ms-thumb {
 }
 
 .confirm{
-    background-color: #D2FFCB; 
+    background-color: #D2FFCB;
     font-size: smaller;
     padding: 1px 10px 1px 10px;
     border-radius: 3px;
-    
+
 }
 
 .pending{
@@ -712,7 +712,7 @@ input[type="range"]::-ms-thumb {
     margin-right: 5px;
     margin-bottom: 15px;
     margin-top: 10px;
-   
+
 }
 
 .btn1{
@@ -741,9 +741,9 @@ input[type="range"]::-ms-thumb {
 
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-   
 
-   
+
+
 }
 .slides::-webkit-scrollbar {
     width: 10px;
@@ -760,7 +760,7 @@ input[type="range"]::-ms-thumb {
 .slides > div {
     scroll-snap-align: start;
     flex-shrink: 0;
-   
+
     /* margin-right: 15px;
     border-radius: 20px; */
     /* background: #ccf3d9; */
@@ -770,8 +770,8 @@ input[type="range"]::-ms-thumb {
     transition: transform 0.5s;
     position: relative;
 
-   
-    
+
+
 }
 
 
@@ -787,9 +787,9 @@ input[type="range"]::-ms-thumb {
     margin-bottom: 30px;
     margin-right: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2) !important;
-    
+
   }
-  
+
   .ratePerHr{
     width:100%;
     position: relative;
@@ -797,32 +797,32 @@ input[type="range"]::-ms-thumb {
     background-color: black;
     opacity: 0.7;
     border-radius: 0 0 10px 10px;
-  
+
   }
-  
+
   .ratePerHr p{
     color: White;
     text-align: center;
-  
+
   }
-  
+
   .tutorcardImg{
     width: 35%;
   }
-  
+
   .tutorDesc{
     width: 65%;
-    
+
   }
-  
+
   .tutorcardImg img{
     border-radius: 10px;
     /* width: 140px; */
     height: 160px;
     margin-top: -35px;
-   
+
   }
-  
+
   /* .tutorcardImg p{
     background-color: red;
     position: relative;
@@ -831,40 +831,40 @@ input[type="range"]::-ms-thumb {
     opacity: 0.6;
     text-align: center;
   } */
-  
+
   .tutorDesc{
     margin-left: 20px;
   }
-  
+
   .tutorDesc .tutname{
     font-size: 16px;
     font-weight: 700;
   }
-  
+
   .tutorTable tr td{
     font-size: 14px;
     line-height: 2.4 !important;
-    
+
   }
-  
+
   .btnSec{
     margin-top: 12px;
-    
+
   }
-  
+
   .btnSec button{
     background-color: #4B3C99;
     color: white;
     border-radius: 5px;
     padding: 1px 7px 1px 7px;
-    
+
   }
-  
+
   .btnSec button:hover{
     background-color: #4B3C99;
     color: white;
   }
-  
+
   .floattright{
     float: right;
   }
@@ -882,7 +882,7 @@ input[type="range"]::-ms-thumb {
   .righttutor button:hover{
     background-color: #4B3C99;
     color: #fff;
-  
+
   }
 
   .tutor_sub{
@@ -924,8 +924,8 @@ input[type="range"]::-ms-thumb {
     align-items: center;
     border: 1px solid #88B0F1;
   }
- 
-  
+
+
   .percentage {
     position: relative;
     left: 13px;
@@ -935,7 +935,7 @@ input[type="range"]::-ms-thumb {
     font-weight: 600;
 
   }
-  
+
   @media screen and (max-width: 800px) {
     :root {
       --progress-bar-width: 40px;
@@ -943,7 +943,7 @@ input[type="range"]::-ms-thumb {
       --font-size: 1.3rem;
     }
   }
-  
+
   @media screen and (max-width: 500px) {
     :root {
       --progress-bar-width: 30px;
@@ -952,12 +952,12 @@ input[type="range"]::-ms-thumb {
     }
   }
 
- 
+
 
   .subItems {
-    display: grid;  
+    display: grid;
     height: 150px;
-   
+
   }
   .subItems ul li a{
     float: left;
@@ -975,7 +975,7 @@ input[type="range"]::-ms-thumb {
 
    .subSlide{
     margin-left: 15px !important;
-    
+
   }
 
   .allSubjects{
@@ -984,7 +984,7 @@ input[type="range"]::-ms-thumb {
 
   .submneu{
     display: flex;
-    
+
   }
 
   .submneu img{
@@ -1018,5 +1018,48 @@ input[type="range"]::-ms-thumb {
   .menu-link img{
     margin-right: 10px;
   }
-   
- 
+
+
+
+  .d-flex >.topBtn{
+    display: flex;
+    justify-content: center;
+    margin-left: 90px;
+  }
+
+
+
+
+
+  @media only screen and (max-width: 480px) {
+    .d-flex >.topBtn {
+        margin-left:0;
+
+    }
+    .listHeader {
+        margin-top: 10px;
+    }
+
+
+
+
+  }
+  @media only screen and (max-width: 767px) {
+    .d-flex >.topBtn {
+        margin-left:0;
+
+
+    }
+    .listHeader {
+        margin-top: 10px;
+    }
+  }
+  @media only screen and (max-width: 767px) and (orientation: landscape) {
+    .d-flex >.topBtn {
+        margin-left:0;
+    }
+
+    .listHeader {
+        margin-top: 10px;
+    }
+  }

@@ -13,7 +13,7 @@
             <div class="alert alert-danger">{{Session::get('fail')}}</div>
             @endif
         <div class="container-fluid">
-            
+
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
@@ -330,7 +330,7 @@
                 </div>
             </div> <!-- end row-->
 
-            <div class="row">
+            <div class="row" hidden>
                 <div class="col-md-6">
                     <div class="card card-animate">
                         <div class="cardTitle">
@@ -377,7 +377,7 @@
                                              <td><a href="{{ url('student/taketest') }}/{{ $upcomingQuiz->id }}"><span
                                                 class="test">Start Test</span></a></td>
                                          @endif
-                                            
+
                                         </tr>
                                         @endforeach
 
@@ -547,7 +547,7 @@
                             <select class="form-control" id="subjectlistid" name="subjectlistid">
                                 <option value="">-- Select --</option>
                                 @foreach ($subjectlistsdata as $subject)
-        
+
                                 <option value="{{$subject->subject_id}}">{{$subject->subject_name}}</option>
                                 @endforeach
                             </select>
@@ -559,7 +559,7 @@
                                 <option value="">--Select--</option>
                                 @foreach ($gradelists as $grade)
                                 <option value="{{$grade->id}}">{{$grade->name}}</option>
-        
+
                                 @endforeach
                             </select>
                         </div>
@@ -575,7 +575,7 @@
                         <div class="col-md-3 col-lg-3 col-xs-6 col-sm-6  ">
                             <div class="arrows">
                                <a href="searchtutor"> <button class="btn btn-sm ">Advance Search</button></a>
-                                
+
                             </div>
 
 
@@ -918,13 +918,13 @@
 
             </div> --}}
 
-            <!-- 
+            <!--
             <div class="allSubjects" id="allSubjects" hidden>
                 <div class="sliderr mb-5">
                     <div class="slides">
                         @foreach ($subjectlists as $subject)
-                            
-                               
+
+
                                 <div id="slide-1">
                                     <div class="subSlide">
                                         <div class="card card-animate">
@@ -945,7 +945,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+
                         @endforeach
                         @if (isset($currentCategory))
                             </ul>
