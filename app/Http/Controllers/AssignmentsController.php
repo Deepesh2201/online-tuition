@@ -134,8 +134,37 @@ class AssignmentsController extends Controller
         ->groupBy('student_assignment_lists.id', 'student_assignment_lists.name','student_assignment_lists.topic', 'subjects.name', 'classes.name', 'studentregistrations.name', 'studentregistrations.id')
         ->orderBy('created_at', 'desc')
         ->get();
-        $students = studentregistration::select('*')
-        ->where('is_active','1')
+        // $students = studentregistration::select('*')
+        // ->where('is_active','1')
+        // ->get();
+        $students = studentregistration::select(
+            'studentregistrations.*',
+            'studentprofiles.profile_pic as profile_pic'
+        )
+        ->join('studentprofiles', 'studentprofiles.student_id', '=', 'studentregistrations.id')
+        ->join('paymentstudents', 'paymentstudents.student_id', '=', 'studentregistrations.id')
+        ->where('paymentstudents.tutor_id', session('userid')->id)
+        ->where('is_active', 1)
+        ->groupBy('studentregistrations.id',
+        'studentprofiles.profile_pic',
+        'studentregistrations.name',
+        'studentregistrations.mobile',
+        'studentregistrations.email',
+        'studentregistrations.is_mobile_verified',
+        'studentregistrations.mobile_verified_at',
+        'studentregistrations.is_email_verified',
+        'studentregistrations.email_verified_at',
+        'studentregistrations.password',
+        'studentregistrations.class_id',
+        'studentregistrations.role_id',
+        'studentregistrations.is_active',
+        'studentregistrations.remember_token',
+        'studentregistrations.created_at',
+        'studentregistrations.updated_at',
+        'studentregistrations.mobile_otp',
+        'studentregistrations.email_otp',
+        'studentregistrations.parent_password'
+        )
         ->get();
         return view('tutor.assignments', compact('assignments', 'classes','students'));
     }
