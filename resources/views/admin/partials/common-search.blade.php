@@ -35,7 +35,6 @@
             <td>{{ $assignment->class }}</td>
             <td>{{ $assignment->subject }}</td>
             <td>{{ $assignment->topic }}</td>
-            <td>{{ $assignment->batch }}</td>
             <td>{{ $assignment->assignment_name }}</td>
             <td>{{ $assignment->assignment_description }}</td>
             <td><a href="{{ url('uploads/documents/assignments') }}/{{ $assignment->assignment_link }}"

@@ -86,7 +86,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-6 col-ms-6 mb-3">
                                     <label>Class/Grade<span style="color:red">*</span></label>
-                                    <select type="text" class="form-control" id="class" name="class"
+                                    <select type="text" class="form-control" id="class" name="class" required
                                         onchange="fetchSubjects()">
                                         @foreach ($classes as $class)
                                         <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -100,8 +100,8 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-ms-6 mb-3">
                                     <label>Subject<span style="color:red">*</span></label>
-                                    <select type="text" class="form-control" id="subject" name="subject"
-                                        onchange="fetchTopics();batchbysubject()">
+                                    <select type="text" class="form-control" id="subject" name="subject" required
+                                        onchange="batchbysubject()">
 
                                     </select>
                                     <span class="text-danger">
@@ -127,9 +127,7 @@
 
                                 <div class="col-12 col-md-6 col-ms-6 mb-3">
                                     <label>Topic<span style="color:red">*</span></label>
-                                    <select type="text" class="form-control" id="topic" name="topic">
-
-                                    </select>
+                                    <input type="text" class="form-control" id="topic" name="topic" required>
                                     <span class="text-danger">
                                         @error('topic')
                                         {{ 'Topic is required' }}
@@ -148,7 +146,7 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-ms-6 mb-3">
                                     <label>Assignment Name<span style="color:red">*</span></label>
-                                    <input type="text" class="form-control" id="assignname" name="assignname">
+                                    <input type="text" class="form-control" id="assignname" name="assignname" required>
                                     <span class="text-danger">
                                         @error('assignname')
                                         {{ 'Name is required' }}
@@ -157,7 +155,7 @@
                                 </div>
                                 <div class="col-12 col-md-12 col-ms-12 mb-3">
                                     <label>Assignment Description<span style="color:red">*</span></label>
-                                    <textarea class="form-control" id="assigndesc" name="assigndesc"></textarea>
+                                    <textarea class="form-control" id="assigndesc" name="assigndesc" required></textarea>
                                     <span class="text-danger">
                                         @error('assigndesc')
                                         {{ 'Description is required' }}
@@ -167,7 +165,7 @@
 
                                 <div class="col-12 col-md-6 col-ms-6 mb-3">
                                     <label>Assignment Start Date<span style="color:red">*</span></label>
-                                    <input type="date" class="form-control" id="assigstartdate" name="assigstartdate">
+                                    <input type="date" class="form-control" id="assigstartdate" name="assigstartdate" required>
                                     <span class="text-danger">
                                         @error('assigstartdate')
                                         {{ 'Start date is required' }}
@@ -176,7 +174,7 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-ms-6 mb-3">
                                     <label>Assignment End Date<span style="color:red">*</span></label>
-                                    <input type="date" class="form-control" id="assigenddate" name="assigenddate">
+                                    <input type="date" class="form-control" id="assigenddate" name="assigenddate" required>
                                     <span class="text-danger">
                                         @error('assigenddate')
                                         {{ 'End date is required' }}

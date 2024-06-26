@@ -40,9 +40,9 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-3 mt-4">
+                            {{-- <div class="col-md-3 mt-4">
                                 <input type="text" class="form-control" name="topic" placeholder="Enter Topic">
-                            </div>
+                            </div> --}}
 
 
 

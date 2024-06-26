@@ -111,22 +111,29 @@ class AssignmentsController extends Controller
             ->get();
         return view('admin.assignments', compact('datas'));
     }
- 
+
     public function tutorassignments()
     {
         $classes = (new CommonController)->classes();
-        $assignments = StudentAssignmentList::select('*', 'student_assignment_lists.id as assignment_id', 'student_assignment_lists.name as assignment_name', 'subjects.name as subject', 'classes.name as class', 'topics.name as topic','studentregistrations.name as studentname','studentregistrations.id as studentid')
-            ->join('subjects', 'subjects.id', 'student_assignment_lists.subject_id')
-            ->join('classes', 'classes.id', 'student_assignment_lists.class_id')
-            ->join('topics', 'topics.id', 'student_assignment_lists.topic_id')
-            ->leftjoin('studentregistrations','studentregistrations.id','student_assignment_lists.student_id')
-            ->leftjoin('student_assignments','student_assignments.submitted_by','student_assignment_lists.student_id')
-            // ->where('student_assignments.assignment_id','student_assignment_lists.id')
-            // ->leftjoin('student_assignments','student_assignments.assignment_id','student_assignment_lists.id')
-            ->where('student_assignment_lists.is_active', 1)
-            ->orderby('student_assignment_lists.created_at','desc')
-            ->where('student_assignment_lists.assigned_by', session('userid')->id)
-            ->get();
+        $assignments = StudentAssignmentList::select(
+            'student_assignment_lists.id as assignment_id',
+            'student_assignment_lists.name as assignment_name',
+            'student_assignment_lists.topic',
+            'subjects.name as subject',
+            'classes.name as class',
+            'studentregistrations.name as studentname',
+            'studentregistrations.id as studentid',
+            DB::raw('MAX(student_assignment_lists.created_at) as created_at')
+        )
+        ->join('subjects', 'subjects.id', '=', 'student_assignment_lists.subject_id')
+        ->join('classes', 'classes.id', '=', 'student_assignment_lists.class_id')
+        ->leftJoin('studentregistrations', 'studentregistrations.id', '=', 'student_assignment_lists.student_id')
+        ->leftJoin('student_assignments', 'student_assignments.submitted_by', '=', 'student_assignment_lists.student_id')
+        ->where('student_assignment_lists.is_active', 1)
+        ->where('student_assignment_lists.assigned_by', session('userid')->id)
+        ->groupBy('student_assignment_lists.id', 'student_assignment_lists.name','student_assignment_lists.topic', 'subjects.name', 'classes.name', 'studentregistrations.name', 'studentregistrations.id')
+        ->orderBy('created_at', 'desc')
+        ->get();
         $students = studentregistration::select('*')
         ->where('is_active','1')
         ->get();
@@ -170,7 +177,7 @@ class AssignmentsController extends Controller
         $data->class_id = $request->class;
         $data->subject_id = $request->subject;
         $data->student_id = $request->studentid;
-        $data->topic_id = $request->topic;
+        $data->topic = $request->topic;
         $data->assigned_by = session('userid')->id;
         $data->name = $request->assignname;
         $data->assignment_description = $request->assigndesc;
@@ -193,14 +200,12 @@ class AssignmentsController extends Controller
     {
         $classes = (new CommonController)->classes();
         $subjects = subjects::where('is_active',1)->get();
-        $assignments = StudentAssignmentList::select('*', 'student_assignment_lists.id as assignment_id', 'student_assignment_lists.id as assignment_id', 'student_assignment_lists.name as assignment_name', 'subjects.name as subject', 'classes.name as class', 'topics.name as topic', 'batches.name as batch')
+        $assignments = StudentAssignmentList::select('*', 'student_assignment_lists.id as assignment_id', 'student_assignment_lists.topic', 'student_assignment_lists.name as assignment_name', 'subjects.name as subject', 'classes.name as class',)
             ->join('subjects', 'subjects.id', 'student_assignment_lists.subject_id')
             ->join('classes', 'classes.id', 'student_assignment_lists.class_id')
-            ->join('topics', 'topics.id', 'student_assignment_lists.topic_id')
-            ->join('batches', 'batches.id', 'student_assignment_lists.batch_id')
+            // ->join('batches', 'batches.id', 'student_assignment_lists.batch_id')
             ->where('student_assignment_lists.is_active', 1)
-            ->where('student_assignment_lists.class_id', session('userid')->class_id)
-            // ->where('student_assignment_lists.student_id', session('userid')->id)
+            ->where('student_assignment_lists.student_id', session('userid')->id)
             ->paginate(10);
 
             $submissions = StudentAssignments::select('*')->where('submitted_by',session('userid')->id)->where('is_active',1)->get();
@@ -227,13 +232,11 @@ class AssignmentsController extends Controller
 
     public function studentassignmentsSearch(Request $request)
     {
-        $query = StudentAssignmentList::select('*', 'student_assignment_lists.id as assignment_id', 'student_assignment_lists.id as assignment_id', 'student_assignment_lists.name as assignment_name', 'subjects.name as subject', 'classes.name as class', 'topics.name as topic', 'batches.name as batch')
+        $query = StudentAssignmentList::select('*', 'student_assignment_lists.id as assignment_id', 'student_assignment_lists.topic', 'student_assignment_lists.name as assignment_name', 'subjects.name as subject', 'classes.name as class')
             ->join('subjects', 'subjects.id', 'student_assignment_lists.subject_id')
             ->join('classes', 'classes.id', 'student_assignment_lists.class_id')
-            ->join('topics', 'topics.id', 'student_assignment_lists.topic_id')
-            ->join('batches', 'batches.id', 'student_assignment_lists.batch_id')
             ->where('student_assignment_lists.is_active', 1)
-            ->where('student_assignment_lists.class_id', session('userid')->class_id);
+            ->where('student_assignment_lists.student_id', session('userid')->id);
 
         if ($request->class_name) {
             $query->where('student_assignment_lists.class_id', $request->class_name);

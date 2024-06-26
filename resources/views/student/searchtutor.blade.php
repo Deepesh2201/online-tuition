@@ -265,12 +265,12 @@
                                                             {{ $tutorlist->total_classes_done }}+ Lessons Completed
                                                         </span>
                                                     </li>
-                                                    <li>
+                                                    {{-- <li>
                                                         <span>
                                                             <i class="icon icon-video tu-orangeclr"></i>
                                                             {{ $tutorlist->total_topics }}+ Topics
                                                         </span>
-                                                    </li>
+                                                    </li> --}}
                                                 </ul>
                                             </div>
                                         </div>
