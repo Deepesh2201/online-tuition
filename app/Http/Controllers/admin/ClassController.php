@@ -122,15 +122,15 @@ class ClassController extends Controller
 
         $targetValue = session('userid')->id; // The value we want to check in the JSON array
 
-        $classes = zoom_classes::select('zoom_classes.*','zoom_classes.id as class_id','zoom_classes.topic_name as topics','zoom_classes.tutor_id as tutor_id','subjects.id as subject_id','subjects.name as subjects',)
-        ->join('slot_bookings','slot_bookings.meeting_id','zoom_classes.id')
+        $classes = zoom_classes::select('zoom_classes.*','zoom_classes.id as class_id','zoom_classes.topic_name as topics','zoom_classes.tutor_id as tutor_id')
+        // ->join('slot_bookings','slot_bookings.meeting_id','zoom_classes.id')
         // ->join('batchstudentmappings','batchstudentmappings.batch_id','zoom_classes.batch_id')
         // ->join('batches','batches.id','zoom_classes.batch_id')
-        ->join('subjects','subjects.id','slot_bookings.subject_id')
+        // ->join('subjects','subjects.id','slot_bookings.subject_id')
         // ->join('topics','topics.id','zoom_classes.topic_id')
         // ->whereRaw("JSON_CONTAINS(batchstudentmappings.student_data, '\"$targetValue\"')")
         ->where('zoom_classes.is_active',1)
-        ->where('slot_bookings.student_id',session('userid')->id)
+        ->where('zoom_classes.student_id',session('userid')->id)
         // ->where('zoom_classes.status','like', '%waiting%')
         ->where('zoom_classes.is_completed',1)
         ->paginate(10000);

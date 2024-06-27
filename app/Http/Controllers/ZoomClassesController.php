@@ -368,7 +368,7 @@ class ZoomClassesController extends Controller
     }
 
     public function completed(Request $request,$id){
-        
+
         $request->validate([
             'video_link' => 'required',
         ]);
@@ -376,6 +376,7 @@ class ZoomClassesController extends Controller
         $data->is_completed = 1;
         $data->recording_link = $request->video_link;
         $data->status = 'Completed';
+        $data->completed_at = Carbon::now();
         $res = $data->save();
 
         $slotupdate = SlotBooking::where('meeting_id', '=', $data->id)->first();
@@ -401,6 +402,7 @@ class ZoomClassesController extends Controller
     public function liveclassstatusupdate(Request $request){
         $data = zoom_classes::find($request->id);
     $data->status = 'Started';
+    $data->started_at = Carbon::Now();
     $res = $data->save();
     return json_encode(array('statusCode' => 200));
     }
@@ -412,7 +414,7 @@ class ZoomClassesController extends Controller
         // $sub = subjects::find($tpc->subject_id);
         $slotbooking = SlotBooking::select('*')->where('meeting_id','=',$class->id)->first();
         $sub = subjects::find($slotbooking->subject_id);
-        
+
         $chk = studentattendance::select('*')
         ->where('class_id',$sub->class_id)
         ->where('subject_id',$sub->id)

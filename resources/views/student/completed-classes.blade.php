@@ -11,7 +11,7 @@
         justify-content: space-between;
     }
 
-   
+
     </style>
 
     <div class="page-content">
@@ -27,7 +27,7 @@
                 <h3>Completed Classes</h3>
             </div>
 
-            
+
 
             <form id="payment-search">
                 <div class="row ">
@@ -82,11 +82,12 @@
                             <th scope="col">S.No.</th>
                             {{-- <th scope="col">Meeting ID</th> --}}
                             {{-- <th scope="col">Status</th> --}}
-                            <th scope="col">Subject</th>
+                            {{-- <th scope="col">Subject</th> --}}
                             {{-- <th scope="col">Batch</th> --}}
-                            <th scope="col">Topic</th>
-                            <th scope="col">Start Time</th>
-                            <th scope="col">Duration</th>
+                            {{-- <th scope="col">Topic</th> --}}
+                            <th scope="col">Started At</th>
+                            <th scope="col">Completed At</th>
+                            {{-- <th scope="col">Duration</th> --}}
                             <th scope="col">Recordings</th>
                         </tr>
                     </thead>
@@ -96,18 +97,19 @@
                             <td>{{ $loop->iteration }}</td>
                             {{-- <td>{{ $class->meeting_id }}</td> --}}
                             {{-- <td>{{ $class->status }}</td> --}}
-                            <td>{{ $class->subjects }}</td>
+                            {{-- <td>{{ $class->subjects }}</td> --}}
                             {{-- <td>{{ $class->batch }}</td> --}}
-                            <td>{{ $class->topics }}</td>
-                            <td>{{ $class->start_time }}</td>
-                            <td>{{ $class->duration }}</td>
+                            {{-- <td>{{ $class->topics }}</td> --}}
+                            <td>{{ $class->started_at }}</td>
+                            <td>{{ $class->completed_at }}</td>
+                            {{-- <td>{{ $class->duration }}</td> --}}
                             <td>
                                 @if ($class->is_completed == 1)
                                 <button class="btn btn-sm btn-success" onclick="play('{{$class->recording_link}}');"><i class="ri-play-circle-line"></i> Play</button>
                                 @endforelse
 
                             </td>
-                            
+
                         </tr>
                         @endforeach
 
@@ -209,7 +211,7 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            
+
             <div class="modal-body" id="iframeid">
             </div>
             <p id="link_test"></p>
@@ -259,9 +261,9 @@ function updateTableAndPagination(data) {
 }
 
 function play(link){
-    // document.getElementById('iframeid').innerHTML = `<iframe src="${link}" width="100%" height="480" allow="autoplay" allowfullscreen ="true"></iframe>`                   
-    // document.getElementById('link_test').innerHTML = `${link}`                   
-    
+    // document.getElementById('iframeid').innerHTML = `<iframe src="${link}" width="100%" height="480" allow="autoplay" allowfullscreen ="true"></iframe>`
+    // document.getElementById('link_test').innerHTML = `${link}`
+
     // $('#playModal').modal('show');
     window.location = link;
 }
