@@ -157,9 +157,13 @@
 
 // Fetch notifications and update count on page load
 
-// $(document).ready(function() {
-//     fetchNotificationsAndUpdateCount();
-// });
+$(document).ready(function() {
+    // Call the function immediately once the document is ready
+    fetchNotificationsAndUpdateCount();
+    
+    // Set an interval to call the function every 5 seconds (5000 milliseconds)
+    setInterval(fetchNotificationsAndUpdateCount, 5000);
+});
 
 // Event listener for clicking on a notification (assuming you have one)
 // $(document).on('click', '.notification-item', function() {
