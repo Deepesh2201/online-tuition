@@ -64,7 +64,7 @@
                             <button class="btn btn-sm btn-primary bookingBtns1" type="submit"><i
                                     class="ri-calendar-todo-fill"></i> &nbsp;Search Slot</button> &nbsp;
                             <button class="btn btn-sm btn-success bookingBtns1" type="button"
-                                onclick="openclassmodal();"><i class="ri-calendar-todo-fill"></i> &nbsp;Create Slot</button>
+                                onclick="openclassmodalcreate();"><i class="ri-calendar-todo-fill"></i> &nbsp;Create Slot</button>
                         </div>
                     </form>
                 </div>
@@ -254,13 +254,13 @@
                                                 checked> Apply for one day.
                                         </label>
                                     </div>
-                                    <div class="col-12 col-md-12 mb-3">
+                                    <div class="col-12 col-md-12 mb-3" id="forweekdiv">
                                         <label>
                                             <input type="radio" id="repeatOption" name="repeatOption" value="forweek">
                                             Apply for next 7 days.
                                         </label>
                                     </div>
-                                    <div class="col-12 col-md-12 mb-3">
+                                    <div class="col-12 col-md-12 mb-3" id="formonthdiv">
                                         <label>
                                             <input type="radio" id="repeatOption" name="repeatOption"
                                                 value="formonth"> Apply for next 30 days.
@@ -495,6 +495,21 @@
                 $('#slotid').val(id);
                 $('#classdate').val(date);
                 $('#classtime').val(slot);
+                $('#forweekdiv').hide();
+                $('#formonthdiv').hide();
+                
+
+
+                $('#scheduleclassmodal').modal('show')
+
+            }
+            function openclassmodalcreate(id, date, slot) {
+                $('#slotid').val(id);
+                $('#classdate').val(date);
+                $('#classtime').val(slot);
+                $('#forweekdiv').show();
+                $('#formonthdiv').show();
+                
 
 
                 $('#scheduleclassmodal').modal('show')
