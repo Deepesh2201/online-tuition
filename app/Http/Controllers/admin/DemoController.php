@@ -22,7 +22,7 @@ class DemoController extends Controller
         ->join('studentregistrations','studentregistrations.id','=','democlasses.student_id')
         ->orderby('democlasses.created_at','desc')
         // ->where('democlasses.student_id','=', session('userid')->id)
-        ->paginate(1000000);
+        ->paginate(100);
         $subjects = subjects::where('is_active',1)->get();
         $classes = classes::where('is_active',1)->get();
         $statuses = status::select('*')->get();

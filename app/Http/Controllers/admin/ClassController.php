@@ -315,7 +315,8 @@ return view('student.classes',get_defined_vars());
         ->leftjoin('topics','topics.id','=','zoom_classes.topic_id')
         ->leftjoin('subjects','subjects.id','=','topics.subject_id')
         ->leftjoin('classes','classes.id','=','subjects.class_id')
-        ->get();
+        ->orderby('zoom_classes.created_at','desc')
+        ->paginate(100);
 
         // dd($scheduledclasses);
         return view('admin.scheduledclasses',get_defined_vars());

@@ -313,8 +313,9 @@ public function admintutorslots(){
         ->leftJoin('studentprofiles','studentprofiles.student_id','=','slot_bookings.student_id')
         ->leftJoin('subjects','subjects.id','=','slot_bookings.subject_id')
         ->leftJoin('tutorregistrations','tutorregistrations.id','slot_bookings.tutor_id')
-        // ->whereDate('slot_bookings.date', '>=', now()->toDateString())
-        ->get();
+        ->orderby('slot_bookings.created_at','desc')
+        ->whereDate('slot_bookings.date', '>=', now()->toDateString())
+        ->paginate(100);
     return view('admin.tutorslotslist', get_defined_vars());
 }
 

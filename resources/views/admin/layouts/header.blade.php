@@ -552,12 +552,12 @@
                                     <li class="nav-item">
                                         <a href="{{route('admin.subject')}}" class="nav-link" data-key="t-team"> Subject </a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a href="{{route('admin.topic')}}" class="nav-link" data-key="t-timeline"> Topic </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{route('admin.batch')}}" class="nav-link" data-key="t-faqs"> Batch </a>
-                                    </li>
+                                    </li> --}}
 
                                 </ul>
                             </div>
