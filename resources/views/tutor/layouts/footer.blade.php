@@ -16,7 +16,65 @@
 </footer>
 </div>
 <!-- end main content-->
+<style>
+    .notification-popup {
+        display: none; /* Hide by default */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        text-align: center;
+    }
+    
+    .notification-popup button {
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: #ff0000;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    
+    .notification-popup button:hover {
+        background-color: #cc0000;
+    }
+    </style>
+    
+    
+    
+<!-- end main content-->
+<div id="notification-popup" class="notification-popup">
+    <p id="notificationpopupdata"></p>
+    <button onclick="closeNotification()">Close</button>
+    <audio id="notification-sound" src="{{url('sounds/notification.mp3')}}" preload="auto"></audio>
+</div>
 
+<script>
+    function showNotification(count) {
+        var popup = document.getElementById('notification-popup');
+        var sound = document.getElementById('notification-sound');
+        document.getElementById('notificationpopupdata').innerHTML='You have '+ count +' unread notifications';
+        
+        popup.style.display = 'block';
+        sound.play();
+    }
+    
+    function closeNotification() {
+        var popup = document.getElementById('notification-popup');
+        popup.style.display = 'none';
+    }
+    
+    // Call the function to show the notification
+    // showNotification();
+    </script>
+   
 
 <!-- JAVASCRIPT -->
 @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -76,6 +134,12 @@
         type: 'GET',
         success: function(response) {
             var unreadCount = response.unread_count;
+            if(response.unread_count > 0){
+                showNotification(response.unread_count);
+            }
+            else{
+                closeNotification();
+            }
             $('#unreadNotificationCount').text(unreadCount);
             // Update the class of the badge to visually indicate unread count
             if (unreadCount > 0) {
@@ -157,10 +221,16 @@
 
 // Fetch notifications and update count on page load
 
+// $(document).ready(function() {
+//     fetchNotificationsAndUpdateCount();
+// });
 $(document).ready(function() {
+    // Call the function immediately once the document is ready
     fetchNotificationsAndUpdateCount();
+    
+    // Set an interval to call the function every 5 seconds (5000 milliseconds)
+    setInterval(fetchNotificationsAndUpdateCount, 5000);
 });
-
 // Event listener for clicking on a notification (assuming you have one)
 // $(document).on('click', '.notification-item', function() {
 //     var notificationId = $(this).data('id');

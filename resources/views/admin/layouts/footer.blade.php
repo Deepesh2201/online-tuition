@@ -138,6 +138,9 @@
             if(response.unread_count > 0){
                 showNotification(response.unread_count);
             }
+            else{
+                closeNotification();
+            }
             $('#unreadNotificationCount').text(unreadCount);
             // Update the class of the badge to visually indicate unread count
             if (unreadCount > 0) {
