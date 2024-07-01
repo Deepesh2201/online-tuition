@@ -333,6 +333,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['AdminAuthenticate']], funct
     Route::get('tutormessagesload/{id}', [MessagesController::class, 'messagesbyadmintutormessagesload'])->name('admin.messages.tutormessagesload');
     Route::get('chatClearAdmintutor/{id}', [MessagesController::class, 'chatClearAdmintutor'])->name('admin.messages.cleartutormessages');
     Route::post('sendmessage', [MessagesController::class, 'messagesentbyadmin'])->name('admin.messages.send');
+    Route::post('messages/student/search', [MessagesController::class, 'chatstudentsearch'])->name('admin.chat.student.search');
+    Route::post('messages/tutor/search', [MessagesController::class, 'chattutorsearch'])->name('admin.chat.tutor.search');
     // Admin Reports
     Route::get('classes-report',[ReportController::class, 'admin_class_report'])->name('admin.reports.class-list');
     Route::get('chat-report',[ReportController::class, 'admin_chat_report'])->name('admin.reports.chat-list');

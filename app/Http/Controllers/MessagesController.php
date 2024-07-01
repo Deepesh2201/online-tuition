@@ -587,11 +587,32 @@ class MessagesController extends Controller
 
         return view('admin.message', compact('userlists'));
     }
+    public function chatstudentsearch(Request $request)
+    {
+        
+        $userlists = studentregistration::select('studentregistrations.*', 'studentprofiles.profile_pic as profile_pic')
+        ->join('studentprofiles', 'studentprofiles.student_id', '=', 'studentregistrations.id')
+        ->where('studentregistrations.is_active', 1)
+        ->where('studentregistrations.name', 'like', '%' . $request->searchtext . '%')
+        ->get();
+
+        return view('admin.message', compact('userlists'));
+    }
     public function messagesbyadmintutor()
     {
         $userlists = tutorregistration::select('tutorregistrations.*', 'tutorprofiles.profile_pic as profile_pic')
             ->join('tutorprofiles', 'tutorprofiles.tutor_id', 'tutorregistrations.id')
             ->where('is_active', 1)->get();
+
+        return view('admin.message', compact('userlists'));
+    }
+    public function chattutorsearch(Request $request)
+    {
+        $userlists = tutorregistration::select('tutorregistrations.*', 'tutorprofiles.profile_pic as profile_pic')
+        ->join('tutorprofiles', 'tutorprofiles.tutor_id', '=', 'tutorregistrations.id')
+        ->where('tutorregistrations.is_active', 1)
+        ->where('tutorregistrations.name', 'like', '%' . $request->searchtext . '%')
+        ->get();
 
         return view('admin.message', compact('userlists'));
     }
