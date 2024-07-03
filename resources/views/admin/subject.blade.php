@@ -125,7 +125,7 @@
                             </div>
                             <div class=" col-md-6 col-12 col-sm-6 form-group">
                                 <label class="ml-2">Upload Image<i style="color:red">*</i></label>
-                                <input type="file" class="form-control" id="uploadimage" value="" name="uploadimage" required>
+                                <input type="file" class="form-control" id="uploadimage" value="" name="uploadimage">
                             </div>
                             </div>
                             <span class="text-danger">

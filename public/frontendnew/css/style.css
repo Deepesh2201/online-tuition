@@ -1,8 +1,13 @@
 body {
 
+  margin: 0;
+  padding: 0;
   
   background-color: #fff;
   
+ 
+}
+html{
   overflow-x: hidden;
 }
 body:before {
@@ -156,13 +161,24 @@ header .navbar .dropdown-menu a {
   text-decoration: none;
   font-size: 16px;
   margin-left: 20px;
+
 }
 
 .logo > .mob > .fa-phone {
   color: #000;
+  font-weight: 600;
+  margin-top: 12px;
+  
 }
 .logo > .mob > span {
   color: #f97316;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.logoMobNum{
+  display: flex;
+  justify-content: start;
 }
 
 .btnSec {
@@ -213,7 +229,7 @@ header .navbar .dropdown-menu a {
 .overlayMTC {
   position: absolute;
   top: 0;
-  height: 520px;
+  height: 506px;
   background: hsla(0, 0%, 100%, 1);
 
   background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%, 1) 58%, hsla(286, 22%, 88%, 1) 100%); /* Black see-through */
@@ -239,9 +255,10 @@ header .navbar .dropdown-menu a {
   background-color: #fff;
   border-radius: 20px;
   /* padding: 0px 40px; */
-  margin: 50px;
+  margin: 30px 50px;
   opacity: 1;
   z-index: -1;
+  overflow: hidden;
 }
 
 .subSec ul {
@@ -250,6 +267,11 @@ header .navbar .dropdown-menu a {
   align-items: center;
   list-style: none;
   padding: 10px 40px;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  
 }
 
 .subSec ul li a {
@@ -262,6 +284,7 @@ header .navbar .dropdown-menu a {
   padding: 10px;
   margin: 5px;
   border-radius: 10px;
+  scroll-snap-align: start;
 }
 
 .subSec ul li:hover {
@@ -394,23 +417,26 @@ header .navbar .dropdown-menu a {
 }
 
 .howitwork-sec {
-  background-image: url("/img/icons/line.png");
+  background-image: url("../img/icons/curveline.png");
   background-repeat: no-repeat;
   /* background-position: 400px 145px; */
   background-position: 390px 260px;
 }
 
 .howitwork-sec2 {
-  background-image: url("/img/icons/Vector\ 7344.png");
+  background-image: url("../img/icons/Vector\ 7344.png");
   background-repeat: no-repeat;
-  /* background-position: 400px 145px; */
-  background-position: 390px 260px;
+  background-position: 280px 390px;
 }
 
 .how-card {
   border-radius: 20px;
 
   padding: 26px;
+}
+
+.how-card2{
+  width: 60%;
 }
 
 .card1 {
@@ -475,6 +501,11 @@ header .navbar .dropdown-menu a {
  
 }
 
+
+.cardText{
+  width: 60%;
+}
+
 .numbr1 {
   position: relative;
   bottom: 150px;
@@ -525,25 +556,29 @@ header .navbar .dropdown-menu a {
 
 
 .tu-statsholder {
+  padding-top: 40px;
   background-color: #f7f8fc;
 }
 
-.tu-stats {
+/* .tu-stats {
   display: flex;
   margin: 0 -12px;
   padding: 40px 0;
   align-items: center;
   border-radius: 10px;
   background-color: #f7f8fc;
-}
+} */
 
-.tu-stats li {
+/* .tu-stats li {
   width: 25%;
   padding: 0 12px;
   list-style: none;
-}
+} */
 
-.tu-stats li img {
+.tu-stats{
+  margin: 0 20px;
+}
+.tu-stats img {
   max-width: 54px;
   margin-bottom: 20px;
   width: 100%;
@@ -607,6 +642,14 @@ header .navbar .dropdown-menu a {
 .footerArea{
   border-top: 1px solid rgba(128, 128, 128, 0.418);
   padding-top: 50px;
+}
+.footerArea a{
+  color: rgb(0, 0, 0);
+
+}
+
+.footerArea ul li{
+  line-height: 30px;
 }
 
 .contactDetail li{
@@ -690,11 +733,11 @@ header .navbar .dropdown-menu a {
 
 
 .tutorHeader{
-  padding: 50px 0;
+  padding: 60px 0;
 }
 .tutorHeader h1{
   text-align: center;
-
+  margin-top: 0;
 }
 
 .findtutor-btns{
@@ -704,17 +747,25 @@ header .navbar .dropdown-menu a {
   margin-top: 30px;
 }
 
+
 .findtutor-btns button{
   border: none;
   background-color: #fff;
 }
 
 
+.drpdwn select{
+  border-radius: 60px; 
+  border:0;
+  padding:10px;
+  
+}
+
 .search-tutor{
   background-color: #F97316 !important;
   border-radius: 61px;
   color: white;
-  padding: 5px 20px;
+  padding: 10px 20px;
   font-size: 14px;
   font-weight: 500;
 
@@ -898,7 +949,15 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
 
  .bannText{
   margin-top: 80px;
+  padding: 0px 0  0 110px
+  
  }
+
+ .bannText h2{
+  font-weight: 700;
+ }
+
+ 
 
 
 
@@ -1113,7 +1172,11 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
   }
 
   .advceAccordian{
+    /* margin-top: 0 auto; */
+   
    position: absolute;
+   width: 40rem;
+   /* left: 300px; */
    margin-top: 20px;
    background-color: #fff !important; 
    border-radius: 20px;
@@ -1124,15 +1187,17 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
 
  
   .collapseAdvSearch form{
-
+    width: 100%;
     padding: 30px;
   }
 
   #accordion{
-    width: 45%;
-    margin: 0 auto;
+    width: 700px;
+    /* margin: 0 auto !important; */
     background-color: #fff !important; 
     border-radius: 20px;
+    display: flex !important;
+    justify-content: center !important;
 
     
   }
@@ -1142,12 +1207,17 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
   }
 
 
+  .whyChooseUsouter{
+    background-color: #f4f6f3;
+    border-radius: 20px;
+  }
+
   .whyChooseUsTop{
     width: 100%;
-    border-radius: 20px;
-    background-image: url(../img/education-concept-smiling-brunette-girl-student-casual-clothes-holds-her-books-study-material\ 1.png);
+    background-image: url(../img/whychoose1.png);
     background-position: center;
     background-repeat: no-repeat;
+    border-radius: 20px;
   }
 
 
@@ -1207,6 +1277,8 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
     color: white;
     /* padding: 30px; */
   }
+
+ 
 
   .flex-container {
     
@@ -1338,3 +1410,1459 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
   bottom:15px;
 	right:10px;
 }
+
+
+
+.navFlx{
+  display: flex;
+
+}
+
+.logoMobNum{
+ padding-left: 30px;
+}
+
+
+.mobBtn{
+  display: none;
+  margin: 0 auto;
+  padding-top: 20px;
+  
+}
+
+.mobLang{
+  display: none;
+  margin: 0 auto;
+  
+}
+
+
+
+.mobBtn button{
+  text-align: center;
+  width: 190px;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 60px;
+  margin-bottom: 10px;
+}
+
+.mobBtn a{
+  text-align: center;
+  width: 190px;
+  border: 1px solid #fff;
+  color: #000;
+  border-radius: 60px;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
+.tutor-details{
+  margin-top: 100px;
+}
+
+
+
+
+.custom-select {
+  position: relative;
+  font-family: Arial;
+  border: none;
+  background-color: transparent;
+  color: transparent;
+  margin-bottom: 30px;
+  background:none;
+}
+
+.custom-select select {
+  display: none; /* Hide original select element */
+}
+
+.select-selected {
+  background-color: #fff;
+
+  border-radius: 20px; /* Rounded edges */
+  /* color: white; */
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.select-items div, .select-selected {
+  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+  color: #6A307D;
+  padding: 10px 16px;
+  cursor: pointer;
+  user-select: none;
+  margin: 3px 20px;
+}
+
+.select-items {
+  width: 90%;
+  position: absolute;
+  background-color: #ffffff;
+  top: 150%;
+  left: 25px;
+  right: 0;
+  z-index: 99;
+  border-radius: 20px; /* Rounded edges */
+  opacity: 1;
+}
+
+.select-items div {
+  background-color: #ffffff;
+  /* border-radius: 20px;  */
+  /* Rounded edges */
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: #e2e0e0; /* Background color on hover */
+  opacity: 1;
+  border-radius: 20px;
+}
+
+.select-hide {
+  display: none;
+}
+
+.select-selected::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 0;
+  height: 0;
+  color: transparent;
+  /* border: 6px solid transparent; */
+  border-color: white transparent transparent transparent;
+}
+
+.topic{
+  width: 80% !important;
+  padding: 0 !important;
+  background-color: #25d366 !important;
+}
+
+.topic:hover{
+  background-color: navy !important;
+}
+
+.select-selected.select-arrow-active::after {
+  border-color: transparent transparent white transparent;
+  top: 25%;
+}
+
+.nested-items {
+  display: none; /* Initially hidden */
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.nested-items div {
+  padding-left: 20px; /* Indent nested items */
+}
+
+
+.drpdwnSearch{
+  margin-top: 10px;
+}
+
+
+.mobileBanner{
+  display: none;
+}
+
+
+
+
+/*
+===================================================================================== 
+------------------------------------------media query--------------------------------
+====================================================================================== */
+
+
+@media only screen and (max-width: 409px) {
+  
+  /* Styles for phones */
+  .navbar-collapse{
+    background-color: #6A307D;
+    padding: 20px;
+    margin: 5px 10px;
+    text-align: center;
+    
+  }
+
+  .findtutorHeader{
+    margin-top: 50px !important;
+  }
+
+  .mobileBanner{
+    display: block !important;
+    margin-top: 80px;
+  }
+
+  .desktopBanner{
+    display: none;
+  }
+
+  .navbar-dark .navbar-nav .nav-link{
+    color: white !important;
+  }
+
+  header .navbar .nav-link.active{
+    color: white !important;
+  }
+
+  .topLine{
+    border-top: 1px solid rgba(255, 255, 255, 0.596);
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+    
+  .mobBtn{
+    display: block;
+  }
+  .deskBtn{
+    display: none;
+  }
+
+  .deskBtn span{
+    display: block;
+  }
+
+  .mobLang{
+    display: block;
+  }
+
+  .mobLang li{
+    margin: 0 auto;
+    width: 50px;
+    background-color: white;
+    color: black;
+    border-radius: 60px;
+  }
+  .subSec {
+    padding: 0px 10px;
+    margin: 20px 10px;
+
+  }
+
+  .subSec ul li {
+    flex: 0 0 25%;
+  }
+
+    .tutorHeader h1{
+      font-size: 3.5rem;
+        font-weight: 600;
+     
+    }
+    .bannerSec{
+      padding-top: 0px;
+    }
+
+    .advSearTextLeft{
+      display: none;
+    }
+
+    .tutor-section{
+      margin-top: 100px;
+    }
+
+    .findtutor-btns{
+      display: block;
+      text-align: center;
+    }
+
+    .drpdwn select {
+      width: 80%;
+      margin-bottom: 15px;
+    }
+
+    .findtutor-btns button{
+      width: 150px;
+      padding: 10px;
+    }
+    
+    
+    #accordion{
+      width: 100%;
+    }
+
+    .advceAccordian{
+      width: 16rem;
+      
+    }
+
+    .accor{
+      display: flex;
+      justify-content: center;
+    }
+
+    .logoMobNum{
+      display: block;
+    }
+
+
+    .imgNumber{
+      left:180px;
+    }
+
+    .howitwork-sec{
+      background-image: none;
+    }
+
+    .footer-bottom{
+      text-align: center;
+      padding: 0 60px;
+    }
+
+  
+
+    .overlayMTC{
+      height: 750px;
+    }
+
+
+    .tutor-banner{
+      height: 550px;
+    }
+
+    .rightside {
+      padding: 60px 30px;
+      width: 100%;
+    }
+
+    .trial {
+      padding: 80px 25px;
+    }
+
+    .bannText{
+      padding:0px 45px 0px 60px
+    }
+
+    .dash{
+      display: none;
+    }
+
+    .abc{
+      line-height: 30px;
+    }
+
+
+    .whyChooseUsouter{
+      height: 612px;
+      border-radius: 20px;
+    }
+    
+  .whyChooseUsTop{
+    width: 100%;
+    background-image: url(../img/whyChooseMob.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 760px;
+    border-radius: 20px;
+  }
+
+  .getstartedBtnPosition{
+    position: relative;
+        top: 270px;
+        left: -110px;
+  }
+
+
+  .resourcesTop{
+    width: 100%;
+    height: 530px;
+    border-radius: 20px;
+    background-image: url(../img/Group\ 933.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-color: #F6F9F8;
+  }
+
+  .resourcesBottom button{
+    float: none;
+  }
+
+  .logoMobNum{
+    margin: 0 auto;
+  }
+
+  .logo > .mob{
+    margin-left: 0;
+  }
+  .how-card2{
+    width: 100%;
+  }
+    
+  .cardText{
+    width: 100%;
+    padding-bottom: 100px;
+  }
+
+
+  .imgNumber1 {
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    left: 180px;
+    bottom: 100px;
+  }
+  .imgNumber1 .shaddow-shape1{
+    width: 155px;
+   
+  }
+
+  .numbr11 {
+    position: relative;
+    bottom: 160px;
+    left: 60px;
+    width: 55px;
+    z-index: 100;
+  }
+  
+  
+  .imgNumber2 {
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    left: 180px;
+    bottom: 120px;
+  }
+  .imgNumber2 .shaddow-shape2{
+    width: 155px;
+   
+  }
+  .numbr22 {
+    position: relative;
+    bottom: 165px;
+    left: 20px;
+    width: 110px;
+    z-index: 100;
+}
+
+  
+  
+  .imgNumber3 {
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    left: 190px;
+    bottom: 100px;
+  }
+  .imgNumber3 .shaddow-shape3{
+    width: 155px;
+   
+  }
+
+  .numbr33 {
+    position: relative;
+    bottom: 140px;
+    left: 35px;
+    width: 89px;
+    z-index: 100;
+}
+
+.howitwork-sec2{
+  background-image: none;
+}
+
+
+.trialBtn {
+  display: flex;
+  justify-content: center;
+ }
+
+ .profileSec2{
+  flex:1;
+  background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%, 1) 58%, hsla(286, 22%, 88%, 1) 100%);
+ }
+ profileSec1{
+  float: right;
+ }
+
+
+ .custom-select {
+  margin-bottom: 15px !important;
+ }
+
+ .profileSec1{
+  order: 2;
+ }
+
+ .profileSec2{
+  order: 1;
+ }
+
+
+ 
+
+  
+}
+
+@media only screen and (min-width: 410px) and (max-width: 600px) {
+
+  .navbar-collapse{
+    background-color: #6A307D;
+    padding: 20px;
+    margin: 5px 10px;
+    text-align: center;
+    
+  }
+
+  .findtutorHeader{
+    margin-top: 50px !important;
+  }
+
+  .desktopBanner{
+    display: none;
+  }
+
+  .mobileBanner{
+    display: block !important;
+    margin-top: 80px;
+  }
+
+  .navbar-dark .navbar-nav .nav-link{
+    color: white !important;
+  }
+
+  header .navbar .nav-link.active{
+    color: white !important;
+  }
+
+  .topLine{
+    border-top: 1px solid rgba(255, 255, 255, 0.596);
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+    
+  .mobBtn{
+    display: block;
+  }
+  .deskBtn{
+    display: none;
+  }
+
+  .deskBtn span{
+    display: block;
+  }
+
+  .mobLang{
+    display: block;
+  }
+
+  .mobLang li{
+    margin: 0 auto;
+    width: 50px;
+    background-color: white;
+    color: black;
+    border-radius: 60px;
+  }
+  .bannerSec{
+    padding-top: 0px;
+  }
+  .advSearTextLeft{
+    display: none;
+  }
+
+  /* .tutor-section{
+    margin-top: 500px;
+  } */
+
+
+ 
+
+  .findtutor-btns{
+    display: block;
+    text-align: center;
+  }
+
+  .drpdwn select {
+    width: 80%;
+    margin-bottom: 15px;
+  }
+
+  
+  .drpdwn select {
+    width: 80%;
+    margin-bottom: 15px;
+  }
+
+  .findtutor-btns button{
+    width: 150px;
+    padding: 10px;
+  }
+
+  
+
+  .accor{
+    display: flex;
+    justify-content: center;
+  }
+  #accordion{
+
+    width: 100%;
+  }
+
+  .advceAccordian{
+    width: 18rem;
+    
+  }
+
+  .logoMobNum{
+    display: block;
+  }
+  .imgNumber{
+    left:220px;
+  }
+  
+
+  .howitwork-sec{
+    background-image: none;
+  }
+
+  .footer-bottom{
+    text-align: center;
+    padding: 0 80px;
+  }
+  .subSec {
+    padding: 0px 10px;
+    margin: 20px 10px;
+
+  }
+
+   
+  .tutor-banner{
+    height: 500px;
+  }
+
+  .rightside {
+    padding: 60px 30px;
+    width: 100%;
+  }
+
+  .trial {
+    padding: 80px 25px;
+  }
+
+  .bannText{
+    padding:0px 45px 0px 60px
+  }
+
+  .trialBtn {
+    display: flex;
+    justify-content: center;
+   }
+
+
+   .whyChooseUsouter{
+    height: 590px;
+    border-radius: 20px;
+  }
+  
+.whyChooseUsTop{
+  width: 100%;
+  background-image: url(../img/whyChooseMob.png);
+  background-position: right;
+  background-repeat: no-repeat;
+  height: 730px;
+  border-radius: 20px;
+}
+
+.getstartedBtnPosition{
+  position: relative;
+      top: 270px;
+      left: -110px;
+}
+
+.resourcesTop{
+  width: 100%;
+  height: 530px;
+  border-radius: 20px;
+  background-image: url(../img/Group\ 933.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #F6F9F8;
+}
+
+.resourcesBottom button {
+  float: none;
+}
+
+.how-card2{
+  width: 100%;
+}
+
+
+
+.cardText{
+  width: 100%;
+  padding-bottom: 100px;
+}
+
+
+.imgNumber1 {
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  left: 320px;
+  bottom: 100px;
+}
+.imgNumber1 .shaddow-shape1{
+  width: 155px;
+ 
+}
+
+.numbr11 {
+  position: relative;
+  bottom: 160px;
+  left: 60px;
+  width: 55px;
+  z-index: 100;
+}
+
+
+.imgNumber2 {
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  left: 320px;
+  bottom: 120px;
+}
+.imgNumber2 .shaddow-shape2{
+  width: 155px;
+ 
+}
+.numbr22 {
+  position: relative;
+  bottom: 165px;
+  left: 20px;
+  width: 110px;
+  z-index: 100;
+}
+
+
+
+.imgNumber3 {
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  left: 320px;
+  bottom: 100px;
+}
+.imgNumber3 .shaddow-shape3{
+  width: 155px;
+ 
+}
+
+.numbr33 {
+  position: relative;
+  bottom: 140px;
+  left: 35px;
+  width: 89px;
+  z-index: 100;
+}
+
+.howitwork-sec2{
+  background-image: none;
+}
+
+
+.overlayMTC {
+  height: 805px;
+}
+ 
+.custom-select {
+  margin-bottom: 15px !important;
+ }
+
+
+
+ .profileSec1{
+  order: 2;
+ }
+
+ .profileSec2{
+  order: 1;
+ }
+
+ 
+
+  
+}
+
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  /* Styles for tablets */
+  .desktopBanner{
+    display: block;
+
+  }
+
+  
+  .navbar-collapse{
+    background-color: #6A307D;
+    padding: 20px;
+    margin: 5px 10px;
+    text-align: center;
+    
+  }
+
+  .navbar-dark .navbar-nav .nav-link{
+    color: white !important;
+  }
+
+  header .navbar .nav-link.active{
+    color: white !important;
+  }
+
+  .topLine{
+    border-top: 1px solid rgba(255, 255, 255, 0.596);
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+    
+  .mobBtn{
+    display: block;
+  }
+  .deskBtn{
+    display: none;
+  }
+
+  .deskBtn span{
+    display: block;
+  }
+
+  .mobLang{
+    display: block;
+  }
+
+  .mobLang li{
+    margin: 0 auto;
+    width: 50px;
+    background-color: white;
+    color: black;
+    border-radius: 60px;
+  }
+
+  .tutorHeader h1{
+    
+
+    margin-top: 0;
+  }
+
+  .advSearTextLeft{
+    display: none;
+  }
+
+  .tutor-section{
+    margin-top: 370px;
+  }
+
+ 
+
+
+  
+  .findtutor-btns{
+    display: block;
+    text-align: center;
+  }
+
+
+  
+ 
+
+  .drpdwn select {
+    width: 80%;
+    margin-bottom: 15px;
+  }
+
+  .findtutor-btns button{
+    width: 150px;
+    padding: 10px;
+  }
+
+  #accordion{
+
+    width: 100%;
+  }
+
+  .accor{
+    display: flex;
+    justify-content: center;
+  }
+
+  .logoMobNum{
+    display: block;
+  }
+  .imgNumber{
+    left:350px;
+  }
+
+  .howitwork-sec{
+    background-image: none;
+  }
+
+  .advceAccordian{
+    width: 20rem;
+    
+  }
+
+  .overlayMTC{
+    height: 660px;
+  }
+
+
+  /* .tutor-banner{
+    height: 500px;
+  } */
+
+  .rightside {
+    padding: 60px 30px;
+    width: 100%;
+  }
+
+  .trial {
+    padding: 80px 25px;
+  }
+
+  .bannText{
+    padding:0px 45px 0px 60px
+  }
+
+
+  .trialBtn {
+    display: flex;
+    justify-content: center;
+   }
+ 
+
+   .whyChooseUsouter{
+    height: 590px;
+    border-radius: 20px;
+  }
+  
+.whyChooseUsTop{
+  width: 100%;
+  background-image: url(../img/whyChooseMob.png);
+  background-position: right;
+  background-repeat: no-repeat;
+  height: 730px;
+  border-radius: 20px;
+}
+
+.getstartedBtnPosition{
+  position: relative;
+      top: 270px;
+      left: -110px;
+}
+
+.resourcesTop{
+  width: 100%;
+  height: 530px;
+  border-radius: 20px;
+  background-image: url(../img/Group\ 933.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #F6F9F8;
+}
+
+.resourcesBottom button {
+  float: none;
+}
+
+
+.how-card2{
+  width: 100%;
+}
+
+
+
+.cardText{
+  width: 100%;
+  padding-bottom: 100px;
+}
+
+
+.imgNumber1 {
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  left: 320px;
+  bottom: 100px;
+}
+.imgNumber1 .shaddow-shape1{
+  width: 155px;
+ 
+}
+
+.numbr11 {
+  position: relative;
+  bottom: 160px;
+  left: 60px;
+  width: 55px;
+  z-index: 100;
+}
+
+
+.imgNumber2 {
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  left: 320px;
+  bottom: 120px;
+}
+.imgNumber2 .shaddow-shape2{
+  width: 155px;
+ 
+}
+.numbr22 {
+  position: relative;
+  bottom: 165px;
+  left: 20px;
+  width: 110px;
+  z-index: 100;
+}
+
+
+
+.imgNumber3 {
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  left: 320px;
+  bottom: 100px;
+}
+.imgNumber3 .shaddow-shape3{
+  width: 155px;
+ 
+}
+
+.numbr33 {
+  position: relative;
+  bottom: 140px;
+  left: 35px;
+  width: 89px;
+  z-index: 100;
+}
+
+.howitwork-sec2{
+  background-image: none;
+}
+
+.profileSec1{
+  order: 2;
+ }
+
+ .profileSec2{
+  order: 1;
+ }
+ .findtutSec{
+  margin-top: 100px;
+ }
+
+
+ 
+}
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+  /* Styles for small desktops */
+  
+
+  .profileSec1{
+    order: 2;
+   }
+  
+   .profileSec2{
+    order: 1;
+   }
+
+  /* .navbar-collapse{
+    background-color: #6A307D;
+    padding: 20px;
+    margin: 5px 10px;
+    text-align: center;
+    
+  }
+
+  .navbar-dark .navbar-nav .nav-link{
+    color: white !important;
+  }
+
+  header .navbar .nav-link.active{
+    color: white !important;
+  }
+
+  .topLine{
+    border-top: 1px solid rgba(255, 255, 255, 0.596);
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+    
+  .mobBtn{
+    display: block;
+  }
+  .deskBtn{
+    display: none;
+  }
+
+  .deskBtn span{
+    display: block;
+  }
+
+  .mobLang{
+    display: block;
+  }
+
+  .mobLang li{
+    margin: 0 auto;
+    width: 50px;
+    background-color: white;
+    color: black;
+    border-radius: 60px;
+  } */
+
+  .tutorHeader h1{
+    
+    margin-top: 0;
+  }
+
+
+  .advSearTextLeft{
+    display: none;
+  }
+
+  .tutor-section{
+    margin-top: 250px;
+  }
+
+  /* .findtutor-btns{
+    display: block;
+  } */
+
+  .drpdwn select {
+    width: 80%;
+    margin-bottom: 15px;
+  }
+
+  .findtutor-btns button{
+    width: 150px;
+    padding: 10px;
+  }
+
+   
+  #accordion{
+    width: 100%;
+  }
+
+  .advceAccordian{
+    width: 16rem;
+    
+  }
+
+  .accor{
+    display: flex;
+    justify-content: center;
+  }
+
+  .logoMobNum{
+    display: block;
+  }
+
+
+  .imgNumber{
+    left:180px;
+  }
+
+  .howitwork-sec{
+    background-image: none;
+  }
+
+  .overlayMTC{
+    height: 580px;
+  }
+
+
+ 
+
+  .rightside {
+    padding: 60px 30px;
+    width: 100%;
+  }
+
+  .trial {
+    padding: 80px 25px;
+  }
+
+  .bannText{
+    padding:0px 45px 0px 60px
+  }
+
+  .trialBtn {
+    display: flex;
+    justify-content: center;
+   }
+
+   
+.how-card2{
+  width: 100%;
+}
+
+
+
+.cardText{
+  width: 100%;
+  padding-bottom: 100px;
+}
+
+
+.imgNumber1 {
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  left: 490px;
+  bottom: 100px;
+}
+.imgNumber1 .shaddow-shape1{
+  width: 155px;
+ 
+}
+
+.numbr11 {
+  position: relative;
+  bottom: 160px;
+  left: 60px;
+  width: 55px;
+  z-index: 100;
+}
+
+
+.imgNumber2 {
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  left: 490px;
+  bottom: 120px;
+}
+.imgNumber2 .shaddow-shape2{
+  width: 155px;
+ 
+}
+.numbr22 {
+  position: relative;
+  bottom: 165px;
+  left: 20px;
+  width: 110px;
+  z-index: 100;
+}
+
+
+
+.imgNumber3 {
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  left: 490px;
+  bottom: 100px;
+}
+.imgNumber3 .shaddow-shape3{
+  width: 155px;
+ 
+}
+
+.numbr33 {
+  position: relative;
+  bottom: 140px;
+  left: 35px;
+  width: 89px;
+  z-index: 100;
+}
+
+.howitwork-sec2{
+  background-image: none;
+}
+
+.findtutSec{
+  margin-top: 70px;
+ }
+
+
+ 
+
+}
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+  /* Styles for large desktops */
+
+  
+  .tutorHeader h1{
+   
+
+    margin-top: 0;
+  }
+
+  .tutorHeader{
+    padding: 120px 0;
+  }
+
+  .tutor-section{
+    margin-top: 200px;
+  }
+
+  .tutor-banner{
+    height: 550px;
+  }
+
+  /* .rightside {
+    padding: 60px 30px;
+    width: 100%;
+  } */
+
+  .trial {
+    padding: 80px 25px;
+  }
+
+  .bannText{
+    padding:0px 45px 0px 60px
+  }
+
+
+  
+  .imgNumber{
+    left:160px;
+  }
+
+  .howitwork-sec{
+    background-position: 130px 245px;
+  }
+
+  .trial {
+    padding: 80px 25px;
+  }
+
+  .trialBtn {
+   display: flex;
+   justify-content: center;
+  }
+
+
+  .imgNumber1 {
+    
+    position: relative;
+    left: 350px;
+    
+  }
+
+  .imgNumber2 {
+    
+    position: relative;
+    left: 715px;
+    top:90px;
+    
+  }
+
+  .imgNumber3 {
+    
+    position: relative;
+    left: 350px;
+    
+  }
+
+  .howitwork-sec2{
+    background-position: 100px 480px;
+  }
+  .overlayMTC{
+    height: 640px;
+  }
+
+   
+  #accordion{
+    width: 100%;
+  }
+
+  .advceAccordian{
+    width: 38rem;
+    
+  }
+
+  .accor{
+    display: flex;
+    justify-content: center;
+  }
+
+  
+
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1500px) {
+
+ /* my laptop size */
+}
+
+
+@media only screen and (min-width: 1501px) and (max-width: 1800px) {
+  .overlayMTC{
+    height: 650px;
+  }
+
+  .tutorHeader h1{
+    background-color: rgb(31, 212, 101);
+    margin-top: 0;
+  }
+
+  #accordion{
+    width: 100%;
+  }
+
+  .advceAccordian{
+    width: 44rem;
+    
+  }
+
+  .accor{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media only screen and (min-width: 1801px) {
+  /* Styles for extra large desktops */
+  .overlayMTC{
+    height: 730px;
+  }
+ 
+  .tutorHeader h1{
+    background-color: red;
+    margin-top: 0;
+  }
+
+  #accordion{
+    width: 100%;
+  }
+
+  .advceAccordian{
+    width: 46rem;
+    
+  }
+
+  .accor{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+
+/* ------------------------ */

@@ -26,7 +26,7 @@ class SubjectController extends Controller
         $request->validate([
             'classname'=> 'required',
             'subject'=> 'required',
-            'uploadimage'=>'required',
+            // 'uploadimage'=>'required',
             'categoryid'=>'required'
         ]);
         if($request->id){
@@ -37,13 +37,17 @@ class SubjectController extends Controller
             $data = new subjects();
             $msg = 'Subject added successfully';
         }
+        if($request->uploadimage){
+            
         $imageName = time().'.'.$request->uploadimage->extension();
 
         $request->uploadimage->move(public_path('images/subjects'), $imageName);
+        $data->image = $imageName;
+    }
 
         $data->class_id = $request->classname;
         $data->name = $request->subject;
-        $data->image = $imageName;
+        
         $data->category = $request->categoryid;
         $res = $data->save();
 

@@ -1,11 +1,12 @@
 @extends('front-cms.layouts.main')
 @section('main-section')
     <!-- tutor section -->
-    <section class="tutor-section">
+    <section class="tutor-details">
         <div class="container tutor-card topheader-tutor">
 
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+               
+                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 profileSec1">
                     <h2>{{ $tutorpd->headline }}</h2>
 
                     <h6 class="mb-4">Subjects</h6>
@@ -77,7 +78,7 @@
                     </div>
 
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 profileSec2">
                     <div class="tutorDetails tutorProfPic">
                         <div class="tutorImg">
                             <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic ?? url('images/avatar/default-profile-pic.png') }}"
@@ -109,11 +110,11 @@
                         </table>
 
                         <div class="freeTrial btnSize ">
-                            <a href="/student/searchtutor" class="btn">Free Trial Class</a>
+                            <a href="{{('/student/login')}}" class="btn">Free Trial Class</a>
                         </div>
 
                         <div class="expMore btnSize">
-                            <a href="/student/enrollnow/{{ $tutorpd->id }}" class="btn">Book Now</a>
+                            <a href="/student/enrollnow/{{ $tutorpd->id }}" href="/student/enrollnow/{{ $tutorpd->id }}" class="btn">Book Now</a>
                         </div>
 
 
@@ -132,8 +133,8 @@
             </div>
             <div class="row">
                 @foreach ($othertutors->slice(0,4) as $othertutor)
-                    
-                <div class="col-lg-3 col-md-3-col-sm-12 col-xs-12 tutorCol">
+                <a href="#" style="color: black">
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 tutorCol">
                     <div class="tutorDetails">
                         <div class="tutorImg">
                             <img src="{{ url('images/tutors/profilepics', '/') }}{{ $othertutor->profile_pic ?? url('images/avatar/default-profile-pic.png') }}" width="100%" alt="">
@@ -145,13 +146,14 @@
                             </span>
                             <span>£{{$othertutor->rate}}/h</span>
                         </div>
-                       <a href="/findatutor"> <span class="name">
+                       <a href="/findatutor" style="color: black"> <span class="name" >
                             {{$othertutor->name}}
                             <p>{{$primarysubjects->subject_name}} teacher</p>
                         </span></a>
 
                     </div>
                 </div>
+                        </a>
                 
                 @endforeach
 

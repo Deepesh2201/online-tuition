@@ -33,19 +33,19 @@
                
                 <div class="radioBtn">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="radioLogin student active-btn">
                                 <input type="radio" value="student" name="loginAs" id="student" checked> 
                                 <span>Student</span>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="radioLogin tutor">
                                 <input type="radio" value="tutor" name="loginAs" id="tutor"> 
                                 <span>Tutor</span>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="radioLogin parents">
                                 <input type="radio" value="parents" name="loginAs" id="parents"> 
                                 <span>Parents</span>

@@ -14,12 +14,14 @@
         <link rel="stylesheet" href="{{url('frontendnew/css/bootstrap.min.css')}}">
         <!-- Style -->
         <link rel="stylesheet" href="{{url('frontendnew/css/style.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>My Choice Tutor</title>
     </head>
     <body>
         <header role="banner" style="background-color: #fff;">
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <div class="container">
+                    <div class="navFlx">
                     <button
                         class="navbar-toggler"
                         type="button"
@@ -30,21 +32,37 @@
                         aria-label="Toggle navigation"
                     >
                         <span class="navbar-toggler-icon">
-                            <!-- <i class="fa fa-bars" aria-hidden="true"></i> -->
-                            <img src="{{url('frontendnew/img/icons/menu-01.png')}}" alt="">
+                            <i class="fa fa-bars" aria-hidden="true" style="color:black"></i>
+                            <!-- <img src="{{url('frontendnew/img/icons/book-03.png')}}" alt=""> -->
                         </span>
                     </button>
-                    <div class="logo">
-                        <a href="/">
-                            <img src="{{url('frontendnew/img/logo-mtc.png')}}" width="116px" alt="">
-                        </a>
-                        <a class="mob" href="tel:07761 975326">
-                            <i class="fa fa-phone" style="transform: scaleX(-1)"></i>
-                            <span>07761 975326</span>
-                        </a>
+                    <div  class="logoMobNum">
+                       <div class="logo">
+                            <a href="{{('/')}}">
+                                <img src="{{url('frontendnew/img/logo-mtc.png')}}" width="116px" alt="">
+                            </a>
+                       </div>
+                        <div class="logo">
+                            <a class="mob" href="tel:07761 975326">
+                                <i class="fa fa-phone" ></i>
+                                <span>07761 975326</span>
+                            </a>
+                        </div>
+                    </div>
                     </div>
                     <div class="collapse navbar-collapse" id="navbarsExample05">
-                        <ul class="navbar-nav ml-auto pl-lg-5 pl-0">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item cta-btn mobBtn">
+                                <div class="mobLogin">
+                                    <button class="btn btn-sm" data-toggle="modal" data-target="#loginPopup">Login</button>
+                                </div>
+                                <div >
+                                <a href="{{('/student/register')}}" class="btn btn-sm ">Become a tutor</a>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <ul class="navbar-nav ml-auto pl-lg-5 pl-0 topLine">
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{('/findatutor')}}">Find a tutor</a>
                             </li>
@@ -62,7 +80,7 @@
                             </li>
                         </ul>
 
-                        <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav ml-auto deskBtn" >
                             <li class="nav-item cta-btn">
                                 <div class="btnSec">
                                     <button class="btn btn-sm " data-toggle="modal" data-target="#loginPopup">Login</button>
@@ -70,6 +88,16 @@
                                     <span>
                                         En
                                         <i class="fa fa-angle-down "></i>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav ml-auto mobLang mt-2" >
+                            <li class="nav-item cta-btn">
+                                <div >
+                                    <span>
+                                        En <i class="fa fa-angle-down "></i>
                                     </span>
                                 </div>
                             </li>

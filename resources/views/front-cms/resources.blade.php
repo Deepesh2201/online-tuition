@@ -18,25 +18,32 @@
 
     </section>
     <!-- tutor section -->
-    <section class="tutor-section">
+    <section class="mt-5">
         <div class="container ">
-
-            <div class="row resourcesTop">
+            <div class="resourcesTop">
+            <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="resourcesBottom">
                         <h4>Featured</h4>
                         <h1>Blogs</h1>
-                        <button class="btn search-tutor">Free Trial Class</button>
+                        <br>
+                        <br>
+                        <div class="freeClassBtn">
+                          <button class="btn search-tutor" onclick="redirect();">Free Trial Class</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            </div>
+           
 
 
 
             <div class="row mt-5">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="blog-card">
-                        <img src="img/blog-img-1.png" width="100%" alt="">
+                        <img  src="{{ url('frontendnew/img/blog-img-1.png') }}" width="100%" alt="">
                         <div class="blogDetails">
                             <span class="feature">
                                 Featured | Student
@@ -52,7 +59,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="blog-card">
-                        <img src="img/blog-img-1.png" width="100%" alt="">
+                        <img src="{{ url('frontendnew/img/blog-img-1.png') }}" width="100%" alt="">
                         <div class="blogDetails">
                             <span class="feature">
                                 Featured | Student
@@ -68,7 +75,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="blog-card">
-                        <img src="img/blog-img-1.png" width="100%" alt="">
+                    <img src="{{ url('frontendnew/img/blog-img-1.png') }}" width="100%" alt="">
                         <div class="blogDetails">
                             <span class="feature">
                                 Featured | Student
@@ -84,7 +91,12 @@
                 </div>
             </div>
 
+            <script>
+            function redirect(){
+                window.location.href = "{{('/student/register')}}";
+            }
 
+        </script>
 
         </div>
 

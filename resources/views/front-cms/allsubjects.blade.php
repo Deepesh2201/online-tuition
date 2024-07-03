@@ -14,7 +14,7 @@
     </div>
 </section>
 <!-- tutor section -->
-<section class="tutor-section">
+<section class="mt-5">
     <div class="container tutor-card">
         <h3>Subjects</h3>
         <br>
