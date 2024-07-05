@@ -97,7 +97,7 @@
                                                         placeholder="Search" id="name" name="name">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-2">
+                                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
                                                 <label for="">Subject</label>
                                                 <select class="form-control" id="subject" name="subject">
                                                     <option value="">Select a subject</option>
@@ -106,7 +106,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-2">
+                                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
                                                 <label for="">Grade</label>
                                                 <select class="form-control" id="grade" name="grade">
                                                     <option value="">Select a grade</option>
@@ -115,7 +115,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12" hidden>
                                                 <label for="">Rating</label>
                                                 <select class="form-control rating" id="ratings" name="ratings">
                                                     <option value="">5 Star <span
@@ -130,7 +130,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12" hidden>
                                                 <label for="">Country</label>
                                                 <select class="form-control" id="country" name="country">
                                                     <option value="">Select Country</option>
@@ -141,7 +141,7 @@
                                             </div>
 
 
-                                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="advSearchBtns">
                                                     <button class="btn cancelBtn">Cancel</button>
                                                     <button type="submit" class="applyBtn">Apply</button>
@@ -255,7 +255,7 @@
         <div class="row">
             @foreach ($tutors->slice(0, 8) as $tutor)
             <a href="tutor-details/{{$tutor->tutor_id}}" style="color: black">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 tutorCol">
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 tutorCol">
                     <div class="tutorDetails">
                         <div class="tutorImg">
                             <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutor->profile_pic }}" width="100%"
@@ -294,7 +294,7 @@
         <h3 class="">Customer Testimonials</h3>
         <div class="row">
             @foreach ($reviews->slice(0, 4) as $review)
-            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mb-4">
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 mb-4">
                 <div class="testi-card">
                     <span class="nameTo">
                         {{ $review->tutorname }}

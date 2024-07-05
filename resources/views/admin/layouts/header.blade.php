@@ -628,7 +628,12 @@
                         </li>
 
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Contents</span></li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="/admin/blogs" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Blogs</span>
+                            </a>
 
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarUILearning" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
                                 <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Learning Contents</span>

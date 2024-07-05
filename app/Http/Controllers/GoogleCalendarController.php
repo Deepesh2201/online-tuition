@@ -269,6 +269,7 @@ class GoogleCalendarController extends Controller
             // Store the access token in the session
             $request->session()->put('access_token', $accessToken);
             // dd($accessToken);
+            
             // Redirect to the create event page
             return redirect()->route('tutor.tutorslots');
         }

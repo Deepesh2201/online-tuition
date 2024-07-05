@@ -17,6 +17,7 @@ use App\Http\Controllers\CommonController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JitsiController;
+use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\GoogleCalendarController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\ReportController;
@@ -66,6 +67,7 @@ Route::get('findatutor',[HomeController::class,'findatutor'])->name('findatutor'
 Route::get('tutor-details/{id}',[HomeController::class,'tutordetails'])->name('tutordetails');
 Route::get('index/slots/search', [SlotBookingController::class, 'indexslotsearch'])->name('index.slots.search');
 Route::get('resources', [HomeController::class, 'indexresources'])->name('index.resources');
+Route::get('resources/{id}', [HomeController::class, 'indexresourcesdetails'])->name('index.resources.details');
 Route::post('toptutorsearch',[HomeController::class, 'toptutorsearch'])->name('toptutorsearch');
 Route::post('advancesearch',[HomeController::class, 'advancesearch'])->name('advancesearch');
 Route::get('reviews',[HomeController::class,'reviewslist'])->name('revieweslist');
@@ -339,6 +341,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['AdminAuthenticate']], funct
     Route::get('classes-report',[ReportController::class, 'admin_class_report'])->name('admin.reports.class-list');
     Route::get('chat-report',[ReportController::class, 'admin_chat_report'])->name('admin.reports.chat-list');
     Route::post('payouts-search',[PaymentsController::class,'adminPayoutsSearch'])->name('admin.payouts-search');
+    Route::get('blogs', [BlogsController::class, 'index'])->name('admin.blogs.list');
+    Route::get('blogs/create', [BlogsController::class, 'create'])->name('admin.blogs.create');
+    Route::post('blogs/create', [BlogsController::class, 'store'])->name('admin.blogs.store');
+    Route::get('blogs/update/{id}', [BlogsController::class, 'edit'])->name('admin.blogs.edit');
 
 });
 
@@ -562,10 +568,19 @@ Route::get('aboutus', function(){
     return view('front-cms/aboutus');
 });
 
-Route::get('blog', function(){
-    return view('front-cms/blog');
-});
+// Route::get('blogdetails', function(){
+//     return view('front-cms/blogdetails');
+// });
 
 Route::get('contact', function(){
     return view('front-cms/contact');
+});
+Route::get('privacypolicy', function(){
+    return view('front-cms/privacypolicy');
+});
+Route::get('refundpolicy', function(){
+    return view('front-cms/refundpolicy');
+});
+Route::get('termsandcontiions', function(){
+    return view('front-cms/termsandconditions');
 });

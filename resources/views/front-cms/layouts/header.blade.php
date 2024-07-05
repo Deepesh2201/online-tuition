@@ -19,7 +19,7 @@
     </head>
     <body>
         <header role="banner" style="background-color: #fff;">
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-xl  navbar-dark bg-dark">
                 <div class="container">
                     <div class="navFlx">
                     <button
@@ -62,7 +62,7 @@
                             </li>
                         </ul>
                         
-                        <ul class="navbar-nav ml-auto pl-lg-5 pl-0 topLine">
+                        <ul class="navbar-nav ml-auto  pl-0 topLine">
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{('/findatutor')}}">Find a tutor</a>
                             </li>

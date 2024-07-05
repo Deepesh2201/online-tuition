@@ -133,21 +133,14 @@
                           const tutorDiv = document.querySelector('.tutor');
                           const parentsDiv = document.querySelector('.parents');
   
-                          const studentRadioPopup = document.getElementById('studentPopup');
-                          const tutorRadioPopup = document.getElementById('tutorPopup');
-                          const parentsRadioPopup = document.getElementById('parentsPopup');
-                          const studentDivPopup = document.querySelector('.studentPopup');
-                          const tutorDivPopup = document.querySelector('.tutorPopup');
-                          const parentsDivPopup = document.querySelector('.parentsPopup');
+                         
   
                           function switchActiveClass() {
                               studentDiv.classList.remove('active-btn');
                               tutorDiv.classList.remove('active-btn');
                               parentsDiv.classList.remove('active-btn');
   
-                              studentDivPopup .classList.remove('active-btn');
-                              tutorDivPopup .classList.remove('active-btn');
-                              parentsDivPopup .classList.remove('active-btn');
+                             
   
                               if (studentRadio.checked) {
                                   studentDiv.classList.add('active-btn');
@@ -159,23 +152,54 @@
   
   
   
-                              if (studentRadioPopup.checked) {
-                                  studentDivPopup .classList.add('active-btn');
-                              } else if (tutorRadioPopup.checked) {
-                                  tutorDivPopup .classList.add('active-btn');
-                              } else if (parentsRadioPopup.checked) {
-                                  parentsDivPopup .classList.add('active-btn');
-                              }
+                             
                           }
   
                           studentRadio.addEventListener('change', switchActiveClass);
                           tutorRadio.addEventListener('change', switchActiveClass);
                           parentsRadio.addEventListener('change', switchActiveClass);
   
-                          studentRadioPopup.addEventListener('change', switchActiveClass);
-                          tutorRadioPopup.addEventListener('change', switchActiveClass);
-                          parentsRadioPopup.addEventListener('change', switchActiveClass);
+                         
                       });
+  
+  
+                      document.addEventListener('DOMContentLoaded', () => {
+  
+                          const studentRadioPopup = document.getElementById('studentPopup');
+                          const tutorRadioPopup = document.getElementById('tutorPopup');
+                          const parentsRadioPopup = document.getElementById('parentsPopup');
+                          const studentDivPopup = document.querySelector('.studentPopup');
+                          const tutorDivPopup = document.querySelector('.tutorPopup');
+                          const parentsDivPopup = document.querySelector('.parentsPopup');
+  
+  
+                          function switchActiveClassNew() {
+                          studentDivPopup .classList.remove('active-btn');
+                          tutorDivPopup .classList.remove('active-btn');
+                          parentsDivPopup .classList.remove('active-btn');
+  
+                          if (studentRadioPopup.checked) {
+                              studentDivPopup .classList.add('active-btn');
+                          } else if (tutorRadioPopup.checked) {
+                              tutorDivPopup .classList.add('active-btn');
+                          } else if (parentsRadioPopup.checked) {
+                              parentsDivPopup .classList.add('active-btn');
+                          }
+  
+                      }
+                      studentRadioPopup.addEventListener('change', switchActiveClassNew);
+                      tutorRadioPopup.addEventListener('change', switchActiveClassNew);
+                      parentsRadioPopup.addEventListener('change', switchActiveClassNew);
+  
+                      });
+  
+  
+                     
+  
+  
+  
+  
+  
                   </script>
   
   
@@ -201,9 +225,9 @@
   <i class="fa fa-whatsapp my-float"></i>
   </a>
   
-  <div class="chatboat">
+  <!-- <div class="chatboat">
       <img src="{{ url('frontendnew/img/icons/chatboat.png') }}" alt="">
-  </div>
+  </div> -->
   
   
   
@@ -220,8 +244,9 @@
                       <a href="/findatutor"><li>Find Tutor</li></a>
                       <a href="/subjects"><li>Subjects</li></a>
                       <a href="/aboutus"><li>Contact Us</li></a>
-                      <a href="#"><li>Privacy Policy</li></a>
-                      <a href="#"><li>Terms and Conditions</li></a>
+                      <a href="/privacypolicy"><li>Privacy Policy</li></a>
+                      <a href="/termscondition"><li>Terms and Conditions</li></a>
+                      <a href="/refundpolicy"><li>Refund Policy</li></a>
   
                   </ul>
               </div>

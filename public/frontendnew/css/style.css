@@ -60,7 +60,7 @@ header {
 }
 @media (min-width: 768px) {
   header {
-    /* padding: 30px 0;  */
+    /* padding: 10px 0;  */
   }
 }
 header .navbar-brand {
@@ -614,12 +614,14 @@ header .navbar .dropdown-menu a {
 }
 
 .blog-card img{
+  height: 260px;
   border-radius: 20px 20px 0px 0px;
 }
 
 .blogDetails{
   padding: 15px;
   margin-bottom:15px;
+  height: 260px;
 }
 
 .feature{
@@ -1181,6 +1183,7 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
    background-color: #fff !important; 
    border-radius: 20px;
    padding: 5px 15px 5px 15px;
+   z-index: 1;
     
     
   }
@@ -1390,7 +1393,8 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
 	position:fixed;
 	width:60px;
 	height:60px;
-	bottom:120px;
+	bottom:50px;
+	/* bottom:120px; */
 	right:20px;
 	background-color:#25d366;
 	color:#FFF;
@@ -1574,6 +1578,9 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
   display: none;
 }
 
+.findtutSec{
+  margin-top: 100px;
+}
 
 
 
@@ -1658,9 +1665,9 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
         font-weight: 600;
      
     }
-    .bannerSec{
+    /* .bannerSec{
       padding-top: 0px;
-    }
+    } */
 
     .advSearTextLeft{
       display: none;
@@ -1899,6 +1906,9 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
   order: 1;
  }
 
+ header {
+  padding-top: 20px ;
+}
 
  
 
@@ -1964,16 +1974,16 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
     color: black;
     border-radius: 60px;
   }
-  .bannerSec{
+  /* .bannerSec{
     padding-top: 0px;
-  }
+  } */
   .advSearTextLeft{
     display: none;
   }
 
-  /* .tutor-section{
-    margin-top: 500px;
-  } */
+  .tutor-section{
+    margin-top: 100px;
+  }
 
 
  
@@ -2195,7 +2205,13 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
   order: 1;
  }
 
- 
+ .dash{
+  display: none;
+}
+
+header {
+  padding-top: 20px ;
+}
 
   
 }
@@ -2472,6 +2488,14 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
   margin-top: 100px;
  }
 
+ .dash{
+  display: none;
+      
+    }
+
+    header {
+      padding-top: 20px ;
+    }
 
  
 }
@@ -2487,13 +2511,23 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
     order: 1;
    }
 
-  /* .navbar-collapse{
+   header {
+    padding: 30px 0;
+  }
+
+  .navbar-collapse{
     background-color: #6A307D;
     padding: 20px;
     margin: 5px 10px;
     text-align: center;
     
   }
+
+  .findtutorHeader{
+    margin-top: 50px !important;
+  }
+
+ 
 
   .navbar-dark .navbar-nav .nav-link{
     color: white !important;
@@ -2530,11 +2564,18 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
     background-color: white;
     color: black;
     border-radius: 60px;
-  } */
+  }
+  
+  .pl-lg-5, .px-lg-5{
+    padding-left: 0 !important;
+  }
+
+
+  
 
   .tutorHeader h1{
     
-    margin-top: 0;
+    margin-top: 60px;
   }
 
 
@@ -2706,11 +2747,63 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
 @media only screen and (min-width: 993px) and (max-width: 1200px) {
   /* Styles for large desktops */
 
+  .navbar-collapse{
+    background-color: #6A307D;
+    padding: 20px;
+    margin: 5px 10px;
+    text-align: center;
+    
+  }
+
+  .findtutorHeader{
+    margin-top: 50px !important;
+  }
+
+  
+
+  .navbar-dark .navbar-nav .nav-link{
+    color: white !important;
+  }
+
+  header .navbar .nav-link.active{
+    color: white !important;
+  }
+
+  .topLine{
+    border-top: 1px solid rgba(255, 255, 255, 0.596);
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+    
+  .mobBtn{
+    display: block;
+  }
+  .deskBtn{
+    display: none;
+  }
+
+  .deskBtn span{
+    display: block;
+  }
+
+  .mobLang{
+    display: block;
+  }
+
+  .mobLang li{
+    margin: 0 auto;
+    width: 50px;
+    background-color: white;
+    color: black;
+    border-radius: 60px;
+  }
+
+
   
   .tutorHeader h1{
    
 
-    margin-top: 0;
+    margin-top: 0px;
   }
 
   .tutorHeader{
@@ -2802,6 +2895,14 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
     justify-content: center;
   }
 
+
+  header {
+    padding: 30px 0;
+  }
+
+  .pl-lg-5, .px-lg-5{
+    padding-left: 0px;
+  }
   
 
 }
@@ -2818,8 +2919,8 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
   }
 
   .tutorHeader h1{
-    background-color: rgb(31, 212, 101);
-    margin-top: 0;
+    /* background-color: rgb(31, 212, 101); */
+    margin-top: 100px;
   }
 
   #accordion{
@@ -2835,17 +2936,20 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
     display: flex;
     justify-content: center;
   }
+  header {
+    padding: 30px 0;
+  }
 }
 
 @media only screen and (min-width: 1801px) {
   /* Styles for extra large desktops */
   .overlayMTC{
-    height: 730px;
+    height: 750px;
   }
  
   .tutorHeader h1{
-    background-color: red;
-    margin-top: 0;
+    /* background-color: red; */
+    margin-top: 100px;
   }
 
   #accordion{
@@ -2861,8 +2965,24 @@ background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%,
     display: flex;
     justify-content: center;
   }
+
+  header {
+    padding: 30px 0;
 }
 
 
+.howitwork-sec{
+  background-position: 650px 245px;;
+}
+
+.howitwork-sec2{
+  background-position: 550px 450px;
+}
+}
+
+
+.blogBanner{
+  width: 100%;
+}
 
 /* ------------------------ */

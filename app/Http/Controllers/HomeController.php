@@ -133,7 +133,13 @@ class HomeController extends Controller
         // return view('front-cms.index', compact('classes'));
     }
     public function indexresources(){
-        return view('front-cms.resources');
+        $blogs = Blogs::select('*')->where('is_active',1)->get();
+        return view('front-cms.resources',compact('blogs'));
+    }
+    public function indexresourcesdetails($id){
+
+        $blog = Blogs::select('*')->where('id',$id)->where('is_active',1)->first();
+        return view('front-cms.blogdetails',compact('blog'));
     }
     public function toptutorsearch(Request $request){
         $subjectid = $request->subject;
@@ -208,8 +214,8 @@ class HomeController extends Controller
         $tutorname = $request->name;
         $subjectid = $request->subject;
         $classid = $request->grade;
-        $ratings = $request->ratings;
-        $countryid = $request->country;
+        $ratings = '';
+        $countryid = '';
 
         $classes = classes::all('id', 'name');
 

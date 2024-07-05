@@ -41,54 +41,23 @@
 
 
             <div class="row mt-5">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                @foreach ($blogs as $blog)
+                
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="blog-card">
-                        <img  src="{{ url('frontendnew/img/blog-img-1.png') }}" width="100%" alt="">
+                        <img  src="{{ url('images/blogs/'.$blog->image) }}" width="100%" alt="">
                         <div class="blogDetails">
-                            <span class="feature">
-                                Featured | Student
-                                <span>
-                                    <h5 class="my-2">Tips and Tricks to design a revision timetable for GCSE</h5>
-                                    <p class="bDesc">Education is the best investment one can make in their children’s
-                                        lives.</p>
-                                    <a href="resources_main.html">
+                            <span class="feature"><span>
+                                <a href="resources/{{$blog->id}}"><h5 class="my-2" style="color: black">{{$blog->name}}</h5></a>
+                                    <p class="bDesc">{!! Str::limit($blog->description, 150) !!}</p>
+                                    <a href="resources/{{$blog->id}}">
                                         Read more
                                     </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="blog-card">
-                        <img src="{{ url('frontendnew/img/blog-img-1.png') }}" width="100%" alt="">
-                        <div class="blogDetails">
-                            <span class="feature">
-                                Featured | Student
-                                <span>
-                                    <h5 class="my-2">Tips and Tricks to design a revision timetable for GCSE</h5>
-                                    <p class="bDesc">Education is the best investment one can make in their children’s
-                                        lives.</p>
-                                    <a href="resources_main.html">
-                                        Read more
-                                    </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="blog-card">
-                    <img src="{{ url('frontendnew/img/blog-img-1.png') }}" width="100%" alt="">
-                        <div class="blogDetails">
-                            <span class="feature">
-                                Featured | Student
-                                <span>
-                                    <h5 class="my-2">Tips and Tricks to design a revision timetable for GCSE</h5>
-                                    <p class="bDesc">Education is the best investment one can make in their children’s
-                                        lives.</p>
-                                    <a href="resources.html">
-                                        Read more
-                                    </a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+                
             </div>
 
             <script>
