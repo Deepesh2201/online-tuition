@@ -66,9 +66,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{('/findatutor')}}">Find a tutor</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{('/subjects')}}">Subjects</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{('/aboutus')}}">Why choose us?</a>
                             </li>

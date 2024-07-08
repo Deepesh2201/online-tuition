@@ -13,12 +13,19 @@ class SlotBookingController extends Controller
 {
     public function tutorslots(){
 
-        $slots = SlotBooking::select('slot_bookings.*','studentprofiles.name as student_name','subjects.name as subject')
-        ->leftJoin('studentprofiles','studentprofiles.student_id','=','slot_bookings.student_id')
-        ->leftJoin('subjects','subjects.id','=','slot_bookings.subject_id')
-        ->where('slot_bookings.tutor_id',session('userid')->id)
-        ->where('slot_bookings.date', '>', Carbon::now())
-        ->get();
+        $slots = SlotBooking::select('slot_bookings.*', 'studentprofiles.name as student_name', 'subjects.name as subject')
+    ->leftJoin('studentprofiles', 'studentprofiles.student_id', '=', 'slot_bookings.student_id')
+    ->leftJoin('subjects', 'subjects.id', '=', 'slot_bookings.subject_id')
+    ->where('slot_bookings.tutor_id', session('userid')->id)
+    ->where(function($query) {
+        $query->whereDate('slot_bookings.date', '>=', Carbon::today())
+              ->orWhere(function($query) {
+                  $query->whereDate('slot_bookings.date', '=', Carbon::today())
+                        ->whereTime('slot_bookings.date', '>=', Carbon::now());
+              });
+    })
+    ->orderby('slot_bookings.date','asc')
+    ->get();
 
         $subjects = subjects::select('subjects.*')
         ->join('tutorsubjectmappings','tutorsubjectmappings.subject_id','subjects.id')

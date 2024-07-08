@@ -581,6 +581,6 @@ Route::get('privacypolicy', function(){
 Route::get('refundpolicy', function(){
     return view('front-cms/refundpolicy');
 });
-Route::get('termsandcontiions', function(){
+Route::get('termsandconditions', function(){
     return view('front-cms/termsandconditions');
 });
