@@ -524,7 +524,7 @@
 
                     toastr.success('status changed')
                     document.getElementById('warningbtn').innerHTML =
-                        `<a href="${link}"><button class="btn btn-sm btn-success">Ok</button></a>`;
+                        `<a href="${link}" target="_blank"><button class="btn btn-sm btn-success">Ok</button></a>`;
                     $('#warningModal').modal('show');
 
                 } else {
