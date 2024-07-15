@@ -354,6 +354,7 @@ Route::group(['prefix' => 'tutor', 'middleware' => ['TutorAuthenticate']], funct
 
     // Tutor Dashboard
     Route::get('dashboard', [TutorDashboardController::class, 'index'])->name('tutor.dashboard');
+    Route::get('dashboard/oauth2callback', [TutorDashboardController::class, 'index'])->name('tutor.dashboard.oauth2callback');
     // Tutor Profile
     Route::get('profile', [TutorProfileController::class, 'tutorprofile'])->name('tutor.profile');
     Route::get('profileupdate', [TutorProfileController::class, 'edit'])->name('tutor.profileupdate');
@@ -542,8 +543,10 @@ Route::group(['prefix' => 'parent', 'middleware' => ['StudentAuthenticate']], fu
 
 // Create Jitsi Meeting
 Route::get('/jitsi', [JitsiController::class, 'index']);
-Route::get('oauth2callback', [GoogleCalendarController::class,'oauthCallback'])->name('oauth2callback');
+// Route::get('oauth2callback', [GoogleCalendarController::class,'oauthCallback'])->name('oauth2callback');
 Route::get('tutorprofile/{id}', [TutorSearchController::class, 'teacherprofile'])->name('tutorprofile');
+Route::get('/tutor/dashboard/oauth2callback', [GoogleCalendarController::class, 'oauth2callbackdemo']);
+
 
 
 
