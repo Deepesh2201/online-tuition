@@ -74,22 +74,18 @@
                 <form action="{{ route('tutor.updateprofiledata') }}" enctype="multipart/form-data" method="POST">
                     @csrf
 
+                    <span class="text-danger" id="file-error"></span>
                     <div class="card-header bg-white">
 
                         <div class="row mb-5">
                             <div class="col-md-3 col-12">
-
                                 <div class="profile-pic-div">
-                                    <img src="{{url('images/tutors/profilepics','/')}}{{ $tutorpd->profile_pic ?? '1703078631.png'}}"
-                                        id="photo">
-                                    <input type="file" id="file" name="file">
-                                    {{-- <input type="file" id="test" name="test"> --}}
-                                    <label for="file" id="uploadBtn"><span class="ri-camera-line">&nbsp;Choose
-                                            Photo</span></label>
-
+                                    <img src="{{url('images/tutors/profilepics','/')}}{{ $tutorpd->profile_pic ?? '1703078631.png'}}" id="photo">
+                                    <input type="file" id="file" name="file" onchange="validateImage()">
+                                    <label for="file" id="uploadBtn"><span class="ri-camera-line">&nbsp;Choose Photo</span></label>
                                 </div>
-
                             </div>
+                            
                             <div class="col-md-6 col-12">
                                 <h2 style="margin-top: 60px; color: black; padding-left: 30px;">
                                     {{ $tutorpd->name ?? session('userid')->name }}</h2>
@@ -546,6 +542,36 @@ function fetchSubjects() {
             $("input[name='skills']").val(skillsArray.join(", "));
         });
     });
+</script>
+<script>
+    function validateImage() {
+       
+    const fileInput = document.getElementById('file');
+    const filePath = fileInput.value;
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    const file = fileInput.files[0];
+    const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+    const errorElement = document.getElementById('file-error');
+
+    // Reset previous error message
+    errorElement.textContent = '';
+       
+    // Check file extension
+    if (!allowedExtensions.exec(filePath)) {
+        errorElement.textContent = 'Only .jpg, .jpeg, and .png files are allowed';
+        fileInput.value = '';
+        return false;
+    }
+   
+    // Check file size
+    if (file.size > maxSize) {
+        errorElement.textContent = 'File size must not exceed 2MB';
+        fileInput.value = '';
+        return false;
+    }
+
+    return true;
+}
 </script>
 
 
