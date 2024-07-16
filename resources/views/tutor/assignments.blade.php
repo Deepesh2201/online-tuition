@@ -187,9 +187,10 @@
 
                             <div style="float:right">
 
-                            <button type="submit" id="" class="btn btn-sm btn-success float-right">Submit</button>
-                            <button type="button" class="btn btn-sm btn-danger mr-1 moveRight"
+                            
+                            <button type="button" class="btn btn-sm btn-danger mr-1 " onclick="closemodal();"
                                 data-dismiss="modal"><span class="fa fa-times"></span> Close</button>
+                                <button type="submit" id="" class="btn btn-sm btn-success float-right">Submit</button>
 
 
 
@@ -215,6 +216,9 @@
             $("#openmodal").modal('show');
         }
 
+        function closemodal(){
+            $("#openmodal").modal('hide');
+        }
         function fetchSubjects() {
 
             var classId = $('#class option:selected').val();
