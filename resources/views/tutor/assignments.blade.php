@@ -136,9 +136,9 @@
                                 </div>
 
                                 <div class="col-12 col-md-6 col-ms-6 mb-3">
-                                    <label>Upload Assignment<span style="color:red">*</span></label>
-                                    <input type="file" class="form-control" id="assigupload" name="assigupload">
-                                    <span class="text-danger">
+                                    <label>Upload Assignment (max 2MB)<span style="color:red">*</span></label>
+                                    <input type="file" class="form-control" id="assigupload" name="assigupload" onchange="validateFile()">
+                                    <span class="text-danger" id="file-error">
                                         @error('assigupload')
                                         {{ 'Assignment is required' }}
                                         @enderror
@@ -369,5 +369,31 @@
             setTimeout(delayedFunction, delay);
             $("#openmodal").modal('show');
         };
+        function validateFile() {
+    const fileInput = document.getElementById('assigupload');
+    const filePath = fileInput.value;
+    const allowedExtensions = /(\.pdf)$/i;
+    const file = fileInput.files[0];
+    const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+    const errorElement = document.getElementById('file-error');
+
+    // Reset previous error message
+    errorElement.textContent = '';
+
+    // Check file extension
+    if (!allowedExtensions.exec(filePath)) {
+        errorElement.textContent = 'Only .pdf files are allowed';
+        fileInput.value = '';
+        return false;
+    }
+    // Check file size
+    if (file.size > maxSize) {
+        errorElement.textContent = 'File size must not exceed 2MB';
+        fileInput.value = '';
+        return false;
+    }
+
+    return true;
+}
         </script>
     @endsection

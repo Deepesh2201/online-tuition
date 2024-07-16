@@ -118,6 +118,7 @@ class AssignmentsController extends Controller
         $assignments = StudentAssignmentList::select(
             'student_assignment_lists.id as assignment_id',
             'student_assignment_lists.name as assignment_name',
+            'student_assignment_lists.assignment_link as assignment_link',
             'student_assignment_lists.topic',
             'subjects.name as subject',
             'classes.name as class',
@@ -131,7 +132,7 @@ class AssignmentsController extends Controller
         ->leftJoin('student_assignments', 'student_assignments.submitted_by', '=', 'student_assignment_lists.student_id')
         ->where('student_assignment_lists.is_active', 1)
         ->where('student_assignment_lists.assigned_by', session('userid')->id)
-        ->groupBy('student_assignment_lists.id', 'student_assignment_lists.name','student_assignment_lists.topic', 'subjects.name', 'classes.name', 'studentregistrations.name', 'studentregistrations.id')
+        ->groupBy('student_assignment_lists.id', 'student_assignment_lists.name','student_assignment_lists.assignment_link','student_assignment_lists.topic', 'subjects.name', 'classes.name', 'studentregistrations.name', 'studentregistrations.id')
         ->orderBy('created_at', 'desc')
         ->get();
         // $students = studentregistration::select('*')
@@ -166,6 +167,7 @@ class AssignmentsController extends Controller
         'studentregistrations.parent_password'
         )
         ->get();
+        // dd($assignments);
         return view('tutor.assignments', compact('assignments', 'classes','students'));
     }
 
