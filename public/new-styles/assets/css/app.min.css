@@ -16145,6 +16145,7 @@ span.flatpickr-weekday {
     z-index: 0;
     border-radius: 0.25rem;
 }
+
 @media (max-width: 576.98px) {
     .about-img-section::before {
         right: 20px;
@@ -16159,6 +16160,9 @@ span.flatpickr-weekday {
         float: right !important;
        
     }
+
+
+    
 }
 .features-company-widgets {
     position: absolute;

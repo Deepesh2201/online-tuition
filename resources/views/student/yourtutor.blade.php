@@ -27,6 +27,10 @@
                 width: 90%;
                 margin-top: 4px;
             }
+
+            .bookedSlot, .startChat{
+                width: 50% !important;
+            }
         </style>
       <link rel="stylesheet" href="{{url('frontend/css/profile.css')}}">
             <h3 class="text-center mb-2">Your Tutor</h3>
@@ -154,12 +158,16 @@
                                   {{-- <a href="#classes">  <button class="btn btn-sm btn-primary"
                                     onclick="openDemoModal('{{ $tutorlist->tutor_id }}','{{ $tutorlist->name }}','{{ $tutorlist->class_name }}','{{ $tutorlist->subjectid }}','{{ $tutorlist->subject }}','{{ $class_purchased ?? '-' }}','{{ $total_amount_paid ?? '-' }}','{{ $formatted_date ?? '_'}}','{{ $class_attended ?? '-'}}')">Classes
                                     </button></a> --}}
-                                    <a href="enrollupdate/{{$tutorlist->tutor_id}}"><button class="btn btn-sm btn-success">Booked Slots</button></a>
-                                    <a href="tutormessages/{{$tutorlist->tutor_id}}"><button class="btn btn-sm btn-success">Start Chat</button></a>
+                                    <div class="aaa1"style="margin-right:10px; margin-bottom:10px;">
+                                        <a href="enrollupdate/{{$tutorlist->tutor_id}}" class="bookedSlot"><button class="btn btn-sm btn-success">Booked Slots</button></a>
+                                        <a href="tutormessages/{{$tutorlist->tutor_id}}" class="startChat"><button class="btn btn-sm btn-success">Start Chat</button></a> 
+                                    </div>
                                     <a href="/student/tutorprofile/{{ $tutorlist->tutor_id }}" class="tu-primbtn">View full profile</a>
                                 </div>
                             </div>
                         </div>
+
+                       
                         @endforeach
                         @endif
                     </div>

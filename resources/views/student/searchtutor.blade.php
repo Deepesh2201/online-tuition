@@ -214,7 +214,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xl-8 col-xxl-9">
+                    <div class="col-xl-8 col-xxl-9" >
                         <div class="tu-listinginfo-holder">
                             @if (isset($tutorlist))
                                 @foreach ($tutorlist as $tutorlist)
@@ -229,7 +229,7 @@
                                                     </figure>
                                                     <div class="tu-listing-heading">
                                                         <h5><a
-                                                                href="/student/tutorprofile/{{ $tutorlist->tutor_id }}">{{ $tutorlist->name }}</a>
+                                                                href="/student/tutorprofile/{{ $tutorlist->sub_map_id }}">{{ $tutorlist->name }}</a>
                                                             <i class="icon icon-check-circle tu-greenclr"
                                                                 data-tippy-trigger="mouseenter"
                                                                 data-tippy-html="#tu-verifed" data-tippy-interactive="true"
@@ -265,12 +265,12 @@
                                                             {{ $tutorlist->total_classes_done }}+ Lessons Completed
                                                         </span>
                                                     </li>
-                                                    {{-- <li>
+                                                    <li>
                                                         <span>
                                                             <i class="icon icon-video tu-orangeclr"></i>
                                                             {{ $tutorlist->total_topics }}+ Topics
                                                         </span>
-                                                    </li> --}}
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -325,6 +325,7 @@
                             </ul>
                         </nav> --}}
                     </div>
+                    <br>
                     {{-- Search/Filter --}}
                     <div class="col-xl-4 col-xxl-3">
                         <aside class="tu-asidewrapper">

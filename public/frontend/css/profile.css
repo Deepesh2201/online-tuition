@@ -4774,6 +4774,7 @@ input.tu-showplaceholder::placeholder {
   position: relative;
   border-radius: 4px;
   border: 1px solid #eeeeee;
+  margin-bottom: 20px;
 }
 .tu-listinginfo:hover {
   box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.04), 0px 3px 16px rgba(0, 0, 0, 0.04);
@@ -4940,6 +4941,7 @@ input.tu-showplaceholder::placeholder {
 .tu-btnarea {
   display: flex;
   align-items: center;
+  
 }
 .tu-btnarea a + a {
   margin-left: 10px;

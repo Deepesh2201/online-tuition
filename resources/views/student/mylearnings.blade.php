@@ -25,15 +25,17 @@
                     <form action="{{route('student.mylearnings')}}" method="post">
                         @csrf
                         <div class="row ">
-                            <div class="col-md-3 mt-4">
+                            <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 mt-4">
                                 <input type="text" value="{{$requests['topic'] ?? ''}}" name="topic" class="form-control" placeholder="Enter Topic">
                             </div>
 
 
 
-                            <div class="col-md-9 mt-4">
-                                <button class="btn  btn-primary"> <span
+                            <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12 mt-4" >
+                                <div class="myLearningSearch">
+                                    <button class="btn  btn-primary"> <span
                                     class="fa fa-search"></span> Search</button>
+                                </div>
                             </div>
                         </div>
 

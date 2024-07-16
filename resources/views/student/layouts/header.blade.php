@@ -103,14 +103,14 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
 
                     <div class="d-flex">
 
-                    <div class="dropdown d-md-none topbar-head-dropdown header-item">
+                    <div class="dropdown d-md-none topbar-head-dropdown header-item" hidden>
                         <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                             id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             <i class="bx bx-search fs-22"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                            aria-labelledby="page-header-search-dropdown">
+                            aria-labelledby="page-header-search-dropdown" >
                             <form class="p-3">
                                 <div class="form-group m-0">
                                     <div class="input-group">
@@ -124,9 +124,9 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                         </div>
                     </div>
 
-
-
-
+                   
+                        
+                   
 
                     <div class="ms-1 header-item d-none d-sm-flex">
                         <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
