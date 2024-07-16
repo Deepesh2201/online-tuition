@@ -163,7 +163,7 @@
                                     <thead>
                                         <tr class="">
                                             <th>Tutor</th>
-                                            <th>Subject</th>
+                                            <th>Topic</th>
                                             <th>Time</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -179,7 +179,7 @@
                                                     <span>{{ $upcomingclass->tutor_name }}</span>
                                                 </div>
                                             </td>
-                                            <td>{{ $upcomingclass->subjects }}</td>
+                                            <td>{{ $upcomingclass->topics }}</td>
                                             <td>
                                                 <div class="dayTime">
                                                     @php

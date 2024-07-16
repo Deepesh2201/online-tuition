@@ -50,28 +50,24 @@ class DashboardController extends Controller
             ->where('paymentstudents.student_id', session('userid')->id)->sum('classes_purchased');
         $upcomingClasses = zoom_classes::join('batchstudentmappings', 'batchstudentmappings.batch_id', 'zoom_classes.batch_id')
             ->whereRaw("JSON_CONTAINS(batchstudentmappings.student_data, '\"$targetValue\"')")
-            ->where('start_time', '>', Carbon::now())
+            // ->where('start_time', '>', Carbon::now())
             ->orderBy('start_time', 'asc') // Order by start_time in ascending order
             ->take(5) // Limit to the latest 5
             ->get();
 
         // ============================
-        $upclasses = zoom_classes::select('*', 'zoom_classes.id as class_id', 'zoom_classes.tutor_id as tutor_id', 'subjects.id as subject_id', 'subjects.name as subjects', 'batches.name as batch', 'topics.name as topics', 'tutorprofiles.name as tutor_name', 'tutorprofiles.profile_pic')
-            ->join('batchstudentmappings', 'batchstudentmappings.batch_id', 'zoom_classes.batch_id')
-            ->join('batches', 'batches.id', 'zoom_classes.batch_id')
-            ->join('subjects', 'subjects.id', 'batches.subject_id')
-            ->join('topics', 'topics.id', 'zoom_classes.topic_id')
+        $upclasses = zoom_classes::select('*', 'zoom_classes.id as class_id', 'zoom_classes.tutor_id as tutor_id', 'zoom_classes.topic_name as topics', 'tutorprofiles.name as tutor_name', 'tutorprofiles.profile_pic')
             ->join('tutorprofiles', 'tutorprofiles.tutor_id', 'zoom_classes.tutor_id')
-            ->whereRaw("JSON_CONTAINS(batchstudentmappings.student_data, '\"$targetValue\"')")
             ->where('zoom_classes.is_active', 1)
             ->where('zoom_classes.is_completed', 0)
-            ->where('zoom_classes.start_time', '>', Carbon::now())
+            ->where('zoom_classes.start_time', '>=', Carbon::now())
             ->orderBy('zoom_classes.start_time', 'asc')
             ->take(5)
             ->get()
             ->each(function ($item) {
                 $item->start_time = Carbon::parse($item->start_time)->format('Y-m-d H:i:s');
             });
+        //     echo Carbon::now();
 
         // dd($upclasses);
 
