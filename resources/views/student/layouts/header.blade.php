@@ -14,8 +14,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose student & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="/images/MCTfavicon.png">
+    <!-- Favicon -->
+    <link rel="icon" href="{{url('frontendnew/img/icons/mct-favicon.png')}}" type="image/x-icon">
 
     <!-- plugin css -->
     <link href="{{url('new-styles/assets/libs/jsvectormap/css/jsvectormap.min.css')}}" rel="stylesheet"
@@ -618,7 +618,7 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                     <li class="menu-title"><span data-key="t-menu">Menu</span></li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="/student/dashboard" role="button" aria-expanded="false"
+                        <a class="nav-link menu-link {{ Request::is('student/dashboard') ? 'active' : '' }}" href="/student/dashboard" role="button" aria-expanded="false"
                             aria-controls="sidebarDashboards">
                             <img src="/images/Student-dashboard-menu-icon/Dashboard.svg" alt="">&nbsp; <span
                                 data-key="t-dashboards"> Dashboard</span>
@@ -626,12 +626,12 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                     </li> <!-- end Dashboard Menu -->
 
                     <li class="nav-item">
-                        <a href="{{route('student.yourtutor')}}" class="nav-link menu-link"> <img
+                        <a href="{{route('student.yourtutor')}}" class="nav-link menu-link {{ Request::is('student/yourtutor') ? 'active' : '' }}"> <img
                                 src="/images/Student-dashboard-menu-icon/My Tutors.svg" alt="">&nbsp; <span
                                 data-key="t-starter">My Tutor </span> </a>
                     </li>
 
-                    <li class="nav-item" hidden>
+                    {{-- <li class="nav-item" hidden>
                         <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="sidebarApps">
                             <i class="ri-apps-2-line"></i> <span data-key="t-apps">Apps</span>
@@ -648,40 +648,38 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
 
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item">
+                        @php
+                            $isClassesActive = Request::is('student/demolist') || Request::is('student/classes') || Request::is('student/completed-classes');
+                        @endphp
                         <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarLayouts">
+                            aria-expanded="{{ $isClassesActive ? 'true' : 'false' }}" aria-controls="sidebarLayouts">
                             <img src="/images/Student-dashboard-menu-icon/My Classes.svg" alt="">&nbsp;<span
-                                data-key="t-layouts"> My Classes</span> <span class="badge badge-pill bg-danger"
-                                data-key="t-hot">Updates</span>
+                                data-key="t-layouts"> My Classes</span> 
                         </a>
-                        <div class="collapse menu-dropdown" id="sidebarLayouts">
+                        <div class="collapse menu-dropdown {{ $isClassesActive ? 'show' : '' }}" id="sidebarLayouts">
                             <ul class="nav nav-sm flex-column">
-
                                 <li class="nav-item submneu">
-                                    <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt=""><a
-                                        href="{{route('student.demolist')}}" class="nav-link" data-key="">My Demo
-                                        Classes</a>
+                                    <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt="">
+                                    <a href="{{ route('student.demolist') }}" class="nav-link {{ Request::is('student/demolist') ? 'active' : '' }}" data-key="">My Demo Classes</a>
                                 </li>
                                 <li class="nav-item submneu">
-                                    <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt=""><a
-                                        href="{{route('student.classes')}}" class="nav-link" data-key="">Upcoming
-                                        Classes</a>
+                                    <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt="">
+                                    <a href="{{ route('student.classes') }}" class="nav-link {{ Request::is('student/classes') ? 'active' : '' }}" data-key="">Upcoming Classes</a>
                                 </li>
                                 <li class="nav-item submneu">
-                                    <img src="/images/Student-dashboard-menu-icon/My recordings.svg" alt="">&nbsp;<a
-                                        href="{{route('student.completed-classes')}}" class="nav-link"
-                                        data-key="t-horizontal">My Recordings</a>
+                                    <img src="/images/Student-dashboard-menu-icon/My recordings.svg" alt="">&nbsp;
+                                    <a href="{{ route('student.completed-classes') }}" class="nav-link {{ Request::is('student/completed-classes') ? 'active' : '' }}" data-key="t-horizontal">My Recordings</a>
                                 </li>
-
                             </ul>
                         </div>
                     </li>
+                    
 
                     <li class="nav-item">
-                        <a href="{{route('student.searchtutor')}}" class="nav-link menu-link"> <img
+                        <a href="{{route('student.searchtutor')}}" class="nav-link menu-link {{ Request::is('student/searchtutor') ? 'active' : '' }}"> <img
                                 src="/images/Student-dashboard-menu-icon/Explore tutors.svg" alt="">&nbsp; <span
                                 data-key="t-dashboards"> Explore Tutors</span> </a>
                     </li>
@@ -729,92 +727,101 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
             </li>
 
             <li class="nav-item">
+                @php
+                    $isStudyMaterialsActive = Request::is('student/mylearnings') || Request::is('student/assignments');
+                @endphp
                 <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
-                    aria-expanded="false" aria-controls="sidebarLanding">
+                    aria-expanded="{{ $isStudyMaterialsActive ? 'true' : 'false' }}" aria-controls="sidebarLanding">
                     <img src="/images/Student-dashboard-menu-icon/Study Materials.svg" alt="">&nbsp;<span
                         data-key="t-landing">Study Materials</span>
                 </a>
-                <div class="collapse menu-dropdown" id="sidebarLanding">
+                <div class="collapse menu-dropdown {{ $isStudyMaterialsActive ? 'show' : '' }}" id="sidebarLanding">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="{{route('student.mylearnings')}}" class="nav-link menu-link"
-                                data-key="t-one-page">Learning Contents</a>
+                            <a href="{{ route('student.mylearnings') }}" class="nav-link menu-link {{ Request::is('student/mylearnings') ? 'active' : '' }}" data-key="t-one-page">Learning Contents</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('student.assignments.list')}}" class="nav-link menu-link"
-                                data-key="t-one-page">Assignments</a>
+                            <a href="{{ route('student.assignments.list') }}" class="nav-link menu-link {{ Request::is('student/assignments') ? 'active' : '' }}" data-key="t-one-page">Assignments</a>
                         </li>
-
                     </ul>
                 </div>
             </li>
+            
 
 
 
             <li class="nav-item">
+                @php
+                    $isOnlineTestsActive = Request::is('student/exams');
+                @endphp
                 <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button"
-                    aria-expanded="false" aria-controls="sidebarAdvanceUI">
+                    aria-expanded="{{ $isOnlineTestsActive ? 'true' : 'false' }}" aria-controls="sidebarAdvanceUI">
                     <img src="/images/Student-dashboard-menu-icon/Online Tests.svg" alt="">&nbsp; <span
                         data-key="t-advance-ui">Online Tests</span>
                 </a>
-                <div class="collapse menu-dropdown" id="sidebarAdvanceUI">
+                <div class="collapse menu-dropdown {{ $isOnlineTestsActive ? 'show' : '' }}" id="sidebarAdvanceUI">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="{{route('student.exams')}}" class="nav-link" data-key="t-alerts">Quizes</a>
+                            <a href="{{ route('student.exams') }}" class="nav-link {{ Request::is('student/exams') ? 'active' : '' }}" data-key="t-alerts">Quizes</a>
                         </li>
-
                     </ul>
                 </div>
             </li>
+            
 
 
             <li class="nav-item">
+                @php
+                    $isPaymentsActive = Request::is('student/studentpayments');
+                @endphp
                 <a class="nav-link menu-link" href="#sidebarForms" data-bs-toggle="collapse" role="button"
-                    aria-expanded="false" aria-controls="sidebarForms">
-                    <img src="/images/Student-dashboard-menu-icon/Payments.svg" alt="">&nbsp; <span
-                        data-key="t-forms">Payments</span>
+                    aria-expanded="{{ $isPaymentsActive ? 'true' : 'false' }}" aria-controls="sidebarForms">
+                    <img src="/images/Student-dashboard-menu-icon/Payments.svg" alt="">&nbsp; <span data-key="t-forms">Payments</span>
                 </a>
-                <div class="collapse menu-dropdown" id="sidebarForms">
+                <div class="collapse menu-dropdown {{ $isPaymentsActive ? 'show' : '' }}" id="sidebarForms">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="{{route('student.studentpayments')}}" class="nav-link" data-key="t-form-select">
-                                Payment History </a>
+                            <a href="{{ route('student.studentpayments') }}" class="nav-link {{ Request::is('student/studentpayments') ? 'active' : '' }}" data-key="t-form-select">
+                                Payment History
+                            </a>
                         </li>
-
-
                     </ul>
                 </div>
             </li>
+            
 
             <li class="nav-item">
+                @php
+                    $isReportsActive = Request::is('student/class-reports') || Request::is('student/attendance-reports');
+                @endphp
                 <a class="nav-link menu-link" href="#sidebarCharts" data-bs-toggle="collapse" role="button"
-                    aria-expanded="false" aria-controls="sidebarCharts">
-                    <img src="/images/Student-dashboard-menu-icon/Reports.svg" alt="">&nbsp; <span
-                        data-key="t-charts">Reports</span>
+                    aria-expanded="{{ $isReportsActive ? 'true' : 'false' }}" aria-controls="sidebarCharts">
+                    <img src="/images/Student-dashboard-menu-icon/Reports.svg" alt="">&nbsp; <span data-key="t-charts">Reports</span>
                 </a>
-                <div class="collapse menu-dropdown" id="sidebarCharts">
+                <div class="collapse menu-dropdown {{ $isReportsActive ? 'show' : '' }}" id="sidebarCharts">
                     <ul class="nav nav-sm flex-column">
-
                         <li class="nav-item">
-                            <a href="{{route('student.class.report')}}" class="nav-link" data-key="t-chartjs">
-                                Classes </a>
+                            <a href="{{ route('student.class.report') }}" class="nav-link {{ Request::is('student/class-reports') ? 'active' : '' }}" data-key="t-chartjs">
+                                Classes
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('student.attendance.report')}}" class="nav-link" data-key="t-chartjs">
-                                Attendance </a>
+                            <a href="{{ route('student.attendance.report') }}" class="nav-link {{ Request::is('student/attendance-reports') ? 'active' : '' }}" data-key="t-chartjs">
+                                Attendance
+                            </a>
                         </li>
-
                     </ul>
                 </div>
             </li>
+            
 
             <li class="nav-item">
-                <a href="{{route('student.messages')}}" class="nav-link menu-link"> <img
+                <a href="{{route('student.messages')}}" class="nav-link menu-link {{ Request::is('student/messages') ? 'active' : '' }}"> <img
                         src="/images/Student-dashboard-menu-icon/Chat.svg" alt="">&nbsp; <span data-key="t-dashboards">
                         Chat</span> </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('student.myfeedback')}}" class="nav-link menu-link" data-key="t-starter"> <img
+                <a href="{{route('student.myfeedback')}}" class="nav-link menu-link {{ Request::is('student/myfeedback') ? 'active' : '' }}" data-key="t-starter"> <img
                         src="/images/Student-dashboard-menu-icon/feedback.svg" alt="">&nbsp; <span
                         data-key="t-dashboards"> Feedback</span> </a>
             </li>

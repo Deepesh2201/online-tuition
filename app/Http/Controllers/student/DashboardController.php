@@ -32,12 +32,13 @@ class DashboardController extends Controller
             ->groupBy('paymentstudents.subject_id')
             ->selectRaw('paymentstudents.subject_id, COUNT(*) as subject_count')
             ->get();
-        $atendedclasses = zoom_classes::join('batchstudentmappings', 'batchstudentmappings.batch_id', 'zoom_classes.batch_id')
-            ->whereRaw("JSON_CONTAINS(batchstudentmappings.student_data, '\"$targetValue\"')")
-            ->where('zoom_classes.is_active', 1)
+        $atendedclasses = zoom_classes::
+        // join('batchstudentmappings', 'batchstudentmappings.batch_id', 'zoom_classes.batch_id')
+            // ->whereRaw("JSON_CONTAINS(batchstudentmappings.student_data, '\"$targetValue\"')")
+            // ->where('zoom_classes.is_active', 1)
             // ->where('zoom_classes.status', 'like', '%completed%')
-            ->where('zoom_classes.is_completed', 1)
-            ->where('zoom_classes.student_id', session('userid')->id)
+            where('is_completed', 1)
+            ->where('student_id', session('userid')->id)
             ->count();
         // dd($atendedclasses);
         $non_atendedclasses = zoom_classes::join('batchstudentmappings', 'batchstudentmappings.batch_id', 'zoom_classes.batch_id')

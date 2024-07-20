@@ -15,6 +15,8 @@
         <!-- Style -->
         <link rel="stylesheet" href="{{url('frontendnew/css/style.css')}}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Favicon -->
+        <link rel="icon" href="{{url('frontendnew/img/icons/mct-favicon.png')}}" type="image/x-icon">
         <title>My Choice Tutor</title>
     </head>
     <body>
@@ -62,23 +64,24 @@
                             </li>
                         </ul>
                         
-                        <ul class="navbar-nav ml-auto  pl-0 topLine">
+                        <ul class="navbar-nav ml-auto pl-0 topLine">
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{('/findatutor')}}">Find a tutor</a>
+                                <a class="nav-link {{ Request::is('findatutor') ? 'active' : '' }}" href="{{ url('/findatutor') }}">Find a tutor</a>
                             </li>
                             {{-- <li class="nav-item">
-                                <a class="nav-link" href="{{('/subjects')}}">Subjects</a>
+                                <a class="nav-link {{ Request::is('subjects') ? 'active' : '' }}" href="{{ url('/subjects') }}">Subjects</a>
                             </li> --}}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{('/aboutus')}}">Why choose us?</a>
+                                <a class="nav-link {{ Request::is('aboutus') ? 'active' : '' }}" href="{{ url('/aboutus') }}">Why choose us?</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{('/resources')}}">Resources</a>
+                                <a class="nav-link {{ Request::is('resources') ? 'active' : '' }}" href="{{ url('/resources') }}">Resources</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{('/howitworks')}}">How it works</a>
+                                <a class="nav-link {{ Request::is('howitworks') ? 'active' : '' }}" href="{{ url('/howitworks') }}">How it works</a>
                             </li>
                         </ul>
+                        
 
                         <ul class="navbar-nav ml-auto deskBtn" >
                             <li class="nav-item cta-btn">

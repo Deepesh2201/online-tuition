@@ -175,7 +175,7 @@
                         <div class="d-flex">
                             <div class="avatar-xs me-3 flex-shrink-0">
                                 <span class="avatar-title bg-info-subtle  rounded-circle fs-16">
-                                    <img src="/images/tutors/profilepics/${notification.initiator_pic}" class="">
+                                    <img src="/images/tutors/profilepics/${notification.initiator_pic}" class="" height="36px">
                                 </span>
                             </div>
                             <div class="flex-grow-1">

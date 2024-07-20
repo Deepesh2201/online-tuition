@@ -97,7 +97,7 @@
                   <button type="submit" class="btn brand-bg-Color mb-3">Login</button>
   
                   <br>
-                  <a href="#">
+                  {{-- <a href="#">
                       <div class="googleLogin">
   
                           <img src="{{ url('frontendnew/img/icons/google-logo.png') }}" alt=""><span>Sign in with
@@ -105,7 +105,7 @@
   
                       </div>
   
-                  </a>
+                  </a> --}}
   
                   <div class="forgotPwd mt-3">
                       <p> Don't have an account? <a href="{{ '/student/register' }}" class="register">Register</a></p>

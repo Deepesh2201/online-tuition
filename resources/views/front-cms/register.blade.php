@@ -126,7 +126,7 @@
                             </div>
 
 
-                            <div class="row mt-4">
+                            {{-- <div class="row mt-4">
                                 <div class="col-12 ">
                                     <div class="fb-btn">
                                         <img src="{{url('frontendnew/img/icons/facebook-icon.png')}}" alt="">
@@ -141,7 +141,7 @@
                                         <span>Sign up with Google</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="haveAnAccount">
                                 <p>Already have an account <a href="#" data-toggle="modal" data-target="#loginPopup"><u>Login now</u></a></p>
