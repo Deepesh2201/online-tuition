@@ -606,7 +606,7 @@ if ($request->has('gradelistid') || $request->has('subjectlistid')) {
 
             //////////////// Here I need to pass notification into db
             $notificationdata = new Notification();
-            $notificationdata->alert_type = 4;
+            $notificationdata->alert_type = 7;
             $notificationdata->notification = session('userid')->name.' Enrolled for classes';
             $notificationdata->initiator_id = session('userid')->id;
             $notificationdata->initiator_role = session('userid')->role_id;

@@ -19,7 +19,7 @@
             @if (Session::has('fail'))
                 <div class="alert alert-danger">{{ Session::get('fail') }}</div>
             @endif
-            <h3 class="text-center">Demo List </h3>
+            <h3 class="text-center">Trial Class </h3>
             <div class="mt-4" id="">
 
                 <table class="table table-hover table-striped align-middlemb-0 table-responsive">

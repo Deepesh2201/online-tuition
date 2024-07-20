@@ -6,6 +6,8 @@ use App\Models\subjects;
 use App\Models\status;
 use App\Models\studentregistration;
 use Carbon\Carbon;
+use App\Events\RealTimeMessage;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\classes;
 
@@ -131,6 +133,42 @@ public function reschedule(Request $request){
     $cleardata->contact_admin = 0;
     $cleardata->remarks = NULL;
     $cleardata->save();
+
+    //////////////// Here I need to pass notification into db
+    $notificationdata = new Notification();
+    $notificationdata->alert_type = 7;
+    $notificationdata->notification = "You slots has been modified";
+    $notificationdata->initiator_id = session('userid')->id;
+    $notificationdata->initiator_role = session('userid')->role_id;
+    $notificationdata->event_id = $request->currentslotid;
+    // Sending to admin
+    // if($request->receiver_role_id == 1){
+    //     $notificationdata->show_to_admin = 1;
+    //     $notificationdata->show_to_admin_id = $request->receiver_id;
+    //     // $notificationdata->show_to_all_admin = 1;
+    // }
+    // // Sending to tutor
+    // if($request->receiver_role_id == 2){
+    //     $notificationdata->show_to_tutor = 1;
+    //     $notificationdata->show_to_tutor_id = $request->receiver_id;
+    //     // $notificationdata->show_to_all_tutor = 0;
+    // }
+    // Sending to student
+    // if($request->receiver_role_id == 3){
+        $notificationdata->show_to_student = 1;
+        $notificationdata->show_to_student_id = $getdata->student_id;
+        // $notificationdata->show_to_all_student = 0;
+    // }
+    // Sending to parent
+    // if($request->receiver_role_id == 3){
+    //     $notificationdata->show_to_parent = 1;
+    //     $notificationdata->show_to_parent_id = $request->receiver_id;
+    //     // $notificationdata->show_to_all_parent = 0;
+    // }
+    $notificationdata->read_status = 0;
+
+    $notified = $notificationdata->save();
+    broadcast(new RealTimeMessage('$notification'));
 
     return back()->with('success', 'Slot changed successfully!');
 }

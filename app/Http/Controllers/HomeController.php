@@ -1588,6 +1588,7 @@ class HomeController extends Controller
             //     }
             // }
         }
+
         // Notification Event On Enrollment
         if ($notificationData->alert_type == 6) {
 
@@ -1631,47 +1632,38 @@ class HomeController extends Controller
             // }
         }
         // Notification Event On Slot Booking
-        // if($notificationData->alert_type == 7){
+        if($notificationData->alert_type == 7){
 
-        //     // Initiated By Admin
-        //     if($notificationData->initiator_role == 1){
-        //         if(session('userid')->role_id == 2){
-        //             return redirect()->to('tutor/students');
-        //         }
-        //         if(session('userid')->role_id == 3){
-        //             return redirect()->to('student/yourtutor');
-        //         }
-        //     }
-        //     // Initiated by tutor
-        //     if($notificationData->initiator_role == 2){
-        //         if(session('userid')->role_id == 1){
-        //             return redirect()->to('admin/payments');
-        //         }
-        //         if(session('userid')->role_id == 3){
-        //             return redirect()->to('student/yourtutor');
-        //         }
-        //     }
-        //     // Chat Initiated by student
-        //     if($notificationData->initiator_role == 3){
+           // Slot Booked By Student
+            if($notificationData->initiator_role == 3){
 
-        //         if(session('userid')->role_id == 1){
-        //             return redirect()->to('admin/payments');
-        //         }
-        //         if(session('userid')->role_id == 2){
-        //             return redirect()->to('tutor/students');
-        //         }
+                if(session('userid')->role_id == 1){
+                    return redirect()->to('admin/payments');
+                }
+                if(session('userid')->role_id == 2){
+                    return redirect()->to('tutor/tutorslots');
+                }
+                if(session('userid')->role_id == 3){
+                    return redirect()->to('student/enrollupdate/'.$notificationData->initiator_id);
+                }
 
-        //     }
-        //     // Initiated by parent
-        //     // if($notificationData->initiator_role == 4){
-        //     //     if(session('userid')->role_id == 1){
-        //     //         return redirect()->to('admin/studentmessages/'.$notificationData->initiator_id);
-        //     //     }
-        //     //     if(session('userid')->role_id == 2){
-        //     //         return redirect()->to('tutor/studentmessages/'.$notificationData->initiator_id);
-        //     //     }
-        //     // }
-        // }
+            }
+            // Slot Booked By Student
+            if($notificationData->initiator_role == 2){
+
+                if(session('userid')->role_id == 1){
+                    return redirect()->to('admin/payments');
+                }
+                if(session('userid')->role_id == 2){
+                    return redirect()->to('tutor/tutorslots');
+                }
+                if(session('userid')->role_id == 3){
+                    return redirect()->to('student/enrollupdate/'.$notificationData->initiator_id);
+                }
+
+            }
+            
+        }
         // Notification Event On Tutor Registration
         if ($notificationData->alert_type == 8) {
 

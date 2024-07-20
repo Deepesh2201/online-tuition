@@ -30,7 +30,7 @@
             <div class="alert alert-danger">{{ Session::get('fail') }}</div>
             @endif
             <div id="" class="mb-3 listHeader page-title-box">
-                <h3>Upcoming Classes </h3>
+                <h3>My Schedule Classes </h3>
                 <a href="tutorslots"><button class="btn btn-sm btn-success"><i class="ri-calendar-todo-fill"></i>
                     View Slots</button></a>
             </div>

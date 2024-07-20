@@ -83,7 +83,7 @@
                                 @endif
                             </td>
                             <td><button class="btn btn-sm btn-primary" onclick="openAttModal('{{$liveclass->id}}','{{$liveclass->student}}','{{$liveclass->student_present}}')">Attendance</button></td>
-
+                            <td><a href="assignments"><button class="btn btn-sm btn-success">Add Assignment</button></a></td>
                         </tr>
 
                         @endforeach

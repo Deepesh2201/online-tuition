@@ -20,7 +20,7 @@
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                     <h4 class="mb-sm-0">Dashboard</h4>
                                     @if (session('userid')->is_active == 0)
-                                    <div class="alert alert-danger">Your account is <b>Inactive</b>. Kindly contact admin for activation.  To chat with admin <a href="adminmessages" class="btn btn-sm btn-success">Click here</a></div>
+                                    <div class="alert alert-danger">Your account is inactive. Please log out and log in again to check the status. If the issue persists, please contact the admin.  To chat with admin <a href="adminmessages" class="btn btn-sm btn-success">Click here</a></div>
 
                                     @endif
 

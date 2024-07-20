@@ -40,11 +40,13 @@
                     <br>
                 @endif
                 <div id="" class="mb-3 listHeader page-title-box">
-                    <h3>Slots Booking </h3>
+                    <h3>Slots Management </h3>
+                    
                     <form action="{{ route('tutor.slots.search') }}" method="GET">
                         @csrf
                         <div style="display: flex">
-
+                            <button class="btn btn-sm btn-success bookingBtns1" style="margin-right: 5px" type="button"
+                                onclick="openclassmodalcreate();"><i class="ri-calendar-todo-fill"></i> &nbsp;Create Slot</button>
                             <select type="text" class="form-control" style="width:auto; margin-right:10px"
                                 id="selectsubject" name="selectsubject">
                                 <option value="">Select Subject</option>
@@ -63,8 +65,7 @@
                                 onchange="searchSlots();" id="searchDate" name="searchDate">
                             <button class="btn btn-sm btn-primary bookingBtns1" type="submit"><i
                                     class="ri-calendar-todo-fill"></i> &nbsp;Search Slot</button> &nbsp;
-                            <button class="btn btn-sm btn-success bookingBtns1" type="button"
-                                onclick="openclassmodalcreate();"><i class="ri-calendar-todo-fill"></i> &nbsp;Create Slot</button>
+                            
                         </div>
                     </form>
                 </div>

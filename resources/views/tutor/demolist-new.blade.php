@@ -22,7 +22,7 @@
                     <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                 @endif
                 <div class="page-title-box">
-                    <h3 class="text-center">Demo List </h3>
+                    <h3 class="text-center">Trial Class </h3>
                 </div>
                 <form action="{{route('tutor.demolist-search')}}" method="POST">
                     @csrf
