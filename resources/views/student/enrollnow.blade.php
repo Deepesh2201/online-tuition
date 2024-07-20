@@ -29,21 +29,21 @@
                 animation: blink 1s infinite;
             }
 
-            .red{
-                color:#f06548;
+            .red {
+                color: #f06548;
             }
-            .green{
+
+            .green {
                 color: #0ab39c;
             }
 
-            .blue{
+            .blue {
                 color: #405189
             }
 
-            .avalability i{
+            .avalability i {
                 padding-left: 10px;
             }
-
         </style>
 
         <div class="page-content">
@@ -134,136 +134,158 @@
 
                     </div>
 
-                <hr>
+                    <hr>
 
-                <div class="full-width-table-responsive">
-                    <table class="table table-hover table-striped align-middle table-nowrap mb-0 users-table" style="height: 260px;">
-                        <thead class="thead-dark">
+                    <div class="full-width-table-responsive">
+                        <table class="table table-hover table-striped align-middle table-nowrap mb-0 users-table"
+                            style="height: 260px;">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Slots</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($groupedSlots as $date => $slots)
                                     <tr>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Slots</th>
+                                        <td>{{ $date }}</td>
+                                        <td>
+                                            @foreach ($slots as $slot)
+                                                @php
+                                                    // Convert the time string to a Carbon instance for formatting
+                                                    $formattedTime = \Carbon\Carbon::parse($slot['time'])->format(
+                                                        'h:i A',
+                                                    );
+                                                @endphp
+
+                                                <button type="button"
+                                                    class="slot-btn btn btn-sm btn-{{ $slot['is_available'] ? 'success' : 'danger' }}"
+                                                    data-date="{{ $date }}" data-time="{{ $formattedTime }}"
+                                                    data-slot-id="{{ $slot['id'] }}"
+                                                    {{ $slot['is_available'] ? '' : 'disabled' }}>
+                                                    {{ $formattedTime }}
+                                                </button>
+                                            @endforeach
+
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($groupedSlots as $date => $slots)
-                                        <tr>
-                                            <td>{{ $date }}</td>
-                                            <td>
-                                                @foreach($slots as $slot)
-                                                    @php
-                                                        // Convert the time string to a Carbon instance for formatting
-                                                        $formattedTime = \Carbon\Carbon::parse($slot['time'])->format('h:i A');
-                                                    @endphp
+                                @endforeach
+                            </tbody>
 
-                                                    <button type="button" class="slot-btn btn btn-sm btn-{{ $slot['is_available'] ? 'success' : 'danger' }}"
-                                                        data-date="{{ $date }}" data-time="{{ $formattedTime }}" data-slot-id="{{ $slot['id'] }}"
-                                                        {{ $slot['is_available'] ? '' : 'disabled' }}>
-                                                        {{ $formattedTime }}
-                                                    </button>
-                                                @endforeach
-
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-
-                            </table>
-                        </div>
+                        </table>
+                    </div>
 
 
 
                     </table>
-                </div>
-                <div style="display: flex; justify-content:space-between" class="my-3">
-                   <div>
+            </div>
+            <div style="display: flex; justify-content:space-between" class="my-3">
+                <div>
                     <input type="hidden" id="slotids" name="slotids">
-                    <input type="checkbox" id="contactadmin" name="contactadmin"> <span><label for="contactadmin" > Please select to contact Admin, if you are not able to select slots.</label></span>
-                   </div>
-                <button class="btn btn-sm btn-primary">Pay Now</button>
-            </form>
+                    <input type="checkbox" id="contactadmin" name="contactadmin"> <span><label for="contactadmin"> Please
+                            select to contact Admin, if you are not able to select slots.</label></span>
                 </div>
+                <button class="btn btn-sm btn-primary">Pay Now</button>
+                </form>
             </div>
         </div>
+    </div>
 
     </div>
     <!-- content-wrapper ends -->
 
- <!-- ... Existing HTML code ... -->
+    <!-- ... Existing HTML code ... -->
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Initialize an array to store selected slots
-        var selectedSlots = [];
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize an array to store selected slots
+            var selectedSlots = [];
 
-        // Event listener for the "requiredclasses" input field change
-        $('#requiredclassenroll').on('keyup', function () {
-            // Clear the selected slots and remove the 'selected' class from buttons
-            selectedSlots = [];
-            $('.slot-btn').removeClass('selected').removeClass('btn-primary').addClass('btn-success');
-            // Update the slotids input field
-            updateSlotIdsInput();
-            // Log the cleared selected slots (you can customize this part based on your requirements)
-            console.log('Selected Slots Cleared:', selectedSlots);
+            // Event listener for the "requiredclasses" input field change
+            $('#requiredclassenroll').on('keyup', function() {
+                // Clear the selected slots and remove the 'selected' class from buttons
+                selectedSlots = [];
+                $('.slot-btn').removeClass('selected').removeClass('btn-primary').addClass('btn-success');
+                // Update the slotids input field
+                updateSlotIdsInput();
+                // Log the cleared selected slots (you can customize this part based on your requirements)
+                console.log('Selected Slots Cleared:', selectedSlots);
+            });
+
+            // Button click event handler
+$('.slot-btn').on('click', function () {
+    var $button = $(this);
+    var date = $button.data('date');
+    var time = $button.data('time');
+    var slotId = $button.data('slot-id'); // Added to get the slot ID
+
+    // Get the required number of classes from the input field
+    var requiredClasses = parseInt(document.getElementById('requiredclassenroll').value);
+
+    // Check if the input value is valid
+    if (isNaN(requiredClasses) || requiredClasses < 1) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Invalid Input',
+            text: 'Please enter a valid number of required classes.',
+            confirmButtonText: 'OK'
         });
+        return false;
+    }
 
-        // Button click event handler
-        $('.slot-btn').on('click', function () {
-            if (parseInt(document.getElementById('requiredclassenroll').value) < 1 || document.getElementById('requiredclassenroll').value == '') {
-                alert('Please enter required classes before slot selection');
-                return false;
-            }
-            if (selectedSlots.length >= parseInt(document.getElementById('requiredclassenroll').value)) {
-                alert('You already selected ' + selectedSlots.length + ' as per your required classes.');
-                return false;
-            }
-            var $button = $(this);
-            var date = $button.data('date');
-            var time = $button.data('time');
-            var slotId = $button.data('slot-id'); // Added to get the slot ID
-
-            // Check if the slot is not selected
-            if (!$button.hasClass('selected')) {
-                // Add the slot to the selectedSlots array
-                selectedSlots.push({ date: date, time: time, slotId: slotId });
-                // Toggle the selected class
-                $button.addClass('selected');
-                // Change the button color to blue
-                $button.removeClass('btn-success').addClass('btn-primary');
-            } else {
-                // Remove the slot from the selectedSlots array
-                selectedSlots = selectedSlots.filter(function (slot) {
-                    return !(slot.date === date && slot.time === time && slot.slotId === slotId);
-                });
-                // Toggle the selected class
-                $button.removeClass('selected');
-                // Change the button color back to its original color
-                $button.removeClass('btn-primary').addClass('btn-success');
-            }
-
-            // Update the slotids input field
-            updateSlotIdsInput();
-
-            // Log the selected slots (you can customize this part based on your requirements)
-            console.log('Selected Slots:', selectedSlots);
-        });
-
-        // Function to update the slotids input field
-        function updateSlotIdsInput() {
-            var slotIds = selectedSlots.map(function (slot) {
-                return slot.slotId;
-            }).join(',');
-            $('#slotids').val(slotIds);
+    // Check if the slot is not selected
+    if (!$button.hasClass('selected')) {
+        // Check if the number of selected slots has reached the required number
+        if (selectedSlots.length >= requiredClasses) {
+            Swal.fire({
+                icon: 'info',
+                title: 'Limit Reached',
+                text: 'You already selected ' + selectedSlots.length + ' slots as per your required classes.',
+                confirmButtonText: 'OK'
+            });
+            return false;
         }
 
-        // Additional logic can be added here based on your requirements
-    });
-</script>
+        // Add the slot to the selectedSlots array
+        selectedSlots.push({ date: date, time: time, slotId: slotId });
+        // Toggle the selected class
+        $button.addClass('selected');
+        // Change the button color to blue
+        $button.removeClass('btn-success').addClass('btn-primary');
+    } else {
+        // Remove the slot from the selectedSlots array
+        selectedSlots = selectedSlots.filter(function (slot) {
+            return !(slot.date === date && slot.time === time && slot.slotId === slotId);
+        });
+        // Toggle the selected class
+        $button.removeClass('selected');
+        // Change the button color back to its original color
+        $button.removeClass('btn-primary').addClass('btn-success');
+    }
+
+    // Update the slotids input field
+    updateSlotIdsInput();
+
+    // Log the selected slots (you can customize this part based on your requirements)
+    console.log('Selected Slots:', selectedSlots);
+});
+
+
+            // Function to update the slotids input field
+            function updateSlotIdsInput() {
+                var slotIds = selectedSlots.map(function(slot) {
+                    return slot.slotId;
+                }).join(',');
+                $('#slotids').val(slotIds);
+            }
+
+            // Additional logic can be added here based on your requirements
+        });
+    </script>
     <script>
         function calculate() {
             $('#totalamountenroll').val($('#rateperhourenroll').val() * $('#requiredclassenroll').val())
         }
     </script>
-
-
 @endsection
