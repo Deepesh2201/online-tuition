@@ -14,11 +14,10 @@ class QuestionBankController extends Controller
 {
     public function index(){
 
-        $questions = questionbank::select('*','questionbanks.id as question_id','questionbanks.is_active as question_status','classes.name as class','subjects.name as subject','topics.name as topic')
+        $questions = questionbank::select('*','questionbanks.id as question_id','questionbanks.is_active as question_status','classes.name as class','subjects.name as subject','questionbanks.topic_name as topic')
         ->join('classes','classes.id','questionbanks.class_id')
-        ->join('subjects','subjects.id','questionbanks.subject_id')
-        ->join('topics','topics.id','questionbanks.topic_id')
-        ->paginate(10);
+        ->join('subjects','subjects.id','questionbanks.subject_id')->orderby('questionbanks.created_at','desc')
+        ->paginate(10000000000);
         $classes = classes::where('is_active',1)->get();
         $subjects = subjects::where('is_active',1)->get();
         $topics = topics::where('is_active',1)->get();
@@ -48,7 +47,7 @@ class QuestionBankController extends Controller
             $query->where('questionbanks.subject_id', $request->subject_name);
         }
         if ($request->topic_name) {
-            $query->where('questionbanks.topic_id', $request->topic_name);
+            $query->where('questionbanks.topic_name', $request->topic_name);
         }
         if ($request->status_field) {
             if($request->status_field=='2'){
@@ -96,7 +95,7 @@ class QuestionBankController extends Controller
         }
         $data->class_id = $request->classname;
         $data->subject_id = $request->subject;
-        $data->topic_id=$request->topic;
+        $data->topic_name=$request->topic;
         $data->question=$request->editor1;
         $data->option1=$request->optiona;
         $data->option2=$request->optionb;
@@ -144,11 +143,11 @@ class QuestionBankController extends Controller
         $qdata = questionbank::select('*')
         ->where('id', $id)->first();
         $subjects = subjects::select('*')->where('class_id',$qdata->class_id)->get();
-        $topics = topics::select('*')->where('subject_id',$qdata->subject_id)->get();
         $label = 'Update Question';
 
+        // dd($qdata);
         if($qdata->type == 1){
-            return view('admin.questionbank',compact('qdata','classes','subjects','topics','label'));
+            return view('admin.questionbank',compact('qdata','classes','subjects','label'));
         }elseif($qdata->type == 2){
             return view('admin.questionbanksubjective',get_defined_vars());
         }
@@ -178,7 +177,7 @@ class QuestionBankController extends Controller
         }
         $data->class_id = $request->classname;
         $data->subject_id = $request->subject;
-        $data->topic_id=$request->topic;
+        $data->topic_name=$request->topic;
         $data->question=$request->editor1;
         $data->remarks=$request->remarks;
         $data->type='2';
@@ -196,10 +195,9 @@ class QuestionBankController extends Controller
     // tutor questio bank functions
     public function tutorQuestionbank(){
 
-        $questions = questionbank::select('*','questionbanks.id as question_id','questionbanks.is_active as question_status','classes.name as class','subjects.name as subject','topics.name as topic')
+        $questions = questionbank::select('*','questionbanks.id as question_id','questionbanks.is_active as question_status','classes.name as class','subjects.name as subject','questionbanks.topic_name as topic')
         ->join('classes','classes.id','questionbanks.class_id')
         ->join('subjects','subjects.id','questionbanks.subject_id')
-        ->join('topics','topics.id','questionbanks.topic_id')
         ->orderby('questionbanks.created_at','desc')
         ->paginate(10);
         $classes = classes::where('is_active',1)->get();
@@ -235,7 +233,7 @@ class QuestionBankController extends Controller
         }
         $data->class_id = $request->classname;
         $data->subject_id = $request->subject;
-        $data->topic_id=$request->topic;
+        $data->topic_name=$request->topic;
         $data->question=$request->editor1;
         $data->option1=$request->optiona;
         $data->option2=$request->optionb;

@@ -107,8 +107,8 @@
                                     <td>{{ $exam->description }}</td>
                                     <td>{{ $exam->attemptsRemaining }}</td>
                                     <td>{{ $exam->test_duration }} min</td>
-                                    <td>{{ $exam->test_start_date }}</td>
-                                    <td>{{ $exam->test_end_date }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($exam->test_start_date)->format('d-m-Y h:i A') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($exam->test_end_date)->format('d-m-Y h:i A') }}</td>
 
                                     {{-- <td><a href="{{ url('student/taketest') }}/{{ $exam->id }}"
                                             class="badge bg-success">Start Test</a></td> --}}
@@ -164,9 +164,9 @@
                                 <td>{{ $extaken->exam_name }}</td>
                                 <td>{{ $extaken->exam_description }}</td>
                                 <td>{{ $extaken->duration }} min</td>
-                                <td>{{ $extaken->test_start_date }}</td>
-                                <td>{{ $extaken->test_end_date }}</td>
-                                <td>{{ $extaken->test_attempted_on }}</td>
+                                <td>{{  \Carbon\Carbon::parse($extaken->test_start_date)->format('d-m-Y h:i A')}}</td>
+                                <td>{{  \Carbon\Carbon::parse($extaken->test_end_date)->format('d-m-Y h:i A')}}</td>
+                                <td>{{  \Carbon\Carbon::parse($extaken->test_attempted_on)->format('d-m-Y h:i A')}}</td>
                                 <td><a href="{{url('student/exam/report')}}/{{$extaken->id}}" class="badge bg-primary p-2"> Report</a></td>
                             </tr>
                         @endforeach

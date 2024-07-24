@@ -97,11 +97,10 @@ class DashboardController extends Controller
         });
         // dd($demos);
         // Upcoming Quiz/Tests
-        $upcomingQuizes = OnlineTests::select('online_tests.*', 'subjects.name as subject_name', 'subjects.image as subject_image', 'topics.name as topic_name')
+        $upcomingQuizes = OnlineTests::select('online_tests.*', 'subjects.name as subject_name', 'subjects.image as subject_image', 'online_tests.topic_name as topic_name')
             ->where('online_tests.class_id', session('userid')->class_id)
             // ->where('online_tests.test_start_date', '>', Carbon::now())
             ->join('subjects', 'subjects.id', 'online_tests.subject_id')
-            ->join('topics', 'topics.id', 'online_tests.topic_id')
             ->orderBy('online_tests.test_start_date', 'asc')
             ->take(5)->get();
         $upcomingQuizes->transform(function ($quiz) {

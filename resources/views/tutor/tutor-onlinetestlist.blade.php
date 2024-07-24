@@ -59,12 +59,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select class="form-control" name="topic_name" id="topicid">
-                                <option value="">Select Topic</option>
-                                @foreach ($topics as $topic)
-                                    <option value="{{ $topic->id }}">{{ $topic->name }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" name="topic_name" id="topicid" placeholder="Enter Topic">
                         </div>
                     </div>
 
@@ -112,6 +107,7 @@
                     <thead>
                         <tr>
                             <th scope="col">S.No</th>
+                            <th>Test Type</th>
                             <th>Test Name</th>
                             <th>Test Description</th>
                             <th scope="col">Class</th>
@@ -130,6 +126,7 @@
                         @foreach ($testlists as $testlist)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $testlist->test_type  == 1 ? 'Objective' : 'Subjective' }}</td>
                                 <td>{{ $testlist->test_name }}</td>
                                 <td>{{ $testlist->test_description }}</td>
                                 <td>{{ $testlist->class_name }}</td>
@@ -201,7 +198,7 @@
                                          </tr>
                                      </thead>
                                      <tbody id="studentlist">
-                                        @foreach ($students as $student)
+                                        {{-- @foreach ($students as $student)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$student->name}}</td>
@@ -209,7 +206,7 @@
                                                     <input type="checkbox" name="selected_students[]" value="{{ $student->id }}">
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                  </table>
                              </div>

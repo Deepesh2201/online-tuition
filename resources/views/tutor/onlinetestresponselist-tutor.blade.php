@@ -26,7 +26,6 @@
             <!-- <h3 class="text-center"></h3> -->
             <div id="" class="mb-3 listHeader page-title-box">
                 <h3>Test Response </h3>
-
             </div>
             <form id="payment-search">
                 <div class="row">
@@ -50,16 +49,11 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                         <label>Topic</label>
-                        <select class="form-control" name="topic_name" id="topicid">
-                            <option value="">Select Topic</option>
-                            @foreach ($topics as $topic)
-                                <option value="{{ $topic->id }}">{{ $topic->name }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control" name="topic_name" id="topicid" placeholder="Enter Topic">
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                         <label>Test Name</label>
-                        <input type="text" class="form-control" name="test_name">
+                        <input type="text" class="form-control" name="test_name" id="test_name" placeholder="Enter Test Name">
                     </div>
                 </div>
 

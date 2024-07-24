@@ -309,9 +309,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['AdminAuthenticate']], funct
     Route::post('questionbank/subjective-store', [QuestionBankController::class, 'storeSubjective'])->name('admin.questionbank.subjective.store');
 
 
-    Route::post('questionbank/subjective-store', [QuestionBankController::class, 'storeSubjective'])->name('admin.questionbank.subjective.store');
-
-
     // Online tests
     Route::get('onlinetestlist', [OnlineTestController::class, 'index'])->name('admin.onlinetests');
     Route::get('onlinetestresponseslist', [OnlineTestController::class, 'onlinetestresponseslist'])->name('admin.onlinetests.responses.list');
@@ -322,7 +319,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['AdminAuthenticate']], funct
     Route::get('onlinetests/{id}', [OnlineTestController::class, 'edit'])->name('admin.onlinetests.edit');
     Route::get('onlinetestquestions/{id}', [OnlineTestController::class, 'viewquestions'])->name('admin.onlinetestquestions.viewquestions');
     Route::post('onlinetestlist-search', [OnlineTestController::class, 'onlinetestSearch'])->name('admin.onlinetests-search');
-    // Get questions by Topic
+    // Get questions by Subject
     Route::post('fetchquestions', [OnlineTestController::class, 'fetchquestions'])->name('fetchquestions');
     // Message By Student
     Route::get('messages', [MessagesController::class, 'messagesbyadmin'])->name('admin.messages');

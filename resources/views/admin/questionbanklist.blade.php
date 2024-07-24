@@ -54,8 +54,8 @@
                             <td class="text-nowrap">{{ $question->class }}</td>
                             <td>{{ $question->subject }}</td>
                             <td>{{ $question->topic }}</td>
-                            <td> @if($question->type == '1') Objective @elseif($question->type == '2') Subjective @endif</td>
-                            <td>{{ $question->question }}</td>
+                            <td>{{ $question->type == 1 ? 'Objective' : 'Subjective' }}</td>
+                            <td>{!! $question->question !!}</td>
                             {{-- <td><div ><textarea class="form-control">{{$question->question}}</textarea>
             </div>
             </td> --}}

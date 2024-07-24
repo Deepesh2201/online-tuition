@@ -28,10 +28,9 @@ class OnlineTestController extends Controller
 {
     public function index()
     {
-        $testlists = OnlineTests::select('*', 'online_tests.id as test_id', 'online_tests.name as test_name', 'online_tests.description as test_description', 'online_tests.is_active as test_status', 'classes.name as class_name', 'subjects.name as subject_name', 'topics.name as topic_name')
+        $testlists = OnlineTests::select('*', 'online_tests.id as test_id', 'online_tests.name as test_name', 'online_tests.description as test_description', 'online_tests.is_active as test_status', 'classes.name as class_name', 'subjects.name as subject_name', 'online_tests.topic_name as topic_name')
             ->join('classes', 'classes.id', 'online_tests.class_id')
-            ->join('subjects', 'subjects.id', 'online_tests.subject_id')
-            ->join('topics', 'topics.id', 'online_tests.topic_id')
+            ->join('subjects', 'subjects.id', 'online_tests.subject_id')->orderby('online_tests.created_at','desc')
             ->paginate(10);
         $classes = classes::where('is_active', 1)->get();
         $subjects = subjects::where('is_active', 1)->get();
@@ -43,10 +42,9 @@ class OnlineTestController extends Controller
     public function onlinetestSearch(Request $request)
     {
         // return $request->all();
-        $query = OnlineTests::select('*', 'online_tests.id as test_id', 'online_tests.name as test_name', 'online_tests.description as test_description', 'online_tests.is_active as test_status', 'classes.name as class_name', 'subjects.name as subject_name', 'topics.name as topic_name')
+        $query = OnlineTests::select('*', 'online_tests.id as test_id', 'online_tests.name as test_name', 'online_tests.description as test_description', 'online_tests.is_active as test_status', 'classes.name as class_name', 'subjects.name as subject_name', 'online_tests.topic_name as topic_name')
             ->join('classes', 'classes.id', 'online_tests.class_id')
-            ->join('subjects', 'subjects.id', 'online_tests.subject_id')
-            ->join('topics', 'topics.id', 'online_tests.topic_id');
+            ->join('subjects', 'subjects.id', 'online_tests.subject_id');
         // ->get();
         if ($request->test_name) {
             $query->where('online_tests.name', 'like', '%' . $request->test_name . '%');
@@ -94,7 +92,7 @@ class OnlineTestController extends Controller
         // echo $request->topic_id;
 
         $questions = questionbank::select('*')
-            ->where('topic_id', $request->topic_id)
+            ->where('subject_id', $request->subject_id)
             ->where('is_active', 1)
             ->where('type', $request->type)
             ->get();
@@ -129,7 +127,7 @@ class OnlineTestController extends Controller
         $data->description = $request->testdescription;
         $data->class_id = $request->classname;
         $data->subject_id = $request->subject;
-        $data->topic_id = $request->topic;
+        $data->topic_name = $request->topic;
         $data->max_attempt = $request->maxattempt;
         $data->test_duration = $request->duration;
         $data->test_start_date = $request->tstartdate;
@@ -150,7 +148,7 @@ class OnlineTestController extends Controller
         $classes = (new CommonController)->classes();
         $subjects = subjects::select('*')->where('class_id', $tdata->class_id)->where('is_active', 1)->get();
         $topics = topics::select('*')->where('subject_id', $tdata->subject_id)->where('is_active', 1)->get();
-        $questions = questionbank::select('*')->where('topic_id', $tdata->topic_id)->where('is_active', 1)->get();
+        $questions = questionbank::select('*')->where('subject_id', $tdata->subject_id)->where('type',$tdata->test_type)->where('is_active', 1)->get();
         $questiondatas = OnlineTests::select('question_id')->where('id', $tdata->id)->first();
 
         // $questiondata = explode(',', $tdata->question_id);
@@ -233,10 +231,12 @@ class OnlineTestController extends Controller
         // return $request->all();
         $classes = (new CommonController)->classes();
         $subjects = subjects::where('is_active', 1)->get();
-        $query = OnlineTests::select('online_tests.*', 'classes.name as class', 'subjects.name as subject', 'topics.name as topic')
+        $query = OnlineTests::select('online_tests.*', 'classes.name as class', 'subjects.name as subject', 'online_tests.topic_name as topic')
             ->join('classes', 'classes.id', 'online_tests.class_id')
             ->join('subjects', 'subjects.id', 'online_tests.subject_id')
-            ->join('topics', 'topics.id', 'online_tests.topic_id');
+            ->join('assign_tests', 'assign_tests.test_id', 'online_tests.id')
+            ->where('assign_tests.status', 1)
+            ->where('assign_tests.is_attempted', 0);
         // ->get();
 
 
@@ -247,7 +247,7 @@ class OnlineTestController extends Controller
             $query->where('online_tests.subject_id', $request->subject_name);
         }
         if ($request->topic) {
-            $query->where('topics.name', 'like', '%' . $request->topic . '%');
+            $query->where('online_tests.topic_name', 'like', '%' . $request->topic . '%');
         }
         $exams = $query->paginate(10);
         foreach ($exams as $exam) {
@@ -557,7 +557,26 @@ class OnlineTestController extends Controller
 
     public function onlinetestresponseslist()
     {
-        return view('admin.onlinetestresponselist');
+        $subs = tutorsubjectmapping::pluck('subject_id')->toArray();
+        if ($subs) {
+            $onlineTests = OnlineTests::select('online_tests.*', 'subjects.name as sub_name', 'classes.name as class_name', 'online_tests.topic_name as topic_name')
+            ->join('classes', 'classes.id', 'online_tests.class_id')
+            ->join('subjects', 'subjects.id', 'online_tests.subject_id')
+            ->join('testattempteds','testattempteds.test_id','online_tests.id')
+            ->join('paymentstudents','paymentstudents.student_id','testattempteds.student_id')
+            ->where('online_tests.subject_id', 'paymentstudents.subject_id')
+            ->where('online_tests.test_type', 2)
+            ->where('paymentstudents.tutor_id', session('userid')->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+            $classes = classes::where('is_active', 1)->get();
+            $subjects = subjects::where('is_active', 1)->get();
+            $topics = topics::where('is_active', 1)->get();
+            // dd();
+            return view('admin.onlinetestresponselist', get_defined_vars());
+        } else {
+            return back()->with('fail', 'No tests Found');
+        }
     }
     public function onlinetestresponse($id)
     {
@@ -569,10 +588,9 @@ class OnlineTestController extends Controller
     {
         $subs = tutorsubjectmapping::where('tutor_id', session('userid')->id)->pluck('subject_id')->toArray();
         if ($subs) {
-            $onlineTests = OnlineTests::select('online_tests.*', 'subjects.name as sub_name', 'classes.name as class_name', 'topics.name as topic_name')
+            $onlineTests = OnlineTests::select('online_tests.*', 'subjects.name as sub_name', 'classes.name as class_name', 'online_tests.topic_name as topic_name')
             ->join('classes', 'classes.id', 'online_tests.class_id')
             ->join('subjects', 'subjects.id', 'online_tests.subject_id')
-            ->join('topics', 'topics.id', 'online_tests.topic_id')
             ->join('testattempteds','testattempteds.test_id','online_tests.id')
             ->join('paymentstudents','paymentstudents.student_id','testattempteds.student_id')
             ->where('online_tests.subject_id', 'paymentstudents.subject_id')
@@ -745,10 +763,9 @@ class OnlineTestController extends Controller
 
     public function tutorindex()
     {
-        $testlists = OnlineTests::select('*', 'online_tests.id as test_id', 'online_tests.name as test_name', 'online_tests.description as test_description', 'online_tests.is_active as test_status', 'classes.name as class_name', 'subjects.name as subject_name', 'topics.name as topic_name')
+        $testlists = OnlineTests::select('*', 'online_tests.id as test_id', 'online_tests.name as test_name', 'online_tests.description as test_description', 'online_tests.is_active as test_status', 'classes.name as class_name', 'subjects.name as subject_name', 'online_tests.topic_name as topic_name')
             ->join('classes', 'classes.id', 'online_tests.class_id')
             ->join('subjects', 'subjects.id', 'online_tests.subject_id')
-            ->join('topics', 'topics.id', 'online_tests.topic_id')
             ->orderby('online_tests.created_at', 'desc')
             ->paginate(10);
         $classes = classes::where('is_active', 1)->get();
@@ -877,7 +894,7 @@ class OnlineTestController extends Controller
         $data->description = $request->testdescription;
         $data->class_id = $request->classname;
         $data->subject_id = $request->subject;
-        $data->topic_id = $request->topic;
+        $data->topic_name= $request->topic;
         $data->max_attempt = 1;
         $data->test_duration = $request->duration;
         $data->test_start_date = Carbon::now();
@@ -896,7 +913,7 @@ class OnlineTestController extends Controller
         // echo $request->topic_id;
 
         $questions = questionbank::select('*')
-            ->where('topic_id', $request->topic_id)
+            ->where('subject_id', $request->subject_id)
             ->where('type', $request->type)
             ->where('is_active', 1)
             ->get();
@@ -915,7 +932,7 @@ class OnlineTestController extends Controller
         $classes = (new CommonController)->classes();
         $subjects = subjects::select('*')->where('class_id', $tdata->class_id)->where('is_active', 1)->get();
         $topics = topics::select('*')->where('subject_id', $tdata->subject_id)->where('is_active', 1)->get();
-        $questions = questionbank::select('*')->where('topic_id', $tdata->topic_id)->where('is_active', 1)->get();
+        $questions = questionbank::select('*')->where('subject_id', $tdata->subject_id)->where('type',$tdata->test_type)->where('is_active', 1)->get();
         $questiondatas = OnlineTests::select('question_id')->where('id', $tdata->id)->first();
 
         // $questiondata = explode(',', $tdata->question_id);
@@ -977,10 +994,9 @@ class OnlineTestController extends Controller
     public function tutoronlinetestSearch(Request $request)
     {
         // return $request->all();
-        $query = OnlineTests::select('*', 'online_tests.id as test_id', 'online_tests.name as test_name', 'online_tests.description as test_description', 'online_tests.is_active as test_status', 'classes.name as class_name', 'subjects.name as subject_name', 'topics.name as topic_name')
+        $query = OnlineTests::select('*', 'online_tests.id as test_id', 'online_tests.name as test_name', 'online_tests.description as test_description', 'online_tests.is_active as test_status', 'classes.name as class_name', 'subjects.name as subject_name', 'online_tests.topic_name as topic_name')
             ->join('classes', 'classes.id', 'online_tests.class_id')
-            ->join('subjects', 'subjects.id', 'online_tests.subject_id')
-            ->join('topics', 'topics.id', 'online_tests.topic_id');
+            ->join('subjects', 'subjects.id', 'online_tests.subject_id');
         // ->get();
         if ($request->test_name) {
             $query->where('online_tests.name', 'like', '%' . $request->test_name . '%');
@@ -992,7 +1008,7 @@ class OnlineTestController extends Controller
             $query->where('online_tests.subject_id', $request->subject_name);
         }
         if ($request->topic_name) {
-            $query->where('online_tests.topic_id', $request->topic_name);
+            $query->where('online_tests.topic_name', $request->topic_name);
         }
         if ($request->start_date) {
             $query->whereDate(DB::raw('DATE(online_tests.test_start_date)'), '>=', $request->start_date);

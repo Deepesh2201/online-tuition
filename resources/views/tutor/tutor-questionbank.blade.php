@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="">Subject<i style="color:red">*</i></label>
-                        <select type="text" class="form-control" id="subject" name="subject" onchange="fetchTopics();"
+                        <select type="text" class="form-control" id="subject" name="subject" 
                             required>
                             @if ($qdata ?? '')
                                 @foreach ($subjects as $subject)
@@ -97,20 +97,10 @@
                     </div>
                     <div class="col-md-4">
                         <label for="">Topic<i style="color:red">*</i></label>
-                        <select type="text" class="form-control" id="topic" name="topic" required>
-                            @if ($qdata ?? '')
-                            @foreach ($topics as $topic)
-                                <option value="{{$topic->id}}"@if ($qdata->topic_id ?? '')
-                                    @if($topic->id == $qdata->topic_id)
-                                    selected
-                                    @endif
-                                @endif>{{$topic->name}}</option>
-                            @endforeach
-                        @endif
-                        </select>
+                        <input type="text" class="form-control" id="topic" name="topic" required value="{{$qdata->topic_name ?? ''}}">
                         <span class="text-danger">
                             @error('topic')
-                                {{ 'Please select topic' }}
+                                {{ 'Please enter topic' }}
                             @enderror
                         </span>
                     </div>

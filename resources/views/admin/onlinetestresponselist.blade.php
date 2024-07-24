@@ -21,36 +21,46 @@
             <div id="" class="mb-3 listHeader page-title-box">
                 <h3>Test Response </h3>
             </div>
-            <form id="">
+            <form id="payment-search">
                 <div class="row">
-                    <div class="col-12 col-sm-3 col-md-3">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
                         <label>Class</label>
-                        <select class="form-control"></select>
+                        <select name="class_name" class="form-control" id="classname" onchange="fetchSubjects()">
+                            <option value="">Select Class</option>
+                            @foreach ($classes as $class)
+                                <option value="{{ $class->id }}">{{ $class->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="col-12 col-sm-3 col-md-3">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                         <label>Subject</label>
-                        <select class="form-control"></select>
+                        <select name="subject_name" class="form-control" id="subject" onchange="fetchTopics()">
+                            <option value="">Select Subject</option>
+                            @foreach ($subjects as $subject)
+                                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="col-12 col-sm-3 col-md-3">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                         <label>Topic</label>
-                        <select class="form-control"></select>
+                        <input type="text" class="form-control" name="topic_name" id="topicid" placeholder="Enter Topic">
                     </div>
-                    <div class="col-12 col-sm-3 col-md-3">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                         <label>Test Name</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="test_name" id="test_name" placeholder="Enter Test Name">
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12 col-sm-3 col-md-3">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                         <label>Start Date</label>
-                        <input type="date" class="form-control"></select>
+                        <input type="date" class="form-control" name="start_date">
                     </div>
-                    <div class="col-12 col-sm-3 col-md-3">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                         <label>End Date</label>
-                        <input type="date" class="form-control"></select>
+                        <input type="date" class="form-control" name="end_date">
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 mt-4">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-4">
                         <button class="btn btn-primary" style="float:right"> <span class="fa fa-search"></span>
                             Search</button>
                     </div>
@@ -62,7 +72,7 @@
             </form>
             <hr>
 
-            <table class="table table-hover table-striped align-middlemb-0 table-responsive">
+            <table class="table table-hover table-striped align-middle mb-0  users-table">
                 <thead>
                     <tr>
                         <th scope="col">S.No</th>
@@ -75,18 +85,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="{{url('admin/onlinetests/responses')}}/1"><button class="btn btn-sm btn-primary">View</button></a></td>
-                    </tr>
-
-
+                    @if($onlineTests)
+                       @foreach ($onlineTests as $test)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$test->class_name}}</td>
+                            <td>{{$test->sub_name}}</td>
+                            <td>{{$test->topic_name}}</td>
+                            <td>{{$test->name}}</td>
+                            <td>{{ \Carbon\Carbon::parse($test->test_start_date)->format('d M Y') }}</td>
+                            <td>
+                                <a href="{{url('tutor/onlinetests/responses')}}/{{$test->id}}"><button class="btn btn-sm btn-primary">View</button></a>
+                            </td>
+                        </tr>
+                       @endforeach
+                    @endif
                 </tbody>
             </table>
 

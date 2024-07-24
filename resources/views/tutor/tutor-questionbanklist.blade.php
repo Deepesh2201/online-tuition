@@ -42,7 +42,7 @@
                             <th scope="col">Class</th>
                             <th scope="col">Subject</th>
                             <th scope="col">Topic</th>
-                            {{-- <th scope="col">Type</th> --}}
+                            <th scope="col">Type</th>
                             <th scope="col">Question</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
@@ -55,7 +55,8 @@
                             <td class="text-nowrap">{{ $question->class }}</td>
                             <td>{{ $question->subject }}</td>
                             <td>{{ $question->topic }}</td>
-                            <td>{{ $question->question }}</td>
+                            <td>{{ $question->type == 1 ? 'Objective' : 'Subjective' }}</td>
+                            <td>{!! $question->question !!}</td>
                             {{-- <td><div ><textarea class="form-control">{{$question->question}}</textarea>
                             </div>
                             </td> --}}

@@ -117,8 +117,14 @@
                     <div class="col-md-3 col-sm-3 col-12">
                         <label for="">Test Type<i style="color: red">*</i></label>
                         <select class="form-control" id="test-type" name="test_type" onchange="fetchQuestions()">
+                            @if ($tdata ?? '')
+                            
+                            <option value="1" @if ($tdata->test_type == 1) selected @endif>Objective</option>
+                            <option value="2" @if ($tdata->test_type == 2) selected @endif>Subjective</option>
+                            @else
                             <option value="1">Objective</option>
                             <option value="2">Subjective</option>
+                            @endif
                         </select>
                     </div>
                     <div class="col-md-3 col-sm-3 col-12">
@@ -160,7 +166,7 @@
                     </div>
                     <div class="col-md-3 col-sm-3 col-12 mt-2">
                         <label for="">Subject<i style="color:red">*</i></label>
-                        <select type="text" class="form-control" id="subject" name="subject" onchange="fetchTopics();"
+                        <select type="text" class="form-control" id="subject" name="subject" onchange="fetchQuestions();"
                             required>
                             @if ($tdata ?? '')
                                 @foreach ($subjects as $subject)
@@ -180,20 +186,10 @@
                     </div>
                     <div class="col-md-3 col-sm-3 col-12 mt-2">
                         <label for="">Topic<i style="color:red">*</i></label>
-                        <select type="text" class="form-control" id="topic" name="topic"
-                            onchange="fetchQuestions();" required>
-                            @if ($tdata ?? '')
-                                @foreach ($topics as $topic)
-                                    <option
-                                        value="{{ $topic->id }}"@if ($tdata->topic_id ?? '') @if ($topic->id == $tdata->topic_id)
-                                    selected @endif
-                                        @endif>{{ $topic->name }}</option>
-                                @endforeach
-                            @endif
-                        </select>
+                        <input type="text" class="form-control" id="topic" name="topic" value="{{$tdata->topic_name ?? ''}}">
                         <span class="text-danger">
                             @error('topic')
-                                {{ 'Please select topic' }}
+                                {{ 'Please enter topic' }}
                             @enderror
                         </span>
                     </div>
@@ -333,13 +329,13 @@
 
             function fetchQuestions() {
 
-                var topicId = $('#topic option:selected').val();
+                var subjectId = $('#subject option:selected').val();
                 var type = $('#test-type option:selected').val();
                 $.ajax({
                     url: "{{ url('tutor/fetchquestions') }}",
                     type: "POST",
                     data: {
-                        topic_id: topicId,
+                        subject_id: subjectId,
                         type : type,
                         _token: '{{ csrf_token() }}'
                     },

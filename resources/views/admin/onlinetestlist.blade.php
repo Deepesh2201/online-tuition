@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select name="subject_name" class="form-control" id="subject" onchange="fetchTopics()">
+                            <select name="subject_name" class="form-control" id="subject">
                                 <option value="">Select Subject</option>
                                 @foreach ($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
@@ -58,12 +58,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select class="form-control" name="topic_name" id="topicid">
-                                <option value="">Select Topic</option>
-                                @foreach ($topics as $topic)
-                                    <option value="{{ $topic->id }}">{{ $topic->name }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" name="topic_name" id="topicid" placeholder="Enter Topic">
                         </div>
                     </div>
 
