@@ -332,7 +332,7 @@ class MessagesController extends Controller
         ->join('paymentstudents', 'paymentstudents.tutor_id', '=', 'tutorprofiles.tutor_id')
         ->where('paymentstudents.student_id', session('userid')->id)
         ->where('is_active', 1)
-        ->groupBy('tutorregistrations.id','onlinetuitionapp.tutorregistrations.name','onlinetuitionapp.tutorregistrations.mobile','onlinetuitionapp.tutorregistrations.email','onlinetuitionapp.tutorregistrations.is_mobile_verified','onlinetuitionapp.tutorregistrations.mobile_verified_at','onlinetuitionapp.tutorregistrations.is_email_verified','onlinetuitionapp.tutorregistrations.email_verified_at','onlinetuitionapp.tutorregistrations.password','onlinetuitionapp.tutorregistrations.role_id','onlinetuitionapp.tutorregistrations.is_active','onlinetuitionapp.tutorregistrations.remember_token','onlinetuitionapp.tutorregistrations.created_at','onlinetuitionapp.tutorregistrations.updated_at','onlinetuitionapp.tutorprofiles.profile_pic')
+        ->groupBy('tutorregistrations.id','tutorregistrations.name','tutorregistrations.mobile','tutorregistrations.email','tutorregistrations.is_mobile_verified','tutorregistrations.mobile_verified_at','tutorregistrations.is_email_verified','tutorregistrations.email_verified_at','tutorregistrations.password','tutorregistrations.role_id','tutorregistrations.is_active','tutorregistrations.remember_token','tutorregistrations.created_at','tutorregistrations.updated_at','tutorprofiles.profile_pic')
         ->distinct()
         ->get();
 
@@ -353,7 +353,7 @@ class MessagesController extends Controller
         ->join('paymentstudents', 'paymentstudents.tutor_id', '=', 'tutorprofiles.tutor_id')
         ->where('paymentstudents.student_id', session('userid')->id)
         ->where('is_active', 1)
-        ->groupBy('tutorregistrations.id','onlinetuitionapp.tutorregistrations.name','onlinetuitionapp.tutorregistrations.mobile','onlinetuitionapp.tutorregistrations.email','onlinetuitionapp.tutorregistrations.is_mobile_verified','onlinetuitionapp.tutorregistrations.mobile_verified_at','onlinetuitionapp.tutorregistrations.is_email_verified','onlinetuitionapp.tutorregistrations.email_verified_at','onlinetuitionapp.tutorregistrations.password','onlinetuitionapp.tutorregistrations.role_id','onlinetuitionapp.tutorregistrations.is_active','onlinetuitionapp.tutorregistrations.remember_token','onlinetuitionapp.tutorregistrations.created_at','onlinetuitionapp.tutorregistrations.updated_at','onlinetuitionapp.tutorprofiles.profile_pic')
+        ->groupBy('tutorregistrations.id','tutorregistrations.name','tutorregistrations.mobile','tutorregistrations.email','tutorregistrations.is_mobile_verified','tutorregistrations.mobile_verified_at','tutorregistrations.is_email_verified','tutorregistrations.email_verified_at','tutorregistrations.password','tutorregistrations.role_id','tutorregistrations.is_active','tutorregistrations.remember_token','tutorregistrations.created_at','tutorregistrations.updated_at','tutorprofiles.profile_pic')
         ->distinct()
         ->get();
 
@@ -431,7 +431,7 @@ class MessagesController extends Controller
         ->join('paymentstudents', 'paymentstudents.tutor_id', '=', 'tutorprofiles.tutor_id')
         ->where('paymentstudents.student_id', session('userid')->id)
         ->where('is_active', 1)
-        ->groupBy('tutorregistrations.id','onlinetuitionapp.tutorregistrations.name','onlinetuitionapp.tutorregistrations.mobile','onlinetuitionapp.tutorregistrations.email','onlinetuitionapp.tutorregistrations.is_mobile_verified','onlinetuitionapp.tutorregistrations.mobile_verified_at','onlinetuitionapp.tutorregistrations.is_email_verified','onlinetuitionapp.tutorregistrations.email_verified_at','onlinetuitionapp.tutorregistrations.password','onlinetuitionapp.tutorregistrations.role_id','onlinetuitionapp.tutorregistrations.is_active','onlinetuitionapp.tutorregistrations.remember_token','onlinetuitionapp.tutorregistrations.created_at','onlinetuitionapp.tutorregistrations.updated_at','onlinetuitionapp.tutorprofiles.profile_pic')
+        ->groupBy('tutorregistrations.id','tutorregistrations.name','tutorregistrations.mobile','tutorregistrations.email','tutorregistrations.is_mobile_verified','tutorregistrations.mobile_verified_at','tutorregistrations.is_email_verified','tutorregistrations.email_verified_at','tutorregistrations.password','tutorregistrations.role_id','tutorregistrations.is_active','tutorregistrations.remember_token','tutorregistrations.created_at','tutorregistrations.updated_at','tutorprofiles.profile_pic')
         ->distinct()
         ->get();
         $header = tutorregistration::select('tutorregistrations.*', 'tutorprofiles.profile_pic as profile_pic')
