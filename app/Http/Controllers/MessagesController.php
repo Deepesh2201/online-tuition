@@ -328,10 +328,13 @@ class MessagesController extends Controller
             return redirect()->route('student.dashboard')->with('fail', 'Please update your profile details to start messaging. Click on profile > Edit Profile');
         }
         $userlists = tutorregistration::select('tutorregistrations.*', 'tutorprofiles.profile_pic as profile_pic')
-            ->join('tutorprofiles', 'tutorprofiles.tutor_id', 'tutorregistrations.id')
-            ->join('paymentstudents','paymentstudents.tutor_id','tutorprofiles.tutor_id')
-            ->where('paymentstudents.student_id',session('userid')->id)
-            ->where('is_active', 1)->get();
+        ->join('tutorprofiles', 'tutorprofiles.tutor_id', '=', 'tutorregistrations.id')
+        ->join('paymentstudents', 'paymentstudents.tutor_id', '=', 'tutorprofiles.tutor_id')
+        ->where('paymentstudents.student_id', session('userid')->id)
+        ->where('is_active', 1)
+        ->groupBy('tutorregistrations.id','onlinetuitionapp.tutorregistrations.name','onlinetuitionapp.tutorregistrations.mobile','onlinetuitionapp.tutorregistrations.email','onlinetuitionapp.tutorregistrations.is_mobile_verified','onlinetuitionapp.tutorregistrations.mobile_verified_at','onlinetuitionapp.tutorregistrations.is_email_verified','onlinetuitionapp.tutorregistrations.email_verified_at','onlinetuitionapp.tutorregistrations.password','onlinetuitionapp.tutorregistrations.role_id','onlinetuitionapp.tutorregistrations.is_active','onlinetuitionapp.tutorregistrations.remember_token','onlinetuitionapp.tutorregistrations.created_at','onlinetuitionapp.tutorregistrations.updated_at','onlinetuitionapp.tutorprofiles.profile_pic')
+        ->distinct()
+        ->get();
 
         // dd();
         return view('student.message', compact('userlists'));
@@ -346,10 +349,13 @@ class MessagesController extends Controller
     public function messagesbystudenttutor()
     {
         $userlists = tutorregistration::select('tutorregistrations.*', 'tutorprofiles.profile_pic as profile_pic')
-            ->join('tutorprofiles', 'tutorprofiles.tutor_id', 'tutorregistrations.id')
-            ->join('paymentstudents','paymentstudents.tutor_id','tutorprofiles.tutor_id')
-            ->where('paymentstudents.student_id',session('userid')->id)
-            ->where('is_active', 1)->get();
+        ->join('tutorprofiles', 'tutorprofiles.tutor_id', '=', 'tutorregistrations.id')
+        ->join('paymentstudents', 'paymentstudents.tutor_id', '=', 'tutorprofiles.tutor_id')
+        ->where('paymentstudents.student_id', session('userid')->id)
+        ->where('is_active', 1)
+        ->groupBy('tutorregistrations.id','onlinetuitionapp.tutorregistrations.name','onlinetuitionapp.tutorregistrations.mobile','onlinetuitionapp.tutorregistrations.email','onlinetuitionapp.tutorregistrations.is_mobile_verified','onlinetuitionapp.tutorregistrations.mobile_verified_at','onlinetuitionapp.tutorregistrations.is_email_verified','onlinetuitionapp.tutorregistrations.email_verified_at','onlinetuitionapp.tutorregistrations.password','onlinetuitionapp.tutorregistrations.role_id','onlinetuitionapp.tutorregistrations.is_active','onlinetuitionapp.tutorregistrations.remember_token','onlinetuitionapp.tutorregistrations.created_at','onlinetuitionapp.tutorregistrations.updated_at','onlinetuitionapp.tutorprofiles.profile_pic')
+        ->distinct()
+        ->get();
 
         return view('student.message', compact('userlists'));
     }
@@ -421,10 +427,13 @@ class MessagesController extends Controller
     {
 
         $userlists = tutorregistration::select('tutorregistrations.*', 'tutorprofiles.profile_pic as profile_pic')
-            ->join('tutorprofiles', 'tutorprofiles.tutor_id', 'tutorregistrations.id')
-            ->join('paymentstudents','paymentstudents.tutor_id','tutorprofiles.tutor_id')
-            ->where('paymentstudents.student_id',session('userid')->id)
-            ->where('is_active', 1)->get();
+        ->join('tutorprofiles', 'tutorprofiles.tutor_id', '=', 'tutorregistrations.id')
+        ->join('paymentstudents', 'paymentstudents.tutor_id', '=', 'tutorprofiles.tutor_id')
+        ->where('paymentstudents.student_id', session('userid')->id)
+        ->where('is_active', 1)
+        ->groupBy('tutorregistrations.id','onlinetuitionapp.tutorregistrations.name','onlinetuitionapp.tutorregistrations.mobile','onlinetuitionapp.tutorregistrations.email','onlinetuitionapp.tutorregistrations.is_mobile_verified','onlinetuitionapp.tutorregistrations.mobile_verified_at','onlinetuitionapp.tutorregistrations.is_email_verified','onlinetuitionapp.tutorregistrations.email_verified_at','onlinetuitionapp.tutorregistrations.password','onlinetuitionapp.tutorregistrations.role_id','onlinetuitionapp.tutorregistrations.is_active','onlinetuitionapp.tutorregistrations.remember_token','onlinetuitionapp.tutorregistrations.created_at','onlinetuitionapp.tutorregistrations.updated_at','onlinetuitionapp.tutorprofiles.profile_pic')
+        ->distinct()
+        ->get();
         $header = tutorregistration::select('tutorregistrations.*', 'tutorprofiles.profile_pic as profile_pic')
             ->join('tutorprofiles', 'tutorprofiles.tutor_id', 'tutorregistrations.id')
             ->where('tutorregistrations.is_active', 1)->where('tutorregistrations.id', $id)
