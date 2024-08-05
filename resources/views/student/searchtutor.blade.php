@@ -381,10 +381,10 @@
                                                             </li>
                                                         @endforeach
                                                     </ul>
-                                                    <div class="show-more">
+                                                    {{-- <div class="show-more">
                                                         <a href="javascript:void(0);"
                                                             class="tu-readmorebtn tu-show_more">Show all</a>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>
