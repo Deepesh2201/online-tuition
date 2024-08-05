@@ -160,7 +160,7 @@
                                     {{-- <td>{{ $demo->slot_1 }}</td> --}}
                                     {{-- <td>{{ $demo->slot_2 }}</td> --}}
                                     {{-- <td>{{ $demo->slot_3 }}</td> --}}
-                                    <td>{{ \Carbon\Carbon::parse($demo->slot_confirmed)->format('d/m/Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($demo->slot_confirmed)->format('d/m/Y h:i A') }}</td>
                                     {{-- <td><a href="{{ $demo->demo_link }}">{{ $demo->demo_link }}</a></td> --}}
                                     <td>{{ $demo->remarks }}</td>
                                     <td>
