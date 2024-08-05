@@ -150,18 +150,18 @@
                                         @foreach ($upcomingClasses as $class)
                                         <tr>
                                             <td>{{$class->subject}}</td>
-                                            <td>{{$class->student_count}}</td>
+                                            <td>{{$class->studentname}}</td>
                                             <td>{{ $class->start_time->format('h:iA') }} - {{ $class->start_time->addMinutes($class->duration)->format('h:iA') }}</td>
                                             <td>
-                                                @if ($class->is_completed == 1)
-                                                <span class="live">Live</span></td>
-                                                    @else
-                                                    <span class="confirm">Not Started</span>
-                                                @endif
+                                                {{-- @if ($class->is_completed == 1) --}}
+                                                <span class="confirm">{{$class->status}}</span></td>
+                                                    {{-- @else --}}
+                                                    {{-- <span class="confirm">Not Started</span> --}}
+                                                {{-- @endif --}}
                                             </td>
                                             <td>
-                                                @if ($class->is_completed == 1)
-                                               <a href="{{$class->join_url}}"> <span class="endClass"> Join Class</span></a>
+                                                @if ($class->status == 'Started')
+                                               <a href="{{$class->join_url}}" target="_blank"> <span class="endClass"> Join Class</span></a>
                                                 @else
                                                  <a href="getclasslist">   <span class="endClass"> Start Class</span> </a>
 

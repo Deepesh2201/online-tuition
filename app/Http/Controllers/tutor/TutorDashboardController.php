@@ -57,20 +57,32 @@ class TutorDashboardController extends Controller
             ];
         }
 
-        $upcomingClasses = zoom_classes::select(
-            'zoom_classes.*',
-            'subjects.name as subject',
-            DB::raw('JSON_LENGTH(batchstudentmappings.student_data) as student_count')
-        )
-        ->join('topics', 'topics.id', '=', 'zoom_classes.batch_id')
-        ->join('subjects', 'subjects.id', '=', 'topics.subject_id')
-        ->join('batchstudentmappings', 'batchstudentmappings.batch_id', '=', 'zoom_classes.batch_id')
-        ->where('zoom_classes.tutor_id', '=', session('userid')->id)
-        ->where('zoom_classes.is_completed', 0)
-        ->where('zoom_classes.start_time', '>', Carbon::now()) // Add condition to check if the start time is greater than the current time
-        ->orderBy('zoom_classes.start_time', 'asc')
-        ->take(5)
-        ->get();
+        // $upcomingClasses = zoom_classes::select(
+        //     'zoom_classes.*',
+        //     'subjects.name as subject',
+        //     DB::raw('JSON_LENGTH(batchstudentmappings.student_data) as student_count')
+        // )
+        // ->join('topics', 'topics.id', '=', 'zoom_classes.batch_id')
+        // ->join('subjects', 'subjects.id', '=', 'topics.subject_id')
+        // ->join('batchstudentmappings', 'batchstudentmappings.batch_id', '=', 'zoom_classes.batch_id')
+        // ->where('zoom_classes.tutor_id', '=', session('userid')->id)
+        // ->where('zoom_classes.is_completed', 0)
+        // ->where('zoom_classes.start_time', '>', Carbon::now()) // Add condition to check if the start time is greater than the current time
+        // ->orderBy('zoom_classes.start_time', 'asc')
+        // ->take(5)
+        // ->get();
+        $upcomingClasses = zoom_classes::select('zoom_classes.*', 'zoom_classes.id as liveclass_id', 'studentregistrations.name as studentname', 'subjects.name as subject', 'classes.name as classname', 'slot_bookings.date as slotdate', 'slot_bookings.slot as slottime')
+            ->join('slot_bookings', 'slot_bookings.meeting_id', 'zoom_classes.id')
+            ->join('studentregistrations', 'studentregistrations.id', 'slot_bookings.student_id')
+            ->join('paymentstudents', 'paymentstudents.id', 'slot_bookings.class_schedule_id')
+            ->join('subjects', 'subjects.id', 'paymentstudents.subject_id')
+            ->join('classes', 'classes.id', 'paymentstudents.class_id')
+            ->where('zoom_classes.is_completed', 0)
+            ->where('zoom_classes.is_active', 1)
+            ->where('zoom_classes.tutor_id', session('userid')->id)
+            // ->where('zoom_classes.start_time','>=',Carbon::now())
+            ->orderby('zoom_classes.created_at', 'desc')
+            ->get();
 
         $upcomingClasses->transform(function ($class) {
             $class->start_time = Carbon::parse($class->start_time);
