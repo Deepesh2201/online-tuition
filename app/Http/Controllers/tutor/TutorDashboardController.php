@@ -125,7 +125,9 @@ class TutorDashboardController extends Controller
         ->join('classes', 'classes.id','=','subjects.class_id')
         ->join('statuses', 'statuses.id','=','democlasses.status')
         ->join('studentregistrations','studentregistrations.id','=','democlasses.student_id')
-        ->where('democlasses.tutor_id','=', session('userid')->id)->orderBy('democlasses.created_at', 'desc')
+        ->where('democlasses.tutor_id','=', session('userid')->id)
+        ->where('democlasses.slot_confirmed','>=', Carbon::now())
+        ->orderBy('democlasses.created_at', 'desc')
         ->take(5)
         ->get();
         
