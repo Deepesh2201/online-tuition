@@ -228,7 +228,7 @@
                                             <span class="live">Started</span>
                                             @endif
                                             </td>
-                                            <td><a href="{{ $demo->remarks ?? $demo->demo_link}}"><span class="endClass"> Launch Trial Class</span></a></td>
+                                            <td><a href="{{$demo->demo_link}}" target="_blank"><span class="endClass"> Launch Trial Class</span></a></td>
                                         </tr>
                                         @endforeach
 

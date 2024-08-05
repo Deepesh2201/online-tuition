@@ -105,19 +105,30 @@ class TutorDashboardController extends Controller
             return $payment;
         });
 
-        $upcoming_demos = democlasses::select(
-            'democlasses.*',
-            'subjects.name as subject',
-            'studentprofiles.name as student',
-            'studentprofiles.profile_pic as student_img'
-        )
+        // $upcoming_demos = democlasses::select(
+        //     'democlasses.*',
+        //     'subjects.name as subject',
+        //     'studentprofiles.name as student',
+        //     'studentprofiles.profile_pic as student_img'
+        // )
+        // ->join('studentprofiles', 'studentprofiles.student_id', '=', 'democlasses.student_id')
+        // ->join('subjects', 'subjects.id', '=', 'democlasses.subject_id')
+        // ->where('democlasses.tutor_id', '=', session('userid')->id)
+        // ->where('democlasses.status', '=', 1) // Add condition to filter by status
+        // ->orderBy('democlasses.slot_confirmed', 'asc')
+        // ->take(5)
+        // ->get();
+        $upcoming_demos = democlasses::select('*','democlasses.id as demo_id','tutorregistrations.name as tutor','studentprofiles.name as student','studentprofiles.profile_pic as student_img','tutorregistrations.mobile as tutor_mobile','subjects.name as subject','subjects.id as subjectid','statuses.name as currentstatus','classes.name as class_name','studentregistrations.id as student_id','studentregistrations.name as student_name','studentregistrations.mobile as student_mobile','classes.name as classname')
+        ->join('tutorregistrations', 'tutorregistrations.id', '=', 'democlasses.tutor_id')
+        ->join('subjects', 'subjects.id','=','democlasses.subject_id')
         ->join('studentprofiles', 'studentprofiles.student_id', '=', 'democlasses.student_id')
-        ->join('subjects', 'subjects.id', '=', 'democlasses.subject_id')
-        ->where('democlasses.tutor_id', '=', session('userid')->id)
-        ->where('democlasses.status', '=', 1) // Add condition to filter by status
-        ->orderBy('democlasses.slot_confirmed', 'asc')
+        ->join('classes', 'classes.id','=','subjects.class_id')
+        ->join('statuses', 'statuses.id','=','democlasses.status')
+        ->join('studentregistrations','studentregistrations.id','=','democlasses.student_id')
+        ->where('democlasses.tutor_id','=', session('userid')->id)->orderBy('democlasses.created_at', 'desc')
         ->take(5)
         ->get();
+        
 
     $upcoming_demos->transform(function ($demos) {
         $demos->slot_confirmed = Carbon::parse($demos->slot_confirmed);
