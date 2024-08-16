@@ -201,18 +201,21 @@
                                     value="{{ $tutorpd->intro_video_link ?? ''}}">
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <div style="float:right; margin-top:10px">
-                                    <button type="submit" id="" class="btn btn-sm btn-success"><span
+                           
+
+                        </div>
+                        <div class="row">
+                        <div class="form-group col-md-12">
+                                <div class="text-center mt-4">
+                                    <button type="submit" id="" class="btn btn-lg btn-success"><span
                                             class="fa fa-check"></span> Update</button>
 
                                     {{-- <a type="button" class="btn btn-danger mr-1 moveRight" --}}
                                     {{-- style="background-color:#DC3545;" href="editstudentprofile.html">Back</a> --}}
-
-
+                                    <br>
+                                    <small><i>Make sure to update the data before going down.</i></small>
                                 </div>
                             </div>
-
                         </div>
 
 

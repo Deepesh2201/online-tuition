@@ -418,7 +418,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tu-aside-holder">
+                                    <div class="tu-aside-holder" hidden>
                                         <div class="tu-asidetitle" data-bs-toggle="collapse" data-bs-target="#side1a"
                                             role="button" aria-expanded="true">
                                             <h5>Rating</h5>
@@ -496,7 +496,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="tu-aside-holder">
+                                    <div class="tu-aside-holder" hidden>
                                         <div class="tu-asidetitle" data-bs-toggle="collapse" data-bs-target="#side1ab"
                                             role="button" aria-expanded="true">
                                             <h5>Location</h5>

@@ -29,7 +29,8 @@
     padding: 1.5em 0.5em 0.5em;
     border-radius: 0.75em;
     /* text-align: center; */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2) !important;
+    /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2) !important; */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px !important;
 }
 
 .card-title {
@@ -942,6 +943,9 @@ input[type="range"]::-ms-thumb {
       --progress-bar-height: 40px;
       --font-size: 1.3rem;
     }
+    .topBtn{
+        display: none !important;
+      }
   }
 
   @media screen and (max-width: 500px) {
@@ -950,6 +954,10 @@ input[type="range"]::-ms-thumb {
       --progress-bar-height: 30px;
       --font-size: 1rem;
     }
+
+    .topBtn{
+        display: none !important;
+      }
   }
 
 
@@ -1012,7 +1020,7 @@ input[type="range"]::-ms-thumb {
 
 
    .topCradCount{
-    text-align: center;
+    /* text-align: center; */
    }
 
   .menu-link img{
@@ -1027,6 +1035,14 @@ input[type="range"]::-ms-thumb {
     margin-left: 90px;
   }
 
+  .topBlueBtn a{
+
+    margin: 0px 10px;
+  }
+
+  .topBtn a{
+    margin: 0px 10px;
+  }
 
 
 
@@ -1039,6 +1055,10 @@ input[type="range"]::-ms-thumb {
     .listHeader {
         margin-top: 10px;
     }
+
+    .topBtn{
+        display: none !important;
+      }
 
 
 
@@ -1053,6 +1073,16 @@ input[type="range"]::-ms-thumb {
     .listHeader {
         margin-top: 10px;
     }
+
+    .topBtn{
+        display: none !important;
+      }
+  }
+
+  @media only screen and (max-width: 1025px) {
+    .topBtn{
+        display: none !important;
+      }
   }
   @media only screen and (max-width: 767px) and (orientation: landscape) {
     .d-flex >.topBtn {
@@ -1062,4 +1092,60 @@ input[type="range"]::-ms-thumb {
     .listHeader {
         margin-top: 10px;
     }
+
+    .topBtn{
+        display: none !important;
+      }
   }
+
+
+  .mobSlot{
+    display: none;
+  }
+
+  @media only screen and (max-width: 480px) {
+    /* CSS rules for devices with a width up to 480px */
+    .mobSlot{
+        display: block !important;
+      }
+      .deskSlot{
+        display: none !important;
+      }
+
+      .topBlueBtn{
+        display: none;
+      }
+
+  }
+
+  @media only screen and (min-width: 481px) and (max-width: 768px) {
+    /* CSS rules for devices with a width between 481px and 768px */
+    .mobSlot{
+        display: block !important;
+      }
+
+      .deskSlot{
+        display: none !important;
+      }
+
+      .topBlueBtn{
+        display: none;
+      }
+  }
+
+  @media only screen and (min-width: 769px) and (max-width: 1024px) {
+    /* CSS rules for devices with a width between 769px and 1024px */
+    .mobSlot{
+        display: block !important;
+      }
+
+      .deskSlot{
+        display: none !important;
+      }
+
+      .topBlueBtn{
+        display: none;
+      }
+  }
+
+  

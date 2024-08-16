@@ -26,7 +26,7 @@ class TutorDashboardController extends Controller
             ->first();
         $classmapping = teacherclassmapping::select('*')->where('teacher_id',session('userid')->id)->first();
         if(!$classmapping){
-            return redirect('tutor/profileupdate')->with('fail', 'Kindly update your profile & add Class/Grade Mapping.');
+            return redirect('tutor/profileupdate')->with('fail', 'Kindly update your profile & add Class/Grade Mapping.')->with('success', 'Registration Successfull. You can use your registered "Mobile Number" & "Password" to login');
         }
 
         $pending_demos = democlasses::whereIn('status', [1, 6])->where('tutor_id', '=', session('userid')->id)->count();

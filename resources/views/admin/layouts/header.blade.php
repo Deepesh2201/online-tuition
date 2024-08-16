@@ -81,10 +81,12 @@
             </div>
             {{-- <a href="/student/classes" style="padding-right: 10px"> <button class="btn btn-primary">Upcoming Classes</button></a>
                         <a href="/student/searchtutor" style="padding-right: 10px"> <button class="btn btn-primary">Explore Tutors</button></a> --}}
-                        <a href="/admin/students" > <button class="btn btn-primary">Students List</button></a>
-                        <a href="/admin/tutors" > <button class="btn btn-primary">Tutors List</button></a>
-                        <a href="/admin/messages" > <button class="btn btn-primary">Chat</button></a>
-                        <a href="/" target="_blank" > <button class="btn btn-primary">Visit Website</button></a>
+                        <div class="topBlueBtn">
+                            <a href="/admin/students" > <button class="btn btn-primary">Students List</button></a>
+                            <a href="/admin/tutors" > <button class="btn btn-primary">Tutors List</button></a>
+                            <a href="/admin/messages" > <button class="btn btn-primary">Chat</button></a>
+                            <a href="/" target="_blank" > <button class="btn btn-primary">Visit Website</button></a>
+                        </div>
             <div class="d-flex align-items-center">
 
                 <div class="dropdown d-md-none topbar-head-dropdown header-item">
@@ -290,7 +292,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
 
-                        <div class="dropdown-head bg-primary bg-pattern rounded-top">
+                        <div class="dropdown-head bg-primary bg-pattern rounded-top" style="margin:0 10px">
                             <div class="" style="padding-left: 10px">
                                 <div class="row align-items-center">
                                     <div class="col">
@@ -524,33 +526,37 @@
                 </button>
             </div>
 
-            <div id="scrollbar">
-                <div class="container-fluid">
+            <div id="scrollbar"> 
+                <div class="container-fluid sidemenu">
 
                     <div id="two-column-menu">
                     </div>
                     <ul class="navbar-nav" id="navbar-nav">
                         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="/admin/dashboard" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <a class="nav-link menu-link {{ Request::is('admin/dashboard') ? 'active' : '' }}" href="/admin/dashboard" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                                 <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
                             </a>
 
                         </li> <!-- end Dashboard Menu -->
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarPages">
+                        @php
+                            $isMasterActive = Request::is('admin/class') || Request::is('admin/subject');
+                        @endphp
+                       
+                            <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isMasterActive ? 'true' : 'false' }}" aria-controls="sidebarPages">
                                 <i class="ri-pages-line"></i> <span data-key="t-pages">Master</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarPages">
+                            <div class="collapse menu-dropdown {{ $isMasterActive ? 'show' : '' }}" id="sidebarPages">
                                 <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.class')}}" class="nav-link" data-key="t-starter"> Grade </a>
+                                    <li class="nav-item ">
+                                        <a href="{{route('admin.class')}}" class="nav-link {{ Request::is('admin/class') ? 'active' : '' }}" data-key="t-starter"> Grade </a>
                                     </li>
                                     {{-- <li class="nav-item">
                                         <a href="{{route('admin.subjectcategory')}}" class="nav-link" data-key="t-team"> Subject Category </a>
                                     </li> --}}
                                     <li class="nav-item">
-                                        <a href="{{route('admin.subject')}}" class="nav-link" data-key="t-team"> Subject </a>
+                                        <a href="{{route('admin.subject')}}" class="nav-link {{ Request::is('admin/subject') ? 'active' : '' }}" data-key="t-team"> Subject </a>
                                     </li>
                                     {{-- <li class="nav-item">
                                         <a href="{{route('admin.topic')}}" class="nav-link" data-key="t-timeline"> Topic </a>
@@ -577,20 +583,23 @@
                         </li> --}}
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                        @php
+                            $isClassesActive = Request::is('admin/demolist') || Request::is('admin/scheduledclasses') || Request::is('admin/tutorslots');
+                        @endphp
+                            <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isClassesActive ? 'true' : 'false' }}" aria-controls="sidebarLayouts">
                                 <i class="ri-layout-3-line"></i> <span data-key="t-layouts">Classes</span>
                                 {{-- <span class="badge badge-pill bg-danger" data-key="t-hot">Updates</span> --}}
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarLayouts">
+                            <div class="collapse menu-dropdown {{ $isClassesActive ? 'show' : '' }}" id="sidebarLayouts">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="{{route('admin.demolist')}}" class="nav-link" data-key="t-horizontal">Demo Classes</a>
+                                        <a href="{{route('admin.demolist')}}" class="nav-link {{ Request::is('admin/demolist') ? 'active' : '' }}" data-key="t-horizontal">Demo Classes</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{route('admin.scheduledclasses')}}" class="nav-link" data-key="t-horizontal">Scheduled Classes</a>
+                                        <a href="{{route('admin.scheduledclasses')}}" class="nav-link {{ Request::is('admin/scheduledclasses') ? 'active' : '' }}" data-key="t-horizontal">Scheduled Classes</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{route('admin.tutorslots')}}" class="nav-link" data-key="t-horizontal">Tutor Slots</a>
+                                        <a href="{{route('admin.tutorslots')}}" class="nav-link {{ Request::is('admin/tutorslots') ? 'active' : '' }}" data-key="t-horizontal">Tutor Slots</a>
                                     </li>
 
                                 </ul>
@@ -600,13 +609,16 @@
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarPagesStudents" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarPages">
+                        @php
+                            $isStudentActive = Request::is('admin/students');
+                        @endphp
+                            <a class="nav-link menu-link" href="#sidebarPagesStudents" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isStudentActive ? 'true' : 'false' }}" aria-controls="sidebarPages">
                                 <i class="ri-pages-line"></i> <span data-key="t-pages">Students</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarPagesStudents">
+                            <div class="collapse menu-dropdown {{ $isStudentActive ? 'show' : '' }}" id="sidebarPagesStudents">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="{{route('admin.students')}}" class="nav-link" data-key="t-starter"> Student List </a>
+                                        <a href="{{route('admin.students')}}" class="nav-link {{ Request::is('admin/students') ? 'active' : '' }}" data-key="t-starter"> Student List </a>
                                     </li>
 
                                 </ul>
@@ -614,13 +626,16 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarLandingTutor" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLanding">
+                        @php
+                            $isTutorActive = Request::is('admin/tutor');
+                        @endphp
+                            <a class="nav-link menu-link" href="#sidebarLandingTutor" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isTutorActive ? 'true' : 'false' }}" aria-controls="sidebarLanding">
                                 <i class="ri-rocket-line"></i> <span data-key="t-landing">Tutors</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarLandingTutor">
+                            <div class="collapse menu-dropdown {{ $isTutorActive ? 'show' : '' }}" id="sidebarLandingTutor">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="{{route('admin.tutors')}}" class="nav-link" data-key="t-one-page"> Tutor List </a>
+                                        <a href="{{route('admin.tutors')}}" class="nav-link {{ Request::is('admin/tutor') ? 'active' : '' }}" data-key="t-one-page"> Tutor List </a>
                                     </li>
 
                                 </ul>
@@ -629,22 +644,25 @@
 
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Contents</span></li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="/admin/blogs" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <a class="nav-link menu-link {{ Request::is('admin/blogs') ? 'active' : '' }}" href="/admin/blogs" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                                 <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Blogs</span>
                             </a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarUILearning" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
+                        @php
+                            $isLCActive = Request::is('admin/learningcontents') || Request::is('admin/assignments');
+                        @endphp
+                            <a class="nav-link menu-link" href="#sidebarUILearning" data-bs-toggle="collapse" role="button" aria-controls="sidebarUI" aria-expanded="{{ $isLCActive ? 'true' : 'false' }}">
                                 <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Learning Contents</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarUILearning">
+                            <div class="collapse menu-dropdown {{ $isLCActive ? 'show' : '' }}" id="sidebarUILearning">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                                <a href="{{route('admin.learningcontents')}}" class="nav-link" data-key="t-alerts">Learning Contents</a>
+                                                <a href="{{route('admin.learningcontents')}}" class="nav-link {{ Request::is('admin/learningcontents') ? 'active' : '' }}" data-key="t-alerts">Learning Contents</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{route('admin.assignments')}}" class="nav-link" data-key="t-alerts">Assignments</a>
+                                                <a href="{{route('admin.assignments')}}" class="nav-link {{ Request::is('admin/assignments') ? 'active' : '' }}" data-key="t-alerts">Assignments</a>
                                             </li>
 
                                         </ul>
@@ -652,19 +670,22 @@
                                 </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarAdvanceUIOT" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI">
+                        @php
+                            $isOnlineTestActive = Request::is('admin/questionbank') || Request::is('admin/onlinetestlist')|| Request::is('admin/onlinetestresponseslist');
+                        @endphp
+                            <a class="nav-link menu-link" href="#sidebarAdvanceUIOT" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isOnlineTestActive ? 'true' : 'false' }}" aria-controls="sidebarAdvanceUI">
                                 <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Online Tests</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarAdvanceUIOT">
+                            <div class="collapse menu-dropdown {{ $isOnlineTestActive ? 'show' : '' }}" id="sidebarAdvanceUIOT">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                                <a href="{{route('admin.questionbank')}}" class="nav-link" data-key="t-alerts">Question Bank</a>
+                                                <a href="{{route('admin.questionbank')}}" class="nav-link {{ Request::is('admin/questionbank') ? 'active' : '' }}" data-key="t-alerts">Question Bank</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{route('admin.onlinetests')}}" class="nav-link" data-key="t-alerts">Tests</a>
+                                                <a href="{{route('admin.onlinetests')}}" class="nav-link {{ Request::is('admin/onlinetestlist') ? 'active' : '' }}" data-key="t-alerts">Tests</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{route('admin.onlinetests.responses.list')}}" class="nav-link" data-key="t-alerts">Test Responses</a>
+                                                <a href="{{route('admin.onlinetests.responses.list')}}" class="nav-link {{ Request::is('admin/onlinetestresponseslist') ? 'active' : '' }}" data-key="t-alerts">Test Responses</a>
                                             </li>
 
                                         </ul>
@@ -673,22 +694,26 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarFormsPay" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarForms">
+                        @php
+                            $isPayActive = Request::is('admin/tutorpaymentslist') || Request::is('admin/payments')|| Request::is('admin/blogs');
+                            @endphp
+                        
+                            <a class="nav-link menu-link" href="#sidebarFormsPay" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isPayActive ? 'true' : 'false' }}" aria-controls="sidebarForms">
                                 <i class="ri-file-list-3-line"></i> <span data-key="t-forms">Payments</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarFormsPay">
+                            <div class="collapse menu-dropdown {{ $isPayActive ? 'show' : '' }}" id="sidebarFormsPay">
                                 <ul class="nav nav-sm flex-column">
                                     {{-- <li class="nav-item">
-                                        <a href="#" class="nav-link" data-key="t-basic-elements"> Create Payment </a>
+                                        <a href="#" class="nav-link " data-key="t-basic-elements"> Create Payment </a>
                                     </li> --}}
                                     <li class="nav-item">
-                                        <a href="{{route('admin.tutorpaymentslist')}}" class="nav-link" data-key="t-form-select"> Tutor Payment </a>
+                                        <a href="{{route('admin.tutorpaymentslist')}}" class="nav-link {{ Request::is('admin/tutorpaymentslist') ? 'active' : '' }}" data-key="t-form-select"> Tutor Payment </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{route('admin.payments')}}" class="nav-link" data-key="t-checkboxs-radios"> Student Payment </a>
+                                        <a href="{{route('admin.payments')}}" class="nav-link {{ Request::is('admin/payments') ? 'active' : '' }}" data-key="t-checkboxs-radios"> Student Payment </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link" data-key="t-pickers"> Transactions List </a>
+                                        <a href="#" class="nav-link {{ Request::is('admin/blogs') ? 'active' : '' }}" data-key="t-pickers"> Transactions List </a>
                                     </li>
 
                                 </ul>
@@ -696,23 +721,30 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarCharts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCharts">
+                        @php
+                            $isReportActive = Request::is('admin/student-payments-report') || Request::is('admin/tutor-payments-report') || Request::is('admin/classes-report');
+                        @endphp
+                            <a class="nav-link menu-link" href="#sidebarCharts" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isReportActive ? 'true' : 'false' }}" aria-controls="sidebarCharts">
                                 <i class="ri-pie-chart-line"></i> <span data-key="t-charts">Reports</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarCharts">
+                            <div class="collapse menu-dropdown {{ $isReportActive ? 'show' : '' }}" id="sidebarCharts">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#sidebarApexcharts" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApexcharts" data-key="t-apexcharts">
+
+                                    @php
+                                        $isPaymentActive = Request::is('admin/student-payments-report') || Request::is('admin/tutor-payments-report') || Request::is('admin/classes-report');
+                                    @endphp
+                                        <a href="#sidebarApexcharts" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isPaymentActive ? 'true' : 'false' }}" aria-controls="sidebarApexcharts" data-key="t-apexcharts">
                                             Payments
                                         </a>
-                                        <div class="collapse menu-dropdown" id="sidebarApexcharts">
+                                        <div class="collapse menu-dropdown {{ $isPaymentActive ? 'show' : '' }}" id="sidebarApexcharts">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="{{route('admin.reports.student-payments')}}" class="nav-link" data-key="t-line"> Student Payment
+                                                    <a href="{{route('admin.reports.student-payments')}}" class="nav-link {{ Request::is('admin/student-payments-report') ? 'active' : '' }}" data-key="t-line"> Student Payment
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="{{route('admin.reports.tutor-payments')}}" class="nav-link" data-key="t-area"> Tutor Payment
+                                                    <a href="{{route('admin.reports.tutor-payments')}}" class="nav-link {{ Request::is('admin/tutor-payments-report') ? 'active' : '' }}" data-key="t-area"> Tutor Payment
                                                     </a>
                                                 </li>
 
@@ -720,16 +752,16 @@
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{route('admin.reports.class-list')}}" class="nav-link" data-key="t-chartjs"> Classes </a>
+                                        <a href="{{route('admin.reports.class-list')}}" class="nav-link {{ Request::is('admin/classes-report') ? 'active' : '' }}" data-key="t-chartjs"> Classes </a>
                                     </li>
                                     {{-- <li class="nav-item">
-                                        <a href="{{route('admin.reports.chat-list')}}" class="nav-link" data-key="t-chartjs"> Chat Report </a>
+                                        <a href="{{route('admin.reports.chat-list')}}" class="nav-link {{ Request::is('admin/') ? 'active' : '' }}" data-key="t-chartjs"> Chat Report </a>
                                     </li> --}}
                                     {{-- <li class="nav-item">
-                                        <a href="{{route('admin.topic')}}" class="nav-link" data-key="t-echarts"> Topic </a>
+                                        <a href="{{route('admin.topic')}}" class="nav-link {{ Request::is('admin/') ? 'active' : '' }}" data-key="t-echarts"> Topic </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{route('admin.batch')}}" class="nav-link" data-key="t-echarts"> Batch </a>
+                                        <a href="{{route('admin.batch')}}" class="nav-link {{ Request::is('admin/') ? 'active' : '' }}" data-key="t-echarts"> Batch </a>
                                     </li> --}}
                                 </ul>
                             </div>

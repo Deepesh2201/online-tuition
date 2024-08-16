@@ -5,8 +5,9 @@
     <div class="container-fluid">
         <div class="bannerImg ">
             <div class="bannerBGImg">
-                <img class="desktopBanner" src="{{ url('frontendnew/img/Group 850.png') }}" alt="" width="100%">
+                <img class="desktopBanner" src="{{ url('frontendnew/img/bg-mtc.png') }}" alt="" width="100%">
                 <img class="mobileBanner" src="{{ url('frontendnew/img/MobBan.png') }}" alt="" width="100%">
+                <img class="tabBanner" src="{{ url('frontendnew/img/bannerIpad.png') }}" alt="" width="100%">
             </div>
             <div class="overlayMTC">
                 <div class="tutorHeader">
@@ -35,26 +36,6 @@
                                 </select>
                             </div>
 
-
-
-
-                            <!-- <div class="drpdwn">
-                                <select  id="subject" name="subject">
-                                    <option value="">Select a subject</option>
-                                    @foreach ($subjects as $subject)
-                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                    @endforeach
-                                </select>
-                                </div>
-                               <div class="drpdwn">
-                               <select  id="grade" name="grade">
-                                    <option value="">Select a grade</option>
-                                    @foreach ($gradelists as $grade)
-                                        <option value="{{ $grade->id }}">{{ $grade->name }}</option>
-                                    @endforeach
-                                </select>
-                               </div> -->
-
                             <div class="drpdwnSearch">
                                 <button type="submit" class="btn search-tutor">Search</button>
                             </div>
@@ -75,7 +56,7 @@
                                             aria-controls="collapseTwo">Find the tutor of your choice use advance
                                             search</a>
                                         <span>
-                                            <a href="" class="collapsed" data-toggle="collapse"
+                                            <a href="" class="collapsed advSearch2" data-toggle="collapse"
                                                 data-target="#collapseTwo" aria-expanded="false"
                                                 aria-controls="collapseTwo">
                                                 <img src="{{ url('frontendnew/img/icons/magnifire.png') }}" alt="">
@@ -248,8 +229,8 @@
     </div>
 </section>
 <!-- tutor section -->
-<section class="tutor-section">
-    <div class="container tutor-card">
+<section class=" mar-top-40">
+    <div class="container tutor-card padd-80">
         <h4>10 million evaluated private tutors</h4>
         <br>
         <div class="row">
@@ -282,7 +263,7 @@
         <div class="row mt-4">
             <div class="col-12">
                 <div class="expMore">
-                    <a href="findatutor" class="btn btn-lg">Explore more</a>
+                    <a href="findatutor" class="btn btn-lg mb-4">Explore more</a>
                 </div>
             </div>
         </div>

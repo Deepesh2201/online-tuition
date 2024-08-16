@@ -22,7 +22,7 @@
     <body>
         <header role="banner" style="background-color: #fff;">
             <nav class="navbar navbar-expand-xl  navbar-dark bg-dark">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="navFlx">
                     <button
                         class="navbar-toggler"
@@ -59,7 +59,7 @@
                                     <button class="btn btn-sm" data-toggle="modal" data-target="#loginPopup">Login</button>
                                 </div>
                                 <div >
-                                <a href="{{('/student/register')}}" class="btn btn-sm ">Become a tutor</a>
+                                <a href="{{('/student/register')}}" class="btn btn-sm ">Get Started</a>
                                 </div>
                             </li>
                         </ul>
@@ -83,11 +83,11 @@
                         </ul>
                         
 
-                        <ul class="navbar-nav ml-auto deskBtn" >
+                        <ul class="navbar-nav ml-auto mr-4 deskBtn" >
                             <li class="nav-item cta-btn">
                                 <div class="btnSec">
                                     <button class="btn btn-sm " data-toggle="modal" data-target="#loginPopup">Login</button>
-                                    <a href="{{('/student/register')}}" class="btn btn-sm ">Become a tutor</a>
+                                    <a href="{{('/student/register')}}" class="btn btn-sm ">Get Started</a>
                                     <span>
                                         En
                                         <i class="fa fa-angle-down "></i>

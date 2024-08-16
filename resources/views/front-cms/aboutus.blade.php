@@ -69,7 +69,7 @@
         </div>
 
         <div class="row mt-5">
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 order1"  >
 
                 <div class="Bg_purple">
                     <div class="p-5">
@@ -87,7 +87,7 @@
                 </div>
 
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 order2">
 
                 <div class="row">
                     <div class="col-12 mb-4">
@@ -126,7 +126,7 @@
                 </div>
 
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 order3">
                 <div class="boeder_Bg">
                     <div class="p-5">
                         <h3>One-on-one lessons</h3>

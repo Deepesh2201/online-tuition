@@ -77,7 +77,7 @@
                         </button>
 
                         <div class="topBtn">
-                            <button type="button" style="    margin-left: -100px;"
+                            <button type="button" style=""
                                 class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                                 id="topnav-hamburger-icon">
                                 <a href="/tutor/tutorslots">
@@ -104,13 +104,13 @@
 
                     <div class="d-flex align-items-center">
 
-                        <div class="dropdown d-md-none topbar-head-dropdown header-item">
+                        <div class="dropdown d-md-none topbar-head-dropdown header-item" hidden>
                             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                                 id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 <i class="bx bx-search fs-22"></i>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" 
                                 aria-labelledby="page-header-search-dropdown">
                                 <form class="p-3">
                                     <div class="form-group m-0">
@@ -350,7 +350,7 @@
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
                                 aria-labelledby="page-header-notifications-dropdown">
 
-                                <div class="dropdown-head bg-primary bg-pattern rounded-top">
+                                <div class="dropdown-head bg-primary bg-pattern rounded-top" style="margin: 0px 10px">
                                     <div class="" style="padding-left: 10px">
                                         <div class="row align-items-center">
                                             <div class="col">
