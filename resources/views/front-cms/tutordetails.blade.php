@@ -133,7 +133,7 @@
             </div>
             <div class="row">
                 @foreach ($othertutors->slice(0,4) as $othertutor)
-                <a href="#" style="color: black">
+                <a href="/tutor-details/{{$othertutor->tutor_id}}" style="color: black">
                 <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 tutorCol">
                     <div class="tutorDetails">
                         <div class="tutorImg">
@@ -146,7 +146,7 @@
                             </span>
                             <span>£{{$othertutor->rate}}/h</span>
                         </div>
-                       <a href="/findatutor" style="color: black"> <span class="name" >
+                       <a href="/tutor-details/{{$othertutor->tutor_id}}"  style="color: black"> <span class="name" >
                             {{$othertutor->name}}
                             <p>{{$primarysubjects->subject_name}} teacher</p>
                         </span></a>
