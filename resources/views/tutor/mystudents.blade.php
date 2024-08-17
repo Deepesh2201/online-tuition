@@ -41,12 +41,15 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $student->class }}</td>
                                             <td>{{ $student->subject }}</td>
-                                            <td><a href="">{{ $student->studentname }}</a></td>
+                                            <td>{{ $student->studentname }}</td>
                                             <td>
-                                                <a href="tutorslots"><button class="btn btn-sm btn-primary">View
-                                                        Slots</button></a>
+                                                <form action="{{ route('tutor.slots.search') }}" method="GET" style="display:inline;">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $student->studentid }}" id="selectstudent" name="selectstudent">
+                                                    <button type="submit" class="btn btn-sm btn-primary">View Slots</button>
+                                                </form>
                                                 <a href="studentmessages/{{ $student->studentid }}"><button
-                                                        class="btn btn-sm btn-success">Start Chat</button></a>
+                                                            class="btn btn-sm btn-success">Start Chat</button></a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -39,7 +39,7 @@
                     <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                     <br>
                 @endif
-                <div id="" class="mb-3 listHeader page-title-box deskSlot">
+                <div id="" class="mb-3 listHeader page-title-box">
                     <h3>Slots Management </h3>
                     
                     <form action="{{ route('tutor.slots.search') }}" method="GET">
@@ -61,6 +61,13 @@
                                     <option value="{{ $student->id }}">{{ $student->name }}</option>
                                 @endforeach
                             </select>
+                            <select type="text" class="form-control" style="width:auto; margin-right:10px"
+                                id="bookingstatus" name="bookingstatus">
+                                <option value="" disabled selected>Slot Status</option>
+                                <option value="">All Slots</option>
+                                <option value="1">Booked Slots</option>
+                                <option value="2">Available Slots</option>
+                            </select>
                             <input type="date" class="form-control" style="width:auto; margin-right:10px"
                                 onchange="searchSlots();" id="searchDate" name="searchDate">
                             <button class="btn btn-sm btn-primary bookingBtns1" type="submit"><i
@@ -69,74 +76,6 @@
                         </div>
                     </form>
                 </div>
-
-
-                <div class="mobSlot">
-                <form action="{{ route('tutor.slots.search') }}" method="GET">
-
-                    <div class="row mb-3">
-
-                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-2">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h3>Slots Management </h3>
-                                </div>
-                                <div class="col-6">
-                                    <div style="float:right;">
-                                        <button class="btn btn-sm btn-success bookingBtns1" type="button"
-                                            onclick="openclassmodalcreate();"><i class="ri-calendar-todo-fill"></i>
-                                            &nbsp;Create Slot</button>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
-
-                                <div class="row">
-
-                                    <div class="col-4 ">
-                                        <select type="text" class="form-control" id="selectsubject"
-                                            name="selectsubject">
-                                            <option value="">Select Subject</option>
-                                            @foreach ($subjects as $subject)
-                                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-4">
-                                        <select type="text" class="form-control" id="selectstudent"
-                                            name="selectstudent">
-                                            <option value="">Select Student</option>
-                                            @foreach ($students as $student)
-                                            <option value="{{ $student->id }}">{{ $student->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="date" class="form-control" onchange="searchSlots();"
-                                            id="searchDate" name="searchDate">
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 mb-2">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div style="float:right;">
-                                            <button class="btn btn-sm btn-primary bookingBtns1" type="submit"><i
-                                                    class="ri-calendar-todo-fill"></i> &nbsp;Search Slot</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                </form>
-            </div>
 
                 <div class="mt-4 table-responsive" id="">
 
@@ -292,7 +231,7 @@
                         <div class="modal-body">
 
                             <header>
-                                <h3 class="text-center mb-4">Slot Details </h3>
+                                <h3 class="text-center mb-4">Slot Details</h3>
                             </header>
 
                             <form action="{{ route('tutor.slots.create') }}" method="POST">

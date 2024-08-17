@@ -3,6 +3,7 @@
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
+
 <div class="main-content">
     <style>
     .listHeader {
@@ -213,7 +214,7 @@
                                     {{-- <a type="button" class="btn btn-danger mr-1 moveRight" --}}
                                     {{-- style="background-color:#DC3545;" href="editstudentprofile.html">Back</a> --}}
                                     <br>
-                                    <small><i>Make sure to update the data before going down.</i></small>
+                                    <p style="color:red; font-size:12px"> * Make sure to update the data before going down.</p>
                                 </div>
                             </div>
                         </div>
@@ -576,6 +577,40 @@ function fetchSubjects() {
     return true;
 }
 </script>
+<script>
+    // Flag to track changes in any form
+    let isFormDirty = false;
+
+    // Select all forms on the page
+    const forms = document.querySelectorAll('form');
+
+    // Loop through each form
+    forms.forEach(form => {
+        const inputs = form.querySelectorAll('input, select, textarea');
+        
+        // Attach 'input' event listeners to each form's inputs
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                isFormDirty = true;
+                // alert("Form has unsaved changes!"); // Just to test that the event is triggered
+            });
+        });
+
+        // Reset the flag when any form is submitted
+        form.addEventListener('submit', () => {
+            isFormDirty = false;
+        });
+    });
+
+    // Warn user before they leave the page if any form has unsaved changes
+    window.addEventListener('beforeunload', (event) => {
+        if (isFormDirty) {
+            event.preventDefault();
+            event.returnValue = 'You have unsaved changes, do you really want to leave?';
+        }
+    });
+</script>
+
 
 
 @endsection
