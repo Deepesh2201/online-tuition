@@ -67,9 +67,9 @@ class ClassController extends Controller
         ->join('studentregistrations','studentregistrations.id','slot_bookings.student_id')
         ->join('subjects','subjects.id','slot_bookings.subject_id')
         ->join('classes','subjects.class_id','classes.id')
-        // ->where('zoom_classes.is_completed',1)
-        // ->where('zoom_classes.is_active',1)
-        // ->where('zoom_classes.tutor_id',session('userid')->id)
+        ->where('zoom_classes.is_completed',1)
+        ->where('zoom_classes.is_active',1)
+        ->where('zoom_classes.tutor_id',session('userid')->id)
         ->get();
         $classes = (new CommonController)->classes();
         // dd($liveclasses);
