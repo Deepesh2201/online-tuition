@@ -108,7 +108,17 @@ class TutorDashboardController extends Controller
     ->orderBy('start_time', 'asc')
     ->get();
 
-    $totalUpcomingClasses = $tUpcomingClasses->count();
+    $totalUpcomingClasses = zoom_classes::select('zoom_classes.*', 'zoom_classes.id as liveclass_id', 'studentregistrations.name as studentname', 'subjects.name as subjectname', 'classes.name as classname', 'slot_bookings.date as slotdate', 'slot_bookings.slot as slottime')
+    ->join('slot_bookings', 'slot_bookings.meeting_id', 'zoom_classes.id')
+    ->join('studentregistrations', 'studentregistrations.id', 'slot_bookings.student_id')
+    ->join('paymentstudents', 'paymentstudents.id', 'slot_bookings.class_schedule_id')
+    ->join('subjects', 'subjects.id', 'paymentstudents.subject_id')
+    ->join('classes', 'classes.id', 'paymentstudents.class_id')
+    ->where('zoom_classes.is_completed', 0)
+    ->where('zoom_classes.is_active', 1)
+    ->where('zoom_classes.tutor_id', session('userid')->id)
+    ->orderby('zoom_classes.created_at', 'desc')
+    ->count();;
 
         $latest_payments = paymentdetails::leftjoin('paymentstudents','paymentstudents.transaction_id','paymentdetails.transaction_id')
                     ->leftjoin('subjects','subjects.id','paymentstudents.subject_id')->where('paymentstudents.tutor_id', '=', session('userid')->id)->orderBy('payment_date', 'desc')->take(5)->get();
