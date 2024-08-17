@@ -307,7 +307,8 @@
                                             </td>
 
                                             <td class="joinclass">
-                                                @if (strtolower($democlass->currentstatus) == 'started')
+                                                {{-- @if (strtolower($democlass->currentstatus) == 'started') --}}
+                                                @if ($democlass->status == 5)
                                                 <a href="{{ $democlass->demo_link }}"><button class="badge border-0"
                                                         id="joinClassBtn2">Join Now</button></a>
                                                 @else
@@ -539,12 +540,12 @@
                 </div> -->
 
                 <div class="righttutor">
-                    {{-- <form class="multi-range-field my-5 pb-5" id="tutor-search"> --}}
+                    <form action="{{ route('student.tutoradvs') }}" method="POST">
                     @csrf
                     <div class="row ">
                         <div class="col-md-3 col-lg-3 col-xs-6 col-sm-6">
                             <label for="">Subject</label>
-                            <select class="form-control" id="subjectlistid" name="subjectlistid">
+                            <select class="form-control" id="subjectid" name="subjectlistid[]">
                                 <option value="">-- Select --</option>
                                 @foreach ($subjectlistsdata as $subject)
 
@@ -555,7 +556,7 @@
 
                         <div class="col-md-3 col-lg-3 col-xs-6 col-sm-6">
                             <label for="">Level</label>
-                            <select class="form-control">
+                            <select class="form-control" id="gradelistid" name="gradelistid">
                                 <option value="">--Select--</option>
                                 @foreach ($gradelists as $grade)
                                 <option value="{{$grade->id}}">{{$grade->name}}</option>
@@ -581,7 +582,7 @@
 
                         </div>
                     </div>
-                    {{-- </form> --}}
+                    </form>
                 </div>
 
                 <div class="sliderr mb-5">
@@ -593,12 +594,13 @@
                             <div class="tutorcard">
                                 <div class="tutorcardImg">
                                     <div class="ratePerHr">
-                                        <p>&#163;{{$tutorlist->rate}}</p>
+                                        <p>&#163;{{$tutorlist->rateperhour}}</p>
                                     </div>
-                                    <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorlist->profile_pic ?? url('images/avatar/default-profile-pic.png') }}" class="card-img-top" alt="...">
+                                    <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorlist->profile_pic }}" class="card-img-top" alt="Tutor Image" onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/MCTfavicon.png';">
+                               
                                 </div>
                                 <div class="tutorDesc">
-                                    <span class="tutname">{{ $tutorlist->name }}</span><br>
+                                    <a href="tutorprofile/{{ $tutorlist->tutor_id }}" style="color: black"><span class="tutname">{{ $tutorlist->name }}</span></a><br>
                                     <table class="tutorTable">
                                         <tr>
                                             <td colspan="2"><small>{{ $tutorlist->headline }}</small></td>
@@ -615,12 +617,14 @@
                                     </table>
 
                                     <div class="btnSec">
-                                        <a href="tutorprofile/{{ $tutorlist->sub_map_id }}"><button
+                                        <a href="tutorprofile/{{ $tutorlist->tutor_id }}"><button
                                                 class="btn btn-sm">View Profile</button></a>
                                                 @if (session('usertype') == 'Parent')
                                                     @else
-                                                    <a href="/student/searchtutor"> <button class="btn btn-sm">Free
-                                                        Trial</button></a>
+                                                    <a href="#booktrial"> <button data-toggle="modal"
+                                                            data-target="#openDemoModal" class="btn btn-sm btn-primary"
+                                                            onclick="openDemoModal('{{ $tutorlist->tutor_id }}','{{ $tutorlist->name }}','{{ $tutorlist->subjectid }}','{{ $tutorlist->subject }}')">Trial
+                                                            Class</button></a>
                                                         @endif
                                     </div>
                                 </div>
@@ -956,6 +960,82 @@
 
         </div>
 
+<!--Demo modal -->
+<div class="modal fade" id="openDemoModal" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+
+
+        <div class="modal-body">
+
+
+            <header>
+                <h3 class="text-center ">Free Trial Class</h3>
+            </header>
+
+            <form action="{{ route('student.bookdemo') }}" method="POST">
+                @csrf
+                <div class=" row mb-2">
+
+                    <div class="form-group col-md-6">
+                        {{-- <label for="">Candidate</label> --}}
+                        <input type="hidden" class="form-control" id="demostudentname"
+                            value="{{ session('userid')->name }}" disabled>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{-- <label for="">Tutor</label> --}}
+                        <input type="hidden" class="" id="demotutorid" name="demotutorid">
+                        <input type="hidden" class="form-control" id="demotutorname"
+                            name="demotutorname" disabled>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <label for="name">Subject</label>
+                        {{-- <input type="hidden" id="demosubjectid" name="demosubjectid">
+                        <input type="text" class="form-control" id="demosubjectname"
+                            name="demosubjectname" disabled> --}}
+                        <select class="form-control" id="demosubjectid" name="demosubjectid" required></select>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <label for="">Prefer Slot 1<i style="color: red;">*</i></label>
+                        <input type="datetime-local" class="form-control" id="demoslotfirst"
+                            name="demoslotfirst" required>
+
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <label for="">Prefer Slot 2</label>
+                        <input type="datetime-local" class="form-control" id="demoslotsecond"
+                            name="demoslotsecond">
+
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <label for="">Prefer Slot 3</label>
+                        <input type="datetime-local" class="form-control" id="demoslotthird"
+                            name="demoslotthird">
+
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <label for="">Message(<span><i>Optional</i></span>)</label>
+                        <textarea class="form-control" id="message" name="message" style="height: 110px !important"></textarea>
+
+                    </div>
+
+                </div>
+                <div class="mt-2">
+                    <button type="submit" id="" class="btn btn-sm btn-success"
+                        style="float:right ">Schedule
+                        Demo</button>
+                </div>
+
+        </div>
+
 
 
 
@@ -963,8 +1043,105 @@
     </div>
 
 
-    <!-- End Page-content -->
 
+
+
+
+    </form>
+
+</div>
+</div>
+
+
+
+    </div>
+
+
+    <!-- End Page-content -->
+    <script>
+        function openDemoModal(tid, tname, sid, sname) {
+            getTutorSubjects(tid)
+            $('#demotutorid').val(tid)
+            // $('#demotutorname').val(tname)
+            // $('#demosubjectid').val(sid)
+            $('#demosubjectname').val(sname)
+            $('#openDemoModal').modal('show')
+
+        }
+
+        $(document).ready(function() {
+            // Function to validate slot timings
+            function validateSlotTimings() {
+                var now = new Date();
+                var minTime = new Date(now.getTime() + 60 * 60 * 1000); // Current time + 1 hour
+
+                // Validate Prefer Slot 1
+                setMinDate('#demoslotfirst', minTime);
+
+                // Validate Prefer Slot 2
+                setMinDate('#demoslotsecond', minTime);
+
+                // Validate Prefer Slot 3
+                setMinDate('#demoslotthird', minTime);
+
+                return true;
+            }
+
+            // Set min date for datetime-local input
+            function setMinDate(selector, minDate) {
+                // Get the current date and time in the required format
+                var minDateString = minDate.toISOString().slice(0, 16);
+
+                // Set the min attribute for the specified datetime-local input
+                $(selector).attr('min', minDateString);
+            }
+
+            // Call the validation function on page load
+            validateSlotTimings();
+        });
+
+
+        function openEnrollModal(tid, tname, sid, sname, ttopics, ratehr) {
+            clearselectedslots()
+            $('#tutorenrollid').val(tid)
+            $('#tutorenroll').val(tname)
+            $('#subjectenrollid').val(sid)
+            $('#subjectenroll').val(sname)
+            $('#availableclassenroll').val(ttopics)
+            $('#rateperhourenroll').val(ratehr)
+            // $('#totalamountenroll').val(ratehr * )
+            $('#openEnrollModal').modal('show')
+        }
+
+        function calculate() {
+            $('#totalamountenroll').val($('#rateperhourenroll').val() * $('#requiredclassenroll').val())
+        }
+    </script>
+    <script>
+        function getTutorSubjects(id) {
+
+
+            $.ajax({
+                url: "{{ url('fetchtutorsubjects') }}",
+                type: "POST",
+                data: {
+                    tutor_id: id,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#demosubjectid').html('<option value="">-- Select Subject --</option>');
+                    $.each(result.subjects, function(key, value) {
+                        $("#demosubjectid").append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+
+                }
+
+            });
+
+        };
+    </script>
     <script>
     const circularProgress = document.querySelectorAll(".circular-progress");
 

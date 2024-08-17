@@ -206,28 +206,39 @@ class DashboardController extends Controller
 
         // Tutors List
         $tutorlists = tutorprofile::select(
-            'tutorprofiles.id',
-            'classes.name as class_name',
+            'tutorprofiles.tutor_id as tutor_id',
             'tutorprofiles.name',
             'tutorprofiles.headline',
+            'tutorprofiles.qualification as tutor_qualification',
+            'tutorprofiles.intro_video_link',
             'tutorprofiles.experience',
-            DB::raw('(tutorsubjectmappings.rate + (tutorsubjectmappings.rate * tutorsubjectmappings.admin_commission / 100)) as rate'),
+            DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100)) as rateperhour'),
             'tutorprofiles.profile_pic',
-            'subjects.id as subjectid',
-            'subjects.name as subject',
-            DB::raw('SUM(ratings) / COUNT(ratings) AS starrating, COUNT(DISTINCT topics.name) as total_topics'),
-            'tutorsubjectmappings.id as sub_map_id',
-            DB::raw('(SELECT COUNT(*) FROM classschedules WHERE classschedules.tutor_id = tutorprofiles.id) AS total_classes_done')
+            DB::raw('GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", ") as subject'),
+            DB::raw('SUM(tutorreviews.ratings) / COUNT(tutorreviews.id) AS starrating'),
+            DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
+            DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
         )
             ->join('teacherclassmappings', 'teacherclassmappings.teacher_id', '=', 'tutorprofiles.tutor_id')
             ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
             ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
             ->join('classes', 'classes.id', '=', 'tutorsubjectmappings.class_id')
-            ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.id')
+            ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id')
             ->join('topics', 'topics.subject_id', '=', 'subjects.id')
             ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
+            ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
             ->where('tutorregistrations.is_active', 1)
-            ->groupby('tutorprofiles.id', 'subjects.id', 'subjects.name', 'classes.name', 'tutorprofiles.rate', 'tutorprofiles.profile_pic', 'tutorprofiles.name', 'rate', 'sub_map_id', 'experience', 'headline', 'total_classes_done')
+            ->groupBy(
+                'tutorprofiles.tutor_id',
+                'tutorprofiles.name',
+                'tutorprofiles.headline',
+                'tutorprofiles.qualification',
+                'tutorprofiles.intro_video_link',
+                'tutorprofiles.experience',
+                'tutorprofiles.rateperhour',
+                'tutorprofiles.admin_commission',
+                'tutorprofiles.profile_pic'
+            )
             ->get();
 
         // Subject lists with category
