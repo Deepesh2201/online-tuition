@@ -4,19 +4,16 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\batches;
-use App\Models\subjects;
 use App\Models\batchstudentmapping;
-use App\Models\zoom_classes;
-use App\Models\students\studentattendance;
 use App\Models\classes;
-use App\Models\studentprofile;
 use App\Models\classschedule;
+use App\Models\studentprofile;
 use App\Models\studentregistration;
+use App\Models\subjects;
 use App\Models\tutorregistration;
+use App\Models\zoom_classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use SebastianBergmann\LinesOfCode\Exception;
-use Spatie\FlareClient\Http\Client;
 
 class BatchesController extends Controller
 {
@@ -25,27 +22,28 @@ class BatchesController extends Controller
     {
         $classes = classes::select('*')->where('is_active', 1)->get();
         $tutors = tutorregistration::select('*')->get();
-        $subjects = subjects::where('is_active',1)->get();
+        $subjects = subjects::where('is_active', 1)->get();
         $batches = batches::select('batches.id as batch_id', 'batches.name as batch_name', 'batches.description as batch_description', 'batches.is_active as batch_status', 'subjects.name as subject_name', 'subjects.id as subject_id', 'classes.id as class_id', 'classes.name as class_name', 'tutorregistrations.id as tutor_id', 'tutorregistrations.name as tutor_name')
             ->join('subjects', 'subjects.id', '=', 'batches.subject_id')
             ->join('tutorregistrations', 'tutorregistrations.id', '=', 'batches.tutor_id')
             ->join('classes', 'classes.id', '=', 'subjects.class_id')->paginate(10);
-            //  dd($batches);
+        //  dd($batches);
         return view('admin.batch', get_defined_vars());
     }
 
-     // search functionality
-     public function batchSearch(Request $request){
+    // search functionality
+    public function batchSearch(Request $request)
+    {
         // return $request->all();
-        $classes = classes::select('*')->where('is_active',1)->get();
-        $subjects = subjects::where('is_active',1)->get();
+        $classes = classes::select('*')->where('is_active', 1)->get();
+        $subjects = subjects::where('is_active', 1)->get();
         $tutors = tutorregistration::select('*')->get();
         $query = batches::select('batches.id as batch_id', 'batches.name as batch_name', 'batches.description as batch_description', 'batches.is_active as batch_status', 'subjects.name as subject_name', 'subjects.id as subject_id', 'classes.id as class_id', 'classes.name as class_name', 'tutorregistrations.id as tutor_id', 'tutorregistrations.name as tutor_name')
-                        ->join('subjects', 'subjects.id', '=', 'batches.subject_id')
-                        ->join('tutorregistrations', 'tutorregistrations.id', '=', 'batches.tutor_id')
-                        ->join('classes', 'classes.id', '=', 'subjects.class_id');
-                        // ->where('batches.tutor_id',1)->get();
-                        // dd($request->tutor_name);
+            ->join('subjects', 'subjects.id', '=', 'batches.subject_id')
+            ->join('tutorregistrations', 'tutorregistrations.id', '=', 'batches.tutor_id')
+            ->join('classes', 'classes.id', '=', 'subjects.class_id');
+        // ->where('batches.tutor_id',1)->get();
+        // dd($request->tutor_name);
 
         if ($request->class_name) {
             $query->where('subjects.class_id', $request->class_name);
@@ -53,21 +51,18 @@ class BatchesController extends Controller
         if ($request->subject_name) {
             $query->where('batches.subject_id', $request->subject_name);
         }
-        if($request->tutor_name) {
-            $query->where('batches.tutor_id',$request->tutor_name);
+        if ($request->tutor_name) {
+            $query->where('batches.tutor_id', $request->tutor_name);
         }
 
-
         $batches = $query->paginate(10);
-        $viewTable = view('admin.partials.batches-search',compact('batches'))->render();
+        $viewTable = view('admin.partials.batches-search', compact('batches'))->render();
         $viewPagination = $batches->links()->render();
         return response()->json([
             'table' => $viewTable,
-            'pagination' => $viewPagination
+            'pagination' => $viewPagination,
         ]);
     }
-
-
 
     public function store(Request $request)
     {
@@ -119,8 +114,8 @@ class BatchesController extends Controller
 
     public function mapping(Request $request)
     {
-        $datachk = batchstudentmapping::select('*')->where('batch_id',$request->batchid)->first();
-        if($datachk){
+        $datachk = batchstudentmapping::select('*')->where('batch_id', $request->batchid)->first();
+        if ($datachk) {
             $data = batchstudentmapping::find($datachk->id);
             $msg = 'Batch updated successfully';
         }
@@ -142,31 +137,31 @@ class BatchesController extends Controller
         }
     }
 
-    public function viewrecord($id){
+    public function viewrecord($id)
+    {
 
-         // Fetch student details based on batches -> Using jQuerry
-         $data['subjects'] = batchstudentmapping::where("batch_id", $id)->first();
-     return response()->json($data);
+        // Fetch student details based on batches -> Using jQuerry
+        $data['subjects'] = batchstudentmapping::where("batch_id", $id)->first();
+        return response()->json($data);
     }
 
-    public function tutorbatches(){
-        $batches = batches::select('batches.id as batch_id','batches.name as batch_name','batches.description as batch_description','subjects.id as subject_id','subjects.name as subject_name','classes.name as class_name')
+    public function tutorbatches()
+    {
+        $batches = batches::select('batches.id as batch_id', 'batches.name as batch_name', 'batches.description as batch_description', 'subjects.id as subject_id', 'subjects.name as subject_name', 'classes.name as class_name')
 
-        ->join('subjects','subjects.id','batches.subject_id')
-        ->join('classes','classes.id','subjects.class_id')
+            ->join('subjects', 'subjects.id', 'batches.subject_id')
+            ->join('classes', 'classes.id', 'subjects.class_id')
 
         // ->join('classschedules','classschedules.batch_id','batches.id')
         // ->join('classschedules','classschedules.batch_id','batches.id')
         //
-        ->where('batches.tutor_id',session('userid')->id)
-        ->where('batches.is_active',1)
-        ->get();
+            ->where('batches.tutor_id', session('userid')->id)
+            ->where('batches.is_active', 1)
+            ->get();
         $classessch = classschedule::select('*')->get();
-        return view('tutor.batches',compact('batches','classessch'));
+        return view('tutor.batches', compact('batches', 'classessch'));
 
         // ->has('classschedules','classschedules.id')->get();
-
-
 
     }
 
@@ -183,25 +178,27 @@ class BatchesController extends Controller
             ->join('paymentstudents', 'paymentstudents.student_id', '=', 'studentregistrations.id')
             ->join('classes', 'classes.id', '=', 'paymentstudents.class_id')
             ->join('subjects', 'subjects.id', '=', 'paymentstudents.subject_id')
-            ->where('paymentstudents.tutor_id',session('userid')->id)
+            ->where('paymentstudents.tutor_id', session('userid')->id)
             ->where('studentregistrations.is_active', 1)
             ->distinct()
             ->get();
-    
+
         return view('tutor.mystudents', get_defined_vars());
     }
-      
-    public function tutorbatchesstudents($id){
-        $data= batchstudentmapping::select('student_data')->where("batch_id", $id)->first();
+
+    public function tutorbatchesstudents($id)
+    {
+        $data = batchstudentmapping::select('student_data')->where("batch_id", $id)->first();
         $explode_id = json_decode($data['student_data'], true);
-        $student = studentregistration::select('name')->whereIn('id',$explode_id)->get();
+        $student = studentregistration::select('name')->whereIn('id', $explode_id)->get();
         return response()->json($student);
 
     }
 
-    public function tutorbatchesattendance(Request $request,$id){
+    public function tutorbatchesattendance(Request $request, $id)
+    {
         // dd($request->all());
-        $data= batchstudentmapping::select('student_data')->where("batch_id", $id)->where("tutor_id", session('userid')->id)->first();
+        $data = batchstudentmapping::select('student_data')->where("batch_id", $id)->where("tutor_id", session('userid')->id)->first();
         $explode_id = json_decode($data['student_data'], true);
         // $students = studentregistration::select('studentregistrations.name','studentattendances.status')->leftjoin('studentattendances','studentattendances.student_id','studentregistrations.id')
 
@@ -213,18 +210,18 @@ class BatchesController extends Controller
         //             ->where('studentattendances.tutor_id',session('userid')->id)
         //             ->get();
 
-        $students = studentregistration::select('studentregistrations.name','studentregistrations.id as student_id', DB::raw('COALESCE(studentattendances.status, 0) as status'))
-                            ->leftJoin('studentattendances', function ($join) use ($request) {
-                                $join->on('studentattendances.student_id', '=', 'studentregistrations.id')
-                                    ->where('studentattendances.class_id', $request->class_id)
-                                    ->where('studentattendances.subject_id', $request->subject_id)
-                                    ->where('studentattendances.batch_id', $request->batch_id)
-                                    ->where('studentattendances.topic_id', $request->topic_id)
-                                    ->where('studentattendances.meeting_id', $request->meeting_id)
-                                    ->where('studentattendances.tutor_id', session('userid')->id);
-                            })
-                            ->whereIn('studentregistrations.id', $explode_id)
-                            ->get();
+        $students = studentregistration::select('studentregistrations.name', 'studentregistrations.id as student_id', DB::raw('COALESCE(studentattendances.status, 0) as status'))
+            ->leftJoin('studentattendances', function ($join) use ($request) {
+                $join->on('studentattendances.student_id', '=', 'studentregistrations.id')
+                    ->where('studentattendances.class_id', $request->class_id)
+                    ->where('studentattendances.subject_id', $request->subject_id)
+                    ->where('studentattendances.batch_id', $request->batch_id)
+                    ->where('studentattendances.topic_id', $request->topic_id)
+                    ->where('studentattendances.meeting_id', $request->meeting_id)
+                    ->where('studentattendances.tutor_id', session('userid')->id);
+            })
+            ->whereIn('studentregistrations.id', $explode_id)
+            ->get();
 
         return response()->json([
             'students' => $students,
@@ -233,60 +230,71 @@ class BatchesController extends Controller
             'topic_id' => $request->topic_id,
             'batch_id' => $request->batch_id,
             'start_time' => $request->start_time,
-            'meeting_id' => $request->meeting_id
+            'meeting_id' => $request->meeting_id,
         ]);
     }
 
-    public function tutorBatcheUpdateattendance(Request $request){
+    public function tutorBatcheUpdateattendance(Request $request)
+    {
 
-        if($request->ispresent == 'on'){
+        if ($request->ispresent == 'on') {
             $presence = 1;
-        }
-        else{
+        } else {
             $presence = 0;
         }
         $attendance = zoom_classes::find($request->post_meeting_id);
         $attendance->student_present = $presence;
 
         $res = $attendance->update();
-        if($res){
-            return back()->with('success','Attendance Successfully Submitted');
+        if ($res) {
+            return back()->with('success', 'Attendance Successfully Submitted');
 
-        }
-        else{
-            return back()->with('fail','Something went wrong!, try again later');
+        } else {
+            return back()->with('fail', 'Something went wrong!, try again later');
 
         }
     }
 
-public function zoomapi(){
-    // dd();
-    // $client = new Client();
+    public function updaterecording(Request $request){
+        $data = zoom_classes::find($request->recording_link_id);
+        $data->recording_link = $request->recording_link;
+        $res = $data->update();
+        if ($res) {
+            return back()->with('success', 'Recording Link Successfully Submitted');
 
-    // $response = $client->get('https://zoom.us/oauth/token', [
-    //     'form_params' => [
-    //         'grant_type' => 'authorization_code',
-    //         'client_id' => 'oFed_e_zQi6wE8183XRI0A',
-    //         'client_secret' => '1hYXjFPAXUJ8uYOQDUGTJJNjzVGdaxTu',
-    //     ],
-    // ]);
+        } else {
+            return back()->with('fail', 'Something went wrong!, try again later');
 
+        }
+    }
 
-    // $accessToken = json_decode($response);
+    public function zoomapi()
+    {
+        // dd();
+        // $client = new Client();
 
-    // $response2 = $client->get('https://api.zoom.us/v2/users', [
-    //     'headers' => [
-    //         'Authorization' => 'Bearer ' . $accessToken,
-    //         'Content-Type' => 'application/json',
-    //     ],
-    // ]);
+        // $response = $client->get('https://zoom.us/oauth/token', [
+        //     'form_params' => [
+        //         'grant_type' => 'authorization_code',
+        //         'client_id' => 'oFed_e_zQi6wE8183XRI0A',
+        //         'client_secret' => '1hYXjFPAXUJ8uYOQDUGTJJNjzVGdaxTu',
+        //     ],
+        // ]);
 
-    // $users = json_decode($response2->getBody()->getContents())->users;
+        // $accessToken = json_decode($response);
 
-    // return $users;
+        // $response2 = $client->get('https://api.zoom.us/v2/users', [
+        //     'headers' => [
+        //         'Authorization' => 'Bearer ' . $accessToken,
+        //         'Content-Type' => 'application/json',
+        //     ],
+        // ]);
 
+        // $users = json_decode($response2->getBody()->getContents())->users;
 
-    // try {
+        // return $users;
+
+        // try {
         // $client = new Client();
 
         // $response = $client->get('https://zoom.us/oauth/token', [
@@ -304,14 +312,13 @@ public function zoomapi(){
 
         // $db = new DB();
         // $db->update_access_token(json_encode($token));
-    //     echo "Access token inserted successfully.";
-    // } catch(Exception $e) {
-    //     echo $e->getMessage();
-    // }
+        //     echo "Access token inserted successfully.";
+        // } catch(Exception $e) {
+        //     echo $e->getMessage();
+        // }
 
-
-    // echo "<pre>";
-    // dd($response);
-}
+        // echo "<pre>";
+        // dd($response);
+    }
 
 }
