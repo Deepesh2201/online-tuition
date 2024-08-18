@@ -237,6 +237,7 @@ class AssignmentsController extends Controller
             // ->join('batches', 'batches.id', 'student_assignment_lists.batch_id')
             ->where('student_assignment_lists.is_active', 1)
             ->where('student_assignment_lists.student_id', session('userid')->id)
+            ->orderBy('student_assignment_lists.created_at', 'desc')
             ->paginate(10);
 
             $submissions = StudentAssignments::select('*')->where('submitted_by',session('userid')->id)->where('is_active',1)->get();

@@ -149,9 +149,9 @@
                                 </div>
                             </div>
                             <div class="tu-listinginfo_btn">
-                                <div class="tu-iconheart">
+                                {{-- <div class="tu-iconheart">
                                     <i class="icon icon-heart"></i><span>Add to favourite</span>
-                                </div>
+                                </div> --}}
                                 <div class="tu-btnarea">
                                     {{-- <a href="tutormessages/{{ $tutorlist->tutor_id }}"> <button class="btn btn-sm btn-primary" id="enrollnow">Chat</button></a> --}}
                                     {{-- <a href="enrollnow/{{ $tutorlist->sub_map_id }}"> <button class="btn btn-sm btn-success" id="enrollnow">Enroll Now</button></a> --}}

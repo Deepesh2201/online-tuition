@@ -275,7 +275,7 @@
                                             </div>
                                         </div>
                                         <div class="tu-listinginfo_btn">
-                                            @if ($tutorlist->myfav)
+                                            {{-- @if ($tutorlist->myfav)
                                                 <div class="tu-iconheart">
                                                     <a href="addfav/{{ $tutorlist->tutor_id }}"><img
                                                             src="{{ asset('images/red-heart.png') }}" width="18px"
@@ -287,7 +287,7 @@
                                                             src="{{ asset('images/grey-heart.png') }}" width="18px"
                                                             alt=""><span>&nbsp; Add Favourite</span></a>
                                                 </div>
-                                            @endif
+                                            @endif --}}
 
                                             <div class="tu-btnarea">
                                                 <a href="#booktrial"> <button data-toggle="modal"
@@ -782,6 +782,7 @@
 
                                 <header>
                                     <h3 class="text-center ">Free Trial Class</h3>
+                                    <p style="color: red">*Please provide your preferred time slots for the trial class. Once confirmed by the tutor, be punctual and join at the specified time.</p>
                                 </header>
 
                                 <form action="{{ route('student.bookdemo') }}" method="POST">

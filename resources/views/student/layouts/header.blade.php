@@ -674,7 +674,7 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                 </li>
                                 <li class="nav-item submneu">
                                     <img src="/images/Student-dashboard-menu-icon/My recordings.svg" alt="">&nbsp;
-                                    <a href="{{ route('student.completed-classes') }}" class="nav-link {{ Request::is('student/completed-classes') ? 'active' : '' }}" data-key="t-horizontal">My Recordings</a>
+                                    <a href="{{ route('student.completed-classes') }}" class="nav-link {{ Request::is('student/completed-classes') ? 'active' : '' }}" data-key="t-horizontal">Completed Classes</a>
                                 </li>
                             </ul>
                         </div>

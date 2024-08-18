@@ -972,6 +972,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
 
             <header>
                 <h3 class="text-center ">Free Trial Class</h3>
+                <p style="color: red">*Please provide your preferred time slots for the trial class. Once confirmed by the tutor, be punctual and join at the specified time.</p>
             </header>
 
             <form action="{{ route('student.bookdemo') }}" method="POST">
