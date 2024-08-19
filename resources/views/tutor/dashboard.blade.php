@@ -130,7 +130,7 @@
                 <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
                     <div class="card card-animate">
                         <div class="cardTitle">
-                            <h5>Schedule Classes</h5>
+                            <h5>Scheduled Classes</h5>
                             <a href="getclasslist"><b>View All</b></a>
                         </div>
                         <div class="card-body">

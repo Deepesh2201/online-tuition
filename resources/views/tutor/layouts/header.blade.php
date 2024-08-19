@@ -967,7 +967,7 @@
                                 class="nav-link {{ Request::is('tutor/classes') ? 'active' : '' }}"
                                 data-key="t-horizontal">
                                 <img src="/images/Tutor-Dashboard-menu-icons/My Complete Classes.svg"
-                                    alt="">&nbsp; <span data-key="t-dashboards"> Complete Classes</span>
+                                    alt="">&nbsp; <span data-key="t-dashboards"> Completed Classes</span>
                             </a>
 
                             <a href="{{ route('tutor.studentslist') }}"
