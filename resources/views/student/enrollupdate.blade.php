@@ -201,12 +201,15 @@
 
                     </table>
                 </div>
+                @if (session('usertype') == 'Parent')
+                @else
                 <div style="display: flex; justify-content:space-between" class="my-3">
                    <div>
                     <input type="hidden" id="slotids" name="slotids">
                     <input type="checkbox" id="contactadmin" name="contactadmin"> <span><label for="contactadmin" > Please select to contact Admin, if you are not able to select slots.</label></span>
                    </div>
                 <button class="btn btn-sm btn-success">Update Slots</button>
+                @endif
             </form>
                 </div>
             </div>

@@ -92,6 +92,8 @@
                                                     class="btn btn-danger">Watch Intro</button><i
                                                     class="icon icon-copy"></i></a>
                                         </div>
+                                        @if (session('usertype') == 'Parent')
+                                        @else
                                         <a href="#booktrial"> <button data-toggle="modal"
                                             data-target="#openDemoModal" class="btn btn-sm btn-primary"
                                             onclick="openDemoModal('{{ $tutorpd->tutor_id }}','{{ $tutorpd->name }}','{{ $tutorpd->subjectid }}','{{ $tutorpd->subject }}')">Trial
@@ -100,7 +102,7 @@
                                             <a href="/student/enrollnow/{{ $tutorpd->tutor_id }}"> <button
                                                 class="btn btn-sm btn-success" id="enrollnow">Enroll
                                                 Now</button></a>
-
+@endif
                                         <a href="/student/tutormessages/{{ $tutorpd->tutor_id }}"><button
                                                 class="btn btn-sm btn-success">Start Chat</button></a>
                                         {{-- <ul class="tu-profilelinksbtn">

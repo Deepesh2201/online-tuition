@@ -148,18 +148,18 @@
                     <div class="btns">
 
                         <!-- <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    Sort By
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Price</a>
-                                    <a class="dropdown-item" href="#">Class</a>
-                                    <a class="dropdown-item" href="#">Rating</a>
-                                    <a class="dropdown-item" href="#">Experience</a>
+                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        Sort By
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Price</a>
+                                        <a class="dropdown-item" href="#">Class</a>
+                                        <a class="dropdown-item" href="#">Rating</a>
+                                        <a class="dropdown-item" href="#">Experience</a>
 
-                                </div>
-                            </div> -->
+                                    </div>
+                                </div> -->
                         <div class="dropdown">
                             {{-- <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -214,7 +214,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xl-8 col-xxl-9" >
+                    <div class="col-xl-8 col-xxl-9">
                         <div class="tu-listinginfo-holder">
                             @if (isset($tutorlist))
                                 @foreach ($tutorlist as $tutorlist)
@@ -233,7 +233,8 @@
                                                             <i class="icon icon-check-circle tu-greenclr"
                                                                 data-tippy-trigger="mouseenter"
                                                                 data-tippy-html="#tu-verifed" data-tippy-interactive="true"
-                                                                data-tippy-placement="top"></i></h5>
+                                                                data-tippy-placement="top"></i>
+                                                        </h5>
                                                         <div class="tu-listing-location">
                                                             <span>{{ $tutorlist->starrating }} <i
                                                                     class="fa-solid fa-star"></i><em></em></span>
@@ -290,18 +291,20 @@
                                             @endif --}}
 
                                             <div class="tu-btnarea">
-                                                <a href="#booktrial"> <button data-toggle="modal"
-                                                        data-target="#openDemoModal" class="btn btn-sm btn-primary"
-                                                        onclick="openDemoModal('{{ $tutorlist->tutor_id }}','{{ $tutorlist->name }}','{{ $tutorlist->subjectid }}','{{ $tutorlist->subject }}')">Trial
-                                                        Class</button></a>
+                                                @if (session('usertype') == 'Parent')
+                                                @else
+                                                    <a href="#booktrial"> <button data-toggle="modal"
+                                                            data-target="#openDemoModal" class="btn btn-sm btn-primary"
+                                                            onclick="openDemoModal('{{ $tutorlist->tutor_id }}','{{ $tutorlist->name }}','{{ $tutorlist->subjectid }}','{{ $tutorlist->subject }}')">Trial
+                                                            Class</button></a>
 
-                                                {{-- <a href="tutormessages/{{ $tutorlist->tutor_id }}"> <button class="btn btn-sm btn-success" id="enrollnow">Chat</button></a> --}}
-                                                {{-- <a href="tutormessages/{{ $tutorlist->tutor_id }}"> <button
+                                                    {{-- <a href="tutormessages/{{ $tutorlist->tutor_id }}"> <button class="btn btn-sm btn-success" id="enrollnow">Chat</button></a> --}}
+                                                    {{-- <a href="tutormessages/{{ $tutorlist->tutor_id }}"> <button
                                                         class="btn btn-sm btn-primary" id="enrollnow">Chat</button></a> --}}
-                                                <a href="enrollnow/{{ $tutorlist->tutor_id }}"> <button
-                                                        class="btn btn-sm btn-success" id="enrollnow">Enroll
-                                                        Now</button></a>
-
+                                                    <a href="enrollnow/{{ $tutorlist->tutor_id }}"> <button
+                                                            class="btn btn-sm btn-success" id="enrollnow">Enroll
+                                                            Now</button></a>
+                                                @endif
                                                 {{-- <a href="#checkslots" onclick="checkslots('{{$tutorlist->tutor_id}}')" class="btn btn-success">Check Slots</a> --}}
                                                 {{-- <a href="{{url('student/searchtutor')}}" class="btn btn-primary">Book Trial</a> --}}
                                                 <a href="/student/tutorprofile/{{ $tutorlist->tutor_id }}"
@@ -782,7 +785,8 @@
 
                                 <header>
                                     <h3 class="text-center ">Free Trial Class</h3>
-                                    <p style="color: red">*Please provide your preferred time slots for the trial class. Once confirmed by the tutor, be punctual and join at the specified time.</p>
+                                    <p style="color: red">*Please provide your preferred time slots for the trial class.
+                                        Once confirmed by the tutor, be punctual and join at the specified time.</p>
                                 </header>
 
                                 <form action="{{ route('student.bookdemo') }}" method="POST">
@@ -808,7 +812,8 @@
                                             {{-- <input type="text" id="demosubjectid" name="demosubjectid"> --}}
                                             {{-- <input type="text" class="form-control" id="demosubjectname"
                                                 name="demosubjectname" disabled> --}}
-                                            <select class="form-control" id="demosubjectid" name="demosubjectid" required></select>
+                                            <select class="form-control" id="demosubjectid" name="demosubjectid"
+                                                required></select>
                                         </div>
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <label for="">Prefer Slot 1<i style="color: red;">*</i></label>

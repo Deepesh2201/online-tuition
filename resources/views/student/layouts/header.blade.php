@@ -1,6 +1,6 @@
 @php
-use App\Models\studentprofile;
-$studentprofile =studentprofile::where('student_id',session('userid')->id)->first();
+    use App\Models\studentprofile;
+    $studentprofile = studentprofile::where('student_id', session('userid')->id)->first();
 
 @endphp
 <!doctype html>
@@ -15,23 +15,23 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
     <meta content="Premium Multipurpose student & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- Favicon -->
-    <link rel="icon" href="{{url('frontendnew/img/icons/mct-favicon.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{ url('frontendnew/img/icons/mct-favicon.png') }}" type="image/x-icon">
 
     <!-- plugin css -->
-    <link href="{{url('new-styles/assets/libs/jsvectormap/css/jsvectormap.min.css')}}" rel="stylesheet"
+    <link href="{{ url('new-styles/assets/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet"
         type="text/css" />
 
     <!-- Layout config Js -->
-    <script src="{{url('new-styles/assets/js/layout.js')}}"></script>
+    <script src="{{ url('new-styles/assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
-    <link href="{{url('new-styles/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('new-styles/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="{{url('new-styles/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('new-styles/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="{{url('new-styles/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('new-styles/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="{{url('new-styles/assets/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('css/custom.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('new-styles/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('css/custom.css') }}" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icon@0.1.0/css/feather.min.css">
@@ -61,24 +61,24 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                             <a href="/student/dashboard" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <!-- <h3>LOGO</h3> -->
-                                    <img src="{{url('/images/MCT Logo.png')}}" alt="" height="22">
+                                    <img src="{{ url('/images/MCT Logo.png') }}" alt="" height="22">
 
                                 </span>
                                 <span class="logo-lg">
                                     <!-- <h3>LOGO</h3> -->
-                                    <img src="{{url('/images/MCT Logo.png')}}" alt="" height="17">
+                                    <img src="{{ url('/images/MCT Logo.png') }}" alt="" height="17">
                                 </span>
                             </a>
 
                             <a href="/student/dashboard" class="logo logo-light">
                                 <span class="logo-sm">
                                     <!-- <h3>LOGO</h3> -->
-                                    <img src="{{url('images/MCT Logo.png')}}" alt="" height="22">
+                                    <img src="{{ url('images/MCT Logo.png') }}" alt="" height="22">
 
                                 </span>
                                 <span class="logo-lg">
                                     <!-- <h3>LOGO</h3> -->
-                                    <img src="{{url('images/MCT Logo.png')}}" alt="" height="17">
+                                    <img src="{{ url('images/MCT Logo.png') }}" alt="" height="17">
                                 </span>
                             </a>
                         </div>
@@ -99,7 +99,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                     </div>
 
                     <div class="studentTopBtn d-flex">
-                        <a href="/student/classes" style="padding-right: 20px"> <button class="btn btn-primary">Scheduled
+                        <a href="/student/classes" style="padding-right: 20px"> <button
+                                class="btn btn-primary">Scheduled
                                 Classes</button></a>
                         <a href="/student/searchtutor" style="padding-right: 20px"> <button
                                 class="btn btn-primary">Explore Tutors</button></a>
@@ -181,8 +182,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="all-notification-check01">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="" id="all-notification-check01">
                                                             <label class="form-check-label"
                                                                 for="all-notification-check01"></label>
                                                         </div>
@@ -206,14 +207,15 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                         <div data-simplebar style="max-height: 300px;" class="pe-2">
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{url('new-styles/assets/images/users/avatar-3.jpg')}}"
+                                                    <img src="{{ url('new-styles/assets/images/users/avatar-3.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
                                                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">James Lemire</h6>
                                                         </a>
                                                         <div class="fs-13 text-muted">
-                                                            <p class="mb-1">We talked about a project on linkedin.</p>
+                                                            <p class="mb-1">We talked about a project on linkedin.
+                                                            </p>
                                                         </div>
                                                         <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                             <span><i class="mdi mdi-clock-outline"></i> 30 min
@@ -222,8 +224,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="messages-notification-check01">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="" id="messages-notification-check01">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check01"></label>
                                                         </div>
@@ -233,7 +235,7 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{url('new-styles/assets/images/users/avatar-2.jpg')}}"
+                                                    <img src="{{ url('new-styles/assets/images/users/avatar-2.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
@@ -245,13 +247,14 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                                                 graph 🔔.</p>
                                                         </div>
                                                         <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                            <span><i class="mdi mdi-clock-outline"></i> 2 hrs ago</span>
+                                                            <span><i class="mdi mdi-clock-outline"></i> 2 hrs
+                                                                ago</span>
                                                         </p>
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="messages-notification-check02">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="" id="messages-notification-check02">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check02"></label>
                                                         </div>
@@ -261,14 +264,15 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{url('new-styles/assets/images/users/avatar-6.jpg')}}"
+                                                    <img src="{{ url('new-styles/assets/images/users/avatar-6.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
                                                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">Kenneth Brown</h6>
                                                         </a>
                                                         <div class="fs-13 text-muted">
-                                                            <p class="mb-1">Mentionned you in his comment on 📃 invoice
+                                                            <p class="mb-1">Mentionned you in his comment on 📃
+                                                                invoice
                                                                 #12501.
                                                             </p>
                                                         </div>
@@ -279,8 +283,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="messages-notification-check03">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="" id="messages-notification-check03">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check03"></label>
                                                         </div>
@@ -290,14 +294,15 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{url('new-styles/assets/images/users/avatar-8.jpg')}}"
+                                                    <img src="{{ url('new-styles/assets/images/users/avatar-8.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
                                                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6>
                                                         </a>
                                                         <div class="fs-13 text-muted">
-                                                            <p class="mb-1">We talked about a project on linkedin.</p>
+                                                            <p class="mb-1">We talked about a project on linkedin.
+                                                            </p>
                                                         </div>
                                                         <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                             <span><i class="mdi mdi-clock-outline"></i> 3 days
@@ -306,8 +311,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="messages-notification-check04">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="" id="messages-notification-check04">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check04"></label>
                                                         </div>
@@ -362,8 +367,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                     </div>
 
                                     <div class="px-2 pt-2">
-                                        <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom" data-dropdown-tabs="true"
-                                            id="notificationItemsTab" role="tablist">
+                                        <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom"
+                                            data-dropdown-tabs="true" id="notificationItemsTab" role="tablist">
                                             <li class="nav-item waves-effect waves-light">
                                                 <a class="nav-link active" data-bs-toggle="tab" href="#all-noti-tab"
                                                     role="tab" aria-selected="true">All</a>
@@ -381,7 +386,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                 </div>
 
                                 <div class="tab-content position-relative" id="notificationItemsTabContent1">
-                                    <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
+                                    <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab"
+                                        role="tabpanel">
                                         <div data-simplebar style="max-height: 300px;" class="pe-2">
 
 
@@ -394,14 +400,15 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                         <div data-simplebar style="max-height: 300px;" class="pe-2">
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{url('new-styles/assets/images/users/avatar-3.jpg')}}"
+                                                    <img src="{{ url('new-styles/assets/images/users/avatar-3.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
                                                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">James Lemire</h6>
                                                         </a>
                                                         <div class="fs-13 text-muted">
-                                                            <p class="mb-1">We talked about a project on linkedin.</p>
+                                                            <p class="mb-1">We talked about a project on linkedin.
+                                                            </p>
                                                         </div>
                                                         <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                             <span><i class="mdi mdi-clock-outline"></i> 30 min
@@ -410,8 +417,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="messages-notification-check01">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="" id="messages-notification-check01">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check01"></label>
                                                         </div>
@@ -421,7 +428,7 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{url('new-styles/assets/images/users/avatar-2.jpg')}}"
+                                                    <img src="{{ url('new-styles/assets/images/users/avatar-2.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
@@ -433,13 +440,14 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                                                 graph 🔔.</p>
                                                         </div>
                                                         <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                            <span><i class="mdi mdi-clock-outline"></i> 2 hrs ago</span>
+                                                            <span><i class="mdi mdi-clock-outline"></i> 2 hrs
+                                                                ago</span>
                                                         </p>
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="messages-notification-check02">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="" id="messages-notification-check02">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check02"></label>
                                                         </div>
@@ -449,14 +457,15 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{url('new-styles/assets/images/users/avatar-6.jpg')}}"
+                                                    <img src="{{ url('new-styles/assets/images/users/avatar-6.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
                                                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">Kenneth Brown</h6>
                                                         </a>
                                                         <div class="fs-13 text-muted">
-                                                            <p class="mb-1">Mentionned you in his comment on 📃 invoice
+                                                            <p class="mb-1">Mentionned you in his comment on 📃
+                                                                invoice
                                                                 #12501.
                                                             </p>
                                                         </div>
@@ -467,8 +476,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="messages-notification-check03">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="" id="messages-notification-check03">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check03"></label>
                                                         </div>
@@ -478,14 +487,15 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{url('new-styles/assets/images/users/avatar-8.jpg')}}"
+                                                    <img src="{{ url('new-styles/assets/images/users/avatar-8.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
                                                             <h6 class="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6>
                                                         </a>
                                                         <div class="fs-13 text-muted">
-                                                            <p class="mb-1">We talked about a project on linkedin.</p>
+                                                            <p class="mb-1">We talked about a project on linkedin.
+                                                            </p>
                                                         </div>
                                                         <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                             <span><i class="mdi mdi-clock-outline"></i> 3 days
@@ -494,8 +504,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="messages-notification-check04">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="" id="messages-notification-check04">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check04"></label>
                                                         </div>
@@ -527,15 +537,18 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                         </div>
 
                         <div class="dropdown ms-sm-3 header-item topbar-user">
-                            <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn" id="page-header-user-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                        src="{{url('images/students/profilepics/')}}/{{$studentprofile->profile_pic ?? ''}}"
+                                        src="{{ url('images/students/profilepics/') }}/{{ $studentprofile->profile_pic ?? '' }}"
                                         alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span
-                                            class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{session('userid')->name}}</span>
+                                            class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ session('userid')->name }}</span>
+                                        @if (session('usertype') == 'Parent')
+                                            <p style="color: grey; font-size:10px">Logged In As Parent</p>
+                                        @endif
                                         {{-- <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Founder</span> --}}
                                     </span>
                                 </span>
@@ -543,11 +556,12 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                             <div class="dropdown-menu dropdown-menu-end">
 
                                 <!-- item-->
-                                <h6 class="dropdown-header">Welcome {{session('userid')->name}}</h6>
-                                <a class="dropdown-item" href="{{url('student/profile')}}"><i
+                                <h6 class="dropdown-header">Welcome {{ session('userid')->name }}</h6>
+
+                                <a class="dropdown-item" href="{{ url('student/profile') }}"><i
                                         class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle">Profile</span></a>
-                                <a class="dropdown-item" href="{{route('student.messages')}}"><i
+                                <a class="dropdown-item" href="{{ route('student.messages') }}"><i
                                         class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i>
                                     <span class="align-middle">Messages</span></a>
                                 {{-- <a class="dropdown-item" href="apps-tasks-kanban.html"><i class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Taskboard</span></a> --}}
@@ -556,7 +570,7 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                                 {{-- <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$5971.67</b></span></a> --}}
                                 {{-- <a class="dropdown-item" href="pages-profile-settings.html"><span class="badge bg-success-subtle text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a> --}}
 
-                                <a class="dropdown-item" href="{{route('logout')}}"><i
+                                <a class="dropdown-item" href="{{ route('logout') }}"><i
                                         class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle" data-key="t-logout">Logout</span></a>
                             </div>
@@ -577,7 +591,8 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                     <div class="modal-body">
                         <div class="mt-2 text-center">
                             <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
-                                colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                                colors="primary:#f7b84b,secondary:#f06548"
+                                style="width:100px;height:100px"></lord-icon>
                             <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
                                 <h4>Are you sure ?</h4>
                                 <p class="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
@@ -635,16 +650,16 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                             <a class="nav-link menu-link {{ Request::is('student/dashboard') ? 'active' : '' }}"
                                 href="/student/dashboard" role="button" aria-expanded="false"
                                 aria-controls="sidebarDashboards">
-                                <img src="/images/Student-dashboard-menu-icon/Dashboard.svg" alt="">&nbsp; <span
-                                    data-key="t-dashboards"> Dashboard</span>
+                                <img src="/images/Student-dashboard-menu-icon/Dashboard.svg" alt="">&nbsp;
+                                <span data-key="t-dashboards"> Dashboard</span>
                             </a>
                         </li> <!-- end Dashboard Menu -->
 
                         <li class="nav-item">
-                            <a href="{{route('student.yourtutor')}}"
-                                class="nav-link menu-link {{ Request::is('student/yourtutor') ? 'active' : '' }}"> <img
-                                    src="/images/Student-dashboard-menu-icon/My Tutors.svg" alt="">&nbsp; <span
-                                    data-key="t-starter">My Tutor </span> </a>
+                            <a href="{{ route('student.yourtutor') }}"
+                                class="nav-link menu-link {{ Request::is('student/yourtutor') ? 'active' : '' }}">
+                                <img src="/images/Student-dashboard-menu-icon/My Tutors.svg" alt="">&nbsp;
+                                <span data-key="t-starter">My Tutor </span> </a>
                         </li>
 
                         {{-- <li class="nav-item" hidden>
@@ -666,30 +681,38 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                 </div>
                 </li> --}}
 
-                <li class="nav-item ">
-                   
-                    <a href="{{ route('student.demolist') }}"
-                        class="nav-link {{ Request::is('student/demolist') ? 'active' : '' }}" data-key="">
-                        <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt="">&nbsp;  Trial
-                        Classes</a>
-                </li>
-                <li class="nav-item ">
-                   
-                    <a href="{{ route('student.classes') }}"
-                        class="nav-link {{ Request::is('student/classes') ? 'active' : '' }}" data-key=""> <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt=""> &nbsp; Scheduled
-                        Classes</a>
-                </li>
-                <li class="nav-item ">
-                    
-                    <a href="{{ route('student.completed-classes') }}"
-                        class="nav-link {{ Request::is('student/completed-classes') ? 'active' : '' }}"
-                        data-key="t-horizontal"><img src="/images/Student-dashboard-menu-icon/My recordings.svg" alt="">&nbsp;&nbsp; Class Recordings</a>
-                </li>
+                        <li class="nav-item ">
 
-                <!-- <li class="nav-item">
+                            <a href="{{ route('student.demolist') }}"
+                                class="nav-link {{ Request::is('student/demolist') ? 'active' : '' }}"
+                                data-key="">
+                                <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg"
+                                    alt="">&nbsp; Trial
+                                Classes</a>
+                        </li>
+                        <li class="nav-item ">
+
+                            <a href="{{ route('student.classes') }}"
+                                class="nav-link {{ Request::is('student/classes') ? 'active' : '' }}" data-key="">
+                                <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg"
+                                    alt=""> &nbsp; Scheduled
+                                Classes</a>
+                        </li>
+                        <li class="nav-item ">
+
+                            <a href="{{ route('student.completed-classes') }}"
+                                class="nav-link {{ Request::is('student/completed-classes') ? 'active' : '' }}"
+                                data-key="t-horizontal"><img
+                                    src="/images/Student-dashboard-menu-icon/My recordings.svg"
+                                    alt="">&nbsp;&nbsp; Class Recordings</a>
+                        </li>
+
+                        <!-- <li class="nav-item">
                     @php
-                    $isClassesActive = Request::is('student/demolist') || Request::is('student/classes') ||
-                    Request::is('student/completed-classes');
+                        $isClassesActive =
+                            Request::is('student/demolist') ||
+                            Request::is('student/classes') ||
+                            Request::is('student/completed-classes');
                     @endphp
                     <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button"
                         aria-expanded="{{ $isClassesActive ? 'true' : 'false' }}" aria-controls="sidebarLayouts">
@@ -721,21 +744,21 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                 </li> -->
 
 
-                <li class="nav-item">
-                    <a href="{{route('student.searchtutor')}}"
-                        class="nav-link menu-link {{ Request::is('student/searchtutor') ? 'active' : '' }}"> <img
-                            src="/images/Student-dashboard-menu-icon/Explore tutors.svg" alt="">&nbsp; <span
-                            data-key="t-dashboards"> Explore Tutors</span> </a>
-                </li>
+                        <li class="nav-item">
+                            <a href="{{ route('student.searchtutor') }}"
+                                class="nav-link menu-link {{ Request::is('student/searchtutor') ? 'active' : '' }}">
+                                <img src="/images/Student-dashboard-menu-icon/Explore tutors.svg"
+                                    alt="">&nbsp; <span data-key="t-dashboards"> Explore Tutors</span> </a>
+                        </li>
 
-                {{-- <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{route('student.subjects')}}" class="nav-link menu-link"> <img
                     src="/images/Student-dashboard-menu-icon/My Subjects.svg" alt="">&nbsp; <span
                     data-key="t-dashboards"> My Subjects</span> </a>
                 </li> --}}
 
 
-                {{--
+                        {{--
                         <li class="nav-item">
                             <a href="{{route('student.subjectlist')}}" class="nav-link menu-link"> <img
                     src="/images/Student-dashboard-menu-icon/Explore Subjects.svg" alt="">&nbsp; <span
@@ -745,176 +768,187 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
 
 
 
-                <!-- <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Purchase</span></li> -->
+                        <!-- <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Purchase</span></li> -->
 
-                <li class="nav-item" hidden>
-                    <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarPages">
-                        <i class="ri-pages-line"></i> <span data-key="t-pages">My Purchases</span>
+                        <li class="nav-item" hidden>
+                            <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse"
+                                role="button" aria-expanded="false" aria-controls="sidebarPages">
+                                <i class="ri-pages-line"></i> <span data-key="t-pages">My Purchases</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="sidebarPages">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                    <li class="nav-item">
+                                        <a href="{{ route('student.searchtutor') }}" class="nav-link"
+                                            data-key="t-starter">Purchase New Tutor </a>
+                                    </li>
+                                    <a href="{{ route('student.yourtutor') }}" class="nav-link"
+                                        data-key="t-starter">
+                                        Tutor </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('student.subjects') }}" class="nav-link" data-key="t-starter">
+                                Subjects </a>
+                        </li>
+
+                    </ul>
+                </div>
+                </li>
+
+                <li class="nav-item">
+                    @php
+                        $isStudyMaterialsActive =
+                            Request::is('student/mylearnings') || Request::is('student/assignments');
+                    @endphp
+                    <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ $isStudyMaterialsActive ? 'true' : 'false' }}"
+                        aria-controls="sidebarLanding">
+                        <img src="/images/Student-dashboard-menu-icon/Study Materials.svg" alt="">&nbsp;<span
+                            data-key="t-landing">Study Materials</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarPages">
+                    <div class="collapse menu-dropdown {{ $isStudyMaterialsActive ? 'show' : '' }}"
+                        id="sidebarLanding">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                            <li class="nav-item">
-                                <a href="{{route('student.searchtutor')}}" class="nav-link"
-                                    data-key="t-starter">Purchase New Tutor </a>
+                                <a href="{{ route('student.mylearnings') }}"
+                                    class="nav-link menu-link {{ Request::is('student/mylearnings') ? 'active' : '' }}"
+                                    data-key="t-one-page">Learning Contents</a>
                             </li>
-                            <a href="{{route('student.yourtutor')}}" class="nav-link" data-key="t-starter">
-                                Tutor </a>
+                            <li class="nav-item">
+                                <a href="{{ route('student.assignments.list') }}"
+                                    class="nav-link menu-link {{ Request::is('student/assignments') ? 'active' : '' }}"
+                                    data-key="t-one-page">Assignments</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+
+
+                <li class="nav-item">
+                    @php
+                        $isOnlineTestsActive = Request::is('student/exams');
+                    @endphp
+                    <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ $isOnlineTestsActive ? 'true' : 'false' }}"
+                        aria-controls="sidebarAdvanceUI">
+                        <img src="/images/Student-dashboard-menu-icon/Online Tests.svg" alt="">&nbsp; <span
+                            data-key="t-advance-ui">Online Tests</span>
+                    </a>
+                    <div class="collapse menu-dropdown {{ $isOnlineTestsActive ? 'show' : '' }}"
+                        id="sidebarAdvanceUI">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('student.exams') }}"
+                                    class="nav-link {{ Request::is('student/exams') ? 'active' : '' }}"
+                                    data-key="t-alerts">Quizes</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+
+                <li class="nav-item">
+                    @php
+                        $isPaymentsActive = Request::is('student/studentpayments');
+                    @endphp
+                    <a class="nav-link menu-link" href="#sidebarForms" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ $isPaymentsActive ? 'true' : 'false' }}" aria-controls="sidebarForms">
+                        <img src="/images/Student-dashboard-menu-icon/Payments.svg" alt="">&nbsp; <span
+                            data-key="t-forms">Payments</span>
+                    </a>
+                    <div class="collapse menu-dropdown {{ $isPaymentsActive ? 'show' : '' }}" id="sidebarForms">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('student.studentpayments') }}"
+                                    class="nav-link {{ Request::is('student/studentpayments') ? 'active' : '' }}"
+                                    data-key="t-form-select">
+                                    Payment History
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    @php
+                        $isReportsActive =
+                            Request::is('student/class-reports') || Request::is('student/attendance-reports');
+                    @endphp
+                    <a class="nav-link menu-link" href="#sidebarCharts" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ $isReportsActive ? 'true' : 'false' }}" aria-controls="sidebarCharts">
+                        <img src="/images/Student-dashboard-menu-icon/Reports.svg" alt="">&nbsp; <span
+                            data-key="t-charts">Reports</span>
+                    </a>
+                    <div class="collapse menu-dropdown {{ $isReportsActive ? 'show' : '' }}" id="sidebarCharts">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('student.class.report') }}"
+                                    class="nav-link {{ Request::is('student/class-reports') ? 'active' : '' }}"
+                                    data-key="t-chartjs">
+                                    Classes
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('student.attendance.report') }}"
+                                    class="nav-link {{ Request::is('student/attendance-reports') ? 'active' : '' }}"
+                                    data-key="t-chartjs">
+                                    Attendance
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="{{ route('student.messages') }}"
+                        class="nav-link menu-link {{ Request::is('student/messages') ? 'active' : '' }}"> <img
+                            src="/images/Student-dashboard-menu-icon/Chat.svg" alt="">&nbsp; <span
+                            data-key="t-dashboards">
+                            Chat</span> </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('student.subjects')}}" class="nav-link" data-key="t-starter"> Subjects </a>
+                    <a href="{{ route('student.myfeedback') }}"
+                        class="nav-link menu-link {{ Request::is('student/myfeedback') ? 'active' : '' }}"
+                        data-key="t-starter"> <img src="/images/Student-dashboard-menu-icon/feedback.svg"
+                            alt="">&nbsp;
+                        <span data-key="t-dashboards"> Feedback</span> </a>
                 </li>
+
+
+                <li class="nav-item" hidden>
+                    <a class="nav-link menu-link" href="#sidebarFormsChat" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarForms">
+                        <i class="ri-file-list-3-line"></i> <span data-key="t-forms">Chat & Feedbacks</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarFormsChat">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('student.messages') }}" class="nav-link" data-key="t-form-select">
+                                    Chat/Messages </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('student.myfeedback') }}" class="nav-link"
+                                    data-key="t-form-select">
+                                    Feedbacks </a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </li>
+
 
                 </ul>
             </div>
-            </li>
-
-            <li class="nav-item">
-                @php
-                $isStudyMaterialsActive = Request::is('student/mylearnings') || Request::is('student/assignments');
-                @endphp
-                <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
-                    aria-expanded="{{ $isStudyMaterialsActive ? 'true' : 'false' }}" aria-controls="sidebarLanding">
-                    <img src="/images/Student-dashboard-menu-icon/Study Materials.svg" alt="">&nbsp;<span
-                        data-key="t-landing">Study Materials</span>
-                </a>
-                <div class="collapse menu-dropdown {{ $isStudyMaterialsActive ? 'show' : '' }}" id="sidebarLanding">
-                    <ul class="nav nav-sm flex-column">
-                        <li class="nav-item">
-                            <a href="{{ route('student.mylearnings') }}"
-                                class="nav-link menu-link {{ Request::is('student/mylearnings') ? 'active' : '' }}"
-                                data-key="t-one-page">Learning Contents</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('student.assignments.list') }}"
-                                class="nav-link menu-link {{ Request::is('student/assignments') ? 'active' : '' }}"
-                                data-key="t-one-page">Assignments</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-
-
-
-            <li class="nav-item">
-                @php
-                $isOnlineTestsActive = Request::is('student/exams');
-                @endphp
-                <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button"
-                    aria-expanded="{{ $isOnlineTestsActive ? 'true' : 'false' }}" aria-controls="sidebarAdvanceUI">
-                    <img src="/images/Student-dashboard-menu-icon/Online Tests.svg" alt="">&nbsp; <span
-                        data-key="t-advance-ui">Online Tests</span>
-                </a>
-                <div class="collapse menu-dropdown {{ $isOnlineTestsActive ? 'show' : '' }}" id="sidebarAdvanceUI">
-                    <ul class="nav nav-sm flex-column">
-                        <li class="nav-item">
-                            <a href="{{ route('student.exams') }}"
-                                class="nav-link {{ Request::is('student/exams') ? 'active' : '' }}"
-                                data-key="t-alerts">Quizes</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-
-
-            <li class="nav-item">
-                @php
-                $isPaymentsActive = Request::is('student/studentpayments');
-                @endphp
-                <a class="nav-link menu-link" href="#sidebarForms" data-bs-toggle="collapse" role="button"
-                    aria-expanded="{{ $isPaymentsActive ? 'true' : 'false' }}" aria-controls="sidebarForms">
-                    <img src="/images/Student-dashboard-menu-icon/Payments.svg" alt="">&nbsp; <span
-                        data-key="t-forms">Payments</span>
-                </a>
-                <div class="collapse menu-dropdown {{ $isPaymentsActive ? 'show' : '' }}" id="sidebarForms">
-                    <ul class="nav nav-sm flex-column">
-                        <li class="nav-item">
-                            <a href="{{ route('student.studentpayments') }}"
-                                class="nav-link {{ Request::is('student/studentpayments') ? 'active' : '' }}"
-                                data-key="t-form-select">
-                                Payment History
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-
-            <li class="nav-item">
-                @php
-                $isReportsActive = Request::is('student/class-reports') || Request::is('student/attendance-reports');
-                @endphp
-                <a class="nav-link menu-link" href="#sidebarCharts" data-bs-toggle="collapse" role="button"
-                    aria-expanded="{{ $isReportsActive ? 'true' : 'false' }}" aria-controls="sidebarCharts">
-                    <img src="/images/Student-dashboard-menu-icon/Reports.svg" alt="">&nbsp; <span
-                        data-key="t-charts">Reports</span>
-                </a>
-                <div class="collapse menu-dropdown {{ $isReportsActive ? 'show' : '' }}" id="sidebarCharts">
-                    <ul class="nav nav-sm flex-column">
-                        <li class="nav-item">
-                            <a href="{{ route('student.class.report') }}"
-                                class="nav-link {{ Request::is('student/class-reports') ? 'active' : '' }}"
-                                data-key="t-chartjs">
-                                Classes
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('student.attendance.report') }}"
-                                class="nav-link {{ Request::is('student/attendance-reports') ? 'active' : '' }}"
-                                data-key="t-chartjs">
-                                Attendance
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-
-            <li class="nav-item">
-                <a href="{{route('student.messages')}}"
-                    class="nav-link menu-link {{ Request::is('student/messages') ? 'active' : '' }}"> <img
-                        src="/images/Student-dashboard-menu-icon/Chat.svg" alt="">&nbsp; <span data-key="t-dashboards">
-                        Chat</span> </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('student.myfeedback')}}"
-                    class="nav-link menu-link {{ Request::is('student/myfeedback') ? 'active' : '' }}"
-                    data-key="t-starter"> <img src="/images/Student-dashboard-menu-icon/feedback.svg" alt="">&nbsp;
-                    <span data-key="t-dashboards"> Feedback</span> </a>
-            </li>
-
-
-            <li class="nav-item" hidden>
-                <a class="nav-link menu-link" href="#sidebarFormsChat" data-bs-toggle="collapse" role="button"
-                    aria-expanded="false" aria-controls="sidebarForms">
-                    <i class="ri-file-list-3-line"></i> <span data-key="t-forms">Chat & Feedbacks</span>
-                </a>
-                <div class="collapse menu-dropdown" id="sidebarFormsChat">
-                    <ul class="nav nav-sm flex-column">
-                        <li class="nav-item">
-                            <a href="{{route('student.messages')}}" class="nav-link" data-key="t-form-select">
-                                Chat/Messages </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('student.myfeedback')}}" class="nav-link" data-key="t-form-select">
-                                Feedbacks </a>
-                        </li>
-
-
-                    </ul>
-                </div>
-            </li>
-
-
-            </ul>
+            <!-- Sidebar -->
         </div>
-        <!-- Sidebar -->
-    </div>
 
-    <div class="sidebar-background"></div>
+        <div class="sidebar-background"></div>
     </div>
     <!-- Left Sidebar End -->
     <!-- Vertical Overlay-->
