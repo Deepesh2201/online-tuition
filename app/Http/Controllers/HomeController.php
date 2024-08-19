@@ -1632,37 +1632,37 @@ class HomeController extends Controller
             // }
         }
         // Notification Event On Slot Booking
-        if($notificationData->alert_type == 7){
+        if ($notificationData->alert_type == 7) {
 
-           // Slot Booked By Student
-            if($notificationData->initiator_role == 3){
+            // Slot Booked By Student
+            if ($notificationData->initiator_role == 3) {
 
-                if(session('userid')->role_id == 1){
+                if (session('userid')->role_id == 1) {
                     return redirect()->to('admin/payments');
                 }
-                if(session('userid')->role_id == 2){
+                if (session('userid')->role_id == 2) {
                     return redirect()->to('tutor/tutorslots');
                 }
-                if(session('userid')->role_id == 3){
-                    return redirect()->to('student/enrollupdate/'.$notificationData->initiator_id);
+                if (session('userid')->role_id == 3) {
+                    return redirect()->to('student/enrollupdate/' . $notificationData->initiator_id);
                 }
 
             }
             // Slot Booked By Student
-            if($notificationData->initiator_role == 2){
+            if ($notificationData->initiator_role == 2) {
 
-                if(session('userid')->role_id == 1){
+                if (session('userid')->role_id == 1) {
                     return redirect()->to('admin/payments');
                 }
-                if(session('userid')->role_id == 2){
+                if (session('userid')->role_id == 2) {
                     return redirect()->to('tutor/tutorslots');
                 }
-                if(session('userid')->role_id == 3){
-                    return redirect()->to('student/enrollupdate/'.$notificationData->initiator_id);
+                if (session('userid')->role_id == 3) {
+                    return redirect()->to('student/enrollupdate/' . $notificationData->initiator_id);
                 }
 
             }
-            
+
         }
         // Notification Event On Tutor Registration
         if ($notificationData->alert_type == 8) {
