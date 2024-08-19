@@ -53,15 +53,14 @@
 
                             <div class="form-group">
                                 <label for="number">Mobile:<span class="reqrd">*</span></label>
-                                <input type="number" class="form-control" id="mobile" name="mobile" aria-describedby=""
-                                    placeholder="Your mobile number" value="{{old('mobile')}}">
-                                    <span class="text-danger error-message">
-                                        @error('mobile')
-                                            {{ $message }}
-                                        @enderror
-                                    </span>
+                                <input type="text" class="form-control" id="mobile" name="mobile" aria-describedby=""
+                                    placeholder="Your mobile number" value="{{old('mobile')}}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                <span class="text-danger error-message">
+                                    @error('mobile')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
-
 
                             <div class="form-group">
                                 <label for="password">Create password:<span class="reqrd">*</span></label>
