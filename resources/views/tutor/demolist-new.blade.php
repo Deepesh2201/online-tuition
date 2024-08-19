@@ -24,7 +24,7 @@
                 <div class="page-title-box">
                     <h3 class="text-center">Trial Class </h3>
                 </div>
-                <form action="{{route('tutor.demolist-search')}}" method="POST">
+                <form action="{{ route('tutor.demolist-search') }}" method="POST">
                     @csrf
                     <div class="row py-3">
 
@@ -37,11 +37,11 @@
                             </div>
                         </div>
                         <!-- <div class="col-md-3">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="student_mobile" id="smob" placeholder="Student Mobile">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="student_mobile" id="smob" placeholder="Student Mobile">
 
-                                    </div>
-                                </div> -->
+                                        </div>
+                                    </div> -->
 
 
                         <div class="col-md-3">
@@ -97,7 +97,8 @@
 
                         <div class="col-md-6 mt-4">
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit" style="float:right"> <span class="fa fa-search"></span>
+                                <button class="btn btn-primary" type="submit" style="float:right"> <span
+                                        class="fa fa-search"></span>
                                     Search</button>
                             </div>
                         </div>
@@ -115,19 +116,11 @@
                             <tr>
                                 <th scope="col">S.No</th>
                                 <th scope="col">Student Name</th>
-                                {{-- <th scope="col">Student Mobile</th> --}}
-                                {{-- <th scope="col">Tutor Name</th>
-                                            <th scope="col">Tutor Mobile</th> --}}
                                 <th scope="col">class</th>
                                 <th scope="col">Subject</th>
                                 <th scope="col">Current Status</th>
-                                {{-- <th scope="col">Prefered Slot-1</th> --}}
-                                {{-- <th scope="col">Prefered Slot-2</th> --}}
-                                {{-- <th scope="col">Prefered Slot-3</th> --}}
                                 <th scope="col">Confirmed Slot</th>
-                                {{-- <th scope="col">Demo Link</th> --}}
                                 <th scope="col">Remarks</th>
-                                {{-- <th scope="col">Change Status</th> --}}
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -137,9 +130,6 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td><a href="studentprofile/{{ $demo->student_id }}">{{ $demo->student_name }}</a>
                                     </td>
-                                    {{-- <td>{{ $demo->student_mobile }}</td> --}}
-                                    {{-- <td><a href="tutorprofile/{{$demo->tutor_id}}">{{ $demo->tutor }}</a></td>
-                                                <td>{{ $demo->tutor_mobile }}</td> --}}
                                     <td>{{ $demo->class_name }}</td>
                                     <td>{{ $demo->subject }}</td>
                                     <td>
@@ -177,10 +167,12 @@
                                                     class="ri-play-circle-fill"></i> Start Class</button>
                                         @endif
                                         @if ($demo->status == 8)
-                                            <button class="btn btn-sm btn-success" onclick="warningModal('{{ $demo->demo_link }}')"><i
-                                                        class="ri-vidicon-fill"></i> Join Class</button>
-                                                        <button class="btn btn-sm btn-danger" onclick="endWarningModal('{{ $demo->demo_id }}')"><i
-                                                            class="ri-vidicon-fill"></i> End Class</button>
+                                            <button class="btn btn-sm btn-success"
+                                                onclick="warningModal('{{ $demo->demo_link }}')"><i
+                                                    class="ri-vidicon-fill"></i> Join Class</button>
+                                            <button class="btn btn-sm btn-danger"
+                                                onclick="endWarningModal('{{ $demo->demo_id }}')"><i
+                                                    class="ri-vidicon-fill"></i> End Class</button>
                                         @endif
                                     </td>
                                 </tr>
@@ -215,18 +207,17 @@
                         <label>Select Slot to Confirm</label>
                         <div class="row mb-3">
                             <input type="hidden" id="confirmid" name="confirmid">
-                            <div class="col-12 col-md-12 col-ms-12 p-2">
+                            <div class="col-12 col-md-12 col-ms-12 p-2" id="slot1Div">
                                 <label class="mr-4 text-secondary">Slot 1</label>
                                 <input type="radio" id="slot1" value="" name="slot">&nbsp;<span
                                     id="slot_1"></span>
                             </div>
-                            <div class="col-12 col-md-12 col-ms-12 p-2">
+                            <div class="col-12 col-md-12 col-ms-12 p-2" id="slot2Div">
                                 <label class="mr-4 text-secondary">Slot 2</label>
                                 <input type="radio" id="slot2" value="" name="slot">&nbsp;<span
                                     id="slot_2"></span>
                             </div>
-
-                            <div class="col-12 col-md-12 col-ms-12 p-2 mb-3">
+                            <div class="col-12 col-md-12 col-ms-12 p-2 mb-3" id="slot3Div">
                                 <label class="mr-4 text-secondary">Slot 3</label>
                                 <input type="radio" id="slot3" value="" name="slot">&nbsp;<span
                                     id="slot_3"></span>
@@ -364,42 +355,45 @@
                         <h3 class="text-center mb-4 text-danger"><u>Warning!</u></h3>
                     </header>
 
-                    <h4 class="">Please Make Sure To Start The <span style="color: red"><i class="ri-record-circle-fill"></i> Recording</span></h4>
+                    <h4 class="">Please Make Sure To Start The <span style="color: red"><i
+                                class="ri-record-circle-fill"></i> Recording</span></h4>
                     <br>
-                    <p class=""><span class="text-primary"><b>Hint To Start Recording :</b></span> <br>Step 1: Start The Class<br>Step 2: Click On 3 vertical dots(<i class="ri-more-2-fill"></i>)<br>Step 3: Manage Recordings<br>Step 4: Start Recording<br>Step 5: Start(Sometimes A Consent Message Will Display)</p>
+                    <p class=""><span class="text-primary"><b>Hint To Start Recording :</b></span> <br>Step 1: Start
+                        The Class<br>Step 2: Click On 3 vertical dots(<i class="ri-more-2-fill"></i>)<br>Step 3: Manage
+                        Recordings<br>Step 4: Start Recording<br>Step 5: Start(Sometimes A Consent Message Will Display)</p>
                     <div id='warningbtn' style="float:right">
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<!--end class warning modal -->
-<div class="modal fade" id="endWarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
+    <!--end class warning modal -->
+    <div class="modal fade" id="endWarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
 
-        <div class="modal-body">
+                <div class="modal-body">
 
-            <form action="{{route('tutor.demo.end')}}" method="POST">
-                @csrf
-            <header>
-                <h3 class="text-center mb-4 text-danger"><u>Warning!</u></h3>
-            </header>
-            <input type="hidden" id="demoendid" name="demoendid">
-            <h4 class="">You are about to <span style="color: red">End the session</span></h4>
-            <br>
-            <input type="text" class="form-control" name="demoendremarks" id="demoendremarks"
-                                    placeholder="Remarks"><br>
-            <div id='warningbtn' style="float:right">
-                <button class="btn btn-danger" type="submit">End Class</button>
+                    <form action="{{ route('tutor.demo.end') }}" method="POST">
+                        @csrf
+                        <header>
+                            <h3 class="text-center mb-4 text-danger"><u>Warning!</u></h3>
+                        </header>
+                        <input type="hidden" id="demoendid" name="demoendid">
+                        <h4 class="">You are about to <span style="color: red">End the session</span></h4>
+                        <br>
+                        <input type="text" class="form-control" name="demoendremarks" id="demoendremarks"
+                            placeholder="Remarks"><br>
+                        <div id='warningbtn' style="float:right">
+                            <button class="btn btn-danger" type="submit">End Class</button>
+                        </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
     <script>
         function closeModal() {
             $('#editModal').modal('hide');
@@ -429,6 +423,15 @@ aria-hidden="true">
                     $('#slot1').val(result.slot_1)
                     $('#slot2').val(result.slot_2)
                     $('#slot3').val(result.slot_3)
+                    if (!result.slot_1) {
+                        document.getElementById('slot1Div').style.display = 'none';
+                    }
+                    if (!result.slot_2) {
+                        document.getElementById('slot2Div').style.display = 'none';
+                    }
+                    if (!result.slot_3) {
+                        document.getElementById('slot3Div').style.display = 'none';
+                    }
 
                 }
             });
@@ -575,13 +578,14 @@ aria-hidden="true">
 
         }
 
-        function warningModal(link){
-            document.getElementById('warningbtn').innerHTML = `<a href="${link}"><button class="btn btn-sm btn-success">Ok</button></a>`;
+        function warningModal(link) {
+            document.getElementById('warningbtn').innerHTML =
+                `<a href="${link}" target="_blank"><button class="btn btn-sm btn-success">Ok</button></a>`;
             $('#warningModal').modal('show');
-            
+
         }
 
-        function endWarningModal(id){
+        function endWarningModal(id) {
             document.getElementById('demoendid').value = id;
             $('#endWarningModal').modal('show');
         }

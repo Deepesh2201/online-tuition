@@ -142,7 +142,7 @@
                                             <th>Student</th>
                                             <th>Time</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                     </thead>
 
@@ -159,14 +159,14 @@
                                                     {{-- <span class="confirm">Not Started</span> --}}
                                                 {{-- @endif --}}
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 @if ($class->status == 'Started')
                                                <a href="{{$class->join_url}}" target="_blank"> <span class="endClass"> Join Class</span></a>
                                                 @else
                                                  <a href="getclasslist">   <span class="endClass"> Start Class</span> </a>
 
                                                 @endif
-                                            </td>
+                                            </td> --}}
                                             {{-- <td><span class="endClass"> End Class</span></td> --}}
                                         </tr>
                                         @endforeach
@@ -197,7 +197,7 @@
                                             <th>Subject</th>
                                             <th>slot</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                     </thead>
 
@@ -228,7 +228,7 @@
                                             <span class="live">Started</span>
                                             @endif
                                             </td>
-                                            <td><a href="{{$demo->demo_link}}" target="_blank"><span class="endClass"> Launch Trial Class</span></a></td>
+                                            {{-- <td><a href="{{$demo->demo_link}}" target="_blank"><span class="endClass"> Launch Trial Class</span></a></td> --}}
                                         </tr>
                                         @endforeach
 
@@ -392,7 +392,7 @@
                                             <th>Total Marks</th>
                                             <th>Test</th>
                                             <th>Obtained</th>
-                                            <th>Action</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                     </thead>
 

@@ -110,7 +110,7 @@
                                 aria-expanded="false">
                                 <i class="bx bx-search fs-22"></i>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" 
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
                                 aria-labelledby="page-header-search-dropdown">
                                 <form class="p-3">
                                     <div class="form-group m-0">
@@ -911,8 +911,9 @@
                         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link {{ Request::is('tutor/dashboard') ? 'active' : '' }}" href="/tutor/dashboard" role="button"
-                                aria-expanded="false" aria-controls="sidebarDashboards">
+                            <a class="nav-link menu-link {{ Request::is('tutor/dashboard') ? 'active' : '' }}"
+                                href="/tutor/dashboard" role="button" aria-expanded="false"
+                                aria-controls="sidebarDashboards">
                                 <img src="/images/Tutor-Dashboard-menu-icons/dashboard.svg" alt="">&nbsp;
                                 <span data-key="t-dashboards"> Dashboard</span>
                             </a>
@@ -940,116 +941,152 @@
 
 
                         <!-- My Classes Dropdown -->
-    <li class="nav-item">
-        <a class="nav-link menu-link {{ Request::is('tutor/tutorslots') || Request::is('tutor/demolist') || Request::is('tutor/getclasslist') || Request::is('tutor/classes') || Request::is('tutor/students') ? 'active' : '' }}" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="{{ Request::is('tutor/tutorslots') || Request::is('tutor/demolist') || Request::is('tutor/liveclass/classlist') || Request::is('tutor/classes') || Request::is('tutor/students') ? 'true' : 'false' }}" aria-controls="sidebarLayouts">
-            <img src="/images/Tutor-Dashboard-menu-icons/My Classes.svg" alt="">&nbsp;<span data-key="t-layouts"> My Classes</span>
-        </a>
-        <div class="collapse menu-dropdown {{ Request::is('tutor/tutorslots') || Request::is('tutor/demolist') || Request::is('tutor/getclasslist') || Request::is('tutor/classes') || Request::is('tutor/students') ? 'show' : '' }}" id="sidebarLayouts">
-            <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                    <a href="{{ route('tutor.tutorslots') }}" class="nav-link {{ Request::is('tutor/tutorslots') ? 'active' : '' }}" data-key="t-horizontal">
-                        <img src="/images/Tutor-Dashboard-menu-icons/Trial Classes.svg" alt="">&nbsp; <span data-key="t-dashboards"> Slots Management</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('tutor.demolist') }}" class="nav-link {{ Request::is('tutor/demolist') ? 'active' : '' }}" data-key="t-horizontal">
-                        <img src="/images/Tutor-Dashboard-menu-icons/Trial Classes.svg" alt="">&nbsp; <span data-key="t-dashboards"> Trial Classes</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('tutor.liveclass.classlist') }}" class="nav-link {{ Request::is('tutor/getclasslist') ? 'active' : '' }}" data-key="t-horizontal">
-                        <img src="/images/Tutor-Dashboard-menu-icons/My Scheduled Classes.svg" alt="">&nbsp; <span data-key="t-dashboards"> My Scheduled Classes</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('tutor.classes') }}" class="nav-link {{ Request::is('tutor/classes') ? 'active' : '' }}" data-key="t-horizontal">
-                        <img src="/images/Tutor-Dashboard-menu-icons/My Complete Classes.svg" alt="">&nbsp; <span data-key="t-dashboards"> My Complete Classes</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('tutor.studentslist') }}" class="nav-link {{ Request::is('tutor/students') ? 'active' : '' }}" data-key="t-horizontal">
-                        <img src="/images/Tutor-Dashboard-menu-icons/My Batches.svg" alt="">&nbsp; <span data-key="t-dashboards"> My Students</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li> <!-- end Dashboard Menu -->
-    <li class="nav-item">
-        <a class="nav-link menu-link {{ Request::is('tutor/assignments') ? 'active' : '' }}" href="#sidebarLanding" data-bs-toggle="collapse" role="button" aria-expanded="{{ Request::is('tutor/assignments') ? 'true' : 'false' }}" aria-controls="sidebarLanding">
-            <img src="/images/Tutor-Dashboard-menu-icons/Study Materials.svg" alt="">&nbsp; <span data-key="t-dashboards">Study Materials</span>
-        </a>
-        <div class="collapse menu-dropdown {{ Request::is('tutor/assignments') ? 'show' : '' }}" id="sidebarLanding">
-            <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                    <a href="{{ route('tutor.assignments') }}" class="nav-link {{ Request::is('tutor/assignments') ? 'active' : '' }}" data-key="t-one-page">Assignments</a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    
+                        <li class="nav-item">
 
-    <li class="nav-item">
-        <a class="nav-link menu-link {{ Request::is('tutor/questionbank') || Request::is('tutor/onlinetestlist') || Request::is('tutor/onlinetestresponseslist') ? 'active' : '' }}" href="#sidebarFormsTest" data-bs-toggle="collapse" role="button" aria-expanded="{{ Request::is('tutor/questionbank') || Request::is('tutor/onlinetestlist') || Request::is('tutor/onlinetestresponseslist') ? 'true' : 'false' }}" aria-controls="sidebarFormsTest">
-            <img src="/images/Tutor-Dashboard-menu-icons/Online Tests.svg" alt="">&nbsp;
-            <span data-key="t-dashboards">Online Tests</span>
-        </a>
-        <div class="collapse menu-dropdown {{ Request::is('tutor/questionbank') || Request::is('tutor/onlinetestlist') || Request::is('tutor/onlinetestresponseslist') ? 'show' : '' }}" id="sidebarFormsTest">
-            <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                    <a href="{{ url('tutor/questionbank') }}" class="nav-link {{ Request::is('tutor/questionbank') ? 'active' : '' }}" data-key="t-form-select">Questions Bank</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('tutor/onlinetestlist') }}" class="nav-link {{ Request::is('tutor/onlinetestlist') ? 'active' : '' }}" data-key="t-form-select">Online Test</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('tutor/onlinetestresponseslist') }}" class="nav-link {{ Request::is('tutor/onlinetestresponseslist') ? 'active' : '' }}" data-key="t-form-select">Subjective Responses</a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    
+                            <a href="{{ route('tutor.tutorslots') }}"
+                                class="nav-link {{ Request::is('tutor/tutorslots') ? 'active' : '' }}"
+                                data-key="t-horizontal">
+                                <img src="/images/Tutor-Dashboard-menu-icons/Trial Classes.svg" alt="">&nbsp;
+                                <span data-key="t-dashboards"> Slots Management</span>
+                            </a>
+                            <a href="{{ route('tutor.demolist') }}"
+                                class="nav-link {{ Request::is('tutor/demolist') ? 'active' : '' }}"
+                                data-key="t-horizontal">
+                                <img src="/images/Tutor-Dashboard-menu-icons/Trial Classes.svg" alt="">&nbsp;
+                                <span data-key="t-dashboards"> Trial Classes</span>
+                            </a>
 
+                            <a href="{{ route('tutor.liveclass.classlist') }}"
+                                class="nav-link {{ Request::is('tutor/getclasslist') ? 'active' : '' }}"
+                                data-key="t-horizontal">
+                                <img src="/images/Tutor-Dashboard-menu-icons/My Scheduled Classes.svg"
+                                    alt="">&nbsp; <span data-key="t-dashboards"> Scheduled Classes</span>
+                            </a>
 
-    <li class="nav-item">
-        <a class="nav-link menu-link {{ Request::is('tutor/payouts') || Request::is('tutor/payments') ? 'active' : '' }}" href="#sidebarForms" data-bs-toggle="collapse" role="button" aria-expanded="{{ Request::is('tutor/payouts') || Request::is('tutor/payments') ? 'true' : 'false' }}" aria-controls="sidebarForms">
-            <img src="/images/Tutor-Dashboard-menu-icons/Payments.svg" alt="">&nbsp; 
-            <span data-key="t-dashboards">Payments</span>
-        </a>
-        <div class="collapse menu-dropdown {{ Request::is('tutor/payouts') || Request::is('tutor/payments') ? 'show' : '' }}" id="sidebarForms">
-            <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                    <a href="{{ route('tutor.payouts') }}" class="nav-link {{ Request::is('tutor/payouts') ? 'active' : '' }}" data-key="t-form-select">Payouts</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('tutor.payments') }}" class="nav-link {{ Request::is('tutor/payments') ? 'active' : '' }}" data-key="t-form-select">Payment History</a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    
-    <li class="nav-item">
-        <a class="nav-link menu-link {{ Request::is('tutor/attendance') ? 'active' : '' }}" href="#sidebarCharts" data-bs-toggle="collapse" role="button" aria-expanded="{{ Request::is('tutor/attendance') ? 'true' : 'false' }}" aria-controls="sidebarCharts">
-            <img src="/images/Tutor-Dashboard-menu-icons/Reports.svg" alt="">&nbsp; 
-            <span data-key="t-dashboards">Reports</span>
-        </a>
-        <div class="collapse menu-dropdown {{ Request::is('tutor/attendance') ? 'show' : '' }}" id="sidebarCharts">
-            <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                    <a href="{{ route('tutor.attendance') }}" class="nav-link {{ Request::is('tutor/attendance') ? 'active' : '' }}" data-key="t-chartjs">Attendance</a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    
+                            <a href="{{ route('tutor.classes') }}"
+                                class="nav-link {{ Request::is('tutor/classes') ? 'active' : '' }}"
+                                data-key="t-horizontal">
+                                <img src="/images/Tutor-Dashboard-menu-icons/My Complete Classes.svg"
+                                    alt="">&nbsp; <span data-key="t-dashboards"> Complete Classes</span>
+                            </a>
+
+                            <a href="{{ route('tutor.studentslist') }}"
+                                class="nav-link {{ Request::is('tutor/students') ? 'active' : '' }}"
+                                data-key="t-horizontal">
+                                <img src="/images/Tutor-Dashboard-menu-icons/My Batches.svg" alt="">&nbsp;
+                                <span data-key="t-dashboards"> My Students</span>
+                            </a>
+
+                        </li> <!-- end Dashboard Menu -->
+                        <li class="nav-item">
+                            <a class="nav-link menu-link {{ Request::is('tutor/assignments') ? 'active' : '' }}"
+                                href="#sidebarLanding" data-bs-toggle="collapse" role="button"
+                                aria-expanded="{{ Request::is('tutor/assignments') ? 'true' : 'false' }}"
+                                aria-controls="sidebarLanding">
+                                <img src="/images/Tutor-Dashboard-menu-icons/Study Materials.svg"
+                                    alt="">&nbsp; <span data-key="t-dashboards">Study Materials</span>
+                            </a>
+                            <div class="collapse menu-dropdown {{ Request::is('tutor/assignments') ? 'show' : '' }}"
+                                id="sidebarLanding">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('tutor.assignments') }}"
+                                            class="nav-link {{ Request::is('tutor/assignments') ? 'active' : '' }}"
+                                            data-key="t-one-page">Assignments</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
 
 
                         <li class="nav-item">
-                            <a href="{{ route('tutor.messages') }}" class="nav-link menu-link {{ Request::is('tutor/messages') ? 'active' : '' }}"> <img
+                            <a class="nav-link menu-link {{ Request::is('tutor/questionbank') || Request::is('tutor/onlinetestlist') || Request::is('tutor/onlinetestresponseslist') ? 'active' : '' }}"
+                                href="#sidebarFormsTest" data-bs-toggle="collapse" role="button"
+                                aria-expanded="{{ Request::is('tutor/questionbank') || Request::is('tutor/onlinetestlist') || Request::is('tutor/onlinetestresponseslist') ? 'true' : 'false' }}"
+                                aria-controls="sidebarFormsTest">
+                                <img src="/images/Tutor-Dashboard-menu-icons/Online Tests.svg" alt="">&nbsp;
+                                <span data-key="t-dashboards">Online Tests</span>
+                            </a>
+                            <div class="collapse menu-dropdown {{ Request::is('tutor/questionbank') || Request::is('tutor/onlinetestlist') || Request::is('tutor/onlinetestresponseslist') ? 'show' : '' }}"
+                                id="sidebarFormsTest">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ url('tutor/questionbank') }}"
+                                            class="nav-link {{ Request::is('tutor/questionbank') ? 'active' : '' }}"
+                                            data-key="t-form-select">Questions Bank</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('tutor/onlinetestlist') }}"
+                                            class="nav-link {{ Request::is('tutor/onlinetestlist') ? 'active' : '' }}"
+                                            data-key="t-form-select">Online Test</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('tutor/onlinetestresponseslist') }}"
+                                            class="nav-link {{ Request::is('tutor/onlinetestresponseslist') ? 'active' : '' }}"
+                                            data-key="t-form-select">Subjective Responses</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link menu-link {{ Request::is('tutor/payouts') || Request::is('tutor/payments') ? 'active' : '' }}"
+                                href="#sidebarForms" data-bs-toggle="collapse" role="button"
+                                aria-expanded="{{ Request::is('tutor/payouts') || Request::is('tutor/payments') ? 'true' : 'false' }}"
+                                aria-controls="sidebarForms">
+                                <img src="/images/Tutor-Dashboard-menu-icons/Payments.svg" alt="">&nbsp;
+                                <span data-key="t-dashboards">Payments</span>
+                            </a>
+                            <div class="collapse menu-dropdown {{ Request::is('tutor/payouts') || Request::is('tutor/payments') ? 'show' : '' }}"
+                                id="sidebarForms">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('tutor.payouts') }}"
+                                            class="nav-link {{ Request::is('tutor/payouts') ? 'active' : '' }}"
+                                            data-key="t-form-select">Payouts</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('tutor.payments') }}"
+                                            class="nav-link {{ Request::is('tutor/payments') ? 'active' : '' }}"
+                                            data-key="t-form-select">Payment History</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link menu-link {{ Request::is('tutor/attendance') ? 'active' : '' }}"
+                                href="#sidebarCharts" data-bs-toggle="collapse" role="button"
+                                aria-expanded="{{ Request::is('tutor/attendance') ? 'true' : 'false' }}"
+                                aria-controls="sidebarCharts">
+                                <img src="/images/Tutor-Dashboard-menu-icons/Reports.svg" alt="">&nbsp;
+                                <span data-key="t-dashboards">Reports</span>
+                            </a>
+                            <div class="collapse menu-dropdown {{ Request::is('tutor/attendance') ? 'show' : '' }}"
+                                id="sidebarCharts">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('tutor.attendance') }}"
+                                            class="nav-link {{ Request::is('tutor/attendance') ? 'active' : '' }}"
+                                            data-key="t-chartjs">Attendance</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+
+                        <li class="nav-item">
+                            <a href="{{ route('tutor.messages') }}"
+                                class="nav-link menu-link {{ Request::is('tutor/messages') ? 'active' : '' }}"> <img
                                     src="/images/Student-dashboard-menu-icon/Chat.svg" alt="">&nbsp; <span
                                     data-key="t-dashboards"> Chat</span> </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('tutor.feedback.list') }}" class="nav-link menu-link {{ Request::is('tutor/feedback') ? 'active' : '' }}"
+                            <a href="{{ route('tutor.feedback.list') }}"
+                                class="nav-link menu-link {{ Request::is('tutor/feedback') ? 'active' : '' }}"
                                 data-key="t-starter"> <img src="/images/Student-dashboard-menu-icon/feedback.svg"
                                     alt="">&nbsp; <span data-key="t-dashboards"> Feedback</span> </a>
                         </li>

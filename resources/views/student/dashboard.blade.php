@@ -166,7 +166,7 @@
                                             <th>Topic</th>
                                             <th>Time</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -212,20 +212,19 @@
                                                 @endif
                                             </td>
 
-                                            <td class="joinclass">
+                                            {{-- <td class="joinclass">
                                                 @if (in_array(strtolower($upcomingclass->status), ['confirmed',
                                                 'waiting', 'completed']))
                                                 <span style="background-color: lightgrey"
                                                     class="badge border-0 bg-muted text-dark"
                                                     id="countdownTimer">{{ $upcomingclass->status }}</span>
-                                                {{-- <span id="countdownTimer"></span> --}}
                                                 @elseif (in_array(strtolower($upcomingclass->status), ['started',
                                                 'cancelled', 'live']))
                                                 <a href="{{ $upcomingclass->join_url }}"><button class="badge border-0"
                                                         id="joinClassBtn">Join
                                                         Class</button></a>
                                                 @endif
-                                            </td>
+                                            </td> --}}
 
                                         </tr>
                                         @endforeach
@@ -254,7 +253,7 @@
                                             <th>Subject</th>
                                             <th>Slot</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -306,8 +305,7 @@
 
                                             </td>
 
-                                            <td class="joinclass">
-                                                {{-- @if (strtolower($democlass->currentstatus) == 'started') --}}
+                                            {{-- <td class="joinclass">
                                                 @if ($democlass->status == 5)
                                                 <a href="{{ $democlass->demo_link }}"><button class="badge border-0"
                                                         id="joinClassBtn2">Join Now</button></a>
@@ -316,7 +314,7 @@
                                                     class="badge border-0 bg-muted text-dark"
                                                     id="countdownTimer2">{{ $democlass->currentstatus }}</span>
                                                 @endif
-                                            </td>
+                                            </td> --}}
 
                                         </tr>
                                         @endforeach
