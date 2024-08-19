@@ -88,7 +88,7 @@
                                 class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                                 id="topnav-hamburger-icon">
                                 <a href="/tutor/getclasslist">
-                                    <div class="btn btn-primary">Upcoming Classes</div>
+                                    <div class="btn btn-primary">Scheduled Classes</div>
                                 </a>
                             </button>
                             <button type="button"

@@ -32,7 +32,7 @@
             @endif
 
             <div id="" class="mb-3 listHeader page-title-box">
-                <h3>Upcoming Classes</h3>
+                <h3>Scheduled Classes</h3>
                <a href="completed-classes"> <button class="btn btn-primary">Completed Classes</button></a>
             </div>
 

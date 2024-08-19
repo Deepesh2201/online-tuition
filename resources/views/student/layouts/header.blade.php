@@ -99,7 +99,7 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                     </div>
 
                     <div class="studentTopBtn d-flex">
-                        <a href="/student/classes" style="padding-right: 20px"> <button class="btn btn-primary">Upcoming
+                        <a href="/student/classes" style="padding-right: 20px"> <button class="btn btn-primary">Scheduled
                                 Classes</button></a>
                         <a href="/student/searchtutor" style="padding-right: 20px"> <button
                                 class="btn btn-primary">Explore Tutors</button></a>
@@ -676,7 +676,7 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                 <li class="nav-item ">
                    
                     <a href="{{ route('student.classes') }}"
-                        class="nav-link {{ Request::is('student/classes') ? 'active' : '' }}" data-key=""> <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt=""> &nbsp; Upcoming
+                        class="nav-link {{ Request::is('student/classes') ? 'active' : '' }}" data-key=""> <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt=""> &nbsp; Scheduled
                         Classes</a>
                 </li>
                 <li class="nav-item ">
