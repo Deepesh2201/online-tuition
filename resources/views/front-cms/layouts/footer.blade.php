@@ -80,7 +80,7 @@
                           </div>
                           <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                               <div class="radioLogin parentsPopup">
-                                  <input type="radio" value="parents" name="loginAs" id="parentsPopup">
+                                  <input type="radio" value="parent" name="loginAs" id="parentsPopup">
                                   <span>Parents</span>
                               </div>
                           </div>
