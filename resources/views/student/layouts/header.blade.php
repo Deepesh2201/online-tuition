@@ -670,7 +670,7 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                    
                     <a href="{{ route('student.demolist') }}"
                         class="nav-link {{ Request::is('student/demolist') ? 'active' : '' }}" data-key="">
-                        <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt="">&nbsp;  My Demo
+                        <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt="">&nbsp;  Trial
                         Classes</a>
                 </li>
                 <li class="nav-item ">
@@ -683,7 +683,7 @@ $studentprofile =studentprofile::where('student_id',session('userid')->id)->firs
                     
                     <a href="{{ route('student.completed-classes') }}"
                         class="nav-link {{ Request::is('student/completed-classes') ? 'active' : '' }}"
-                        data-key="t-horizontal"><img src="/images/Student-dashboard-menu-icon/My recordings.svg" alt="">&nbsp;&nbsp; My Recordings</a>
+                        data-key="t-horizontal"><img src="/images/Student-dashboard-menu-icon/My recordings.svg" alt="">&nbsp;&nbsp; Class Recordings</a>
                 </li>
 
                 <!-- <li class="nav-item">

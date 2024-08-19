@@ -241,7 +241,7 @@
                 <div class="col-md-6">
                     <div class="card card-animate">
                         <div class="cardTitle">
-                            <h5>Scheduled Trial Classes</h5>
+                            <h5>Trial Classes</h5>
                             <a href="demolist"><b>View All</b></a>
                         </div>
                         <div class="card-body">
