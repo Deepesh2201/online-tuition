@@ -1029,8 +1029,8 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                 </div>
                 <div class="mt-2">
                     <button type="submit" id="" class="btn btn-sm btn-success"
-                        style="float:right ">Schedule
-                        Demo</button>
+                        style="float:right ">Book Trial
+                        </button>
                 </div>
 
         </div>

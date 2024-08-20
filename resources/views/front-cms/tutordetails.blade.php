@@ -113,7 +113,7 @@
                             </div>
 
                             <div class="expMore btnSize">
-                                <a href="/enroll-class/student-login/{{$tutorpd->tutor_id}}" class="btn">Book Now</a>
+                                <a href="/enroll-class/student-login/{{$tutorpd->tutor_id}}" class="btn">Enroll Now</a>
                             </div>
                            </div>
                         </div>
