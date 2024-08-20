@@ -49,7 +49,6 @@
                         <div class="accor">
                             <div class="advceAccordian">
                                 <div class="" id="headingTwo">
-
                                     <div class="advance-search">
                                         <a href="" class="collapsed advSearTextLeft" data-toggle="collapse"
                                             data-target="#collapseTwo" aria-expanded="false"
@@ -145,82 +144,135 @@
                 <div class="subSec">
                     <ul>
                         <li>
-                            <a href="findatutor">
-                                <img src="{{ url('frontendnew/img/icons/board-math.png') }}" alt="">
-                                <p>Maths</p>
-                            </a>
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="1">
+                                <button type="submit" style="background:none;border:none;padding:0;">
+                                    <img src="{{ url('frontendnew/img/icons/board-math.png') }}" alt="">
+                                    <p>Maths</p>
+                                </button>
+                            </form>
                         </li>
+                        
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="2">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/book-03.png') }}" alt="">
                                 <p>English</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="3">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/chemistry-03.png') }}" alt="">
                                 <p>Chemistry</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="4">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/physics.png') }}" alt="">
                                 <p>Physics</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="5">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/geology-crust.png') }}" alt="">
                                 <p>Biology</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="6">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/submerge.png') }}" alt="">
                                 <p>Science</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="8">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/translation.png') }}" alt="">
                                 <p>Spanish</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="9">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/translation.png') }}" alt="">
                                 <p>French</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="10">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/translation.png') }}" alt="">
                                 <p>German</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="11">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/text-creation.png') }}" alt="">
                                 <p>History</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="12">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/music-note-03.png') }}" alt="">
                                 <p>Music</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="13">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/global-education.png') }}" alt="">
                                 <p>Psychology</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="findatutor">
+                            <form action="{{ url('toptutorsearch') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="subject" name="subject" value="14">
+                                <button type="submit" style="background:none;border:none;padding:0;">
                                 <img src="{{ url('frontendnew/img/icons/school-tie.png') }}" alt="">
                                 <p>Politics</p>
-                            </a>
+                             </button>
+                            </form>
                         </li>
                     </ul>
                 </div>
