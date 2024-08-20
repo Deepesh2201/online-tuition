@@ -23,26 +23,24 @@
             <h2 class="my-5">Review</h2>
             <div class="row">
                 @foreach ($reviews as $review)
-                    
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-4">
-                    <div class="testi-card">
-                        <span class="nameTo">
-                            {{$review->tutor_name}}
-                            <p>
-                                {{$review->subject_name}} tutor
-                                <br>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </p>
-                        </span>
-                        <p class="mt-4">“{{$review->name}}”</p>
-                        <p class="nameFrom">{{$review->student_name}}</p>
-                    </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 mb-4">
+                <div class="testi-card">
+                    <span class="nameTo">
+                        {{ $review->tutorname }}
+                        <p>{{ $review->subjectname }}
+                            <br>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </p>
+                    </span>
+                    <p class="mt-4">“{{ $review->name }}”</p>
+                    <p class="nameFrom">{{ $review->studentname }}</p>
                 </div>
-                @endforeach
+            </div>
+            @endforeach
 
             </div>
 
@@ -62,7 +60,7 @@
                         <h2>Is MCT the right fit for you?<br>
                             There is only one way to find out.</h2>
 
-                        <button class="orange-btn">Register Now</button>
+                        <button class="orange-btn mb-4">Register Now</button>
                     </div>
 
                 </div>

@@ -914,7 +914,7 @@
                 <li class="nav-item">
                     <a href="{{ route('student.myfeedback') }}"
                         class="nav-link menu-link {{ Request::is('student/myfeedback') ? 'active' : '' }}"
-                        data-key="t-starter"> <img src="/images/Student-dashboard-menu-icon/feedback.svg"
+                        data-key="t-starter"> <img src="/images/Student-dashboard-menu-icon/Feedback.svg"
                             alt="">&nbsp;
                         <span data-key="t-dashboards"> Feedback</span> </a>
                 </li>

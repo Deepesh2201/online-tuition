@@ -1915,12 +1915,11 @@ class HomeController extends Controller
     }
     public function reviewslist()
     {
-        $reviews = tutorreviews::select('tutorreviews.*', 'subjects.name as subject_name', 'tutorprofiles.name as tutor_name', 'studentprofiles.name as student_name')
-            ->join('subjects', 'subjects.id', 'tutorreviews.subject_id')
-            ->join('tutorprofiles', 'tutorprofiles.tutor_id', 'tutorreviews.tutor_id')
-            ->join('studentprofiles', 'studentprofiles.student_id', 'tutorreviews.student_id')
-            ->where('tutorreviews.ratings', '>', 3)
-            ->get();
+        $reviews = tutorreviews::select('tutorreviews.*', 'subjects.name as subjectname', 'tutorregistrations.name as tutorname', 'studentregistrations.name as studentname')
+        ->leftJoin('subjects', 'subjects.id', 'tutorreviews.subject_id')
+        ->leftJoin('tutorregistrations', 'tutorregistrations.id', 'tutorreviews.tutor_id')
+        ->leftJoin('studentregistrations', 'studentregistrations.id', 'tutorreviews.student_id')
+        ->where('tutorreviews.ratings', '>', 3)->get();
         // dd($reviews);
         return view('front-cms.reviews', compact('reviews'));
     }
