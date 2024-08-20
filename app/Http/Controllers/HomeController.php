@@ -510,7 +510,9 @@ class HomeController extends Controller
             ->leftjoin('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
             ->leftjoin('teacherclassmappings', 'teacherclassmappings.subject_mapping_id', '=', 'tutorsubjectmappings.id')
             ->leftjoin('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
+            ->join('tutorregistrations','tutorregistrations.id','=','tutorprofiles.tutor_id')
             ->where('tutorsubjectmappings.subject_id', '=', $primarysubjects->subject_id)
+            ->where('tutorregistrations.is_active',1)
             ->get();
 
         // dd($othertutors);
