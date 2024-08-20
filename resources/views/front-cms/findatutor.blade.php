@@ -7,22 +7,19 @@
             <h1 class="findtutorHeader">
                 Discover the perfect tutor for you
             </h1>
-
             <form action="{{ url('toptutorsearch') }}" method="POST">
                 @csrf
                 <div class="findtutor-btns">
-
                     <div class="custom-select" style="width:300px;">
-                        <select>
+                        <select id="subject" name="subject">
                             <option>Select a Subject</option>
                             @foreach ($subjects as $subject)
                             <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                             @endforeach
                         </select>
                     </div>
-
                     <div class="custom-select" style="width:300px;">
-                        <select>
+                        <select id="grade" name="grade">
                             <option>Select Grade</option>
                             @foreach ($gradelists as $grade)
                             <option value="{{ $grade->id }}">{{ $grade->name }}</option>
