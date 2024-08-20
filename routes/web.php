@@ -82,6 +82,13 @@ Route::get('/student/login', [HomeController::class, 'std_login'])->name('studen
 Route::get('/student/mobile-verify',[HomeController::class,'student_mobile_verify'])->name('student_mobile_verify');
 Route::post('/student/mobile-verify',[HomeController::class,'verify_student_mobile'])->name('verify_student_mobile');
 Route::get('/student-login',[HomeController::class, 'student_login'])->name('student_login');
+
+Route::get('/free-trial-class/student-login/{id}',[HomeController::class, 'free_trial_class_student_login_form'])->name('student_login_trial');
+Route::get('/free-trial-class-student-login',[HomeController::class, 'free_trial_class_student_login'])->name('student_login_trial_post');
+
+Route::get('/enroll-class/student-login/{id}',[HomeController::class, 'enroll_class_student_login_form'])->name('student_login_enroll');
+Route::get('/enroll-class-student-login',[HomeController::class, 'enroll_class_student_login'])->name('student_login_enroll_post');
+
 Route::post('tutor-search-guest', [TutorSearchController::class, 'tutorsindexsearch'])->name('guest.tutorsindexsearch');
 Route::post('tutor-dashboard-search',[TutorSearchController::class, 'tutorsdashboardsearch'])->name('student.tutorsdashboardsearch');
 

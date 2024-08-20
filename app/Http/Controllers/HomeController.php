@@ -548,8 +548,7 @@ class HomeController extends Controller
                 'tutorprofiles.profile_pic'
             )
             ->get();
-            
-            
+
         // dd($othertutors);
 
         return view('front-cms.tutordetails', compact('tutorpd', 'achievement', 'reviews', 'subjects', 'averagecount', 'averagereview', 'totalStudents', 'othertutors', 'primarysubjects'));
@@ -618,6 +617,205 @@ class HomeController extends Controller
         // return view('common.student-login');
         return view('front-cms.login');
     }
+    public function free_trial_class_student_login_form($id)
+    {
+        $tutorid = $id;
+        return view('front-cms.trial_class_login', compact('tutorid'));
+    }
+    public function free_trial_class_student_login(Request $request)
+    {
+
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'loginAs' => 'required',
+        ]);
+        if ($request->loginAs == 'student') {$user = studentregistration::where('mobile', '=', $request->username)->first();
+            if ($user) {
+                if (Hash::check($request->password, $user->password)) {
+                    //  event(new Registered($user));
+
+                    $user_role = Auth::user();
+                    // dd($user->role_id);
+                    $request->session()->put('userid', $user);
+                    $request->session()->put('usertype', 'Student');
+                    switch ($user->role_id) {
+                        case 1:
+                            echo "Admin - Under development";
+                            dd($user->role_id);
+                            break;
+                        case 2:
+                            return redirect('tutor/dashboard');
+                        case 3:
+                            if ($request->tutorid) {
+                                return redirect("student/tutorprofile/{$request->tutorid}");
+                            } else {
+                                return redirect('student/dashboard');
+                            }
+                            break;
+                        case 4:
+                            echo "Parent";
+                            dd($user->role_id);
+
+                            break;
+                    }
+                    // return redirect(RouteServiceProvider::HOME);
+                }
+                return back()->with('fail', 'Password does not match');
+            } else {
+                return back()->with('fail', 'Mobile No. Not Registered');
+            }}
+        if ($request->loginAs == 'parent') {
+            $user = studentregistration::where('mobile', '=', $request->username)->first();
+
+            if ($user) {
+                if (Hash::check($request->password, $user->parent_password)) {
+                    $request->session()->put('userid', $user);
+                    $request->session()->put('usertype', 'Parent');
+                    return redirect('student/dashboard');
+                }
+                return back()->with('fail', 'Password does not match');
+            } else {
+                return back()->with('fail', 'Mobile No. Not Registered');
+            }
+        }
+        if ($request->loginAs == 'tutor') {
+            $user = tutorregistration::where('mobile', '=', $request->username)->first();
+            if ($user) {
+                if (Hash::check($request->password, $user->password)) {
+                    //  event(new Registered($user));
+
+                    $user_role = Auth::user();
+                    // dd($user->role_id);
+                    $request->session()->put('userid', $user);
+
+                    switch ($user->role_id) {
+                        case 1:
+                            echo "Admin - Under development";
+                            dd($user->role_id);
+                            break;
+                        case 2:
+                            return redirect('tutor/dashboard');
+                        case 3:
+                            if ($request->tutorid) {
+                                return redirect("student/tutorprofile/{$request->tutorid}");
+                            } else {
+                                return redirect('student/dashboard');
+                            }
+                            break;
+                        case 4:
+                            echo "Parent";
+                            dd($user->role_id);
+
+                            break;
+                    }
+                    // return redirect(RouteServiceProvider::HOME);
+                }
+                return back()->with('fail', 'Password does not match');
+            } else {
+                return back()->with('fail', 'Mobile No. Not Registered');
+            }
+        }
+
+    }
+
+    public function enroll_class_student_login_form($id)
+    {
+        $tutorid = $id;
+        return view('front-cms.enroll_class_login', compact('tutorid'));
+    }
+    public function enroll_class_student_login(Request $request)
+    {
+
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'loginAs' => 'required',
+        ]);
+        if ($request->loginAs == 'student') {$user = studentregistration::where('mobile', '=', $request->username)->first();
+            if ($user) {
+                if (Hash::check($request->password, $user->password)) {
+                    //  event(new Registered($user));
+
+                    $user_role = Auth::user();
+                    // dd($user->role_id);
+                    $request->session()->put('userid', $user);
+                    $request->session()->put('usertype', 'Student');
+                    switch ($user->role_id) {
+                        case 1:
+                            echo "Admin - Under development";
+                            dd($user->role_id);
+                            break;
+                        case 2:
+                            return redirect('tutor/dashboard');
+                        case 3:
+                            if ($request->tutorid) {
+                                return redirect("student/enrollnow/{$request->tutorid}");
+                            } else {
+                                return redirect('student/dashboard');
+                            }
+                            break;
+                        case 4:
+                            echo "Parent";
+                            dd($user->role_id);
+
+                            break;
+                    }
+                    // return redirect(RouteServiceProvider::HOME);
+                }
+                return back()->with('fail', 'Password does not match');
+            } else {
+                return back()->with('fail', 'Mobile No. Not Registered');
+            }}
+        if ($request->loginAs == 'parent') {
+            $user = studentregistration::where('mobile', '=', $request->username)->first();
+
+            if ($user) {
+                if (Hash::check($request->password, $user->parent_password)) {
+                    $request->session()->put('userid', $user);
+                    $request->session()->put('usertype', 'Parent');
+                    return redirect('student/dashboard');
+                }
+                return back()->with('fail', 'Password does not match');
+            } else {
+                return back()->with('fail', 'Mobile No. Not Registered');
+            }
+        }
+        if ($request->loginAs == 'tutor') {
+            $user = tutorregistration::where('mobile', '=', $request->username)->first();
+            if ($user) {
+                if (Hash::check($request->password, $user->password)) {
+                    //  event(new Registered($user));
+
+                    $user_role = Auth::user();
+                    // dd($user->role_id);
+                    $request->session()->put('userid', $user);
+
+                    switch ($user->role_id) {
+                        case 1:
+                            echo "Admin - Under development";
+                            dd($user->role_id);
+                            break;
+                        case 2:
+                            return redirect('tutor/dashboard');
+                        case 3:
+                            return redirect('student/dashboard');
+                        case 4:
+                            echo "Parent";
+                            dd($user->role_id);
+
+                            break;
+                    }
+                    // return redirect(RouteServiceProvider::HOME);
+                }
+                return back()->with('fail', 'Password does not match');
+            } else {
+                return back()->with('fail', 'Mobile No. Not Registered');
+            }
+        }
+
+    }
+
     // Logout Controller
     public function logout()
     {

@@ -109,12 +109,11 @@
 
                            <div class="tabView">
                            <div class="freeTrial btnSize ">
-                                <a href="{{('/student/login')}}" class="btn">Free Trial Class</a>
+                                <a href="/free-trial-class/student-login/{{$tutorpd->tutor_id}}" class="btn">Free Trial Class</a>
                             </div>
 
                             <div class="expMore btnSize">
-                                <a href="/student/enrollnow/{{ $tutorpd->id }}"
-                                    href="/student/enrollnow/{{ $tutorpd->id }}" class="btn">Book Now</a>
+                                <a href="/enroll-class/student-login/{{$tutorpd->tutor_id}}" class="btn">Book Now</a>
                             </div>
                            </div>
                         </div>
