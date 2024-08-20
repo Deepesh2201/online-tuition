@@ -12,7 +12,7 @@
                 <div class="findtutor-btns">
                     <div class="custom-select" style="width:300px;">
                         <select id="subject" name="subject">
-                            <option>Select a Subject</option>
+                            <option value="">Select a Subject</option>
                             @foreach ($subjects as $subject)
                             <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                             @endforeach
@@ -20,7 +20,7 @@
                     </div>
                     <div class="custom-select" style="width:300px;">
                         <select id="grade" name="grade">
-                            <option>Select Grade</option>
+                            <option value="">Select Grade</option>
                             @foreach ($gradelists as $grade)
                             <option value="{{ $grade->id }}">{{ $grade->name }}</option>
                             @endforeach
