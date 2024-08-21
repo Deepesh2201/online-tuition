@@ -302,7 +302,7 @@
                         </div>
                         <a href="tutor-details/{{$tutor->tutor_id}}" style="color: black"> <span class="name">
                                 {{ $tutor->name }}
-                                <p>{{ $tutor->subjects }}</p>
+                                <p>{{ $tutor->subject }}</p>
                             </span></a>
                         <span class="desc-tutor">{{ $tutor->headline }}</span>
                     </div>
