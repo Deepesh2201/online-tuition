@@ -221,7 +221,7 @@
   
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+  <a href="https://api.whatsapp.com/send?phone=+447761975326&text=Hello." class="float" target="_blank">
   <i class="fa fa-whatsapp my-float"></i>
   </a>
   
@@ -289,11 +289,11 @@
               </div>
   
               <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                  <h5 class="mt-4">Help</h5>
+                  {{-- <h5 class="mt-4">Help</h5>
                   <ul>
                       <li>Help Center</li>
                       <li>Contact Us</li>
-                  </ul>
+                  </ul> --}}
   
                   <div class="social my-5">
                       <img src="{{ url('frontendnew/img/footer-logo.png') }}" width="160px" alt="">
@@ -302,7 +302,7 @@
           </div>
       </div>
       <div class="footer-bottom">
-          <p>Copyright © 2024 MyChoiceTutor. All rights reserved.</p>
+          <p>Copyright © 2024 MyChoiceTutor. All rights reserved. &nbsp; | &nbsp; Proudly powered by <a href="https://thenexteck.com/" target="_blank" style="color: white">Nexteck</p>
       </div>
   </footer>
   
