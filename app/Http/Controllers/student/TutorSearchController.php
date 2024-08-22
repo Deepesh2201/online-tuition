@@ -892,6 +892,15 @@ class TutorSearchController extends Controller
         return json_encode(array('statusCode' => 200));
     }
 
+    public function rateupdate(Request $request){
+
+        $data = TutorProfile::where('tutor_id', $request->id)->first();
+        // dd($data);
+        $data->rateperhour = $request->rate;
+        $res = $data->save();
+        return json_encode(array('statusCode' => 200));
+    }
+
     public function teacherProfile($id)
     {
         $tutorpd = tutorprofile::select('tutorprofiles.*', 'subjects.name as subject', 'subjects.name as subject', DB::raw('(tutorsubjectmappings.rate + (tutorsubjectmappings.rate * tutorsubjectmappings.admin_commission / 100)) as rate'))

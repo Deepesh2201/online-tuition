@@ -118,6 +118,12 @@
 <script src="{{ url('js/todolist.js') }}"></script>
 <!-- <script src="{{ url('js/ckeditor.js') }}"></script> -->
 {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
 <!-- endinject -->
 <!-- Custom js for this page-->
 <script src="{{ url('js/jquery.cookie.js') }}" type="text/javascript"></script>
@@ -249,6 +255,8 @@ function markAsRead(notificationId) {
     });
 }
 
+
+
 function checkNotificationDetails(notificationId) {
     $.ajax({
         url: '/checkNotificationDetails/' + notificationId, // Endpoint to mark notification as read
@@ -261,6 +269,31 @@ function checkNotificationDetails(notificationId) {
 }
 
 </script>
+
+@if(session('show_popup'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Profile Update Required',
+                html: '<li>Kindly update your profile</li> <br><li>Get approval from admin via call/chat</li> <br><li>Create slots in "Slot Management"</li>',
+                icon: 'warning',
+                confirmButtonText: 'Update Now',
+                confirmButtonColor: '#3085d6',
+                backdrop: `
+                    rgba(0,0,123,0.4)
+                    url("/images/your-image.jpg")
+                    center center
+                    no-repeat
+                `
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '{{ url('tutor/profileupdate') }}';
+                }
+            });
+        });
+    </script>
+@endif
+
 
 
 </html>

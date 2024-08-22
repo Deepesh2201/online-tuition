@@ -271,6 +271,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['AdminAuthenticate']], funct
 
     // Admin Commission
     Route::get('commission/update',[TutorSearchController::class,'commissionupdate'])->name('admin.commission.update');
+    Route::get('rate/update',[TutorSearchController::class,'rateupdate'])->name('admin.rate.update');
     // Payment details
     Route::get('payments', [PaymentsController::class, 'index'])->name('admin.payments');
     Route::get('student-payments-report', [PaymentsController::class, 'studentpaymentsreport'])->name('admin.reports.student-payments');

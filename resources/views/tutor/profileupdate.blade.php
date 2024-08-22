@@ -190,7 +190,7 @@
                             <div class="form-group col-md-6">
                                 <label for="name">Rate Per Hour(£)<i style="color:red">*</i></label>
                                 <input type="text" class="form-control" id="rateperhour" name="rateperhour"
-                                    placeholder="0"
+                                    placeholder="0" disabled readonly
                                     value="{{ $tutorpd->rateperhour ?? 0}}" required>
                             </div>
                             {{-- Added new field for rate per hour based on profile ends here --}}
@@ -401,7 +401,24 @@
 
 
 <br>
-
+<!-- Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoModalLabel">Profile Update Required</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Kindly update your profile & add Class/Grade Mapping.
+        </div>
+        <div class="modal-footer">
+          <a href="{{ url('tutor/profileupdate') }}" class="btn btn-primary">Update Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
     </div>
     <!-- content-wrapper ends -->
 
@@ -491,6 +508,7 @@ file.addEventListener('change', function() {
         reader.readAsDataURL(choosedFile);
     }
 });
+
 
 function fetchSubjects() {
 

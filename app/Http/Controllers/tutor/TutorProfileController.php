@@ -141,7 +141,7 @@ class TutorProfileController extends Controller
         $ppic->detail_3 = $request->details3;
         $ppic->tutor_id = session('userid')->id;
         $ppic->gender = $request->gender;
-        $ppic->rateperhour = $request->rateperhour;
+        // $ppic->rateperhour = $request->rateperhour;
         // $ppic->country_id = $request->country;
 
         if($request->file){
