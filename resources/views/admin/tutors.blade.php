@@ -107,7 +107,7 @@
                                     {{-- <td>£ {{ $ttrlist->rate }}</td> --}}
                                     <td><a href="#"
                                             onclick="updaterate('{{ $ttrlist->tutor_id }}','{{ $ttrlist->rate }}')">
-                                            {{ $ttrlist->rate }}% <span class="badge bg-primary ml-3"> Update</span> </a>
+                                            {{ $ttrlist->rate }} <span class="badge bg-primary ml-3"> Update</span> </a>
                                     </td>
                                     <td><a href="#"
                                             onclick="updatecommission('{{ $ttrlist->tutor_id }}','{{ $ttrlist->admin_commission }}')">
