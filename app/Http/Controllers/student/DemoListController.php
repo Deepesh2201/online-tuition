@@ -210,7 +210,7 @@ class DemoListController extends Controller
             $notified = $notificationdata->save();
             broadcast(new RealTimeMessage('$notification'));
 
-            return redirect()->to('student/searchtutor')->with('success', 'Demo Scheduled Successfully');
+            return redirect()->to('student/searchtutor')->with('success', 'Demo Scheduled Successfully. Please login to class using your registered Email Id.');
         } else {
             return redirect()->to('student/searchtutor')->with('fail', 'Something Went Wrong. Try Again Later');
         }

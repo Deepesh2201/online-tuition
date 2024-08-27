@@ -125,6 +125,11 @@
                                     <td>{{ $demo->remarks }}</td>
                                     {{-- <td><a href="{{$demo->demo_link}}">{{$demo->demo_link}}</a></td> --}}
                                     @if (session('usertype') == 'Parent')
+                                    <td>
+                                        {{-- <button class="btn btn-sm mr-1 btn-primary" disabled><i class="fa fa-calendar" aria-hidden="true"></i> Reschedule</button> --}}
+                                        <a href="{{ $demo->demo_link }}" target="_blank"><button
+                                                class="badge bg-success"> Join Class</button></a>
+                                    </td>
                                     @else
                                         @if ($demo->status == 1)
                                             <td>

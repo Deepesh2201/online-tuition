@@ -582,7 +582,7 @@ class TutorSearchController extends Controller
 
             $msg = 'Enrollment completed. Please have patience, admin you contact you soon.';
         } else {
-            $msg = 'Enrollment Completed & Slots confirmed.';
+            $msg = 'Enrollment Completed & Slots confirmed. Kindly use your registered Email Id to join class.';
         }
 
         if ($spdres) {
