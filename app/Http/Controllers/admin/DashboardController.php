@@ -10,6 +10,7 @@ use App\Models\tutorprofile;
 use App\Models\democlasses;
 use App\Models\subjects;
 use App\Models\zoom_classes;
+use App\Models\Notification;
 use App\Models\OnlineTests;
 use Illuminate\Support\Carbon;
 use App\Models\payments\paymentdetails;
@@ -116,5 +117,13 @@ class DashboardController extends Controller
 
 
         return view('admin.dashboard',get_defined_vars());
+    }
+
+    public function notificationslist(){
+        $notifications = Notification::select('*')
+        ->where('show_to_admin',1)
+        // ->where('show_to_student_id', session('userid')->id)
+        ->paginate(10);
+        return view('admin.notificationslist', compact('notifications'));
     }
 }

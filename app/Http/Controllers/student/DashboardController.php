@@ -7,6 +7,7 @@ use App\Models\questionbank;
 use App\Models\studentprofile;
 use App\Models\testattempted;
 use App\Models\testresponssheet;
+use App\Models\Notification;
 use DB;
 use App\Models\classes;
 use Illuminate\Http\Request;
@@ -402,5 +403,13 @@ class DashboardController extends Controller
         }
 
         return view('parent.dashboard', get_defined_vars());
+    }
+
+    public function notificationslist(){
+        $notifications = Notification::select('*')
+        ->where('show_to_student',1)
+        ->where('show_to_student_id', session('userid')->id)
+        ->paginate(10);
+        return view('student.notificationslist', compact('notifications'));
     }
 }

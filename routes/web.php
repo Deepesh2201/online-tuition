@@ -113,11 +113,6 @@ Route::get("logout", [HomeController::class, "logout"])->name("logout");
 
 // Route::get('/tutor/login', [HomeController::class, 'ttr_login'])->name('tutorlogin');
 
-// Newly Added Login Pages
-
-
-
-
 Route::post('fetchsubjects', [CommonController::class, 'fetchsubjects'])->name('fetchsubjects');
 Route::post('fetchtutorsubjects', [CommonController::class, 'fetchtutorsubjects'])->name('fetchtutorsubjects');
 Route::post('fetchtopics', [CommonController::class, 'fetchtopics'])->name('fetchtopics');
@@ -131,6 +126,7 @@ Route::get('subjects',[SubjectController::class,'cmsindex'])->name('cmsindex');
 Route::group(['prefix' => 'student', 'middleware' => ['StudentAuthenticate']], function () {
     // student dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('student.dashboard');
+    Route::get('notifications', [DashboardController::class, 'notificationslist'])->name('student.notifications');
     // student profile
     Route::get('profile', [StudentProfileController::class, 'index'])->name('student.profile');
     Route::get('profileupdate/{id}', [StudentProfileController::class, 'edit'])->name('student.profileupdate');
@@ -219,6 +215,7 @@ Route::get('admin/login', [LoginController::class, 'login'])->name('admin.login'
 Route::group(['prefix' => 'admin', 'middleware' => ['AdminAuthenticate']], function () {
     // Admin dashboard
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('notifications', [AdminDashboardController::class, 'notificationslist'])->name('admin.notifications');
     // Classes
     Route::get('class', [ClassController::class, 'index'])->name('admin.class');
     Route::post('class', [ClassController::class, 'store'])->name('admin.class.create');
@@ -359,6 +356,7 @@ Route::group(['prefix' => 'tutor', 'middleware' => ['TutorAuthenticate']], funct
 
     // Tutor Dashboard
     Route::get('dashboard', [TutorDashboardController::class, 'index'])->name('tutor.dashboard');
+    Route::get('notifications', [TutorDashboardController::class, 'notificationslist'])->name('tutor.notifications');
     Route::get('dashboard/oauth2callback', [TutorDashboardController::class, 'index'])->name('tutor.dashboard.oauth2callback');
     // Tutor Profile
     Route::get('profile', [TutorProfileController::class, 'tutorprofile'])->name('tutor.profile');

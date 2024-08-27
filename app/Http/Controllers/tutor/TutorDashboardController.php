@@ -11,6 +11,7 @@ use App\Models\studentregistration;
 use App\Models\studentprofile;
 use Illuminate\Http\Request;
 use App\Models\zoom_classes;
+use App\Models\Notification;
 use App\Models\OnlineTests;
 use Illuminate\Support\Carbon;
 use App\Models\payments\paymentdetails;
@@ -181,5 +182,13 @@ class TutorDashboardController extends Controller
             // dd($studentscount);
 
         return view('tutor.dashboard',get_defined_vars());
+    }
+
+    public function notificationslist(){
+        $notifications = Notification::select('*')
+        ->where('show_to_tutor',1)
+        ->where('show_to_tutor_id', session('userid')->id)
+        ->paginate(10);
+        return view('tutor.notificationslist', compact('notifications'));
     }
 }
