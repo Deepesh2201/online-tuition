@@ -271,6 +271,7 @@
                                 <header>
                                     <h3 class="text-center ">Free Trial Class</h3>
                                 </header>
+                                <i style="color: red">*Please provide your preferred time slots for the trial class. Once confirmed by the tutor, be punctual and join at the specified time.</i>
 
                                 <form action="{{ route('student.bookdemo') }}" method="POST">
                                     @csrf
