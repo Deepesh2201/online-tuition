@@ -95,6 +95,14 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+                                                <label for="">Min Price</label>
+                                                <input class="form-control" id="tminprice" name="tminprice">
+                                            </div>
+                                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-2">
+                                                <label for="">Max Price</label>
+                                                <input class="form-control" id="tmaxprice" name="tmaxprice">
+                                            </div>
                                             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12" hidden>
                                                 <label for="">Rating</label>
                                                 <select class="form-control rating" id="ratings" name="ratings">

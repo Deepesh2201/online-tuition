@@ -54,7 +54,8 @@ class HomeController extends Controller
             'tutorprofiles.experience',
             DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100)) as rateperhour'),
             'tutorprofiles.profile_pic',
-            DB::raw('GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", ") as subject'),
+            // Limit subjects to a maximum of two
+            DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", "), ",", 2) as subject'),
             DB::raw('SUM(tutorreviews.ratings) / COUNT(tutorreviews.id) AS starrating'),
             DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
             DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
@@ -141,47 +142,47 @@ class HomeController extends Controller
     public function toptutorsearch(Request $request)
     {
         $subjectid = $request->subject;
-$classid = $request->grade;
+        $classid = $request->grade;
 
-$classes = classes::all('id', 'name');
+        $classes = classes::all('id', 'name');
 
-$tutors = tutorprofile::select(
-    'tutorprofiles.tutor_id as tutor_id',
-    'tutorprofiles.name',
-    'tutorprofiles.headline',
-    'tutorprofiles.qualification as tutor_qualification',
-    'tutorprofiles.intro_video_link',
-    'tutorprofiles.experience',
-    DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100)) as rateperhour'),
-    'tutorprofiles.profile_pic',
-    DB::raw('GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", ") as subject'),
-    DB::raw('SUM(tutorreviews.ratings) / COUNT(tutorreviews.id) AS starrating'),
-    DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
-    DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
-)
-    ->join('teacherclassmappings', 'teacherclassmappings.teacher_id', '=', 'tutorprofiles.tutor_id')
-    ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
-    ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
-    ->join('classes', 'classes.id', '=', 'tutorsubjectmappings.class_id')
-    ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id')
-    ->join('topics', 'topics.subject_id', '=', 'subjects.id')
-    ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
-    ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
-    ->where('tutorregistrations.is_active', 1)
-    ->where('subjects.id', 'like', '%' . $subjectid . '%') // LIKE search for subject
-    ->where('classes.id', 'like', '%' . $classid . '%') // LIKE search for class
-    ->groupBy(
-        'tutorprofiles.tutor_id',
-        'tutorprofiles.name',
-        'tutorprofiles.headline',
-        'tutorprofiles.qualification',
-        'tutorprofiles.intro_video_link',
-        'tutorprofiles.experience',
-        'tutorprofiles.rateperhour',
-        'tutorprofiles.admin_commission',
-        'tutorprofiles.profile_pic'
-    )
-    ->get();
+        $tutors = tutorprofile::select(
+            'tutorprofiles.tutor_id as tutor_id',
+            'tutorprofiles.name',
+            'tutorprofiles.headline',
+            'tutorprofiles.qualification as tutor_qualification',
+            'tutorprofiles.intro_video_link',
+            'tutorprofiles.experience',
+            DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100)) as rateperhour'),
+            'tutorprofiles.profile_pic',
+            DB::raw('GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", ") as subject'),
+            DB::raw('SUM(tutorreviews.ratings) / COUNT(tutorreviews.id) AS starrating'),
+            DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
+            DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
+        )
+            ->join('teacherclassmappings', 'teacherclassmappings.teacher_id', '=', 'tutorprofiles.tutor_id')
+            ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
+            ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
+            ->join('classes', 'classes.id', '=', 'tutorsubjectmappings.class_id')
+            ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id')
+            ->join('topics', 'topics.subject_id', '=', 'subjects.id')
+            ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
+            ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
+            ->where('tutorregistrations.is_active', 1)
+            ->where('subjects.id', 'like', '%' . $subjectid . '%') // LIKE search for subject
+            ->where('classes.id', 'like', '%' . $classid . '%') // LIKE search for class
+            ->groupBy(
+                'tutorprofiles.tutor_id',
+                'tutorprofiles.name',
+                'tutorprofiles.headline',
+                'tutorprofiles.qualification',
+                'tutorprofiles.intro_video_link',
+                'tutorprofiles.experience',
+                'tutorprofiles.rateperhour',
+                'tutorprofiles.admin_commission',
+                'tutorprofiles.profile_pic'
+            )
+            ->get();
 
         $subjectlists = DB::table('subjects')
             ->join('subjectcategories', 'subjects.category', '=', 'subjectcategories.id')
@@ -212,6 +213,8 @@ $tutors = tutorprofile::select(
         $tutorname = $request->name;
         $subjectid = $request->subject;
         $classid = $request->grade;
+        $minPrice = $request->tminprice;
+        $maxPrice = $request->tmaxprice;
 
         $classes = classes::all('id', 'name');
 
@@ -224,7 +227,7 @@ $tutors = tutorprofile::select(
             'tutorprofiles.experience',
             DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100)) as rateperhour'),
             'tutorprofiles.profile_pic',
-            DB::raw('GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", ") as subject'),
+            DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", "), ",", 2) as subject'),
             DB::raw('SUM(tutorreviews.ratings) / COUNT(tutorreviews.id) AS starrating'),
             DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
             DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
@@ -236,23 +239,32 @@ $tutors = tutorprofile::select(
             ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id')
             ->join('topics', 'topics.subject_id', '=', 'subjects.id')
             ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
-            ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
+            ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id')
             ->where('tutorregistrations.is_active', 1)
             ->where('subjects.id', 'like', '%' . $subjectid . '%') // LIKE search for subject
             ->where('classes.id', 'like', '%' . $classid . '%') // LIKE search for class
-            ->where('tutorregistrations.name', 'like', '%' . $tutorname . '%') // LIKE search for tutor
-            ->groupBy(
-                'tutorprofiles.tutor_id',
-                'tutorprofiles.name',
-                'tutorprofiles.headline',
-                'tutorprofiles.qualification',
-                'tutorprofiles.intro_video_link',
-                'tutorprofiles.experience',
-                'tutorprofiles.rateperhour',
-                'tutorprofiles.admin_commission',
-                'tutorprofiles.profile_pic'
-            )
-            ->get();
+            ->where('tutorprofiles.name', 'like', '%' . $tutorname . '%'); // LIKE search for tutor
+
+// Apply the price range conditions only if the min or max price is provided
+        if (!is_null($minPrice)) {
+            $tutors->where(DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100))'), '>=', $minPrice);
+        }
+
+        if (!is_null($maxPrice)) {
+            $tutors->where(DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100))'), '<=', $maxPrice);
+        }
+
+        $tutors = $tutors->groupBy(
+            'tutorprofiles.tutor_id',
+            'tutorprofiles.name',
+            'tutorprofiles.headline',
+            'tutorprofiles.qualification',
+            'tutorprofiles.intro_video_link',
+            'tutorprofiles.experience',
+            'tutorprofiles.rateperhour',
+            'tutorprofiles.admin_commission',
+            'tutorprofiles.profile_pic'
+        )->get();
 
         $subjectlists = DB::table('subjects')
             ->join('subjectcategories', 'subjects.category', '=', 'subjectcategories.id')
@@ -411,7 +423,8 @@ $tutors = tutorprofile::select(
             'tutorprofiles.experience',
             DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100)) as rateperhour'),
             'tutorprofiles.profile_pic',
-            DB::raw('GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", ") as subject'),
+            // Limit subjects to a maximum of two
+            DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", "), ",", 2) as subject'),
             DB::raw('SUM(tutorreviews.ratings) / COUNT(tutorreviews.id) AS starrating'),
             DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
             DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
@@ -1916,10 +1929,10 @@ $tutors = tutorprofile::select(
     public function reviewslist()
     {
         $reviews = tutorreviews::select('tutorreviews.*', 'subjects.name as subjectname', 'tutorregistrations.name as tutorname', 'studentregistrations.name as studentname')
-        ->leftJoin('subjects', 'subjects.id', 'tutorreviews.subject_id')
-        ->leftJoin('tutorregistrations', 'tutorregistrations.id', 'tutorreviews.tutor_id')
-        ->leftJoin('studentregistrations', 'studentregistrations.id', 'tutorreviews.student_id')
-        ->where('tutorreviews.ratings', '>', 3)->get();
+            ->leftJoin('subjects', 'subjects.id', 'tutorreviews.subject_id')
+            ->leftJoin('tutorregistrations', 'tutorregistrations.id', 'tutorreviews.tutor_id')
+            ->leftJoin('studentregistrations', 'studentregistrations.id', 'tutorreviews.student_id')
+            ->where('tutorreviews.ratings', '>', 3)->get();
         // dd($reviews);
         return view('front-cms.reviews', compact('reviews'));
     }
