@@ -241,6 +241,7 @@ public function tutorslotsearch(Request $request) {
     $subject = $request->selectsubject;
     $student = $request->selectstudent;
     $bookingStatus = $request->bookingstatus;
+    $classStatus = $request->classstatus;
     // dd($request->all());
     // Assuming 'date' is the column in your 'slot_bookings' table where the date is stored
     $slotsQuery = SlotBooking::select('slot_bookings.*', 'studentprofiles.name as student_name', 'subjects.name as subject')
@@ -265,6 +266,13 @@ public function tutorslotsearch(Request $request) {
             $bookingStatus = 0;
         }
        $slotsQuery->where('status',$bookingStatus);
+    }
+    if($classStatus){
+
+        // if($bookingStatus == 2){
+        //     $bookingStatus = 0;
+        // }
+       $slotsQuery->where('is_class_scheduled',$classStatus);
     }
 
     $slots = $slotsQuery->get();

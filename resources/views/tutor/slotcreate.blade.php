@@ -63,10 +63,18 @@
                             </select>
                             <select type="text" class="form-control" style="width:auto; margin-right:10px"
                                 id="bookingstatus" name="bookingstatus">
-                                <option value="" disabled selected>Slot Status</option>
+                                <option value="" disabled selected>Select Slot Status</option>
                                 <option value="">All Slots</option>
-                                <option value="1">Booked Slots</option>
+                                <option value="1" >Booked Slots</option>
                                 <option value="2">Available Slots</option>
+                            </select>
+                            <select type="text" class="form-control" style="width:auto; margin-right:10px"
+                                id="classstatus" name="classstatus">
+                                <option value="" disabled selected>Select Class Status</option>
+                                <option value="">All Classes</option>
+                                <option value="0">Not Scheduled Classes</option>
+                                <option value="1">Scheduled Classes</option>
+                                <option value="2">Completed Classes</option>
                             </select>
                             <input type="date" class="form-control" style="width:auto; margin-right:10px"
                                 onchange="searchSlots();" id="searchDate" name="searchDate">
