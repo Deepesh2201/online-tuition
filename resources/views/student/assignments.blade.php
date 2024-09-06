@@ -60,6 +60,7 @@
                                 <tr>
                                     <th scope="col">S.No.</th>
                                     <th scope="col">Class</th>
+                                    <th scope="col">Tutor</th>
                                     <th scope="col">Subject</th>
                                     <th scope="col">Topic</th>
                                     {{-- <th scope="col">Batch</th> --}}
@@ -79,6 +80,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $assignment->class }}</td>
+                                        <td>{{ $assignment->tutor_name }}</td>
                                         <td>{{ $assignment->subject }}</td>
                                         <td>{{ $assignment->topic }}</td>
                                         {{-- <td>{{ $assignment->batch }}</td> --}}

@@ -231,9 +231,10 @@ class AssignmentsController extends Controller
     {
         $classes = (new CommonController)->classes();
         $subjects = subjects::where('is_active',1)->get();
-        $assignments = StudentAssignmentList::select('*', 'student_assignment_lists.id as assignment_id', 'student_assignment_lists.topic', 'student_assignment_lists.name as assignment_name', 'subjects.name as subject', 'classes.name as class',)
+        $assignments = StudentAssignmentList::select('*', 'student_assignment_lists.id as assignment_id', 'tutorregistrations.name as tutor_name', 'student_assignment_lists.topic', 'student_assignment_lists.name as assignment_name', 'subjects.name as subject', 'classes.name as class',)
             ->join('subjects', 'subjects.id', 'student_assignment_lists.subject_id')
             ->join('classes', 'classes.id', 'student_assignment_lists.class_id')
+            ->join('tutorregistrations', 'tutorregistrations.id', 'student_assignment_lists.assigned_by')
             // ->join('batches', 'batches.id', 'student_assignment_lists.batch_id')
             ->where('student_assignment_lists.is_active', 1)
             ->where('student_assignment_lists.student_id', session('userid')->id)
