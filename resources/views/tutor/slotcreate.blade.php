@@ -72,7 +72,7 @@
                                 id="classstatus" name="classstatus">
                                 <option value="" disabled selected>Select Class Status</option>
                                 <option value="">All Classes</option>
-                                <option value="0">Not Scheduled Classes</option>
+                                {{-- <option value="0">Not Scheduled Classes</option> --}}
                                 <option value="1">Scheduled Classes</option>
                                 <option value="2">Completed Classes</option>
                             </select>
