@@ -121,9 +121,23 @@ class DashboardController extends Controller
 
     public function notificationslist(){
         $notifications = Notification::select('*')
-        ->where('show_to_admin',1)
+        // ->where('show_to_admin',1)
+        ->orderBy('created_at','desc')
         // ->where('show_to_student_id', session('userid')->id)
-        ->paginate(10);
+        ->paginate(20);
         return view('admin.notificationslist', compact('notifications'));
+    }
+    public function notificationdelete($id){
+
+        $data = Notification::find($id);
+
+        $res = $data->delete();
+
+        if($res){
+            return back()->with('success','Notification deleted successfully.');
+        }
+        else{
+            return back()->with('error','Something went wrong.');
+        }
     }
 }

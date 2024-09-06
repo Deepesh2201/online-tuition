@@ -105,7 +105,7 @@
                                     <td><a href="tutorprofile/{{ $demo->tutor_id }}">{{ $demo->tutor }}</a></td>
                                     <td>{{ $demo->class_name }}</td>
                                     <td>{{ $demo->subject }}</td>
-                                    
+
                                     {{-- <td>{{ $demo->slot_1 }}</td> --}}
                                     {{-- <td>{{ $demo->slot_2 }}</td> --}}
                                     {{-- <td>{{ $demo->slot_3 }}</td> --}}
@@ -126,11 +126,11 @@
                                     </td>
                                     {{-- <td><a href="{{$demo->demo_link}}">{{$demo->demo_link}}</a></td> --}}
                                     @if (session('usertype') == 'Parent')
-                                    <td>
-                                        {{-- <button class="btn btn-sm mr-1 btn-primary" disabled><i class="fa fa-calendar" aria-hidden="true"></i> Reschedule</button> --}}
-                                        <a href="{{ $demo->demo_link }}" target="_blank"><button
-                                                class="badge bg-success"> Join Class</button></a>
-                                    </td>
+                                        <td>
+                                            {{-- <button class="btn btn-sm mr-1 btn-primary" disabled><i class="fa fa-calendar" aria-hidden="true"></i> Reschedule</button> --}}
+                                            <a href="{{ $demo->demo_link }}" target="_blank"><button
+                                                    class="badge bg-success"> Join Class</button></a>
+                                        </td>
                                     @else
                                         @if ($demo->status == 1)
                                             <td>
@@ -157,8 +157,13 @@
                                                     Cancelled</button>
                                             </td>
                                         @endif
-                                        <td><a href="enrollnow/{{ $demo->tutor_id }}"><button class="badge bg-success">
-                                                    Enroll Now</button></a></td>
+                                        <td>
+                                            @if ($demo->status != 1)
+                                                
+                                            <a href="enrollnow/{{ $demo->tutor_id }}"><button class="badge bg-success">
+                                                Book Now</button></a>
+                                                @endif
+                                        </td>
                                     @endif
 
 

@@ -409,7 +409,8 @@ class DashboardController extends Controller
         $notifications = Notification::select('*')
         ->where('show_to_student',1)
         ->where('show_to_student_id', session('userid')->id)
-        ->paginate(10);
+        ->orderBy('created_at','desc')
+        ->paginate(20);
         return view('student.notificationslist', compact('notifications'));
     }
 }

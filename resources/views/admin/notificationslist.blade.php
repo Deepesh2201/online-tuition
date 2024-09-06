@@ -32,6 +32,7 @@
                             <tr>
                                 <th scope="col">S.No</th>
                                 <th scope="col">Notification</th>
+                                <th scope="col">Action</th>
                                 {{-- <th scope="col">From</th> --}}
                                 
                             </tr>
@@ -41,6 +42,7 @@
                             <tr>
                                    <td>{{$loop->iteration}}</td>
                                    <td>{{$notification->notification}}</td>
+                                   <td><a href="/admin/notificationdelete/{{$notification->id}}"><button type="button" class="btn btn-sm btn-danger">Delete</button></a></td>
                             </tr>
                            @endforeach
                         </tbody>

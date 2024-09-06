@@ -219,6 +219,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['AdminAuthenticate']], funct
     // Admin dashboard
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('notifications', [AdminDashboardController::class, 'notificationslist'])->name('admin.notifications');
+    Route::get('notificationdelete/{id}', [AdminDashboardController::class, 'notificationdelete'])->name('admin.notificationdelete');
     // Classes
     Route::get('class', [ClassController::class, 'index'])->name('admin.class');
     Route::post('class', [ClassController::class, 'store'])->name('admin.class.create');

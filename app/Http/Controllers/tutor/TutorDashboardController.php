@@ -188,7 +188,8 @@ class TutorDashboardController extends Controller
         $notifications = Notification::select('*')
         ->where('show_to_tutor',1)
         ->where('show_to_tutor_id', session('userid')->id)
-        ->paginate(10);
+        ->orderBy('created_at','desc')
+        ->paginate(20);
         return view('tutor.notificationslist', compact('notifications'));
     }
 }

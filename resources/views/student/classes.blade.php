@@ -128,7 +128,7 @@
                             <td>{{ $class->subjects }}</td>
                             {{-- <td>{{ $class->batch }}</td> --}}
                             <td>{{ $class->topics }}</td>
-                           <td>{{ Carbon\Carbon::parse($class->start_time)->format('d/m/Y h:i A') }}</td>
+                           <td>{{$class->start_time ? Carbon\Carbon::parse($class->start_time)->format('d/m/Y h:i A') :''}}</td>
 
                             {{-- <td>{{ $class->duration }} min</td> --}}
                             <td>
