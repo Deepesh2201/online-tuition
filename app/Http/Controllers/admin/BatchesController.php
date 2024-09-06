@@ -258,10 +258,10 @@ class BatchesController extends Controller
     public function updaterecording(Request $request){
         $data = zoom_classes::find($request->recording_link_id);
         $data->recording_link = $request->recording_link;
+        $data->topic_name = $request->class_topic;
         $res = $data->update();
         if ($res) {
             return back()->with('success', 'Recording Link Successfully Submitted');
-
         } else {
             return back()->with('fail', 'Something went wrong!, try again later');
 

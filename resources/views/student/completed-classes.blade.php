@@ -87,6 +87,7 @@
                             {{-- <th scope="col">Topic</th> --}}
                             <th scope="col">Started At</th>
                             <th scope="col">Completed At</th>
+                            <th scope="col">Topic</th>
                             {{-- <th scope="col">Duration</th> --}}
                             <th scope="col">Recordings</th>
                         </tr>
@@ -102,6 +103,7 @@
                             {{-- <td>{{ $class->topics }}</td> --}}
                             <td>{{ $class->started_at }}</td>
                             <td>{{ $class->completed_at }}</td>
+                            <td>{{ $class->topic_name }}</td>
                             {{-- <td>{{ $class->duration }}</td> --}}
                             <td>
                                 @if ($class->is_completed == 1)

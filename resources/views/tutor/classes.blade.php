@@ -216,6 +216,10 @@
                                 @csrf
                                 <input type="hidden" id="recording_link_id" name="recording_link_id">
                                 <div class="col-12 col-md-12 col-ms-6 mb-3">
+                                    <label>Topic</label>
+                                    <input type="text" class="form-control" id="class_topic" name="class_topic" required>
+                                </div>
+                                <div class="col-12 col-md-12 col-ms-6 mb-3">
                                     <label>Recording Link<span style="color:red">*</span></label>
                                     <input type="text" class="form-control" id="recording_link" name="recording_link" required>
                                 </div>
