@@ -173,6 +173,9 @@ Route::group(['prefix' => 'student', 'middleware' => ['StudentAuthenticate']], f
     Route::post('feedback/submit',[TutorreviewsController::class,'feedbacksubmitstudent'])->name('student.feedback.submit');
     // Feedback by tutor
     Route::get('myfeedback', [TutorreviewsController::class, 'studentfeedbacklist'])->name('student.myfeedback');
+    Route::get('trialsuccess', [DemoListController::class, 'trialsuccess'])->name('student.trialsuccess');
+    Route::get('enrollsuccess', [TutorSearchController::class, 'enrollsuccess'])->name('student.enrollsuccess');
+    // Route::get('trialsuccess', [TutorreviewsController::class, 'trialsuccess'])->name('student.trialsuccess');
     // Message By Student
     Route::get('messages', [MessagesController::class, 'messagesbystudent'])->name('student.messages');
     Route::get('adminmessages', [MessagesController::class, 'messagesbystudentadmins'])->name('student.messages.admins');

@@ -24,7 +24,7 @@
                 @endif
 
                 <div id="" class="mb-3 listHeader page-title-box">
-                    <h3>Demo Classes</h3>
+                    <h3>Trial Classes</h3>
                 </div>
 
                 <form id="payment-search">
@@ -86,12 +86,12 @@
                                 <th scope="col">Tutor</th>
                                 <th scope="col">Class</th>
                                 <th scope="col">Subject</th>
-                                <th scope="col">Current Status</th>
-                                <th scope="col">Prefer Slot-1</th>
-                                <th scope="col">Prefer Slot-2</th>
-                                <th scope="col">Prefer Slot-3</th>
+                                {{-- <th scope="col">Prefer Slot-1</th> --}}
+                                {{-- <th scope="col">Prefer Slot-2</th> --}}
+                                {{-- <th scope="col">Prefer Slot-3</th> --}}
                                 <th scope="col">Confirm Slot</th>
                                 <th scope="col">Remarks</th>
+                                <th scope="col">Current Status</th>
                                 @if (session('usertype') == 'Parent')
                                 @else
                                     <th scope="col">Action</th>
@@ -105,9 +105,15 @@
                                     <td><a href="tutorprofile/{{ $demo->tutor_id }}">{{ $demo->tutor }}</a></td>
                                     <td>{{ $demo->class_name }}</td>
                                     <td>{{ $demo->subject }}</td>
+                                    
+                                    {{-- <td>{{ $demo->slot_1 }}</td> --}}
+                                    {{-- <td>{{ $demo->slot_2 }}</td> --}}
+                                    {{-- <td>{{ $demo->slot_3 }}</td> --}}
+                                    <td>{{ $demo->slot_confirmed }}</td>
+                                    <td>{{ $demo->remarks }}</td>
                                     <td>
                                         @if ($demo->status == 1)
-                                            <span class="badge bg-info">{{ $demo->currentstatus }}</span>
+                                            <span class="badge bg-info">Waiting for tutor's confirmation</span>
                                         @elseif ($demo->status == 2)
                                             <span class="badge bg-primary">{{ $demo->currentstatus }}</span>
                                         @elseif ($demo->status == 3)
@@ -118,11 +124,6 @@
                                             <span class="badge bg-danger">{{ $demo->currentstatus }}</span>
                                         @endif
                                     </td>
-                                    <td>{{ $demo->slot_1 }}</td>
-                                    <td>{{ $demo->slot_2 }}</td>
-                                    <td>{{ $demo->slot_3 }}</td>
-                                    <td>{{ $demo->slot_confirmed }}</td>
-                                    <td>{{ $demo->remarks }}</td>
                                     {{-- <td><a href="{{$demo->demo_link}}">{{$demo->demo_link}}</a></td> --}}
                                     @if (session('usertype') == 'Parent')
                                     <td>

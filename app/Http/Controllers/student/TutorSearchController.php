@@ -623,7 +623,8 @@ class TutorSearchController extends Controller
             $notified = $notificationdata->save();
             broadcast(new RealTimeMessage('$notification'));
 
-            return back()->with('success', $msg);
+            // return back()->with('success', $msg);
+            return redirect()->to('student/enrollsuccess');
         } else {
             return back()->with('fail', 'Something Went Wrong. Try Again Later');
         }
@@ -1076,6 +1077,11 @@ class TutorSearchController extends Controller
             ->get();
 
         return view('admin.tutorslots', compact('slots'));
+    }
+
+    public function enrollsuccess(){
+
+        return view('student.enrollsuccess');
     }
 
 }
