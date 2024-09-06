@@ -92,7 +92,7 @@ class ClassController extends Controller
         // ->where('zoom_classes.status','like', '%waiting%')
         ->where('zoom_classes.is_completed',0)
         ->get();
-        $subjects = subjects::where('is_active',1)->where('class_id',session('userid')->class_id)->get();
+        $subjects = subjects::where('is_active',1)->get();
         $batches = batches::where('is_active',1)->get();
 // dd($classes);
         return view('student.classes',get_defined_vars());
@@ -199,7 +199,7 @@ class ClassController extends Controller
         $classes = $query->paginate();
         $type = "student-classes";
         $viewTable = view('admin.partials.common-search', compact('classes','type'))->render();
-        $subjects = subjects::where('is_active',1)->where('class_id',session('userid')->class_id)->get();
+        $subjects = subjects::where('is_active',1)->get();
         $batches = batches::where('is_active',1)->get();
         // $viewPagination = $classes->links()->render();
 

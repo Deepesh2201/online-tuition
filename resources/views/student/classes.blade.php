@@ -50,7 +50,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-2 mt-4">
+                    <div class="col-md-2 mt-4" hidden>
                         <select class="form-control" name="batch" id="batchid">
                             <option value="">Select Batch</option>
                             @foreach ($batches as $batch)
