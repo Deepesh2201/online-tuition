@@ -77,6 +77,8 @@
                             <option value="">Select Status</option>
                             <option value="completed">Completed</option>
                             <option value="waiting">Waiting</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="Started">Live</option>
                         </select>
                     </div>
 
