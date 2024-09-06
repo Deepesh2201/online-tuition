@@ -101,6 +101,7 @@
                             <th scope="col">Subject</th>
                             {{-- <th scope="col">Batch</th> --}}
                             <th scope="col">Topic</th>
+                            <th scope="col">Tutor</th>
                             <th scope="col">Start Time</th>
                             {{-- <th scope="col">Duration</th> --}}
                             <th scope="col">Action</th>
@@ -130,6 +131,7 @@
                             <td>{{ $class->subjects }}</td>
                             {{-- <td>{{ $class->batch }}</td> --}}
                             <td>{{ $class->topics }}</td>
+                            <td>{{ $class->tutor_name }}</td>
                            <td>{{$class->start_time ? Carbon\Carbon::parse($class->start_time)->format('d/m/Y h:i A') :''}}</td>
 
                             {{-- <td>{{ $class->duration }} min</td> --}}
