@@ -87,7 +87,7 @@
                                     <p class="fw-medium  mb-0"><b>My Tutor&nbsp;&nbsp;&nbsp;</b></p>
                                     <div class="topCradCount">
                                         <h2 class="pt-2" style="color: #59C069"><span class="counter-value"
-                                                data-target="{{ count($subjects_enrolled) ?? '0' }}">{{ count($subjects_enrolled) ?? '0' }}</span>
+                                                data-target="{{ count($tutors_enrolled) ?? '0' }}">{{ count($tutors_enrolled) ?? '0' }}</span>
                                         </h2>
                                     </div>
                                 </div>

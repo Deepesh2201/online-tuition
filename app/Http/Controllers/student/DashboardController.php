@@ -323,6 +323,36 @@ class DashboardController extends Controller
             ];
         }
 
+        $tutors_enrolled = tutorprofile::select(
+            'tutorprofiles.id',
+            'tutorprofiles.tutor_id as tutor_id',
+            'tutorprofiles.name',
+            'tutorprofiles.profile_pic',
+            DB::raw('IFNULL(SUM(tutorreviews.ratings) / COUNT(tutorreviews.ratings), 0) AS starrating'),
+            DB::raw('IFNULL(ps.total_classes_purchased, 0) as total_classes_purchased'),
+            DB::raw('(tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100) + tutorprofiles.rateperhour as rate'),
+            DB::raw('GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name ASC SEPARATOR ", ") as subject')
+        )
+            ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id')
+            ->join(DB::raw('(SELECT tutor_id, SUM(classes_purchased) as total_classes_purchased
+                            FROM paymentstudents
+                            WHERE student_id = ' . session('userid')->id . '
+                            GROUP BY tutor_id) as ps'), 'ps.tutor_id', '=', 'tutorprofiles.tutor_id')
+            ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
+            ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
+            ->groupBy(
+                'tutorprofiles.id',
+                'tutorprofiles.tutor_id',
+                'tutorprofiles.name',
+                'tutorprofiles.profile_pic',
+                'tutorprofiles.rateperhour',
+                'tutorprofiles.admin_commission',
+                'ps.total_classes_purchased'
+            )
+            ->get();
+
+            // dd($tutors_enrolled);
+
         return view('student.dashboard', get_defined_vars());
     }
 
