@@ -707,7 +707,7 @@
                                 class="nav-link {{ Request::is('student/completed-classes') ? 'active' : '' }}"
                                 data-key="t-horizontal"><img
                                     src="/images/Student-dashboard-menu-icon/My recordings.svg"
-                                    alt="">&nbsp;&nbsp; Class Recordings</a>
+                                    alt="">&nbsp;&nbsp; Completed Classes</a>
                         </li>
 
                         <!-- <li class="nav-item">

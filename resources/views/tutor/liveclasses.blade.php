@@ -336,6 +336,11 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-12 col-12 col-sm-12">
+                                    <input type="text" class="form-control" placeholder="Enter Topic Here" name="video_topic">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-12 col-sm-12">
                                     <input type="text" class="form-control" placeholder="Paste Video Link Here" name="video_link">
                                 </div>
                             </div>

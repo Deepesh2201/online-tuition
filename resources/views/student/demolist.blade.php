@@ -89,7 +89,7 @@
                                 {{-- <th scope="col">Prefer Slot-1</th> --}}
                                 {{-- <th scope="col">Prefer Slot-2</th> --}}
                                 {{-- <th scope="col">Prefer Slot-3</th> --}}
-                                <th scope="col">Confirm Slot</th>
+                                <th scope="col">Confirmed Slot</th>
                                 <th scope="col">Remarks</th>
                                 <th scope="col">Current Status</th>
                                 @if (session('usertype') == 'Parent')
@@ -109,7 +109,10 @@
                                     {{-- <td>{{ $demo->slot_1 }}</td> --}}
                                     {{-- <td>{{ $demo->slot_2 }}</td> --}}
                                     {{-- <td>{{ $demo->slot_3 }}</td> --}}
-                                    <td>{{ $demo->slot_confirmed }}</td>
+                                    <td>
+                                        {{ $demo->slot_confirmed ? \Carbon\Carbon::parse($demo->slot_confirmed)->format('d-m-Y h:i A') : '' }}
+                                    </td>
+                                    
                                     <td>{{ $demo->remarks }}</td>
                                     <td>
                                         @if ($demo->status == 1)

@@ -395,7 +395,7 @@ class GoogleCalendarController extends Controller
 
             broadcast(new RealTimeMessage('$notification'));
 
-            return redirect()->to('/tutor/demolist')->with('success', 'Demo confirmed successfully');
+            return redirect()->to('/tutor/demolist')->with('success', 'Trial confirmed successfully');
         } else {
             return back()->with('fail', 'Something went wrong. Please try again later');
         }
@@ -455,7 +455,7 @@ class GoogleCalendarController extends Controller
             $notified = $notificationdata->save();
             broadcast(new RealTimeMessage('$notification'));
 
-            return back()->with('success', 'Demo ended successfully');
+            return back()->with('success', 'Trial ended successfully');
         } else {
             return back()->with('fail', 'Something went wrong. Please try again later');
         }
@@ -473,7 +473,7 @@ class GoogleCalendarController extends Controller
             $token = $client->fetchAccessTokenWithAuthCode($request->input('code'));
             if (!isset($token['error'])) {
                 $request->session()->put('access_token', $token);
-                return redirect()->route('tutor.demolist')->with('success', 'Demo confirmed successfully');
+                return redirect()->route('tutor.demolist')->with('success', 'Trial confirmed successfully');
             }
         }
 

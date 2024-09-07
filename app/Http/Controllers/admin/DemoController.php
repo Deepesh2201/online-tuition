@@ -10,6 +10,7 @@ use App\Models\subjects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Models\Notification;
 
 class DemoController extends Controller
 {
@@ -88,7 +89,7 @@ class DemoController extends Controller
         $res = $demo->save();
         if($res){
 
-            return back()->with('success','Demo Cancelled Successfully');
+            return back()->with('success','Trial Cancelled Successfully');
         }
         else{
             return back()->with('fail','Something Went Wrong. Try Again Later');
@@ -113,7 +114,7 @@ class DemoController extends Controller
         $res = $demo->save();
         if($res){
 
-            return back()->with('success','Demo Scheduled Successfully');
+            return back()->with('success','Trial Scheduled Successfully');
         }
         else{
             return back()->with('fail','Something Went Wrong. Try Again Later');
@@ -236,7 +237,7 @@ $data->remarks = $request->remarks;
 
 $res = $data->save();
 if($res){
-    return back()->with('success','Demo details updated successfully');
+    return back()->with('success','Trial details updated successfully');
 }
 else{
     return back()->with('fail','Something went wrong. Please try again later');
@@ -248,6 +249,46 @@ public function demostatusupdate(Request $request)
     $data = democlasses::find($request->id);
     $data->status = '8';
     $res = $data->save();
-    return json_encode(array('statusCode' => 200));
+    if ($res) {
+        //////////////// Here I need to pass notification into db
+        $notificationdata = new Notification();
+        $notificationdata->alert_type = 2;
+        $notificationdata->notification = 'Trial class started by '.session('userid')->name;
+        $notificationdata->initiator_id = session('userid')->id;
+        $notificationdata->initiator_role = session('userid')->role_id;
+        $notificationdata->event_id = $data->id;
+        // Sending to admin
+        // if($request->receiver_role_id == 1){
+            // $notificationdata->show_to_admin = 1;
+        //     $notificationdata->show_to_admin_id = $request->receiver_id;
+        //     // $notificationdata->show_to_all_admin = 1;
+        // }
+        // Sending to tutor
+        // if($request->receiver_role_id == 2){
+            // $notificationdata->show_to_tutor = 1;
+            // $notificationdata->show_to_tutor_id = $tutor_id->assigned_by;
+            // $notificationdata->show_to_all_tutor = 0;
+        // }
+        // Sending to student
+        // if($request->receiver_role_id == 3){
+            $notificationdata->show_to_student = 1;
+            $notificationdata->show_to_student_id = $data->student_id;
+            $notificationdata->show_to_all_student = 0;
+        // }
+        // // Sending to parent
+        // if($request->receiver_role_id == 3){
+            // $notificationdata->show_to_parent = 1;
+            // $notificationdata->show_to_parent_id = $request->receiver_id;
+            // $notificationdata->show_to_all_parent = 0;
+        // }
+        $notificationdata->read_status = 0;
+
+        $notified = $notificationdata->save();
+        broadcast(new RealTimeMessage('$notification'));
+
+        return json_encode(array('statusCode' => 200));
+    } else {
+        return back()->with('fail', 'Something went wrong, please try again later');
+    }
 }
 }

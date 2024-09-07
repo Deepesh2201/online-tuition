@@ -6,12 +6,42 @@
 <div class="main-content">
 
     <div class="page-content">
-        @if (Session::has('success'))
-            <div class="alert alert-success">{{Session::get('success')}}</div>
-            @endif
-            @if (Session::has('fail'))
-            <div class="alert alert-danger">{{Session::get('fail')}}</div>
-            @endif
+        @if(Session::has('success'))
+        <script>
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ Session::get('success') }}',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+        </script>
+    @endif
+    
+    @if(Session::has('fail'))
+        <script>
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: '{{ Session::get('fail') }}',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+        </script>
+    @endif
+    
         <div class="container-fluid">
 
             <!-- start page title -->
@@ -164,7 +194,7 @@
                                         <tr class="">
                                             <th>Tutor</th>
                                             <th>Topic</th>
-                                            <th>Time</th>
+                                            <th>Scheduled Time</th>
                                             <th>Status</th>
                                             {{-- <th>Action</th> --}}
                                         </tr>
@@ -183,22 +213,39 @@
                                             <td>
                                                 <div class="dayTime">
                                                     @php
-                                                    $startDateTime = \Carbon\Carbon::parse($upcomingclass->start_time);
-                                                    $now = \Carbon\Carbon::now();
-
-                                                    if ($startDateTime->isToday()) {
-                                                    $message = 'Today';
-                                                    } elseif ($startDateTime->isTomorrow()) {
-                                                    $message = 'Tomorrow';
+                                                    if ($upcomingclass->start_time) {
+                                                        $startDateTime = \Carbon\Carbon::parse($upcomingclass->start_time);
+                                                        $now = \Carbon\Carbon::now();
+                                                        
+                                                        // Difference in hours between the current time and the class start time
+                                                        $hoursDiff = $startDateTime->diffInHours($now, false); // 'false' keeps the sign of the difference
+                                                        
+                                                        if ($hoursDiff >= -1) { // Only show if the start time is in the future or within the last 1 hour
+                                                            if ($startDateTime->isToday()) {
+                                                                $message = 'Today';
+                                                            } elseif ($startDateTime->isTomorrow()) {
+                                                                $message = 'Tomorrow';
+                                                            } else {
+                                                                $daysToGo = $now->diffInDays($startDateTime);
+                                                                $message = $daysToGo . ' days to go';
+                                                            }
+                                                        } else {
+                                                            $message = '';  // No message for past events more than 1 hour ago
+                                                        }
                                                     } else {
-                                                    $daysToGo = $now->diffInDays($startDateTime);
-                                                    $message = $daysToGo . ' days to go';
+                                                        $message = '';  // Empty if start_time is not available
                                                     }
                                                     @endphp
-                                                    <span>{{ $message }}</span>
-                                                    <small>{{ $startDateTime->format('Y-m-d H:i:s') }}</small>
+                                            
+                                                    @if($upcomingclass->start_time && $hoursDiff >= -1)
+                                                        <span>{{ $message }}</span>
+                                                        <small>{{ $startDateTime->format('d-m-Y h:i A') }}</small>  <!-- Formatted as dd-mm-yyyy hh:mm am/pm -->
+                                                    @else
+                                                        <span></span>  <!-- Empty if no start_time or past more than 1 hour -->
+                                                    @endif
                                                 </div>
                                             </td>
+                                            
 
                                             <td>
                                                 @if (in_array(strtolower($upcomingclass->status), ['confirmed',

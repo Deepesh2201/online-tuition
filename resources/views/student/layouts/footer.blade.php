@@ -18,7 +18,8 @@
 <!-- end main content-->
 <style>
     .notification-popup {
-        display: none; /* Hide by default */
+        display: none;
+        /* Hide by default */
         position: fixed;
         top: 50%;
         left: 50%;
@@ -31,7 +32,7 @@
         z-index: 1000;
         text-align: center;
     }
-    
+
     .notification-popup button {
         margin-top: 10px;
         padding: 5px 10px;
@@ -41,40 +42,40 @@
         border-radius: 3px;
         cursor: pointer;
     }
-    
+
     .notification-popup button:hover {
         background-color: #cc0000;
     }
-    </style>
-    
-    
-    
+</style>
+
+
+
 <!-- end main content-->
 <div id="notification-popup" class="notification-popup">
     <p id="notificationpopupdata"></p>
     <button onclick="closeNotification()">Close</button>
-    <audio id="notification-sound" src="{{url('sounds/notification.mp3')}}" preload="auto"></audio>
+    <audio id="notification-sound" src="{{ url('sounds/notification.mp3') }}" preload="auto"></audio>
 </div>
 
 <script>
     function showNotification(count) {
         var popup = document.getElementById('notification-popup');
         var sound = document.getElementById('notification-sound');
-        document.getElementById('notificationpopupdata').innerHTML='You have '+ count +' unread notifications';
-        
+        document.getElementById('notificationpopupdata').innerHTML = 'You have ' + count + ' unread notifications';
+
         popup.style.display = 'block';
         sound.play();
     }
-    
+
     function closeNotification() {
         var popup = document.getElementById('notification-popup');
         popup.style.display = 'none';
     }
-    
+
     // Call the function to show the notification
     // showNotification();
-    </script>
- 
+</script>
+
 <!-- JAVASCRIPT -->
 @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 <script src="{{ url('new-styles/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -126,55 +127,52 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </body>
 <script>
-   // Function to fetch notifications and update unread count
-   function fetchNotificationsAndUpdateCount() {
+    // Function to fetch notifications and update unread count
+    function fetchNotificationsAndUpdateCount() {
     $.ajax({
         url: '/notifications', // Update this URL to your endpoint that fetches notifications
         type: 'GET',
         success: function(response) {
             var unreadCount = response.unread_count;
-            if(response.unread_count > 0){
-                showNotification(response.unread_count);
+            
+            // Check if the notification has been shown in this session
+            if (unreadCount > 0 && !sessionStorage.getItem('notificationShown')) {
+                showNotification(response.unread_count); // Show notification popup
+                sessionStorage.setItem('notificationShown', true); // Set flag
             }
-            else{
-                closeNotification();
-            }
+
             $('#unreadNotificationCount').text(unreadCount);
+
             // Update the class of the badge to visually indicate unread count
             if (unreadCount > 0) {
                 $('#unreadNotificationCount').removeClass('bg-danger').addClass('bg-primary');
             } else {
                 $('#unreadNotificationCount').removeClass('bg-primary').addClass('bg-danger');
             }
-            
+
             // Clear previous notifications
             var notificationList = $('#all-noti-tab .pe-2');
-            notificationList.empty(); 
-            console.log(response.notifications);
+            notificationList.empty();
+
             // Loop through the notifications and append them to the appropriate tab
             $.each(response.notifications, function(index, notification) {
                 let createdAt = new Date(notification.created_at);
 
-                // Extracting hours, minutes, seconds, day, month, and year
-                let hours = createdAt.getHours();
-                let minutes = createdAt.getMinutes();
-                let seconds = createdAt.getSeconds();
-                let day = createdAt.getDate();
-                let month = createdAt.getMonth() + 1; // Months are zero-indexed, so add 1
+                // Extract and format the date and time
+                let hours = ('0' + createdAt.getHours()).slice(-2);
+                let minutes = ('0' + createdAt.getMinutes()).slice(-2);
+                let seconds = ('0' + createdAt.getSeconds()).slice(-2);
+                let day = ('0' + createdAt.getDate()).slice(-2);
+                let month = ('0' + (createdAt.getMonth() + 1)).slice(-2);
                 let year = createdAt.getFullYear();
 
-                // Padding single digits with leading zeros
-                hours = ('0' + hours).slice(-2);
-                minutes = ('0' + minutes).slice(-2);
-                seconds = ('0' + seconds).slice(-2);
-                day = ('0' + day).slice(-2);
-                month = ('0' + month).slice(-2);
                 let formattedDateTime = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
+                
                 var notificationItem = `
                     <div class="text-reset notification-item d-block dropdown-item position-relative">
                         <div class="d-flex">
                             <div class="avatar-xs me-3 flex-shrink-0">
-                                <span class="avatar-title bg-info-subtle  rounded-circle fs-16">
+                                <span class="avatar-title bg-info-subtle rounded-circle fs-16">
                                     <img src="/images/tutors/profilepics/${notification.initiator_pic}" class="" height="36px">
                                 </span>
                             </div>
@@ -189,77 +187,61 @@
                             <div class="px-2 fs-15">
                                 <div class="form-check notification-check">
                                     <input class="form-check-input" title="Mark as read" onclick="markAsRead('${notification.id}')" type="radio" value="" id="notification-check-${index}">
-                                    
                                 </div>
                             </div>
                         </div>
-                        
-                        
                     </div>
-                    
                 `;
 
-                // <div style="float:right; margin-top:20px;">
-                //             <p style="cursor:pointer" class="text-danger">Clear All</p>    
-                //         </div>
-
-
-                //<label class="form-check-label" for="notification-check-${index}"></label>
-                // Append the notification to the appropriate tab based on its type
-                // if (notification.type === 'message') {
-                //     $('#messages-tab .pe-2').append(notificationItem);
-                // } else if (notification.type === 'alert') {
-                //     $('#alerts-tab').append(notificationItem);
-                // }
-                notificationList.append(notificationItem); // Append to All tab regardless of type
+                notificationList.append(notificationItem);
             });
         }
     });
 }
 
 
-// Fetch notifications and update count on page load
 
-// $(document).ready(function() {
-//     fetchNotificationsAndUpdateCount();
-// });
-$(document).ready(function() {
-    // Call the function immediately once the document is ready
-    fetchNotificationsAndUpdateCount();
-    
-    // Set an interval to call the function every 5 seconds (5000 milliseconds)
-    setInterval(fetchNotificationsAndUpdateCount, 5000);
-});
+    // Fetch notifications and update count on page load
 
-// Event listener for clicking on a notification (assuming you have one)
-// $(document).on('click', '.notification-item', function() {
-//     var notificationId = $(this).data('id');
-//     markAsRead(notificationId);
-// });
+    // $(document).ready(function() {
+    //     fetchNotificationsAndUpdateCount();
+    // });
+    $(document).ready(function() {
+        // Call the function immediately once the document is ready
+        fetchNotificationsAndUpdateCount();
 
-// Function to mark notification as read (assuming you have one)
-function markAsRead(notificationId) {
-    $.ajax({
-        url: '/markAsRead/' + notificationId, // Endpoint to mark notification as read
-        type: 'GET',
-        success: function(response) {
-            // Fetch notifications again after marking as read
-            fetchNotificationsAndUpdateCount();
-        }
+        // Set an interval to call the function every 5 seconds (5000 milliseconds)
+        setInterval(fetchNotificationsAndUpdateCount, 5000);
     });
-}
 
-function checkNotificationDetails(notificationId) {
-    $.ajax({
-        url: '/checkNotificationDetails/' + notificationId, // Endpoint to mark notification as read
-        type: 'GET',
-        success: function(response) {
-            // Fetch notifications again after marking as read
-            fetchNotificationsAndUpdateCount();
-        }
-    });
-}
+    // Event listener for clicking on a notification (assuming you have one)
+    // $(document).on('click', '.notification-item', function() {
+    //     var notificationId = $(this).data('id');
+    //     markAsRead(notificationId);
+    // });
 
+    // Function to mark notification as read (assuming you have one)
+    function markAsRead(notificationId) {
+        $.ajax({
+            url: '/markAsRead/' + notificationId, // Endpoint to mark notification as read
+            type: 'GET',
+            success: function(response) {
+                // Fetch notifications again after marking as read
+                fetchNotificationsAndUpdateCount();
+            }
+        });
+    }
+
+    function checkNotificationDetails(notificationId) {
+        $.ajax({
+            url: '/checkNotificationDetails/' + notificationId, // Endpoint to mark notification as read
+            type: 'GET',
+            success: function(response) {
+                // Fetch notifications again after marking as read
+                fetchNotificationsAndUpdateCount();
+            }
+        });
+    }
 </script>
 
 

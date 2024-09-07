@@ -31,6 +31,7 @@
                         <thead class=" ">
                             <tr>
                                 <th scope="col">S.No</th>
+                                <th scope="col">Time</th>
                                 <th scope="col">Notification</th>
                                 {{-- <th scope="col">From</th> --}}
                                 
@@ -40,6 +41,13 @@
                            @foreach ($notifications as $notification)
                             <tr>
                                    <td>{{$loop->iteration}}</td>
+                                   <td>
+                                    @if($notification->created_at)
+                                        {{ \Carbon\Carbon::parse($notification->created_at)->format('d-m-Y h:i A') }}
+                                    @else
+                                        ''
+                                    @endif
+                                </td>
                                    <td>{{$notification->notification}}</td>
                             </tr>
                            @endforeach

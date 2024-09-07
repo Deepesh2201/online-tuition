@@ -42,7 +42,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-2 mt-4">
+                    <div class="col-md-2 mt-4" hidden>
                         <select class="form-control" name="batch" id="batchid">
                             <option value="">Select Batch</option>
                             @foreach ($batches as $batch)
@@ -87,6 +87,7 @@
                             {{-- <th scope="col">Topic</th> --}}
                             <th scope="col">Started At</th>
                             <th scope="col">Completed At</th>
+                            <th scope="col">Tutor</th>
                             <th scope="col">Topic</th>
                             {{-- <th scope="col">Duration</th> --}}
                             <th scope="col">Recordings</th>
@@ -101,8 +102,14 @@
                             {{-- <td>{{ $class->subjects }}</td> --}}
                             {{-- <td>{{ $class->batch }}</td> --}}
                             {{-- <td>{{ $class->topics }}</td> --}}
-                            <td>{{ $class->started_at }}</td>
-                            <td>{{ $class->completed_at }}</td>
+                            <td>
+                                {{ $class->started_at ? \Carbon\Carbon::parse($class->started_at)->format('d-m-Y h:i A') : '' }}
+                            </td>
+                            <td>
+                                {{ $class->completed_at ? \Carbon\Carbon::parse($class->completed_at)->format('d-m-Y h:i A') : '' }}
+                            </td>
+                            
+                            <td>{{ $class->tutor_name }}</td>
                             <td>{{ $class->topic_name }}</td>
                             {{-- <td>{{ $class->duration }}</td> --}}
                             <td>
