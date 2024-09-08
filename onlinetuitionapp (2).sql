@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2024 at 10:26 AM
+-- Generation Time: Sep 08, 2024 at 01:21 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -125,8 +125,8 @@ CREATE TABLE `assign_tests` (
 --
 
 INSERT INTO `assign_tests` (`id`, `test_id`, `student_id`, `tutor_id`, `class_id`, `subject_id`, `topic_id`, `start_time`, `end_time`, `status`, `is_attempted`, `is_active`, `created_at`, `updated_at`) VALUES
-(8, 5, 1, 1, NULL, NULL, NULL, '2023-12-26T18:54', '2023-12-26T18:54', 1, 1, 1, '2023-12-26 07:54:54', '2023-12-26 07:55:55'),
-(9, 2, 1, 1, NULL, NULL, NULL, '2023-12-26T19:19', '2023-12-29T19:19', 1, 1, 1, '2023-12-26 08:20:02', '2023-12-26 08:53:29'),
+(8, 5, 1, 1, NULL, NULL, NULL, '2023-12-26T18:54', '2023-12-26T18:54', 1, 1, 1, '2023-12-26 07:54:54', '2024-07-24 12:12:06'),
+(9, 2, 1, 1, NULL, NULL, NULL, '2023-12-26T19:19', '2023-12-29T19:19', 1, 1, 1, '2023-12-26 08:20:02', '2024-07-24 12:12:22'),
 (10, 1, 1, 1, NULL, NULL, NULL, '2023-12-26T19:20', '2023-12-29T19:20', 1, 1, 1, '2023-12-26 08:20:31', '2023-12-26 08:37:52'),
 (11, 6, 1, 1, NULL, NULL, NULL, '2023-12-27T12:55', '2023-12-29T12:55', 1, 1, 1, '2023-12-27 01:55:42', '2023-12-27 01:56:44'),
 (12, 7, 1, 1, NULL, NULL, NULL, '2023-12-27T14:28', '2023-12-29T14:28', 1, 1, 1, '2023-12-27 03:28:53', '2023-12-27 03:51:07'),
@@ -215,9 +215,10 @@ INSERT INTO `batchstudentmappings` (`id`, `batch_id`, `student_data`, `tutor_id`
 
 CREATE TABLE `blogs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `name` text NOT NULL,
+  `description` text NOT NULL,
   `image` varchar(255) NOT NULL,
+  `banner` varchar(256) DEFAULT NULL,
   `tags` varchar(255) DEFAULT NULL,
   `is_featured` int(11) NOT NULL DEFAULT 0 COMMENT '0=No,1=Yes',
   `is_active` int(11) NOT NULL DEFAULT 1,
@@ -231,10 +232,12 @@ CREATE TABLE `blogs` (
 -- Dumping data for table `blogs`
 --
 
-INSERT INTO `blogs` (`id`, `name`, `description`, `image`, `tags`, `is_featured`, `is_active`, `published_by`, `published_by_id`, `created_at`, `updated_at`) VALUES
-(1, 'Tips and Tricks to design a revision timetable', 'Education is the best investment one can make in their children’s lives...', 'blog1.jpg', 'Education', 0, 1, 'Tutor', NULL, NULL, NULL),
-(2, 'Blog Test 2', 'This is a blog test description ...', 'blog2.jpg', NULL, 1, 1, 'Student', NULL, NULL, NULL),
-(3, 'Blog Test 3', 'Test blog description for blog 3', 'blog3.jpg', NULL, 1, 1, 'Admin', NULL, NULL, NULL);
+INSERT INTO `blogs` (`id`, `name`, `description`, `image`, `banner`, `tags`, `is_featured`, `is_active`, `published_by`, `published_by_id`, `created_at`, `updated_at`) VALUES
+(1, 'Tips and Tricks to design a revision timetablewewrwer', '<p>Education is the best investment one can make in their children&rsquo;s lives...Education is the best investment one can make in their children&rsquo;s lives...Education is the best investment one can make in their children&rsquo;s lives...Education is the best investment one can make in their children&rsquo;s lives...Education is the best investment one can make in their children&rsquo;s lives...Education is the best investment one can make in their children&rsquo;s lives...Education is the best investment one can make in their children&rsquo;s lives...Education is the best investment one can make in their children&rsquo;s lives...</p>', 'blog1.jpg', '1720197832.jpg', 'Education', 0, 1, 'Tutor', NULL, NULL, '2024-07-05 11:13:52'),
+(2, 'Blog Test 2', '<p>This is a blog test description ...</p>', 'blog2.jpg', '1720197749.jpg', NULL, 1, 1, 'Student', NULL, NULL, '2024-07-05 11:12:29'),
+(3, 'Blog Test 3', 'Test blog description for blog 3', 'blog3.jpg', NULL, NULL, 1, 1, 'Admin', NULL, NULL, NULL),
+(4, 'Test Blog 2', '<p>Test blog 2 description</p>', '1720108083.png', NULL, NULL, 0, 1, NULL, NULL, '2024-07-03 13:05:56', '2024-07-04 10:18:21'),
+(5, 'Test Blog 1', '<p>Test Blog 1 Description</p>', '1720108008.jpg', NULL, NULL, 0, 1, NULL, NULL, '2024-07-04 09:39:16', '2024-07-04 10:16:48');
 
 -- --------------------------------------------------------
 
@@ -319,7 +322,16 @@ INSERT INTO `ch_messages` (`id`, `from_id`, `from_role_id`, `to_id`, `to_role_id
 (150, 13, 3, 1, 1, 'tes message', NULL, 0, '2024-03-20 14:14:15', '2024-03-20 14:14:15', NULL),
 (151, 1, 1, 13, 3, 'test success', NULL, 0, '2024-03-20 14:14:24', '2024-03-20 14:14:24', NULL),
 (152, 1, 1, 8, 2, 'hey TT', NULL, 0, '2024-03-20 14:17:18', '2024-03-20 14:17:18', NULL),
-(153, 8, 2, 1, 1, 'Yes Admin', NULL, 0, '2024-03-20 14:17:34', '2024-03-20 14:17:34', NULL);
+(153, 8, 2, 1, 1, 'Yes Admin', NULL, 0, '2024-03-20 14:17:34', '2024-03-20 14:17:34', NULL),
+(154, 1, 2, 1, 3, 'hi', NULL, 0, '2024-06-21 13:32:06', '2024-06-21 13:32:06', NULL),
+(155, 23, 2, 1, 3, 'hey', NULL, 0, '2024-07-01 12:51:10', '2024-07-01 12:51:10', NULL),
+(156, 1, 3, 22, 2, 'hi', NULL, 0, '2024-07-16 10:16:49', '2024-07-16 10:16:49', NULL),
+(157, 1, 3, 23, 2, 'hi', NULL, 0, '2024-07-20 04:39:50', '2024-07-20 04:39:50', NULL),
+(158, 1, 3, 23, 2, 'hi', NULL, 0, '2024-07-20 04:39:53', '2024-07-20 04:39:53', NULL),
+(159, 23, 2, 1, 3, 'hello', NULL, 0, '2024-07-20 04:40:24', '2024-07-20 04:40:24', NULL),
+(160, 23, 2, 1, 3, 'ji', NULL, 0, '2024-07-20 04:40:28', '2024-07-20 04:40:28', NULL),
+(161, 23, 2, 1, 3, 'hello', NULL, 0, '2024-08-16 11:53:28', '2024-08-16 11:53:28', NULL),
+(162, 1, 3, 23, 2, 'kya hua ji', NULL, 0, '2024-08-16 11:54:04', '2024-08-16 11:54:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -442,7 +454,18 @@ INSERT INTO `democlasses` (`id`, `student_id`, `tutor_id`, `subject_id`, `slot_1
 (30, 1, 1, 1, '2024-02-23 08:07:00', '2024-03-02 08:07:00', '2024-03-02 08:07:00', NULL, NULL, NULL, 1, '2024-02-23 02:37:17', '2024-02-23 02:37:17', NULL, NULL),
 (31, 1, 1, 1, '2024-02-23 10:32:22', '2024-03-02 08:07:00', '2024-03-02 08:07:00', NULL, NULL, NULL, 5, '2024-02-23 02:37:37', '2024-02-23 05:02:22', NULL, NULL),
 (32, 1, 1, 1, '2024-02-23 10:31:20', '2024-03-02 08:23:00', '2024-03-07 08:23:00', NULL, NULL, NULL, 5, '2024-02-23 02:53:35', '2024-02-23 05:01:20', NULL, NULL),
-(33, 1, 6, 4, '2024-06-06 13:25:00', '2024-06-07 13:25:00', '2024-06-14 13:25:00', NULL, NULL, NULL, 1, '2024-06-06 07:57:40', '2024-06-06 07:57:40', NULL, NULL);
+(33, 1, 6, 4, '2024-06-06 13:25:00', '2024-06-07 13:25:00', '2024-06-14 13:25:00', NULL, NULL, NULL, 1, '2024-06-06 07:57:40', '2024-06-06 07:57:40', NULL, NULL),
+(34, 29, 2, 6, '2024-06-07 13:02:00', '2024-06-07 13:02:00', '2024-06-07 13:02:00', NULL, NULL, NULL, 1, '2024-06-07 07:32:16', '2024-06-07 07:32:16', NULL, NULL),
+(35, 29, 5, 1, '2024-06-07 13:02:00', '2024-06-07 13:02:00', '2024-06-18 13:02:00', NULL, NULL, NULL, 1, '2024-06-07 07:32:58', '2024-06-07 07:32:58', NULL, NULL),
+(36, 29, 2, 6, '2024-06-07 13:18:00', '2024-06-18 13:18:00', '2024-06-12 13:18:00', NULL, NULL, NULL, 1, '2024-06-07 07:48:59', '2024-06-07 07:48:59', NULL, NULL),
+(37, 29, 2, 6, '2024-06-07 13:18:00', '2024-06-18 13:18:00', '2024-06-12 13:18:00', NULL, NULL, NULL, 1, '2024-06-07 07:49:44', '2024-06-07 07:49:44', NULL, NULL),
+(38, 1, 2, 6, '2024-06-16 04:50:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-06-15 23:20:14', '2024-06-15 23:20:14', NULL, NULL),
+(39, 1, 2, 6, '2024-06-16 04:50:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-06-15 23:20:26', '2024-06-15 23:20:26', NULL, NULL),
+(40, 1, 22, 1, '2024-06-22 17:44:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-06-22 12:14:47', '2024-06-22 12:14:47', NULL, NULL),
+(41, 1, 6, 4, '2024-06-22 18:07:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-06-22 12:37:29', '2024-06-22 12:37:29', NULL, NULL),
+(42, 1, 2, 6, '2024-06-22 18:12:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-06-22 12:42:27', '2024-06-22 12:42:27', NULL, NULL),
+(43, 1, 23, 6, '2024-08-05 18:37:28', NULL, NULL, '2024-08-05 18:36:00', NULL, NULL, 1, '2024-06-22 13:03:27', '2024-06-22 13:03:27', 'https://google.com', NULL),
+(44, 1, 6, 4, '2024-08-17 17:55:00', NULL, NULL, NULL, NULL, NULL, 1, '2024-08-17 12:25:56', '2024-08-17 12:25:56', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -663,78 +686,18 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `alert_type`, `notification`, `initiator_id`, `initiator_role`, `event_id`, `show_to_admin`, `show_to_admin_id`, `show_to_all_admin`, `show_to_tutor`, `show_to_tutor_id`, `show_to_all_tutor`, `show_to_student`, `show_to_student_id`, `show_to_all_student`, `show_to_parent`, `show_to_parent_id`, `show_to_all_parent`, `read_status`, `read_at`, `created_at`, `updated_at`) VALUES
-(61, 2, 'New Trial Class Scheduled By Deepesh Raj', 1, 3, 32, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-02-23 02:53:35', '2024-02-23 05:23:32'),
-(62, 3, 'Assignment Submitted By Deepesh Raj', 1, 3, 6, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-02-23 03:03:11', '2024-02-23 03:03:11'),
-(63, 3, 'Assignment Submitted By Deepesh Raj', 1, 3, 7, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-02-23 03:04:01', '2024-03-11 01:49:08'),
-(64, 4, 'Test Attempted By Deepesh Raj', 1, 3, 8, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-02-23 03:35:00', '2024-03-11 01:49:08'),
-(65, 4, 'Test Attempted By Deepesh Raj', 1, 3, 8, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-02-23 03:36:14', '2024-03-11 01:49:07'),
-(66, 4, 'Test Attempted By Deepesh Raj', 1, 3, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-02-23 04:31:25', '2024-03-11 01:49:07'),
-(67, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-02-23 04:32:12', '2024-03-11 01:49:07'),
-(68, 6, 'Deepesh Raj Need your help in slot booking', 1, 3, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-02-23 04:33:19', '2024-02-23 05:23:11'),
-(69, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-02-23 04:33:19', '2024-03-11 01:49:07'),
-(70, 2, 'Trial Class Cancelled By Deepesh Raj', 1, 3, 32, 1, 0, 1, 1, NULL, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-02-23 05:01:20', '2024-02-23 05:23:35'),
-(71, 2, 'Trial Class Cancelled By Deepesh Raj', 1, 3, 31, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-02-23 05:02:22', '2024-02-23 05:23:07'),
-(72, 1, 'he', 1, 2, 99, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-05 07:33:55', '2024-03-05 07:34:28'),
-(73, 1, 'asas', 1, 2, 100, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-05 07:34:22', '2024-03-05 07:34:27'),
-(74, 1, 'hi', 1, 2, 101, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-11 01:48:37', '2024-03-11 01:48:56'),
-(75, 1, 'ji', 1, 3, 102, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-11 01:49:01', '2024-03-11 01:49:07'),
-(76, 1, 'hey]', 1, 3, 103, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 08:54:01', '2024-03-20 11:13:44'),
-(77, 1, 'hey', 1, 2, 104, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 09:39:38', '2024-03-20 09:40:55'),
-(78, 1, 'hi', 1, 3, 105, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 09:40:59', '2024-03-20 11:13:50'),
-(79, 1, 'hello', 1, 2, 106, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 09:41:23', '2024-03-20 11:14:04'),
-(80, 1, 'sgdsgds', 1, 3, 107, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 09:42:35', '2024-03-20 11:13:49'),
-(81, 1, 'hello bro', 1, 2, 108, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 09:46:20', '2024-03-20 11:14:04'),
-(82, 1, 'hey', 1, 2, 109, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 09:55:53', '2024-03-20 11:14:03'),
-(83, 1, 'hello', 1, 2, 110, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 09:56:09', '2024-03-20 11:14:03'),
-(84, 1, 'dd', 1, 2, 111, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 09:56:19', '2024-03-20 11:14:03'),
-(85, 1, 'dfg', 1, 2, 112, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 09:56:23', '2024-03-20 11:14:03'),
-(86, 1, 'dfgdfgdfg', 1, 2, 113, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 09:56:31', '2024-03-20 11:14:02'),
-(87, 1, 'dfgdfdfgdfgdfg', 1, 2, 114, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 09:56:35', '2024-03-20 11:14:02'),
-(88, 1, 'dfgdfgfgdfgdfg', 1, 2, 115, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 09:56:47', '2024-03-20 11:14:02'),
-(89, 1, 'hi', 1, 3, 116, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 10:22:18', '2024-03-20 11:13:49'),
-(90, 1, 'hello', 1, 3, 117, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 10:25:01', '2024-03-20 11:13:48'),
-(91, 1, 'Hello Deepu', 1, 2, 118, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 10:25:41', '2024-03-20 11:14:02'),
-(92, 1, 'Hello jancy', 1, 3, 119, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 10:26:16', '2024-03-20 11:13:48'),
-(93, 1, 'Hi Deepesh', 1, 2, 120, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 10:26:30', '2024-03-20 11:14:01'),
-(94, 1, 'hey', 1, 2, 121, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 10:27:51', '2024-03-20 11:14:01'),
-(95, 1, 'hello deepesh bro', 1, 2, 122, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 11:05:13', '2024-03-20 11:14:01'),
-(96, 1, 'Hello Jancy', 1, 3, 123, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 11:05:26', '2024-03-20 11:13:48'),
-(97, 1, 'heloo', 1, 2, 124, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 11:10:50', '2024-03-20 11:14:00'),
-(98, 1, 'ki bheloo', 1, 3, 125, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 11:11:00', '2024-03-20 11:13:48'),
-(99, 1, 'na maalum humra', 1, 2, 126, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-03-20 11:12:33', '2024-03-20 11:13:57'),
-(100, 1, 'kahe na maalum', 1, 3, 127, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 11:12:40', '2024-03-20 11:13:47'),
-(101, 1, 'vnmn', 1, 3, 128, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 11:12:58', '2024-03-20 11:13:38'),
-(102, 1, 'hey', 1, 2, 129, 0, 0, 0, 0, 0, 0, 1, 13, 0, 1, 13, 0, 1, NULL, '2024-03-20 11:30:40', '2024-03-20 11:30:47'),
-(103, 1, 'hey', 1, 2, 130, 0, 0, 0, 0, 0, 0, 1, 13, 0, 1, 13, 0, 1, NULL, '2024-03-20 11:33:08', '2024-03-20 12:41:40'),
-(104, 1, 'hello', 13, 3, 131, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 11:33:20', '2024-03-20 11:33:28'),
-(105, 1, 'ji', 13, 3, 132, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 11:33:51', '2024-03-20 11:34:10'),
-(106, 1, 'hi', 13, 3, 133, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 12:09:25', '2024-03-20 12:41:26'),
-(107, 1, 'hi', 1, 2, 134, 0, 0, 0, 0, 0, 0, 1, 13, 0, 1, 13, 0, 0, NULL, '2024-03-20 12:11:31', '2024-03-20 12:11:31'),
-(108, 1, 'hey', 8, 2, 135, 0, 0, 0, 0, 0, 0, 1, 13, 0, 1, 13, 0, 1, NULL, '2024-03-20 12:46:30', '2024-03-20 12:46:38'),
-(109, 1, 'yes', 13, 3, 136, 0, 0, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 12:46:50', '2024-03-20 12:47:13'),
-(110, 1, 'hey', 8, 2, 137, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 12:49:50', '2024-03-20 12:49:57'),
-(111, 1, 'hello', 1, 1, 138, 0, 0, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-03-20 12:50:03', '2024-03-20 12:50:03'),
-(112, 1, 'deepesh here', 13, 3, 139, 0, 0, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-03-20 13:39:41', '2024-03-20 13:39:41'),
-(113, 1, 'hey', 1, 1, 140, 0, 0, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-03-20 13:51:13', '2024-03-20 13:51:13'),
-(114, 1, 'hello', 1, 1, 141, 0, 0, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 13:51:27', '2024-03-20 13:51:31'),
-(115, 1, 'hi', 8, 2, 142, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 13:51:58', '2024-03-20 13:52:12'),
-(116, 1, 'yes', 1, 1, 143, 0, 0, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-03-20 13:52:17', '2024-03-20 13:52:17'),
-(117, 1, 'hey admin', 13, 3, 144, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 13:57:49', '2024-03-20 13:58:02'),
-(118, 1, 'Ye Team', 1, 1, 145, 0, 0, 0, 0, 0, 0, 1, 13, 0, 1, 13, 0, 0, NULL, '2024-03-20 13:58:11', '2024-03-20 13:58:11'),
-(119, 1, 'hello', 1, 1, 146, 0, 0, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-03-20 13:58:55', '2024-03-20 13:58:55'),
-(120, 1, 'yup', 8, 2, 147, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 13:59:12', '2024-03-21 04:00:49'),
-(121, 1, 'hi', 1, 1, 148, 0, 0, 0, 0, 0, 0, 1, 13, 0, 1, 13, 0, 0, NULL, '2024-03-20 14:10:16', '2024-03-20 14:10:16'),
-(122, 1, 'hello ji', 13, 3, 149, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 14:10:29', '2024-03-21 04:00:48'),
-(123, 1, 'tes message', 13, 3, 150, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 14:14:15', '2024-03-21 04:00:48'),
-(124, 1, 'test success', 1, 1, 151, 0, 0, 0, 0, 0, 0, 1, 13, 0, 1, 13, 0, 0, NULL, '2024-03-20 14:14:24', '2024-03-20 14:14:24'),
-(125, 1, 'hey TT', 1, 1, 152, 0, 0, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-03-20 14:17:18', '2024-03-20 14:17:18'),
-(126, 1, 'Yes Admin', 8, 2, 153, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-20 14:17:34', '2024-03-21 04:00:40'),
-(127, 8, 'ytrtyry Registered as tutor and pending for approval', 16, 2, 16, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-03-21 04:01:29', '2024-03-22 05:33:45'),
-(128, 8, '765765765757 Registered as tutor and pending for approval', 17, 2, 17, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-04-12 01:25:23', '2024-04-12 01:25:23'),
-(129, 4, '1234567123 Enrolled for classes', 21, 3, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-04-12 03:08:22', '2024-04-23 08:41:16'),
-(130, 4, '1234567123 Enrolled for classes', 21, 3, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-04-12 05:06:13', '2024-04-23 08:41:15'),
-(131, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-04-15 02:13:31', '2024-04-23 08:41:14'),
-(132, 2, 'New Trial Class Scheduled By Deepesh Raj', 1, 3, 33, 1, 0, 1, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-06-06 07:57:40', '2024-06-06 07:57:40');
+(149, 1, 'hi', 1, 2, 154, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, NULL, '2024-06-21 13:32:06', '2024-06-22 12:08:50'),
+(155, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 23, 0, 0, 0, 1, 23, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-06-22 13:06:57', '2024-07-01 12:48:22'),
+(156, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 23, 0, 0, 0, 1, 23, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-06-23 02:42:11', '2024-07-01 12:48:21'),
+(157, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 2, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-06-26 12:44:02', '2024-06-26 12:44:02'),
+(158, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 23, 0, 0, 0, 1, 23, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-06-26 12:44:51', '2024-07-01 12:48:20'),
+(159, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 23, 0, 0, 0, 1, 23, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-06-26 12:46:15', '2024-07-01 12:48:20'),
+(160, 3, 'Assignment Submitted By Deepesh Raj', 1, 3, 8, 0, 0, 0, 1, 23, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-06-26 13:38:46', '2024-07-01 12:47:50'),
+(161, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 23, 0, 0, 0, 1, 23, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-06-30 11:35:45', '2024-07-01 12:47:49'),
+(162, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 2, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-06-30 11:36:03', '2024-06-30 11:36:03'),
+(163, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 2, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2024-06-30 11:36:09', '2024-06-30 11:36:09'),
+(164, 4, 'Deepesh Raj Enrolled for classes', 1, 3, 23, 0, 0, 0, 1, 23, 0, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-07-01 12:44:44', '2024-07-01 12:47:47'),
+(165, 1, 'hey', 23, 2, 155, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, NULL, '2024-07-01 12:51:10', '2024-09-07 07:36:53');
 
 -- --------------------------------------------------------
 
@@ -748,7 +711,7 @@ CREATE TABLE `online_tests` (
   `description` text NOT NULL,
   `class_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
-  `topic_id` int(11) DEFAULT NULL,
+  `topic_name` text DEFAULT NULL,
   `max_attempt` double(8,2) NOT NULL,
   `test_duration` double(8,2) NOT NULL,
   `test_start_date` varchar(255) NOT NULL,
@@ -764,15 +727,18 @@ CREATE TABLE `online_tests` (
 -- Dumping data for table `online_tests`
 --
 
-INSERT INTO `online_tests` (`id`, `name`, `description`, `class_id`, `subject_id`, `topic_id`, `max_attempt`, `test_duration`, `test_start_date`, `test_end_date`, `question_id`, `test_type`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Test 1', 'desc', 10, 1, 1, 1.00, 1.00, '2023-07-19T16:27', '2023-07-19T16:27', '[\"2\"]', 1, 1, '2023-07-19 05:27:30', '2023-07-20 05:41:31'),
-(2, 'Computer Fundamental - Mock-1', 'Test based on fundamentals of computer', 10, 6, 6, 5.00, 15.00, '2023-07-19T16:29', '2023-07-20T16:29', '[\"3\",\"4\",\"5\",\"6\"]', 1, 1, '2023-07-19 05:29:47', '2023-09-25 12:45:39'),
-(3, 'test qwer', 'testqwert', 10, 1, 5, 3.00, 15.00, '2023-10-19T17:35', '2023-10-27T17:35', '[\"7\",\"8\"]', 2, 1, '2023-10-03 06:35:19', '2023-10-04 00:24:35'),
-(4, 'Demo Test 1', 'Demo test 1 description - Active', 10, 1, 1, 1.00, 15.00, '2023-12-06T14:42', '2023-12-06T14:42', '[\"1\",\"2\",\"10\"]', 1, 1, '2023-12-06 03:42:53', '2023-12-26 08:19:32'),
-(5, 'Demo Subjectie Test 1', 'Demo Subjectie Test 1 active', 10, 1, 1, 10.00, 15.00, '2023-12-06T14:43', '2023-12-06T14:43', '[\"12\"]', 2, 1, '2023-12-06 03:43:32', '2023-12-06 03:43:32'),
-(6, 'Demo Test 27 Dec', 'Demo Test 27 Dec', 10, 6, 6, 1.00, 5.00, '2023-12-27 07:25:16', '2023-12-27 07:25:16', '[\"3\",\"4\",\"5\",\"6\"]', 1, 1, '2023-12-27 01:55:16', '2023-12-27 01:55:16'),
-(7, 'Computer Dundamental(Subjective) - 27 Dec', 'Computer Dundamental(Subjective) - 27 Dec', 10, 6, 6, 1.00, 10.00, '2023-12-27 08:58:36', '2023-12-27 08:58:36', '[\"9\",\"14\",\"15\",\"16\",\"17\",\"18\",\"19\"]', 2, 1, '2023-12-27 03:28:36', '2023-12-27 03:28:36'),
-(8, 'wada', 'asdad', 10, 1, 1, 1.00, 10.00, '2024-02-23 08:37:54', '2024-02-23 08:37:54', '[\"1\",\"2\",\"10\"]', 1, 1, '2024-02-23 03:07:54', '2024-02-23 03:07:54');
+INSERT INTO `online_tests` (`id`, `name`, `description`, `class_id`, `subject_id`, `topic_name`, `max_attempt`, `test_duration`, `test_start_date`, `test_end_date`, `question_id`, `test_type`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'Test 1', 'desc', 10, 1, '1', 1.00, 1.00, '2023-07-19T16:27', '2023-07-19T16:27', '[\"2\"]', 1, 1, '2023-07-19 05:27:30', '2023-07-20 05:41:31'),
+(2, 'Computer Fundamental - Mock-1', 'Test based on fundamentals of computer', 10, 6, '6', 5.00, 15.00, '2023-07-19T16:29', '2023-07-20T16:29', '[\"3\",\"4\",\"5\",\"6\"]', 1, 1, '2023-07-19 05:29:47', '2023-09-25 12:45:39'),
+(3, 'test qwer', 'testqwert', 10, 1, '5', 3.00, 15.00, '2023-10-19T17:35', '2023-10-27T17:35', '[\"7\",\"8\"]', 2, 1, '2023-10-03 06:35:19', '2023-10-04 00:24:35'),
+(4, 'Demo Test 1', 'Demo test 1 description - Active', 10, 1, '1', 1.00, 15.00, '2023-12-06T14:42', '2023-12-06T14:42', '[\"1\",\"2\",\"10\"]', 1, 1, '2023-12-06 03:42:53', '2023-12-26 08:19:32'),
+(5, 'Demo Subjectie Test 1', 'Demo Subjectie Test 1 active', 10, 1, '1', 10.00, 15.00, '2023-12-06T14:43', '2023-12-06T14:43', '[\"12\"]', 2, 1, '2023-12-06 03:43:32', '2023-12-06 03:43:32'),
+(6, 'Demo Test 27 Dec', 'Demo Test 27 Dec', 10, 6, '6', 1.00, 5.00, '2023-12-27 07:25:16', '2023-12-27 07:25:16', '[\"3\",\"4\",\"5\",\"6\"]', 1, 1, '2023-12-27 01:55:16', '2023-12-27 01:55:16'),
+(7, 'Computer Dundamental(Subjective) - 27 Dec', 'Computer Dundamental(Subjective) - 27 Dec', 10, 6, '6', 1.00, 10.00, '2023-12-27 08:58:36', '2023-12-27 08:58:36', '[\"9\",\"14\",\"15\",\"16\",\"17\",\"18\",\"19\"]', 2, 1, '2023-12-27 03:28:36', '2023-12-27 03:28:36'),
+(8, 'wada', 'asdad', 10, 1, '1', 1.00, 10.00, '2024-02-23 08:37:54', '2024-02-23 08:37:54', '[\"1\",\"2\",\"10\"]', 1, 1, '2024-02-23 03:07:54', '2024-02-23 03:07:54'),
+(9, 'Demo Test 27 Dec', 'sa', 10, 2, 'adasd', 1.00, 9.00, '2024-07-24 17:02:45', '2024-07-24 17:02:45', '[\"20\"]', 2, 1, '2024-07-24 11:09:31', '2024-07-24 11:32:45'),
+(10, 'Test 24 July admin', 'sdfsdf', 10, 2, 'Test Topic', 2.00, 12.00, '2024-07-24T22:57', '2024-07-27T22:57', '[\"21\"]', 1, 1, '2024-07-24 11:57:36', '2024-07-24 11:57:36'),
+(11, 'Demo Test 24 July admin subj', 'asdda', 10, 2, 'Test Topic', 2.00, 13.00, '2024-07-24T22:58', '2024-07-27T22:58', '[\"20\"]', 2, 1, '2024-07-24 11:59:05', '2024-07-24 12:01:43');
 
 -- --------------------------------------------------------
 
@@ -848,7 +814,28 @@ INSERT INTO `paymentdetails` (`id`, `transaction_id`, `payment_mode`, `payment_d
 (25, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-02-23 10:03:19', 10, 1, '2024-02-23 04:33:19', '2024-02-23 04:33:19', NULL),
 (26, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-04-12 08:38:22', 12, 1, '2024-04-12 03:08:22', '2024-04-12 03:08:22', NULL),
 (27, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-04-12 10:36:13', 12, 1, '2024-04-12 05:06:13', '2024-04-12 05:06:13', NULL),
-(28, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-04-15 07:43:31', 60, 1, '2024-04-15 02:13:31', '2024-04-15 02:13:31', NULL);
+(28, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-04-15 07:43:31', 60, 1, '2024-04-15 02:13:31', '2024-04-15 02:13:31', NULL),
+(29, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-07 13:32:47', 19, 1, '2024-06-07 08:02:47', '2024-06-07 08:02:47', NULL),
+(30, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-07 13:40:45', 608, 1, '2024-06-07 08:10:45', '2024-06-07 08:10:45', NULL),
+(31, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-12 16:33:21', 11, 1, '2024-06-12 11:03:21', '2024-06-12 11:03:21', NULL),
+(32, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-12 16:51:46', 0, 1, '2024-06-12 11:21:46', '2024-06-12 11:21:46', NULL),
+(33, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-12 17:07:09', 0, 1, '2024-06-12 11:37:09', '2024-06-12 11:37:09', NULL),
+(34, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-16 09:00:18', 180, 1, '2024-06-16 03:30:18', '2024-06-16 03:30:18', NULL),
+(35, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-22 18:36:54', 250, 1, '2024-06-22 13:06:54', '2024-06-22 13:06:54', NULL),
+(36, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-23 08:12:07', 358, 1, '2024-06-23 02:42:07', '2024-06-23 02:42:07', NULL),
+(37, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-26 18:13:58', 11, 1, '2024-06-26 12:43:58', '2024-06-26 12:43:58', NULL),
+(38, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-26 18:14:47', 28, 1, '2024-06-26 12:44:47', '2024-06-26 12:44:47', NULL),
+(39, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-26 18:16:12', 330, 1, '2024-06-26 12:46:12', '2024-06-26 12:46:12', NULL),
+(40, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-30 17:05:42', 275, 1, '2024-06-30 11:35:42', '2024-06-30 11:35:42', NULL),
+(41, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-30 17:06:00', 1111, 1, '2024-06-30 11:36:00', '2024-06-30 11:36:00', NULL),
+(42, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-06-30 17:06:06', 110, 1, '2024-06-30 11:36:06', '2024-06-30 11:36:06', NULL),
+(43, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-07-01 18:14:40', 330, 1, '2024-07-01 12:44:40', '2024-07-01 12:44:40', NULL),
+(44, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-07-20 12:20:12', 28, 1, '2024-07-20 06:50:12', '2024-07-20 06:50:12', NULL),
+(45, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-07-20 12:31:00', 28, 1, '2024-07-20 07:01:00', '2024-07-20 07:01:00', NULL),
+(46, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-07-20 13:52:33', 28, 1, '2024-07-20 08:22:33', '2024-07-20 08:22:33', NULL),
+(47, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-07-25 08:15:43', 45, 1, '2024-07-25 02:45:43', '2024-07-25 02:45:43', NULL),
+(48, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-07-25 08:20:06', 0, 1, '2024-07-25 02:50:06', '2024-07-25 02:50:06', NULL),
+(49, '1234-5678-qqyz-aspa-zqkp1o2', 'Credit Card', '2024-08-17 11:57:30', 55, 1, '2024-08-17 06:27:30', '2024-08-17 06:27:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -874,34 +861,22 @@ CREATE TABLE `paymentstudents` (
 --
 
 INSERT INTO `paymentstudents` (`id`, `transaction_id`, `student_id`, `class_id`, `subject_id`, `tutor_id`, `classes_purchased`, `rate_per_hr`, `created_at`, `updated_at`) VALUES
-(1, '1234-5678-9012-app0-rest', 1, 1, 1, 1, 3, 12, NULL, NULL),
-(2, '1234-5678-qqyz-aspa-zqkp1o22', 1, 10, 1, 1, 1, 12, '2023-07-11 08:10:09', '2023-07-11 08:10:09'),
-(3, '1234-5678-qqyz-aspa-zqkp1o23', 1, 10, 1, 1, 1, 12, '2023-07-11 23:26:15', '2023-07-11 23:26:15'),
-(4, '1234-5678-qqyz-aspa-zqkp1o24', 1, 10, 1, 1, 1, 12, '2023-07-11 23:27:15', '2023-07-11 23:27:15'),
-(5, '1234-5678-qqyz-aspa-zqkp1o25', 1, 10, 1, 2, 10, 12, '2023-08-09 00:59:11', '2023-08-09 00:59:11'),
-(6, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 12, 10, '2023-09-20 01:37:18', '2023-09-20 01:37:18'),
-(7, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 6, 1, 1, 15, '2023-12-02 07:17:49', '2023-12-02 07:17:49'),
-(8, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 4, 4, 10, '2023-12-14 04:43:53', '2023-12-14 04:43:53'),
-(9, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 4, 10, '2023-12-14 04:45:55', '2023-12-14 04:45:55'),
-(10, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 4, 10, '2023-12-14 04:46:30', '2023-12-14 04:46:30'),
-(11, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 3, 10, '2023-12-14 04:49:12', '2023-12-14 04:49:12'),
-(12, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 5, 10, '2023-12-16 06:44:42', '2023-12-16 06:44:42'),
-(13, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 12, 10, '2023-12-16 06:45:38', '2023-12-16 06:45:38'),
-(14, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 6, 10, '2023-12-16 06:49:55', '2023-12-16 06:49:55'),
-(15, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 5, 10, '2023-12-16 06:50:09', '2023-12-16 06:50:09'),
-(16, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 4, 10, '2023-12-16 06:54:47', '2023-12-16 06:54:47'),
-(17, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 3, 10, '2023-12-16 06:54:54', '2023-12-16 06:54:54'),
-(18, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 1, 10, '2023-12-16 06:55:03', '2023-12-16 06:55:03'),
-(19, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 4, 6, 1, 10, '2023-12-16 07:40:18', '2023-12-16 07:40:18'),
-(20, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 4, 6, 5, 10, '2023-12-18 09:44:25', '2023-12-18 09:44:25'),
-(21, '1234-5678-qqyz-aspa-zqkp1o2', 16, 10, 6, 13, 10, 18, '2023-12-29 07:17:00', '2023-12-29 07:17:00'),
-(22, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 10, 10, '2024-02-23 03:39:26', '2024-02-23 03:39:26'),
-(23, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 1, 10, '2024-02-23 04:31:25', '2024-02-23 04:31:25'),
-(24, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 1, 10, '2024-02-23 04:32:12', '2024-02-23 04:32:12'),
-(25, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 1, 10, '2024-02-23 04:33:19', '2024-02-23 04:33:19'),
-(26, '1234-5678-qqyz-aspa-zqkp1o2', 21, 10, 1, 1, 1, 12, '2024-04-12 03:08:22', '2024-04-12 03:08:22'),
-(27, '1234-5678-qqyz-aspa-zqkp1o2', 21, 10, 1, 1, 1, 12, '2024-04-12 05:06:13', '2024-04-12 05:06:13'),
-(28, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 1, 5, 12, '2024-04-15 02:13:31', '2024-04-15 02:13:31');
+(34, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 22, 10, 18, '2024-06-16 03:30:18', '2024-06-16 03:30:18'),
+(35, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 23, 10, 25, '2024-06-22 13:06:54', '2024-06-22 13:06:54'),
+(36, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 23, 13, 28, '2024-06-23 02:42:07', '2024-06-23 02:42:07'),
+(37, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 6, 2, 1, 11, '2024-06-26 12:43:58', '2024-06-26 12:43:58'),
+(38, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 23, 1, 28, '2024-06-26 12:44:47', '2024-06-26 12:44:47'),
+(39, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 23, 12, 28, '2024-06-26 12:46:12', '2024-06-26 12:46:12'),
+(40, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 23, 10, 28, '2024-06-30 11:35:42', '2024-06-30 11:35:42'),
+(41, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 6, 2, 101, 11, '2024-06-30 11:36:00', '2024-06-30 11:36:00'),
+(42, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 6, 2, 10, 11, '2024-06-30 11:36:06', '2024-06-30 11:36:06'),
+(43, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 23, 12, 28, '2024-07-01 12:44:40', '2024-07-01 12:44:40'),
+(44, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 23, 1, 28, '2024-07-20 06:50:12', '2024-07-20 06:50:12'),
+(45, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 23, 1, 28, '2024-07-20 07:01:00', '2024-07-20 07:01:00'),
+(46, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 23, 1, 28, '2024-07-20 08:22:33', '2024-07-20 08:22:33'),
+(47, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 4, 6, 1, 45, '2024-07-25 02:45:43', '2024-07-25 02:45:43'),
+(48, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 8, 1, 0, '2024-07-25 02:50:06', '2024-07-25 02:50:06'),
+(49, '1234-5678-qqyz-aspa-zqkp1o2', 1, 10, 1, 23, 2, 28, '2024-08-17 06:27:30', '2024-08-17 06:27:30');
 
 -- --------------------------------------------------------
 
@@ -984,7 +959,7 @@ CREATE TABLE `questionbanks` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `class_id` int(11) NOT NULL,
   `subject_id` int(11) DEFAULT NULL,
-  `topic_id` int(11) DEFAULT NULL,
+  `topic_name` text DEFAULT NULL,
   `question` text NOT NULL,
   `option1` varchar(255) DEFAULT NULL,
   `option2` varchar(255) DEFAULT NULL,
@@ -1002,26 +977,30 @@ CREATE TABLE `questionbanks` (
 -- Dumping data for table `questionbanks`
 --
 
-INSERT INTO `questionbanks` (`id`, `class_id`, `subject_id`, `topic_id`, `question`, `option1`, `option2`, `option3`, `option4`, `correct_option`, `remarks`, `type`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 10, 1, 1, '<p>The decimal expansion of number <img src=\"https://www.careerlauncher.com/cbse-ncert/class-10/10-math-real-3-UntitOE0.JPG\" /> has:</p>', 'a terminating decimal', 'non-terminating but repeating', 'non-terminating non repeating', 'terminating after two places of decimal', 'a terminating decimal', NULL, 1, 1, '2023-07-18 06:40:11', '2023-10-09 00:47:37'),
-(2, 10, 1, 1, 'The product of a rational and irrational number is', 'rational', 'irrational', 'both of above', 'none of above', 'irrational', NULL, 1, 1, '2023-07-18 06:47:13', '2023-07-18 13:40:09'),
-(3, 10, 6, 6, '<p>Who is the father of Computers?</p>', 'James Gosling', 'Charles Babbage', 'Dennis Ritchie', 'Bjarne Stroustrup', 'Charles Babbage', 'Explanation: Charles Babbage is known as the father of computers. Charles Babbage designed and built the first mechanical computer and Difference Engine.', 1, 1, '2023-07-18 06:47:29', '2023-07-18 13:38:01'),
-(4, 10, 6, 6, '<p>What is the full form of CPU?</p>', 'Computer Processing Unit', 'Computer Principle Unit', 'Central Processing Unit', 'Control Processing Unit', 'Central Processing Unit', 'Explanation: CPU stands for Central Processing Unit. CPU is the part of a computer system that is mainly referred as the brain of the computer.', 1, 1, '2023-07-18 07:28:12', '2023-07-18 13:39:16'),
-(5, 10, 6, 6, '<p>Which of the following computer language is written in binary codes only?</p>', 'pascal', 'machine language', 'C', 'C#', 'machine language', NULL, 1, 1, '2023-08-19 05:55:08', '2023-08-19 05:55:08'),
-(6, 10, 6, 6, '<p>Which of the following is the brain of the computer?</p>', 'Central Processing Unit', 'Memory', 'Arithmetic and Logic unit', 'Control unit', 'Central Processing Unit', NULL, 1, 1, '2023-08-19 05:56:09', '2023-09-04 06:33:30'),
-(7, 10, 1, 5, '<p>divide 10 with 5? and show write resultant number table ?</p>', NULL, NULL, NULL, NULL, NULL, 'test remarks 11111', 2, 1, '2023-09-28 07:03:17', '2023-09-28 07:10:11'),
-(8, 10, 1, 5, '<p>write 25 table ?</p>', NULL, NULL, NULL, NULL, NULL, 'test', 2, 1, '2023-10-04 00:23:55', '2023-10-04 00:23:55'),
-(9, 10, 6, 6, '<p>Test Question Subjective</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-10-09 01:24:25', '2023-10-09 01:24:25'),
-(10, 10, 1, 1, '<p>Hi, This is a test question</p>', 'Test option 1', 'Test option 2(*)', 'Test option 3', 'Test option 4', 'Test option 2(*)', 'Test Remarks - 6th Dec 2023', 1, 1, '2023-12-06 03:02:51', '2023-12-06 03:04:12'),
-(11, 10, 1, 1, '<p>Test question 2 by deepesh</p>', 'op1', 'op2', 'op3*', 'op4', 'op3*', 'OPT inactive', 1, 0, '2023-12-06 03:05:15', '2023-12-06 03:05:26'),
-(12, 10, 1, 1, '<p>Test subjective type questions 1</p>', NULL, NULL, NULL, NULL, NULL, 'Subjective remarks - Active', 2, 1, '2023-12-06 03:05:59', '2023-12-06 03:05:59'),
-(13, 10, 1, 1, '<p>Test subjective question 2</p>', NULL, NULL, NULL, NULL, NULL, 'Test Sub 2 - InActive', 2, 0, '2023-12-06 03:06:28', '2023-12-06 03:07:22'),
-(14, 10, 6, 6, '<p>What is Computer?</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:04:05', '2023-12-27 03:04:05'),
-(15, 10, 6, 6, '<p>What is CPU?</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:04:25', '2023-12-27 03:04:25'),
-(16, 10, 6, 6, '<p>Who is the father of computer?</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:26:29', '2023-12-27 03:26:29'),
-(17, 10, 6, 6, '<p>Name 5 Input Devices</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:26:47', '2023-12-27 03:26:47'),
-(18, 10, 6, 6, '<p>Name 5 Output Devices</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:27:04', '2023-12-27 03:27:04'),
-(19, 10, 6, 6, '<p>What is Modem ?</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:27:39', '2023-12-27 03:27:39');
+INSERT INTO `questionbanks` (`id`, `class_id`, `subject_id`, `topic_name`, `question`, `option1`, `option2`, `option3`, `option4`, `correct_option`, `remarks`, `type`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 10, 1, '1', '<p>The decimal expansion of number <img src=\"https://www.careerlauncher.com/cbse-ncert/class-10/10-math-real-3-UntitOE0.JPG\" /> has:</p>', 'a terminating decimal', 'non-terminating but repeating', 'non-terminating non repeating', 'terminating after two places of decimal', 'a terminating decimal', NULL, 1, 1, '2023-07-18 06:40:11', '2023-10-09 00:47:37'),
+(2, 10, 1, '1', 'The product of a rational and irrational number is', 'rational', 'irrational', 'both of above', 'none of above', 'irrational', NULL, 1, 1, '2023-07-18 06:47:13', '2023-07-18 13:40:09'),
+(3, 10, 6, '6', '<p>Who is the father of Computers?</p>', 'James Gosling', 'Charles Babbage', 'Dennis Ritchie', 'Bjarne Stroustrup', 'Charles Babbage', 'Explanation: Charles Babbage is known as the father of computers. Charles Babbage designed and built the first mechanical computer and Difference Engine.', 1, 1, '2023-07-18 06:47:29', '2023-07-18 13:38:01'),
+(4, 10, 6, '6', '<p>What is the full form of CPU?</p>', 'Computer Processing Unit', 'Computer Principle Unit', 'Central Processing Unit', 'Control Processing Unit', 'Central Processing Unit', 'Explanation: CPU stands for Central Processing Unit. CPU is the part of a computer system that is mainly referred as the brain of the computer.', 1, 1, '2023-07-18 07:28:12', '2023-07-18 13:39:16'),
+(5, 10, 6, '6', '<p>Which of the following computer language is written in binary codes only?</p>', 'pascal', 'machine language', 'C', 'C#', 'machine language', NULL, 1, 1, '2023-08-19 05:55:08', '2023-08-19 05:55:08'),
+(6, 10, 6, '6', '<p>Which of the following is the brain of the computer?</p>', 'Central Processing Unit', 'Memory', 'Arithmetic and Logic unit', 'Control unit', 'Central Processing Unit', NULL, 1, 1, '2023-08-19 05:56:09', '2023-09-04 06:33:30'),
+(7, 10, 1, '5', '<p>divide 10 with 5? and show write resultant number table ?</p>', NULL, NULL, NULL, NULL, NULL, 'test remarks 11111', 2, 1, '2023-09-28 07:03:17', '2023-09-28 07:10:11'),
+(8, 10, 1, '5', '<p>write 25 table ?</p>', NULL, NULL, NULL, NULL, NULL, 'test', 2, 1, '2023-10-04 00:23:55', '2023-10-04 00:23:55'),
+(9, 10, 6, '6', '<p>Test Question Subjective</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-10-09 01:24:25', '2023-10-09 01:24:25'),
+(10, 10, 1, '1', '<p>Hi, This is a test question</p>', 'Test option 1', 'Test option 2(*)', 'Test option 3', 'Test option 4', 'Test option 2(*)', 'Test Remarks - 6th Dec 2023', 1, 1, '2023-12-06 03:02:51', '2023-12-06 03:04:12'),
+(11, 10, 1, '1', '<p>Test question 2 by deepesh</p>', 'op1', 'op2', 'op3*', 'op4', 'op3*', 'OPT inactive', 1, 0, '2023-12-06 03:05:15', '2023-12-06 03:05:26'),
+(12, 10, 1, '1', '<p>Test subjective type questions 1</p>', NULL, NULL, NULL, NULL, NULL, 'Subjective remarks - Active', 2, 1, '2023-12-06 03:05:59', '2023-12-06 03:05:59'),
+(13, 10, 1, '1', '<p>Test subjective question 2</p>', NULL, NULL, NULL, NULL, NULL, 'Test Sub 2 - InActive', 2, 0, '2023-12-06 03:06:28', '2023-12-06 03:07:22'),
+(14, 10, 6, '6', '<p>What is Computer?</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:04:05', '2023-12-27 03:04:05'),
+(15, 10, 6, '6', '<p>What is CPU?</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:04:25', '2023-12-27 03:04:25'),
+(16, 10, 6, '6', '<p>Who is the father of computer?</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:26:29', '2023-12-27 03:26:29'),
+(17, 10, 6, '6', '<p>Name 5 Input Devices</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:26:47', '2023-12-27 03:26:47'),
+(18, 10, 6, '6', '<p>Name 5 Output Devices</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:27:04', '2023-12-27 03:27:04'),
+(19, 10, 6, '6', '<p>What is Modem ?</p>', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, '2023-12-27 03:27:39', '2023-12-27 03:27:39'),
+(20, 10, 2, 'Test Topic', '<p>Hi, Deepesh Here..</p>', NULL, NULL, NULL, NULL, NULL, 'Test Remarks', 2, 1, '2024-07-24 09:57:11', '2024-07-24 09:57:11'),
+(21, 10, 2, 'Test Topic 2', '<p>Hi Depesh Here Part II</p>', 'a', 'b', 'c', 'd', 'b', 'B correct answer', 1, 1, '2024-07-24 10:17:12', '2024-07-24 10:23:52'),
+(22, 10, 1, 'Test Topic3', '<p>zzczcz</p>', 'a', 'b', 'c', 'd', 'b', 'correct answer : A', 1, 1, '2024-07-24 11:34:22', '2024-07-24 11:46:43'),
+(23, 10, 1, '4', '<p>444</p>', NULL, NULL, NULL, NULL, NULL, 'test 4 remarks', 2, 1, '2024-07-24 11:36:32', '2024-07-24 11:37:25');
 
 -- --------------------------------------------------------
 
@@ -1037,6 +1016,13 @@ CREATE TABLE `sessions` (
   `payload` text NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('iB5H9FSNEC4U7QSCfHWILiwNJFdQjaRexhFx5Vuy', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiM2hnb0ludmJhWFdUSHZLTmVBNkVISnBiNTRtUGhqcmtRdFVKaUNhNyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1719507544);
 
 -- --------------------------------------------------------
 
@@ -1068,82 +1054,37 @@ CREATE TABLE `slot_bookings` (
 --
 
 INSERT INTO `slot_bookings` (`id`, `date`, `slot`, `status`, `student_id`, `booked_at`, `tutor_id`, `transaction_id`, `created_at`, `updated_at`, `subject_id`, `class_schedule_id`, `contact_admin`, `is_class_scheduled`, `meeting_id`, `remarks`) VALUES
-(226, '2024-01-31', '19:48:00', 1, 1, '2024-02-23 09:09:26', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-01-29 08:48:48', '2024-02-23 03:39:26', 1, 22, 0, 0, NULL, NULL),
-(227, '2024-02-01', '19:48:00', 1, 1, '2024-02-23 09:09:26', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-01-29 08:48:48', '2024-02-23 03:39:26', 1, 22, 0, 0, NULL, NULL),
-(228, '2024-02-02', '19:48:00', 1, 1, '2024-02-23 09:09:26', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-01-29 08:48:48', '2024-02-23 03:39:26', 1, 22, 0, 0, NULL, NULL),
-(229, '2024-02-03', '19:48:00', 1, 1, '2024-02-23 10:01:25', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-01-29 08:48:48', '2024-02-23 04:31:25', 1, 23, 0, 0, NULL, NULL),
-(230, '2024-02-04', '19:48:00', 1, 1, '2024-02-23 10:02:12', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-01-29 08:48:48', '2024-02-23 04:32:12', 1, 24, 0, 0, NULL, NULL),
-(231, '2024-02-05', '19:48:00', 1, 1, '2024-02-23 10:03:19', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-01-29 08:48:48', '2024-02-23 04:33:19', 1, 25, 1, 0, NULL, NULL),
-(232, '2024-02-06', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(233, '2024-02-07', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(234, '2024-02-08', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(235, '2024-02-09', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(236, '2024-02-10', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(237, '2024-02-11', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(238, '2024-02-12', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(239, '2024-02-13', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(240, '2024-02-14', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(241, '2024-02-15', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(242, '2024-02-16', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(243, '2024-02-17', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(244, '2024-02-18', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(245, '2024-02-19', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(246, '2024-02-20', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(247, '2024-02-21', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(248, '2024-02-22', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(249, '2024-04-29', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(250, '2024-02-24', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(251, '2024-02-25', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(252, '2024-02-26', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(253, '2024-02-27', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(254, '2024-02-28', '19:48:00', 0, NULL, NULL, 1, NULL, '2024-01-29 08:48:48', '2024-01-29 08:48:48', NULL, NULL, 0, 0, NULL, NULL),
-(255, '2024-04-22', '16:16:00', 0, NULL, NULL, 1, NULL, '2024-03-22 05:16:33', '2024-03-22 05:16:33', NULL, NULL, 0, 0, NULL, NULL),
-(256, '2024-04-12', '17:04:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:02', '2024-04-12 05:05:02', NULL, NULL, 0, 0, NULL, NULL),
-(257, '2024-04-13', '17:04:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:02', '2024-04-12 05:05:02', NULL, NULL, 0, 0, NULL, NULL),
-(258, '2024-04-14', '17:04:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:02', '2024-04-12 05:05:02', NULL, NULL, 0, 0, NULL, NULL),
-(259, '2024-04-15', '17:04:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:02', '2024-04-12 05:05:02', NULL, NULL, 0, 0, NULL, NULL),
-(260, '2024-04-16', '17:04:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:02', '2024-04-12 05:05:02', NULL, NULL, 0, 0, NULL, NULL),
-(261, '2024-04-17', '17:04:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:02', '2024-04-12 05:05:02', NULL, NULL, 0, 0, NULL, NULL),
-(262, '2024-04-18', '17:04:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:02', '2024-04-12 05:05:02', NULL, NULL, 0, 0, NULL, NULL),
-(263, '2024-04-19', '17:04:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:02', '2024-04-12 05:05:02', NULL, NULL, 0, 0, NULL, NULL),
-(264, '2024-04-12', '18:05:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:13', '2024-04-12 05:05:13', NULL, NULL, 0, 0, NULL, NULL),
-(265, '2024-04-13', '18:05:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:13', '2024-04-12 05:05:13', NULL, NULL, 0, 0, NULL, NULL),
-(266, '2024-04-14', '18:05:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:13', '2024-04-12 05:05:13', NULL, NULL, 0, 0, NULL, NULL),
-(267, '2024-04-15', '18:05:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:13', '2024-04-12 05:05:13', NULL, NULL, 0, 0, NULL, NULL),
-(268, '2024-04-16', '18:05:00', 1, 1, '2024-04-15 07:43:31', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-04-12 05:05:13', '2024-04-15 02:13:31', 1, 28, 0, 0, NULL, NULL),
-(269, '2024-04-17', '18:05:00', 1, 1, '2024-04-15 07:43:31', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-04-12 05:05:13', '2024-04-15 02:13:31', 1, 28, 0, 0, NULL, NULL),
-(270, '2024-04-18', '18:05:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:13', '2024-04-12 05:05:13', NULL, NULL, 0, 0, NULL, NULL),
-(271, '2024-04-19', '18:05:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:13', '2024-04-12 05:05:13', NULL, NULL, 0, 0, NULL, NULL),
-(272, '2024-04-12', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(273, '2024-04-13', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(274, '2024-04-14', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(275, '2024-04-15', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(276, '2024-04-16', '20:06:00', 1, 1, '2024-04-15 07:43:31', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-04-12 05:05:38', '2024-04-15 02:13:31', 1, 28, 0, 0, NULL, NULL),
-(277, '2024-04-17', '20:06:00', 1, 1, '2024-04-15 07:43:31', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-04-12 05:05:38', '2024-04-15 02:13:31', 1, 28, 0, 0, NULL, NULL),
-(278, '2024-04-18', '20:06:00', 1, 1, '2024-04-15 07:43:31', 1, '1234-5678-qqyz-aspa-zqkp1o2', '2024-04-12 05:05:38', '2024-04-15 02:13:31', 1, 28, 0, 0, NULL, NULL),
-(279, '2024-04-19', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(280, '2024-04-20', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(281, '2024-04-21', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(282, '2024-04-22', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(283, '2024-04-23', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(284, '2024-04-24', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(285, '2024-04-25', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(286, '2024-04-26', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(287, '2024-04-27', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(288, '2024-04-28', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(289, '2024-04-30', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(290, '2024-05-01', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(291, '2024-05-02', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(292, '2024-05-03', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(293, '2024-05-04', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(294, '2024-05-05', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(295, '2024-05-06', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(296, '2024-05-07', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(297, '2024-05-08', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(298, '2024-05-09', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(299, '2024-05-10', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(300, '2024-05-11', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL),
-(301, '2024-05-12', '20:06:00', 0, NULL, NULL, 1, NULL, '2024-04-12 05:05:38', '2024-04-12 05:05:38', NULL, NULL, 0, 0, NULL, NULL);
+(464, '2024-08-17', '18:00:00', 1, 1, '2024-08-17 11:57:34', 23, '1234-5678-qqyz-aspa-zqkp1o2', '2024-08-17 06:17:56', '2024-08-17 06:27:34', 1, 49, 0, 1, 16, NULL),
+(465, '2024-08-18', '18:00:00', 1, 1, '2024-08-17 11:57:34', 23, '1234-5678-qqyz-aspa-zqkp1o2', '2024-08-17 06:17:56', '2024-08-17 06:27:34', 1, 49, 0, 0, NULL, NULL),
+(466, '2024-08-19', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(467, '2024-08-20', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(468, '2024-08-21', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(469, '2024-08-22', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(470, '2024-08-23', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(471, '2024-08-24', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(472, '2024-08-25', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(473, '2024-08-26', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(474, '2024-08-27', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(475, '2024-08-28', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(476, '2024-08-29', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(477, '2024-08-30', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(478, '2024-08-31', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(479, '2024-09-01', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(480, '2024-09-02', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(481, '2024-09-03', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(482, '2024-09-04', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(483, '2024-09-05', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(484, '2024-09-06', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(485, '2024-09-07', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(486, '2024-09-08', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(487, '2024-09-09', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(488, '2024-09-10', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(489, '2024-09-11', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(490, '2024-09-12', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(491, '2024-09-13', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(492, '2024-09-14', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(493, '2024-09-15', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL),
+(494, '2024-09-16', '18:00:00', 0, NULL, NULL, 23, NULL, '2024-08-17 06:17:56', '2024-08-17 06:17:56', NULL, NULL, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1198,7 +1139,8 @@ INSERT INTO `studentachievements` (`id`, `name`, `description`, `date`, `student
 (3, 'Winner in essay writing', 'Winner in essay writing competition in school', '2023-05-19 08:22:06', 1, NULL, NULL),
 (8, 'Test Name Achievementwe', 'we', '2023-11-01 18:30:00', 9, '2023-11-02 07:01:27', '2023-11-02 07:01:27'),
 (10, 'Test Name Achievement', 'Test Achievement Description', NULL, 15, '2023-12-29 03:39:51', '2023-12-29 03:39:51'),
-(11, 'Test data', '23', '2023-12-22 18:30:00', 15, '2023-12-29 03:40:00', '2023-12-29 03:40:00');
+(11, 'Test data', '23', '2023-12-22 18:30:00', 15, '2023-12-29 03:40:00', '2023-12-29 03:40:00'),
+(12, 'Deepesh Raj', 'Test Decription', NULL, 29, '2024-06-07 07:32:39', '2024-06-07 07:32:39');
 
 -- --------------------------------------------------------
 
@@ -1232,7 +1174,7 @@ INSERT INTO `studentattendances` (`id`, `student_id`, `class_id`, `subject_id`, 
 (4, 3, 10, 1, 1, 1, 6, 1, '2023-09-21T13:03:00Z', 1, '2023-10-09 00:42:19', '2023-10-09 00:42:19'),
 (5, 1, 10, 1, 1, 3, NULL, 1, '2023-09-21T13:11:00+00:00', 1, '2023-12-02 08:03:19', '2023-12-06 06:14:28'),
 (6, 1, 10, 1, 1, 3, 1, 1, '2023-11-03T20:30:40Z', 1, '2023-12-06 02:51:36', '2023-12-06 02:51:36'),
-(7, 3, 10, 1, 1, 3, 1, 1, '2023-11-03T20:30:40Z', 1, '2023-12-06 02:51:36', '2023-12-06 02:51:36');
+(7, 1, 10, 1, 1, 3, 1, 1, '2023-11-03T20:30:40Z', 1, '2023-12-06 02:51:36', '2023-12-06 02:51:36');
 
 -- --------------------------------------------------------
 
@@ -1263,14 +1205,19 @@ CREATE TABLE `studentprofiles` (
 --
 
 INSERT INTO `studentprofiles` (`id`, `name`, `dob`, `grade`, `mobile`, `secondary_mobile`, `email`, `gender`, `school_name`, `fathers_name`, `mothers_name`, `student_id`, `profile_pic`, `created_at`, `updated_at`) VALUES
-(2, 'Deepesh Raj', '2023-07-06 18:30:00', '10', 1234, 1234567, 'deepeshinfo22@gmail.com', 1, 'Central School', 'My Father Name', 'My Mother Name', 1, '1688713664.jpg', '2023-07-06 07:45:16', '2023-07-07 01:37:44'),
+(2, 'Deepesh Raj', '2023-07-06 18:30:00', '10', 1234, 1234567, 'asasasas@gmail.com', 1, 'Central School', 'My Father Name', 'My Mother Name', 1, '1688713664.jpg', '2023-07-06 07:45:16', '2023-07-07 01:37:44'),
 (3, 'Development Team', '2023-11-01 18:30:00', '0', 917004920897, NULL, '1234@gmail.com', 1, 'Central School', 'My Father Name', NULL, 9, '1698928268.jpg', '2023-11-02 07:01:08', '2023-11-02 07:01:08'),
 (4, 'Test Student', '2023-11-05 18:30:00', '0', 7007007007, NULL, 'abcdef@gmail.com', 1, 'Central School', 'My Father Name', NULL, 10, '1699281268.jpg', '2023-11-06 09:04:28', '2023-11-06 09:04:28'),
 (5, 'wewe', '2023-12-04 18:30:00', '0', 9090909099, NULL, 'testdata1@gmail.com', 1, 'Central School', 'My Father Name', NULL, 11, '1701782931.jpg', '2023-12-05 07:58:51', '2023-12-05 07:58:51'),
 (6, 'Development Team', '2023-12-04 18:30:00', '0', 7004920897, NULL, 'stud@demo.com', 1, 'Central School', 'My Father Name', NULL, 13, '1702563644.jpg', '2023-12-14 08:50:44', '2023-12-14 08:50:44'),
 (7, 'test', '2023-11-30 18:30:00', '0', 11111, NULL, '0000011111@gmail.com', 1, 'qw', 'Deepesh', NULL, 14, NULL, '2023-12-20 07:41:47', '2023-12-20 07:41:58'),
 (8, 'Deepesh Raj', '2023-12-28 18:30:00', '0', 1234512345, NULL, '1234512345@gmail.com', 1, 'Central School', 'My Father Name', NULL, 15, '1703837472.png', '2023-12-29 02:40:41', '2023-12-29 03:40:09'),
-(9, 'Deepesh Raj', '2023-12-30 18:30:00', '0', 1122334455, NULL, '1122334455@gmail.com', 1, 'Central School', 'My Father Name', NULL, 17, '1704013057.png', '2023-12-31 03:27:37', '2023-12-31 03:27:37');
+(9, 'Deepesh Raj', '2023-12-30 18:30:00', '0', 1122334455, NULL, '1122334455@gmail.com', 1, 'Central School', 'My Father Name', NULL, 17, '1704013057.png', '2023-12-31 03:27:37', '2023-12-31 03:27:37'),
+(10, 'Deepesh Raj', '2024-06-06 18:30:00', '0', 654564456654, NULL, 'dsfsddsfsdf@sgs.com', 1, NULL, 'My Father Name', NULL, 25, NULL, '2024-06-07 03:47:46', '2024-06-07 04:00:30'),
+(14, 'Deepesh Raj', '2024-06-06 18:30:00', '0', 12345123651, NULL, 'deepeshinfo22@gmail.com', 1, NULL, NULL, NULL, 29, '1717765354.png', '2024-06-07 07:31:10', '2024-06-07 07:32:34'),
+(15, 'Deepesh Raj', NULL, '1', 9865321047, NULL, 'aajsafgaf@gmil.com', NULL, NULL, NULL, NULL, 30, NULL, '2024-06-12 11:01:33', '2024-06-12 11:01:33'),
+(16, 'sdsdg', NULL, '1', 6546465445, NULL, '4556456@gmail.com', NULL, NULL, NULL, NULL, 31, NULL, '2024-07-15 11:42:12', '2024-07-15 11:42:12'),
+(17, 'Deepesh Raj', NULL, '1', 9876598765, NULL, '98765987651@gmail.com', NULL, NULL, NULL, NULL, 32, NULL, '2024-08-16 12:10:41', '2024-08-16 12:10:41');
 
 -- --------------------------------------------------------
 
@@ -1320,7 +1267,15 @@ INSERT INTO `studentregistrations` (`id`, `name`, `mobile`, `email`, `is_mobile_
 (18, 'aasdasd', 121212, '12121212@ssadadad.com', NULL, NULL, NULL, NULL, '$2y$10$fLewWFQaQHk.Km8s08m7xeplXqmk5xuW1594nf8JGTOFVazsMm2.K', 0, 3, 1, NULL, '2024-03-07 05:58:48', '2024-03-07 05:58:49', '1234', NULL, '$2y$10$VlsE98eEHDRQHgC2Em6kMel.mYMjpAHp0sBE923fHptpGtA63aRMS'),
 (19, '1234567890', 5656565656, '5656565656@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$G7wPfkU046kbQ2t/dBSzsOUWmwyPgHcx0./CCq8VZPbvGQt/a5Qsq', 0, 3, 1, NULL, '2024-04-12 00:59:56', '2024-04-12 01:00:01', '1234', NULL, '$2y$10$OQvu0X/3rfDyQjO0OZTJReI0FIenYQVHdKzULchqtaCH9vdZega0u'),
 (20, '765765765757', 765765765757, '765765765757@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$yEi/g4mrz0eFbn4wm1SMdeaYoLcqlEQ7BowDeo4MTVMjaBuJOy7bq', 0, 3, 1, NULL, '2024-04-12 01:24:18', '2024-04-12 01:24:19', '1234', NULL, '$2y$10$A3vwgYdlqGlKWsBz/ZsAeeoka.p3daUKQkKyCD6YOQXL2gTYp6lFe'),
-(21, '1234567123', 1234567123, '1234567123@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$dR46Ql0oaPassVLJr9cureeYakjGxzgB7yTW7ZIg7FZGgmO.r6L2a', 0, 3, 1, NULL, '2024-04-12 01:27:44', '2024-04-12 01:27:46', '1234', NULL, '$2y$10$eA6MZeodddJN8IdbvQ4lAeRDuQi5fdKPYobPl7cNuXTviRvIiGYYq');
+(21, '1234567123', 1234567123, '1234567123@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$dR46Ql0oaPassVLJr9cureeYakjGxzgB7yTW7ZIg7FZGgmO.r6L2a', 0, 3, 1, NULL, '2024-04-12 01:27:44', '2024-04-12 01:27:46', '1234', NULL, '$2y$10$eA6MZeodddJN8IdbvQ4lAeRDuQi5fdKPYobPl7cNuXTviRvIiGYYq'),
+(22, 'Development Team', 4242343434, 'admin@adaasdmin.com', NULL, NULL, NULL, NULL, '$2y$10$ZHgckMP7LSAyxuMaNoUwSOOdXugJR4aoL4uKykGDHzEBFJ5VdJLzG', 0, 3, 1, NULL, '2024-06-07 03:11:55', '2024-06-07 03:11:55', NULL, NULL, '$2y$10$Dq9AoGjcxoYKidHuy4CiD.dJWGzGO4ovOk6S/3HNaEePKpD9hoE4y'),
+(23, 'Development Team', 2234234234, 'adasdasdmin@demo.com', NULL, NULL, NULL, NULL, '$2y$10$sQ6OsT3xONs0YYZ0V1GZoukXhPjiiEktqlzGrrMWB8jiuLE9rbQCq', 0, 3, 1, NULL, '2024-06-07 03:43:56', '2024-06-07 03:43:56', NULL, NULL, '$2y$10$c.SAgDgbwX2Q9v6FEOeaueOgCd.Cebt4ZXPtvkcL7maIN00YF0Kh6'),
+(24, 'Development Team', 1211212121212, 'adasdccasdmin@demo.com', NULL, NULL, NULL, NULL, '$2y$10$cm9c4Sdnn6jTKqHXm8OMaO6aI2/mvPrR47uTp31kUY/gYfeo/teaa', 0, 3, 1, NULL, '2024-06-07 03:46:58', '2024-06-07 03:46:58', NULL, NULL, '$2y$10$XhTLb0oX6UamtC3xSW1BDeC2VJoLDOkmakHZMrEm.Wv9nyt4CcOym'),
+(25, 'Deepesh Raj', 654564456654, 'dsfsddsfsdf@sgs.com', NULL, NULL, NULL, NULL, '$2y$10$uk3pm3tIF2VuVoWVPvDRSeBP8LLa.eP/T6XUTZTKEjymdy72/U/3y', 0, 3, 1, NULL, '2024-06-07 03:47:46', '2024-06-07 03:47:49', '1234', NULL, '$2y$10$FQc5ZlvBYlPaIuBSeAz4pO7T8V9oHyAQUKdYILcSvnwF3LmB8DPXK'),
+(29, 'Deepesh Raj', 12345123651, 'deepeshinfo22@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$wYH.k3Q78r4.JupS2BuDsuJSXhq8HwKNvR1Y/61uNaTPmvCU37SYu', 0, 3, 1, NULL, '2024-06-07 07:31:10', '2024-06-07 07:31:14', '1234', NULL, '$2y$10$neTljgiwZT6RAaHpJdk1guAEd5No.C8RKR3SEy7lT2mLZ7XK76mVe'),
+(30, 'Deepesh Raj', 9865321047, 'aajsafgaf@gmil.com', NULL, NULL, NULL, NULL, '$2y$10$wU8Zelh2QI2pfv9o3ZO1b.uvRZ8vgJu3wm7W91eacbfHH4W50/bb6', 0, 3, 1, NULL, '2024-06-12 11:01:33', '2024-06-12 11:01:49', '1234', NULL, '$2y$10$UfQ1eiOqpLikGNAZbcKbzeeZhG8owjn.60sydAZk5fxaBaCi8wah6'),
+(31, 'sdsdg', 6546465445, '4556456@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$6DQb39fn0tGxr8WlDAQOz.1Ty/cmqpRTTrLUmGC5kY/oc1Ze6xQHi', 0, 3, 1, NULL, '2024-07-15 11:42:12', '2024-07-15 11:42:20', '1234', NULL, '$2y$10$n11h1t4WOs6xHFmM0KRicOFbqOaTrZrGoN3PWBWSm0NgyfnkNndSS'),
+(32, 'Deepesh Raj', 9876598765, '98765987651@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$igO8Hde3kalz4g6FkNuzXulMYvS/EY/WmWOF6orPQNJNXPkXWv1om', 0, 3, 1, NULL, '2024-08-16 12:10:41', '2024-08-16 12:10:55', '1234', NULL, '$2y$10$aJxFCvjaf4Nsvs92z6d/DumNeHHs6QwLeBnOycVnH8Ll2xbjXBqqW');
 
 -- --------------------------------------------------------
 
@@ -1369,19 +1324,6 @@ CREATE TABLE `student_assignments` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `student_assignments`
---
-
-INSERT INTO `student_assignments` (`id`, `assignment_id`, `submission_link`, `submitted_on`, `submitted_by`, `reamrks`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 1, 'www.google.com', '2023-07-17 12:45:13', 1, 'Test Remarks', 1, '2023-07-17 07:15:13', NULL),
-(2, 1, '1', '2023-08-12 17:21:49', 1, NULL, 1, '2023-08-12 11:51:49', '2023-08-12 11:51:49'),
-(3, 1, '1691860982.png', '2023-08-12 17:23:02', 1, NULL, 1, '2023-08-12 11:53:02', '2023-08-12 11:53:02'),
-(4, 1, '1691861014.png', '2023-08-12 17:23:34', 1, 'Test', 1, '2023-08-12 11:53:34', '2023-08-12 11:53:34'),
-(5, 2, '1701777530.jpg', '2023-12-05 11:58:50', 1, NULL, 1, '2023-12-05 06:28:50', '2023-12-05 06:28:50'),
-(6, 3, '1708677191.png', '2024-02-23 08:33:11', 1, NULL, 1, '2024-02-23 03:03:11', '2024-02-23 03:03:11'),
-(7, 5, '1708677241.png', '2024-02-23 08:34:01', 1, NULL, 1, '2024-02-23 03:04:01', '2024-02-23 03:04:01');
-
 -- --------------------------------------------------------
 
 --
@@ -1403,19 +1345,22 @@ CREATE TABLE `student_assignment_lists` (
   `is_active` int(11) DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `batch_id` int(11) DEFAULT NULL
+  `batch_id` int(11) DEFAULT NULL,
+  `topic` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `student_assignment_lists`
 --
 
-INSERT INTO `student_assignment_lists` (`id`, `name`, `class_id`, `subject_id`, `topic_id`, `student_id`, `assigned_by`, `assignment_description`, `assignment_link`, `assignment_start_date`, `assignment_end_date`, `is_active`, `created_at`, `updated_at`, `batch_id`) VALUES
-(1, 'Real Numbers(Test Data)', 10, 1, 3, 0, 1, 'Test Description', '1713881780.webp', '2024-04-23', '2024-05-11', 1, '2023-07-16 06:50:13', '2024-04-23 08:46:20', 1),
-(2, 'Test Assignment', 10, 6, 6, 0, 1, 'Test Assignment Description', '1691074841.jpg', '2023-08-03', '2023-08-04', 1, '2023-08-03 09:30:41', '2023-09-04 06:21:01', 5),
-(3, 'Test Assignment', 10, 1, 1, 0, 3, 'wewe', '1699281689.jpg', '2023-11-06', '2023-11-07', 1, '2023-11-06 09:11:29', '2023-11-06 09:11:29', 1),
-(4, 'Test Assignment 1212', 10, 1, 4, 0, 1, '12123232', '1701851148.jpg', '2023-12-06', '2023-12-08', 1, '2023-12-06 02:55:48', '2023-12-06 02:55:48', 1),
-(5, 'Test Assignment', 10, 1, 3, 16, 1, 'dfdszasasd', '1713888381.webp', '2024-04-23', '2024-04-30', 1, '2024-04-23 05:43:08', '2024-04-23 10:36:21', NULL);
+INSERT INTO `student_assignment_lists` (`id`, `name`, `class_id`, `subject_id`, `topic_id`, `student_id`, `assigned_by`, `assignment_description`, `assignment_link`, `assignment_start_date`, `assignment_end_date`, `is_active`, `created_at`, `updated_at`, `batch_id`, `topic`) VALUES
+(1, 'Real Numbers(Test Data)', 10, 1, 3, 0, 1, 'Test Description', '1713881780.webp', '2024-04-23', '2024-05-11', 1, '2023-07-16 06:50:13', '2024-04-23 08:46:20', 1, NULL),
+(2, 'Test Assignment', 10, 6, 6, 0, 1, 'Test Assignment Description', '1691074841.jpg', '2023-08-03', '2023-08-04', 1, '2023-08-03 09:30:41', '2023-09-04 06:21:01', 5, NULL),
+(3, 'Test Assignment', 10, 1, 1, 0, 3, 'wewe', '1699281689.jpg', '2023-11-06', '2023-11-07', 1, '2023-11-06 09:11:29', '2023-11-06 09:11:29', 1, NULL),
+(4, 'Test Assignment 1212', 10, 1, 4, 0, 1, '12123232', '1701851148.jpg', '2023-12-06', '2023-12-08', 1, '2023-12-06 02:55:48', '2023-12-06 02:55:48', 1, NULL),
+(5, 'Test Assignment', 10, 1, 3, 16, 1, 'dfdszasasd', '1713888381.webp', '2024-04-23', '2024-04-30', 1, '2024-04-23 05:43:08', '2024-04-23 10:36:21', NULL, NULL),
+(6, 'Test Assignment', 10, 1, NULL, 1, 23, 'Sasa', NULL, '2024-06-26', '2024-06-29', 1, '2024-06-26 13:27:33', '2024-06-26 13:27:33', NULL, 'Test Topic Data'),
+(7, 'aas', 10, 1, NULL, 9, 23, 'aSas', NULL, '2024-06-25', '2024-06-29', 1, '2024-06-26 13:32:28', '2024-06-26 13:32:28', NULL, 'Real Number aSas');
 
 -- --------------------------------------------------------
 
@@ -1489,7 +1434,8 @@ INSERT INTO `subjective_responses` (`id`, `student_id`, `test_id`, `question_id`
 (10, 1, 7, 16, '<p>Vijay Chauhan</p>', '2', '0', 'Charles Babbage', 1, 1, '2023-12-27 03:51:07', '2023-12-27 06:25:12'),
 (11, 1, 7, 17, '<p>Mouse, Keyboard, Monitor, Speaker, Printer</p>', '2', '1', 'Monitor, Speaker, Printer are output device', 1, 1, '2023-12-27 03:51:07', '2023-12-27 06:25:12'),
 (12, 1, 7, 18, '<p>Monitor, Speaker, Printer, Scanner, Monitor</p>', '2', '1', 'Scanner is input device', 1, 1, '2023-12-27 03:51:07', '2023-12-27 06:25:12'),
-(13, 1, 7, 19, '<p>Electronic Device Used for Internet</p>', '2', '2', NULL, 1, 1, '2023-12-27 03:51:07', '2023-12-27 06:25:12');
+(13, 1, 7, 19, '<p>Electronic Device Used for Internet</p>', '2', '2', NULL, 1, 1, '2023-12-27 03:51:07', '2023-12-27 06:25:12'),
+(14, 1, 5, 12, '<p>afafas</p>', NULL, NULL, NULL, NULL, 0, '2024-07-24 12:12:06', '2024-07-24 12:12:06');
 
 -- --------------------------------------------------------
 
@@ -1514,8 +1460,8 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`id`, `name`, `description`, `image`, `class_id`, `created_at`, `updated_at`, `is_active`, `category`) VALUES
-(1, 'Maths', NULL, '1689314709.jpg', 10, NULL, '2023-09-04 05:55:18', 1, 1),
-(2, 'English', NULL, '1689315954.jpg', 10, '2023-07-14 00:55:54', '2023-07-14 00:55:54', 1, 1),
+(1, 'Maths', NULL, '1720028550.png', 10, NULL, '2024-07-03 12:12:30', 1, 1),
+(2, 'English', NULL, '1720027725.png', 10, '2023-07-14 00:55:54', '2024-07-03 11:58:45', 1, 2),
 (3, 'Social Science', NULL, '1689315992.jpg', 10, '2023-07-14 00:56:32', '2023-07-14 00:56:32', 1, 1),
 (4, 'French', NULL, '1689316006.jpg', 10, '2023-07-14 00:56:46', '2023-07-14 00:56:46', 1, 2),
 (5, 'Science', NULL, '1689316359.png', 10, '2023-07-14 01:02:39', '2023-07-14 01:02:39', 1, 2),
@@ -1576,7 +1522,13 @@ INSERT INTO `teacherclassmappings` (`id`, `teacher_id`, `class_id`, `created_at`
 (8, 9, 10, '2023-12-20 08:23:21', '2023-12-20 08:23:21', NULL, 19),
 (9, 13, 10, '2023-12-29 06:20:19', '2023-12-29 06:20:19', NULL, 20),
 (10, 13, 10, '2023-12-29 06:20:48', '2023-12-29 06:20:48', NULL, 21),
-(11, 1, 10, '2024-03-20 08:53:20', '2024-03-20 08:53:20', NULL, 22);
+(11, 1, 10, '2024-03-20 08:53:20', '2024-03-20 08:53:20', NULL, 22),
+(14, 22, 10, '2024-06-21 12:25:44', '2024-06-21 12:25:44', NULL, 25),
+(15, 22, 10, '2024-06-21 12:26:52', '2024-06-21 12:26:52', NULL, 26),
+(16, 22, 10, '2024-06-21 12:27:04', '2024-06-21 12:27:04', NULL, 27),
+(17, 23, 10, '2024-06-22 13:02:13', '2024-06-22 13:02:13', NULL, 28),
+(18, 23, 10, '2024-06-22 13:02:21', '2024-06-22 13:02:21', NULL, 29),
+(21, 25, 10, '2024-08-22 10:22:23', '2024-08-22 10:22:23', NULL, 32);
 
 -- --------------------------------------------------------
 
@@ -1646,7 +1598,9 @@ INSERT INTO `testattempteds` (`id`, `student_id`, `test_id`, `attempt_no`, `test
 (37, 1, 8, 2, '2024-02-23 03:32:21', '0', '50', '28', '[119]', NULL, 1, NULL, 1, '2024-02-23 03:32:21', '2024-02-23 03:32:21'),
 (38, 1, 8, 3, '2024-02-23 03:33:32', '0', '50', '28', '[120]', NULL, 1, NULL, 1, '2024-02-23 03:33:32', '2024-02-23 03:33:32'),
 (39, 1, 8, 4, '2024-02-23 03:35:00', '0', '50', '28', '[121]', NULL, 1, NULL, 1, '2024-02-23 03:35:00', '2024-02-23 03:35:00'),
-(40, 1, 8, 5, '2024-02-23 03:36:14', '0', '50', '28', '[122]', NULL, 1, NULL, 1, '2024-02-23 03:36:14', '2024-02-23 03:36:14');
+(40, 1, 8, 5, '2024-02-23 03:36:14', '0', '50', '28', '[122]', NULL, 1, NULL, 1, '2024-02-23 03:36:14', '2024-02-23 03:36:14'),
+(41, 1, 5, 2, '2024-07-24 12:12:06', '0', '0', '0', '0', '[14]', 2, NULL, 1, '2024-07-24 12:12:06', '2024-07-24 12:12:06'),
+(42, 1, 2, 14, '2024-07-24 12:12:22', '0', '50', '28', '[123,124,125,126]', NULL, 1, NULL, 1, '2024-07-24 12:12:22', '2024-07-24 12:12:22');
 
 -- --------------------------------------------------------
 
@@ -1715,7 +1669,11 @@ INSERT INTO `testresponssheets` (`id`, `test_id`, `student_id`, `attempt_no`, `q
 (119, 8, 1, 2, 1, 1, 4, '2024-02-23 03:32:21', '2024-02-23 03:32:21'),
 (120, 8, 1, 3, 1, 1, 3, '2024-02-23 03:33:32', '2024-02-23 03:33:32'),
 (121, 8, 1, 4, 1, 1, 2, '2024-02-23 03:35:00', '2024-02-23 03:35:00'),
-(122, 8, 1, 5, 1, 1, 2, '2024-02-23 03:36:14', '2024-02-23 03:36:14');
+(122, 8, 1, 5, 1, 1, 2, '2024-02-23 03:36:14', '2024-02-23 03:36:14'),
+(123, 2, 1, 14, 3, 2, 1, '2024-07-24 12:12:22', '2024-07-24 12:12:22'),
+(124, 2, 1, 14, 4, 3, 2, '2024-07-24 12:12:22', '2024-07-24 12:12:22'),
+(125, 2, 1, 14, 5, 2, 1, '2024-07-24 12:12:22', '2024-07-24 12:12:22'),
+(126, 2, 1, 14, 6, 1, 3, '2024-07-24 12:12:22', '2024-07-24 12:12:22');
 
 -- --------------------------------------------------------
 
@@ -1844,13 +1802,21 @@ CREATE TABLE `tutorprofiles` (
 --
 
 INSERT INTO `tutorprofiles` (`id`, `name`, `mobile`, `secondary_mobile`, `email`, `goal`, `qualification`, `intro_video_link`, `profile_pic`, `expertise`, `experience`, `certification`, `headline`, `detail_1`, `detail_2`, `detail_3`, `tutor_id`, `keywords`, `created_at`, `updated_at`, `country_id`, `gender`, `rateperhour`, `admin_commission`, `rate`) VALUES
-(1, 'Jancy Mary', 1234, NULL, 'jancy@gmail.com', NULL, 'werty', 'https://www.youtube.com/embed/MoXA75rZFGg', '1716470815.png', 'Expert in maths', '1 Year', NULL, 'Expertise in Business Studies', 'My Details 1', NULL, NULL, 1, 'Java Expert, Python Expert, Motivational Speaker', NULL, '2024-06-06 05:56:31', 1, 2, '100', '20', 98),
+(1, 'Deepesh Rajww', 1234, NULL, 'jancy@gmail.com', NULL, ' ', NULL, '1716470815.png', 'Expert in maths', NULL, NULL, NULL, NULL, NULL, NULL, 20, 'test', NULL, '2024-06-21 11:44:11', 1, 1, '2032', '20', 98),
 (2, 'Jenni', 9090909090, NULL, 'jenni@demo.com', NULL, 'B.Com', 'https://www.youtube.com/embed/MoXA75rZFGg', '1691564127.png', NULL, '1 Year', NULL, 'Expertise in Business Studies', 'Tutor as well as career consultant', NULL, NULL, 2, NULL, '2023-08-09 01:25:27', '2023-08-09 01:25:27', 0, 1, '10', '10', 19),
 (3, 'Test Tutor', 9009009009, NULL, 'testtutor123@gmail.com', NULL, '12', '1', '1699282182.png', NULL, '12', NULL, '12', '12', NULL, NULL, 3, NULL, '2023-11-06 09:19:42', '2023-11-06 09:19:42', 0, 1, '', '', 21),
 (4, 'Development Team', 7004920897, NULL, 'development@demo.com', 'My Goals', 'B.Com', 'https://www.youtube.com/embed/MoXA75rZFGg', '1702560488.png', NULL, '1 Year', 'N/A', 'Expertise in Business Studies', 'My Details 1', 'My Details 2', 'My Details 3', 6, 'test,test,roman', '2023-12-14 07:58:08', '2024-06-06 09:33:39', 0, 1, '30', '50', 22),
 (5, 'Test Tutor', 1234512345, NULL, '12341234@gmail.com', NULL, 'werty', 'https://www.youtube.com/embed/MoXA75rZFGg', '1702884588.png', NULL, '1 Year', 'werty', 'Expertise in Business Studies', 'erty', NULL, NULL, 8, NULL, '2023-12-18 01:59:49', '2024-06-06 05:48:51', 0, 1, '', '23', 11),
 (6, '0000011111', 11111, NULL, '0000011111@gmail.com', NULL, 'werty', 'https://www.youtube.com/embed/MoXA75rZFGg', '1703078631.png', NULL, '1 Year', NULL, 'Expertise in Business Studies', 'My Details 1', NULL, NULL, 9, NULL, '2023-12-20 07:53:51', '2024-06-06 05:48:15', 0, 1, '', '11', 15),
-(8, 'Kirti Kumari', 1234561234, NULL, '1234561234@gmail.com', NULL, 'werty', 'https://www.youtube.com/embed/MoXA75rZFGg', '1703078631.png', NULL, '1 Year', NULL, 'Expertise in Business Studies', 'My Details 1', NULL, NULL, 13, NULL, '2023-12-29 06:19:13', '2023-12-29 06:19:13', 0, 2, '', '', 40);
+(8, 'Kirti Kumari', 1234561234, NULL, '1234561234@gmail.com', NULL, 'werty', 'https://www.youtube.com/embed/MoXA75rZFGg', '1703078631.png', NULL, '1 Year', NULL, 'Expertise in Business Studies', 'My Details 1', NULL, NULL, 13, NULL, '2023-12-29 06:19:13', '2023-12-29 06:19:13', 0, 2, '', '', 40),
+(10, 'Deepesh Raj', 45656644545, NULL, 'sadas@sfsf.cmm', NULL, ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18, NULL, '2024-06-07 04:16:06', '2024-06-07 04:16:06', 0, 1, '0', '0', NULL),
+(12, 'Deepesh Raj', 4567984458, NULL, 'weweweadmin@admin.com', NULL, ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 19, NULL, '2024-06-21 11:24:09', '2024-06-21 11:24:09', 0, 1, '0', '0', NULL),
+(13, 'Deepesh Rajww', 66545654, NULL, 'qwdasdadad@gmail.com', NULL, ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20, NULL, '2024-06-21 11:43:40', '2024-06-21 11:43:40', 0, 1, '0', '0', NULL),
+(14, 'Development Team', 9894545646, NULL, 'asasfaas@gsfsd.com', NULL, ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 21, NULL, '2024-06-21 11:45:54', '2024-06-21 11:52:55', 0, 1, '2110', '0', NULL),
+(15, 'Dipanshu', 9879879870, NULL, 'dipanshu@gmail.com', NULL, ' ', NULL, '1718992618.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 22, NULL, '2024-06-21 12:24:18', '2024-06-21 12:26:58', 0, 1, '20', '10', NULL),
+(16, 'Krishna', 9876598765, NULL, 'krishna@gmail.com', NULL, ' ', 'https://www.youtube.com/embed/MoXA75rZFGg', '1719081125.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 23, NULL, '2024-06-22 13:01:34', '2024-06-22 13:02:05', 0, 1, '25', '10', NULL),
+(18, 'Deepesh Raj', 45456444645, NULL, 'ajkfgasjf@gmail.com', NULL, ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 24, NULL, '2024-08-16 10:16:07', '2024-08-22 11:32:53', 0, 1, '19', '0', NULL),
+(19, 'Test 22 Aug', 9898454565, NULL, 'test22aug@gmail.com', NULL, ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 25, NULL, '2024-08-22 10:16:23', '2024-08-22 10:17:21', 0, 1, '15', '25', NULL);
 
 -- --------------------------------------------------------
 
@@ -1891,7 +1857,14 @@ INSERT INTO `tutorregistrations` (`id`, `name`, `mobile`, `email`, `is_mobile_ve
 (14, 'adasdas', 23232323232, 'adminasdas@demo.com', NULL, NULL, NULL, NULL, '$2y$10$M2M9vARWVQiT2E5RP1I0Zue40rw79cUjALr7xo2hkekJGEjBinxuq', 2, 0, NULL, '2024-03-05 13:49:47', '2024-03-05 13:49:47'),
 (15, 'aasdasd', 1212121212, '1212121212@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$WGMakWnNpNc8foZu5WqGrOg.I4mLy1MRXplUOXBWTQ9uzNpyoKicC', 2, 0, NULL, '2024-03-07 05:59:16', '2024-03-07 05:59:16'),
 (16, 'ytrtyry', 111564115, 'ytuyutut@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$i3jFOI4nE3T0s6L19ub8COxeTuX8uNbbGeQm00UAd8s8bknoQOb6q', 2, 0, NULL, '2024-03-21 04:01:29', '2024-03-21 04:01:29'),
-(17, '765765765757', 7657657657, '765765765757@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$1MMZVV4zPVueXjLZncZJseMiCzsRDsLGzu2W1rPKWP5r1aiu8mVFy', 2, 0, NULL, '2024-04-12 01:25:23', '2024-04-12 01:25:23');
+(17, '765765765757', 7657657657, '765765765757@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$1MMZVV4zPVueXjLZncZJseMiCzsRDsLGzu2W1rPKWP5r1aiu8mVFy', 2, 0, NULL, '2024-04-12 01:25:23', '2024-04-12 01:25:23'),
+(18, 'Deepesh Raj', 45656644545, 'sadas@sfsf.cmm', NULL, NULL, NULL, NULL, '$2y$10$9XoZE8WP3.cEFdbsqLIKne9lJufXZlDV88buJl99.DLh6s6XkTBxi', 2, 0, NULL, '2024-06-07 04:16:06', '2024-06-07 04:16:06'),
+(19, 'Deepesh Raj', 4567984458, 'weweweadmin@admin.com', NULL, NULL, NULL, NULL, '$2y$10$PD7HfR/yyZLtqKtK//XQNumhjwl0ZDg..urnD5xXP4q3hZjLA3Xe6', 2, 0, NULL, '2024-06-21 11:24:09', '2024-06-21 11:24:09'),
+(20, 'Deepesh Rajww', 66545654, 'qwdasdadad@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$3zDmOw/Vpx5QiD8tFj3Vn.qKFe4fLxsnveURE14mHuypi2UtY9swi', 2, 0, NULL, '2024-06-21 11:43:40', '2024-06-21 11:43:40'),
+(21, 'Development Team', 9894545646, 'asasfaas@gsfsd.com', NULL, NULL, NULL, NULL, '$2y$10$gkHb1xdoKh5OeB1QfYxl8eoW6O.btmwr8.va3YdTSe81DsCiEHYXu', 2, 0, NULL, '2024-06-21 11:45:54', '2024-06-21 12:06:14'),
+(22, 'Dipanshu', 9879879870, 'dipanshu@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$I2cSAwTrt88tASHpr01gY.DXoQb/x2lGAtpTVWrlQVTse0dewmFnS', 2, 1, NULL, '2024-06-21 12:24:18', '2024-06-21 12:24:44'),
+(23, 'Krishna', 9876598765, 'krishna@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$V6usyIXD0qf/wm0Iw.iOduMtHTLVbbQl8aIj82xNkmKU4p7mHuGmS', 2, 1, NULL, '2024-06-22 13:01:34', '2024-06-22 13:02:52'),
+(24, 'Deepesh Raj', 45456444645, 'ajkfgasjf@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$07.hFZvQky4b0d0dnxEoB.PNcufBHlm3HVDiRdHgsa3aBUZrk66Lu', 2, 1, NULL, '2024-08-16 10:16:07', '2024-08-22 11:21:28');
 
 -- --------------------------------------------------------
 
@@ -1952,7 +1925,13 @@ INSERT INTO `tutorsubjectmappings` (`id`, `tutor_id`, `subject_id`, `created_at`
 (19, 9, 1, '2023-12-20 08:23:21', '2024-06-06 05:42:18', 10, '110', NULL),
 (20, 13, 6, '2023-12-29 06:20:19', '2023-12-29 06:20:19', 10, '0', NULL),
 (21, 13, 5, '2023-12-29 06:20:48', '2023-12-29 06:20:48', 10, '0', NULL),
-(22, 1, 1, '2024-03-20 08:53:20', '2024-03-20 08:53:20', 10, '0', NULL);
+(22, 1, 1, '2024-03-20 08:53:20', '2024-03-20 08:53:20', 10, '0', NULL),
+(25, 22, 1, '2024-06-21 12:25:44', '2024-06-21 12:25:44', 10, '0', NULL),
+(26, 22, 2, '2024-06-21 12:26:52', '2024-06-21 12:26:52', 10, '0', NULL),
+(27, 22, 5, '2024-06-21 12:27:04', '2024-06-21 12:27:04', 10, '0', NULL),
+(28, 23, 1, '2024-06-22 13:02:13', '2024-06-22 13:02:13', 10, '0', NULL),
+(29, 23, 6, '2024-06-22 13:02:21', '2024-06-22 13:02:21', 10, '0', NULL),
+(32, 25, 3, '2024-08-22 10:22:23', '2024-08-22 10:22:23', 10, '0', NULL);
 
 -- --------------------------------------------------------
 
@@ -2039,29 +2018,31 @@ CREATE TABLE `zoom_classes` (
   `recording_link` varchar(255) DEFAULT NULL,
   `student_id` int(11) DEFAULT NULL,
   `remarks` varchar(255) DEFAULT NULL,
-  `student_present` int(11) DEFAULT NULL
+  `student_present` int(11) DEFAULT NULL,
+  `started_at` datetime DEFAULT NULL,
+  `completed_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `zoom_classes`
 --
 
-INSERT INTO `zoom_classes` (`id`, `tutor_id`, `batch_id`, `uuid`, `meeting_id`, `host_id`, `host_email`, `topic_id`, `topic_name`, `type`, `status`, `start_time`, `duration`, `timezone`, `agenda`, `start_url`, `join_url`, `password`, `h323_password`, `pstn_password`, `encrypted_password`, `is_active`, `is_completed`, `created_at`, `updated_at`, `recording_link`, `student_id`, `remarks`, `student_present`) VALUES
-(1, 1, 1, 'feMIPinjQM6Tg8e5Dm2UxQ==', '83669355658', 'fddvqCpdSrea-FC6wuxbpA', 'metacitinasar@gmail.com', '3', '(Batch 1) Finding HCF prime-factorization method', 2, 'Completed', '2023-11-03T20:30:40Z', 60, 'UTC', 'Finding HCF prime-factorization method', 'https://us05web.zoom.us/s/83669355658?zak=eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6ImZkZHZxQ3BkU3JlYS1GQzZ3dXhicEEiLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEsIndjZCI6InVzMDUiLCJjbHQiOjAsIm1udW0iOiI4MzY2OTM1NTY1OCIsImV4cCI6MTY5MTA2MjI0MCwiaWF0IjoxNjkxMDU1MDQwLCJhaWQiOiJpMVpQZ3VGdFRMLU1qajlVS1VGdl9RIiwiY2lkIjoiIn0.9p7BAOK3zPZH6hF06PQmQVuxuhmzAS8JfNMcTmBcgtU', 'https://us05web.zoom.us/j/83669355658?pwd=S1GrWbEtIWFl8Rbhi2MaalcobDytNJ.1', '12345678', '12345678', '12345678', 'S1GrWbEtIWFl8Rbhi2MaalcobDytNJ.1', 1, 1, '2023-08-03 04:00:40', '2023-12-06 02:49:12', '#', NULL, NULL, NULL),
-(2, 1, 1, 'pM/HAD53RUuDhuP/kb80fQ==', '81887919554', 'fddvqCpdSrea-FC6wuxbpA', 'metacitinasar@gmail.com', '3', '(Batch 2) Real Number', 2, 'Completed', '2023-11-04T09:30:40Z', 60, 'UTC', 'Real Number', 'https://us05web.zoom.us/s/81887919554?zak=eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6ImZkZHZxQ3BkU3JlYS1GQzZ3dXhicEEiLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEsIndjZCI6InVzMDUiLCJjbHQiOjAsIm1udW0iOiI4MTg4NzkxOTU1NCIsImV4cCI6MTY5MTA2NTkyNCwiaWF0IjoxNjkxMDU4NzI0LCJhaWQiOiJpMVpQZ3VGdFRMLU1qajlVS1VGdl9RIiwiY2lkIjoiIn0.zsPoyscA2mWnJQvjF7pHRzNAJq0NwyQEkRFnsfbNCCo', 'https://us05web.zoom.us/j/81887919554?pwd=G1Szinpy0TF39JklwOHdeRsdGRF0b7.1', '12345678', '12345678', '12345678', 'G1Szinpy0TF39JklwOHdeRsdGRF0b7.1', 1, 1, '2023-08-03 05:02:04', '2023-12-06 02:50:42', '#', NULL, NULL, NULL),
-(3, 1, 5, 'NqdY6gy5QpyJV/jkZb2tvw==', '81479362345', 'fddvqCpdSrea-FC6wuxbpA', 'metacitinasar@gmail.com', '6', '(Batch - Computer) Computer Fundamentals', 2, 'waiting', '2023-11-03T10:32:31Z', 60, 'UTC', 'Computer Fundamentals', 'https://us05web.zoom.us/s/81479362345?zak=eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6ImZkZHZxQ3BkU3JlYS1GQzZ3dXhicEEiLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEsIndjZCI6InVzMDUiLCJjbHQiOjAsIm1udW0iOiI4MTQ3OTM2MjM0NSIsImV4cCI6MTY5MTA2NTk1MSwiaWF0IjoxNjkxMDU4NzUxLCJhaWQiOiJpMVpQZ3VGdFRMLU1qajlVS1VGdl9RIiwiY2lkIjoiIn0.2w5w_gRQT_cAqxqsRnIs6k0PXTFHNHHgzMN_wHiJN7I', 'https://us05web.zoom.us/j/81479362345?pwd=PGU5IlQ09iXqjHz2oG52c3hIEbFvU4.1', '12345678', '12345678', '12345678', 'PGU5IlQ09iXqjHz2oG52c3hIEbFvU4.1', 1, 0, '2023-08-03 05:02:31', '2023-08-03 05:02:31', NULL, NULL, NULL, NULL),
-(4, 1, 1, '1De+n5k3QcOaLT3LZTmJyQ==', '88052904675', 'fddvqCpdSrea-FC6wuxbpA', 'metacitinasar@gmail.com', '2', '(Batch 1) Euclids division lemma and problems on it complete', 2, 'waiting', '2023-08-04T08:22:22Z', 60, 'UTC', 'Euclids division lemma and problems on it complete', 'https://us05web.zoom.us/s/88052904675?zak=eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6ImZkZHZxQ3BkU3JlYS1GQzZ3dXhicEEiLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEsIndjZCI6InVzMDUiLCJjbHQiOjAsIm1udW0iOiI4ODA1MjkwNDY3NSIsImV4cCI6MTY5MTE0NDU0MiwiaWF0IjoxNjkxMTM3MzQyLCJhaWQiOiJpMVpQZ3VGdFRMLU1qajlVS1VGdl9RIiwiY2lkIjoiIn0.eitfKH3jIn9jeZojEvCkFFzUZRtE9OQTVZBoNsNumA0', 'https://us05web.zoom.us/j/88052904675?pwd=rPWlTkysSYnN2J5wxV9oVlkkrv1ygc.1', '12345678', '12345678', '12345678', 'rPWlTkysSYnN2J5wxV9oVlkkrv1ygc.1', 1, 0, '2023-08-04 02:52:22', '2023-08-04 02:52:22', NULL, NULL, NULL, NULL),
-(5, 1, 1, 'f8slm8ru3ju1r901g33vglpons', 'https://meet.google.com/rtj-ftzp-byf', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '1', '(Batch 1) Real Number', 2, 'Completed', '2023-09-20T16:45:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Real Number', 'https://meet.google.com/rtj-ftzp-byf', 'https://meet.google.com/rtj-ftzp-byf', '121212', '121212', '121212', '121212', 1, 1, '2023-09-20 06:03:42', '2023-09-21 01:23:21', 'https://drive.google.com/file/d/1t-BI3eKKeeLpUpcoUFfB3nXF3hw1TPcd/view?usp=drive_link', NULL, NULL, NULL),
-(6, 1, 1, 'uoqvmlm9chuhbckoeoirvqd8p0', 'https://meet.google.com/kdj-fpwh-ubh', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '1', '(Batch 1) Real Number', 2, 'Completed', '2023-09-21T13:03:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Real Number', 'https://meet.google.com/kdj-fpwh-ubh', 'https://meet.google.com/kdj-fpwh-ubh', '12345678', '12345678', '12345678', '12345678', 1, 1, '2023-09-21 02:09:32', '2023-09-21 03:38:10', NULL, NULL, NULL, NULL),
-(7, 1, 1, 'c03epvccgks5d496cr17abupes', 'https://meet.google.com/gyt-vosr-tdg', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '3', '(Batch 1) Finding HCF prime-factorization method', 2, 'Started', '2023-09-21T13:11:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Finding HCF prime-factorization method', 'https://meet.google.com/gyt-vosr-tdg', 'https://meet.google.com/gyt-vosr-tdg', '121212', '121212', '121212', '121212', 1, 0, '2023-09-21 02:14:49', '2023-09-21 02:15:22', NULL, NULL, NULL, NULL),
-(8, 1, 1, '7l5n8jlkpmo7f3874nfo6m9gic', 'https://meet.google.com/iiz-rhoh-eea', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '3', '(Batch 1) Finding HCF prime-factorization method', 2, 'Completed', '2023-09-21T13:15:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Finding HCF prime-factorization method', 'https://meet.google.com/iiz-rhoh-eea', 'https://meet.google.com/iiz-rhoh-eea', '121212', '121212', '121212', '121212', 1, 1, '2023-09-21 02:15:16', '2023-12-06 02:48:42', '#', NULL, NULL, NULL),
-(9, 1, 1, 'm7ive76nikv24hg8idoct3ot5g', 'https://meet.google.com/zbx-svui-bpp', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '2', '(Batch 1) Euclids division lemma and problems on it complete', 2, 'Completed', '2023-09-25T23:11:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Euclids division lemma and problems on it complete', 'https://meet.google.com/zbx-svui-bpp', 'https://meet.google.com/zbx-svui-bpp', '121212', '121212', '121212', '121212', 1, 1, '2023-09-25 12:11:31', '2023-12-06 02:48:57', '#', NULL, NULL, NULL),
-(10, 1, 1, 'k4bfo6d0dm4nr9rtl7k08a3i1c', 'https://meet.google.com/dkk-qojk-xsv', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '2', '(Batch 1) Euclids division lemma and problems on it complete', 2, 'Completed', '2023-09-25T23:12:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Euclids division lemma and problems on it complete', 'https://meet.google.com/dkk-qojk-xsv', 'https://meet.google.com/dkk-qojk-xsv', '121212', '121212', '121212', '121212', 1, 1, '2023-09-25 12:12:11', '2023-12-06 02:41:11', '#', NULL, NULL, NULL),
-(11, 1, 1, '8m2740r62reee8u917umj806oo', 'https://meet.google.com/kyt-oaxr-igv', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '5', '(Batch 1) Without actually dividing finding the decimal expansion of rational number', 2, 'Completed', '2023-09-26T23:12:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Without actually dividing finding the decimal expansion of rational number', 'https://meet.google.com/kyt-oaxr-igv', 'https://meet.google.com/kyt-oaxr-igv', '121212', '121212', '121212', '121212', 1, 1, '2023-09-25 12:13:00', '2023-12-06 02:39:00', '#', NULL, NULL, NULL),
-(12, 3, 7, 'flb5iktp205rndrjgek6b6qh4g', 'https://meet.google.com/gfr-efct-ekg', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '1', '(Ali batch05) Real Number', 2, 'Completed', '2023-11-06T20:10:00+00:00', 60, 'Asia/Kolkata', '(Ali batch05) Real Number', 'https://meet.google.com/gfr-efct-ekg', 'https://meet.google.com/gfr-efct-ekg', '12345678', '12345678', '12345678', '12345678', 1, 1, '2023-11-06 09:10:42', '2023-11-06 09:20:27', '#', NULL, NULL, NULL),
-(13, 3, 5, 'trjqf4rghv5d1hlvpmmem95j9c', 'https://meet.google.com/puo-rqwp-tzt', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '6', '(Batch - Computer) Computer Fundamentals', 2, 'confirmed', '2023-11-07T20:13:00+00:00', 60, 'Asia/Kolkata', '(Batch - Computer) Computer Fundamentals', 'https://meet.google.com/puo-rqwp-tzt', 'https://meet.google.com/puo-rqwp-tzt', '12345678', '12345678', '12345678', '12345678', 1, 0, '2023-11-06 09:13:25', '2023-11-06 09:13:25', NULL, NULL, NULL, NULL),
-(14, 1, 1, 'aov7qut7n03bcn10fa2qdi1e98', 'https://meet.google.com/ueq-wyvt-qnx', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '2', '(Batch 1) Euclids division lemma and problems on it complete', 2, 'Completed', '2023-12-06T13:35:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Euclids division lemma and problems on it complete', 'https://meet.google.com/ueq-wyvt-qnx', 'https://meet.google.com/ueq-wyvt-qnx', '12345678', '12345678', '12345678', '12345678', 1, 0, '2023-12-06 02:35:44', '2023-12-06 02:38:37', '#', NULL, NULL, NULL),
-(16, 13, 1, 'msun3bcleia63m7krongrolla0', 'https://meet.google.com/dex-mavc-gda', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '8', 'On Demand', 2, 'Completed', '2023-12-31T09:33:00+00:00', 60, 'Asia/Kolkata', 'Live for student : Deepesh Raj, by tutor : Development Team', 'https://meet.google.com/dex-mavc-gda', 'https://meet.google.com/dex-mavc-gda', '12345678', '12345678', '12345678', '12345678', 1, 1, '2023-12-30 04:14:45', '2023-12-30 05:48:28', '#', 1, NULL, 1);
+INSERT INTO `zoom_classes` (`id`, `tutor_id`, `batch_id`, `uuid`, `meeting_id`, `host_id`, `host_email`, `topic_id`, `topic_name`, `type`, `status`, `start_time`, `duration`, `timezone`, `agenda`, `start_url`, `join_url`, `password`, `h323_password`, `pstn_password`, `encrypted_password`, `is_active`, `is_completed`, `created_at`, `updated_at`, `recording_link`, `student_id`, `remarks`, `student_present`, `started_at`, `completed_at`) VALUES
+(1, 1, 1, 'feMIPinjQM6Tg8e5Dm2UxQ==', '83669355658', 'fddvqCpdSrea-FC6wuxbpA', 'metacitinasar@gmail.com', '3', '(Batch 1) Finding HCF prime-factorization method', 2, 'Completed', '2023-11-03T20:30:40Z', 60, 'UTC', 'Finding HCF prime-factorization method', 'https://us05web.zoom.us/s/83669355658?zak=eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6ImZkZHZxQ3BkU3JlYS1GQzZ3dXhicEEiLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEsIndjZCI6InVzMDUiLCJjbHQiOjAsIm1udW0iOiI4MzY2OTM1NTY1OCIsImV4cCI6MTY5MTA2MjI0MCwiaWF0IjoxNjkxMDU1MDQwLCJhaWQiOiJpMVpQZ3VGdFRMLU1qajlVS1VGdl9RIiwiY2lkIjoiIn0.9p7BAOK3zPZH6hF06PQmQVuxuhmzAS8JfNMcTmBcgtU', 'https://us05web.zoom.us/j/83669355658?pwd=S1GrWbEtIWFl8Rbhi2MaalcobDytNJ.1', '12345678', '12345678', '12345678', 'S1GrWbEtIWFl8Rbhi2MaalcobDytNJ.1', 1, 1, '2023-08-03 04:00:40', '2023-12-06 02:49:12', '#', NULL, NULL, NULL, NULL, NULL),
+(2, 1, 1, 'pM/HAD53RUuDhuP/kb80fQ==', '81887919554', 'fddvqCpdSrea-FC6wuxbpA', 'metacitinasar@gmail.com', '3', '(Batch 2) Real Number', 2, 'Completed', '2023-11-04T09:30:40Z', 60, 'UTC', 'Real Number', 'https://us05web.zoom.us/s/81887919554?zak=eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6ImZkZHZxQ3BkU3JlYS1GQzZ3dXhicEEiLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEsIndjZCI6InVzMDUiLCJjbHQiOjAsIm1udW0iOiI4MTg4NzkxOTU1NCIsImV4cCI6MTY5MTA2NTkyNCwiaWF0IjoxNjkxMDU4NzI0LCJhaWQiOiJpMVpQZ3VGdFRMLU1qajlVS1VGdl9RIiwiY2lkIjoiIn0.zsPoyscA2mWnJQvjF7pHRzNAJq0NwyQEkRFnsfbNCCo', 'https://us05web.zoom.us/j/81887919554?pwd=G1Szinpy0TF39JklwOHdeRsdGRF0b7.1', '12345678', '12345678', '12345678', 'G1Szinpy0TF39JklwOHdeRsdGRF0b7.1', 1, 1, '2023-08-03 05:02:04', '2023-12-06 02:50:42', '#', NULL, NULL, NULL, NULL, NULL),
+(3, 1, 5, 'NqdY6gy5QpyJV/jkZb2tvw==', '81479362345', 'fddvqCpdSrea-FC6wuxbpA', 'metacitinasar@gmail.com', '6', '(Batch - Computer) Computer Fundamentals', 2, 'waiting', '2023-11-03T10:32:31Z', 60, 'UTC', 'Computer Fundamentals', 'https://us05web.zoom.us/s/81479362345?zak=eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6ImZkZHZxQ3BkU3JlYS1GQzZ3dXhicEEiLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEsIndjZCI6InVzMDUiLCJjbHQiOjAsIm1udW0iOiI4MTQ3OTM2MjM0NSIsImV4cCI6MTY5MTA2NTk1MSwiaWF0IjoxNjkxMDU4NzUxLCJhaWQiOiJpMVpQZ3VGdFRMLU1qajlVS1VGdl9RIiwiY2lkIjoiIn0.2w5w_gRQT_cAqxqsRnIs6k0PXTFHNHHgzMN_wHiJN7I', 'https://us05web.zoom.us/j/81479362345?pwd=PGU5IlQ09iXqjHz2oG52c3hIEbFvU4.1', '12345678', '12345678', '12345678', 'PGU5IlQ09iXqjHz2oG52c3hIEbFvU4.1', 1, 0, '2023-08-03 05:02:31', '2023-08-03 05:02:31', NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 1, 1, '1De+n5k3QcOaLT3LZTmJyQ==', '88052904675', 'fddvqCpdSrea-FC6wuxbpA', 'metacitinasar@gmail.com', '2', '(Batch 1) Euclids division lemma and problems on it complete', 2, 'waiting', '2023-08-04T08:22:22Z', 60, 'UTC', 'Euclids division lemma and problems on it complete', 'https://us05web.zoom.us/s/88052904675?zak=eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6ImZkZHZxQ3BkU3JlYS1GQzZ3dXhicEEiLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEsIndjZCI6InVzMDUiLCJjbHQiOjAsIm1udW0iOiI4ODA1MjkwNDY3NSIsImV4cCI6MTY5MTE0NDU0MiwiaWF0IjoxNjkxMTM3MzQyLCJhaWQiOiJpMVpQZ3VGdFRMLU1qajlVS1VGdl9RIiwiY2lkIjoiIn0.eitfKH3jIn9jeZojEvCkFFzUZRtE9OQTVZBoNsNumA0', 'https://us05web.zoom.us/j/88052904675?pwd=rPWlTkysSYnN2J5wxV9oVlkkrv1ygc.1', '12345678', '12345678', '12345678', 'rPWlTkysSYnN2J5wxV9oVlkkrv1ygc.1', 1, 0, '2023-08-04 02:52:22', '2023-08-04 02:52:22', NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 1, 1, 'f8slm8ru3ju1r901g33vglpons', 'https://meet.google.com/rtj-ftzp-byf', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '1', '(Batch 1) Real Number', 2, 'Completed', '2023-09-20T16:45:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Real Number', 'https://meet.google.com/rtj-ftzp-byf', 'https://meet.google.com/rtj-ftzp-byf', '121212', '121212', '121212', '121212', 1, 1, '2023-09-20 06:03:42', '2023-09-21 01:23:21', 'https://drive.google.com/file/d/1t-BI3eKKeeLpUpcoUFfB3nXF3hw1TPcd/view?usp=drive_link', NULL, NULL, NULL, NULL, NULL),
+(6, 1, 1, 'uoqvmlm9chuhbckoeoirvqd8p0', 'https://meet.google.com/kdj-fpwh-ubh', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '1', '(Batch 1) Real Number', 2, 'Completed', '2023-09-21T13:03:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Real Number', 'https://meet.google.com/kdj-fpwh-ubh', 'https://meet.google.com/kdj-fpwh-ubh', '12345678', '12345678', '12345678', '12345678', 1, 1, '2023-09-21 02:09:32', '2023-09-21 03:38:10', NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 1, 1, 'c03epvccgks5d496cr17abupes', 'https://meet.google.com/gyt-vosr-tdg', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '3', '(Batch 1) Finding HCF prime-factorization method', 2, 'Started', '2023-09-21T13:11:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Finding HCF prime-factorization method', 'https://meet.google.com/gyt-vosr-tdg', 'https://meet.google.com/gyt-vosr-tdg', '121212', '121212', '121212', '121212', 1, 0, '2023-09-21 02:14:49', '2023-09-21 02:15:22', NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 1, 1, '7l5n8jlkpmo7f3874nfo6m9gic', 'https://meet.google.com/iiz-rhoh-eea', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '3', '(Batch 1) Finding HCF prime-factorization method', 2, 'Completed', '2023-09-21T13:15:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Finding HCF prime-factorization method', 'https://meet.google.com/iiz-rhoh-eea', 'https://meet.google.com/iiz-rhoh-eea', '121212', '121212', '121212', '121212', 1, 1, '2023-09-21 02:15:16', '2023-12-06 02:48:42', '#', NULL, NULL, NULL, NULL, NULL),
+(9, 1, 1, 'm7ive76nikv24hg8idoct3ot5g', 'https://meet.google.com/zbx-svui-bpp', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '2', '(Batch 1) Euclids division lemma and problems on it complete', 2, 'Completed', '2023-09-25T23:11:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Euclids division lemma and problems on it complete', 'https://meet.google.com/zbx-svui-bpp', 'https://meet.google.com/zbx-svui-bpp', '121212', '121212', '121212', '121212', 1, 1, '2023-09-25 12:11:31', '2023-12-06 02:48:57', '#', NULL, NULL, NULL, NULL, NULL),
+(10, 1, 1, 'k4bfo6d0dm4nr9rtl7k08a3i1c', 'https://meet.google.com/dkk-qojk-xsv', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '2', '(Batch 1) Euclids division lemma and problems on it complete', 2, 'Completed', '2023-09-25T23:12:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Euclids division lemma and problems on it complete', 'https://meet.google.com/dkk-qojk-xsv', 'https://meet.google.com/dkk-qojk-xsv', '121212', '121212', '121212', '121212', 1, 1, '2023-09-25 12:12:11', '2023-12-06 02:41:11', '#', NULL, NULL, NULL, NULL, NULL),
+(11, 1, 1, '8m2740r62reee8u917umj806oo', 'https://meet.google.com/kyt-oaxr-igv', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '5', '(Batch 1) Without actually dividing finding the decimal expansion of rational number', 2, 'Completed', '2023-09-26T23:12:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Without actually dividing finding the decimal expansion of rational number', 'https://meet.google.com/kyt-oaxr-igv', 'https://meet.google.com/kyt-oaxr-igv', '121212', '121212', '121212', '121212', 1, 1, '2023-09-25 12:13:00', '2023-12-06 02:39:00', '#', NULL, NULL, NULL, NULL, NULL),
+(12, 3, 7, 'flb5iktp205rndrjgek6b6qh4g', 'https://meet.google.com/gfr-efct-ekg', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '1', '(Ali batch05) Real Number', 2, 'Completed', '2023-11-06T20:10:00+00:00', 60, 'Asia/Kolkata', '(Ali batch05) Real Number', 'https://meet.google.com/gfr-efct-ekg', 'https://meet.google.com/gfr-efct-ekg', '12345678', '12345678', '12345678', '12345678', 1, 1, '2023-11-06 09:10:42', '2023-11-06 09:20:27', '#', NULL, NULL, NULL, NULL, NULL),
+(13, 3, 5, 'trjqf4rghv5d1hlvpmmem95j9c', 'https://meet.google.com/puo-rqwp-tzt', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '6', '(Batch - Computer) Computer Fundamentals', 2, 'confirmed', '2023-11-07T20:13:00+00:00', 60, 'Asia/Kolkata', '(Batch - Computer) Computer Fundamentals', 'https://meet.google.com/puo-rqwp-tzt', 'https://meet.google.com/puo-rqwp-tzt', '12345678', '12345678', '12345678', '12345678', 1, 0, '2023-11-06 09:13:25', '2023-11-06 09:13:25', NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 1, 1, 'aov7qut7n03bcn10fa2qdi1e98', 'https://meet.google.com/ueq-wyvt-qnx', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '2', '(Batch 1) Euclids division lemma and problems on it complete', 2, 'Completed', '2023-12-06T13:35:00+00:00', 60, 'Asia/Kolkata', '(Batch 1) Euclids division lemma and problems on it complete', 'https://meet.google.com/ueq-wyvt-qnx', 'https://meet.google.com/ueq-wyvt-qnx', '12345678', '12345678', '12345678', '12345678', 1, 1, '2023-12-06 02:35:44', '2023-12-06 02:38:37', '#', 1, NULL, NULL, NULL, NULL),
+(16, 23, 1, 'msun3bcleia63m7krongrolla0', 'https://meet.google.com/dex-mavc-gda', 'info@sofabespoke.co.uk', 'info@sofabespoke.co.uk', '', 'On Demand', 2, 'Started', '2024-07-31T09:33:00+00:00', 60, 'Asia/Kolkata', 'Live for student : Deepesh Raj, by tutor : Development Team', 'https://meet.google.com/dex-mavc-gda', 'https://meet.google.com/dex-mavc-gda', '12345678', '12345678', '12345678', '12345678', 1, 1, '2023-12-30 04:14:45', '2024-08-17 11:47:39', 'https://youtube.com', 1, NULL, 1, '2024-06-27 09:23:35', '2024-06-27 10:23:41');
 
 --
 -- Indexes for dumped tables
@@ -2469,13 +2450,13 @@ ALTER TABLE `batchstudentmappings`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ch_messages`
 --
 ALTER TABLE `ch_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT for table `classes`
@@ -2499,7 +2480,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `democlasses`
 --
 ALTER TABLE `democlasses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -2529,25 +2510,25 @@ ALTER TABLE `my_favourites`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT for table `online_tests`
 --
 ALTER TABLE `online_tests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `paymentdetails`
 --
 ALTER TABLE `paymentdetails`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `paymentstudents`
 --
 ALTER TABLE `paymentstudents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `payment_modes`
@@ -2571,13 +2552,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `questionbanks`
 --
 ALTER TABLE `questionbanks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `slot_bookings`
 --
 ALTER TABLE `slot_bookings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=495;
 
 --
 -- AUTO_INCREMENT for table `statuses`
@@ -2589,7 +2570,7 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `studentachievements`
 --
 ALTER TABLE `studentachievements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `studentattendances`
@@ -2601,13 +2582,13 @@ ALTER TABLE `studentattendances`
 -- AUTO_INCREMENT for table `studentprofiles`
 --
 ALTER TABLE `studentprofiles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `studentregistrations`
 --
 ALTER TABLE `studentregistrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `studentreviews`
@@ -2619,13 +2600,13 @@ ALTER TABLE `studentreviews`
 -- AUTO_INCREMENT for table `student_assignments`
 --
 ALTER TABLE `student_assignments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `student_assignment_lists`
 --
 ALTER TABLE `student_assignment_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `subjectcategories`
@@ -2637,7 +2618,7 @@ ALTER TABLE `subjectcategories`
 -- AUTO_INCREMENT for table `subjective_responses`
 --
 ALTER TABLE `subjective_responses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -2655,25 +2636,25 @@ ALTER TABLE `syllabi`
 -- AUTO_INCREMENT for table `teacherclassmappings`
 --
 ALTER TABLE `teacherclassmappings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `temporary_subjectives`
 --
 ALTER TABLE `temporary_subjectives`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `testattempteds`
 --
 ALTER TABLE `testattempteds`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `testresponssheets`
 --
 ALTER TABLE `testresponssheets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `topics`
@@ -2697,13 +2678,13 @@ ALTER TABLE `tutorpayments`
 -- AUTO_INCREMENT for table `tutorprofiles`
 --
 ALTER TABLE `tutorprofiles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tutorregistrations`
 --
 ALTER TABLE `tutorregistrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tutorreviews`
@@ -2715,7 +2696,7 @@ ALTER TABLE `tutorreviews`
 -- AUTO_INCREMENT for table `tutorsubjectmappings`
 --
 ALTER TABLE `tutorsubjectmappings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `userroles`
