@@ -193,6 +193,7 @@
                                     <thead>
                                         <tr class="">
                                             <th>Tutor</th>
+                                            <th>Subject</th>
                                             <th>Topic</th>
                                             <th>Scheduled Time</th>
                                             <th>Status</th>
@@ -203,6 +204,7 @@
                                         @foreach ($upclasses as $upcomingclass)
                                         <tr>
                                             <td>{{ $upcomingclass->tutor_name }}</td>
+                                            <td>{{ $upcomingclass->subjects }}</td>
                                             <td>{{ $upcomingclass->topics }}</td>
                                             <td>
                                                 <div class="dayTime">
