@@ -67,7 +67,7 @@
                                 <span class="badge bg-success">Started</span>
                                 @elseif ($liveclass->status == 'cancelled' || $liveclass->status == 'Cancelled')
                                 <span class="badge bg-danger">Cancelled</span>
-                                
+
                                 @elseif ($liveclass->status == 'Completed' || $liveclasses->status == 'completed')
                                         <span class="badge bg-success">Completed</span>
                                 {{-- @elseif ($liveclasses->status == 8)
@@ -529,8 +529,9 @@
 
                     toastr.success('status changed')
                     document.getElementById('warningbtn').innerHTML =
-                        `<a href="${link}" target="_blank"><button class="btn btn-sm btn-success">Ok</button></a>`;
+                        `<a href="${link}" target="_blank"><button onclick="reloadpage()" class="btn btn-sm btn-success">Ok</button></a>`;
                     $('#warningModal').modal('show');
+
 
                 } else {
                     alert("Something went wrong. Please try again later");
@@ -539,6 +540,9 @@
             }
         });
 
+    }
+    function reloadpage(){
+        location.reload();
     }
     </script>
     <script>

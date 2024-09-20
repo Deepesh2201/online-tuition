@@ -23,7 +23,7 @@
             });
         </script>
     @endif
-    
+
     @if(Session::has('fail'))
         <script>
             Swal.fire({
@@ -41,7 +41,7 @@
             });
         </script>
     @endif
-    
+
         <div class="container-fluid">
 
             <!-- start page title -->
@@ -202,13 +202,7 @@
                                     <tbody>
                                         @foreach ($upclasses as $upcomingclass)
                                         <tr>
-                                            <td>
-                                                <div class="namePic">
-                                                    <img src="/images/tutors/profilepics/{{ $upcomingclass->profile_pic }}"
-                                                        alt="">
-                                                    <span>{{ $upcomingclass->tutor_name }}</span>
-                                                </div>
-                                            </td>
+                                            <td>{{ $upcomingclass->tutor_name }}</td>
                                             <td>{{ $upcomingclass->topics }}</td>
                                             <td>
                                                 <div class="dayTime">
@@ -216,10 +210,10 @@
                                                     if ($upcomingclass->start_time) {
                                                         $startDateTime = \Carbon\Carbon::parse($upcomingclass->start_time);
                                                         $now = \Carbon\Carbon::now();
-                                                        
+
                                                         // Difference in hours between the current time and the class start time
                                                         $hoursDiff = $startDateTime->diffInHours($now, false); // 'false' keeps the sign of the difference
-                                                        
+
                                                         if ($hoursDiff >= -1) { // Only show if the start time is in the future or within the last 1 hour
                                                             if ($startDateTime->isToday()) {
                                                                 $message = 'Today';
@@ -236,7 +230,7 @@
                                                         $message = '';  // Empty if start_time is not available
                                                     }
                                                     @endphp
-                                            
+
                                                     @if($upcomingclass->start_time && $hoursDiff >= -1)
                                                         <span>{{ $message }}</span>
                                                         <small>{{ $startDateTime->format('d-m-Y h:i A') }}</small>  <!-- Formatted as dd-mm-yyyy hh:mm am/pm -->
@@ -245,7 +239,7 @@
                                                     @endif
                                                 </div>
                                             </td>
-                                            
+
 
                                             <td>
                                                 @if (in_array(strtolower($upcomingclass->status), ['confirmed',
@@ -642,7 +636,7 @@
                                         <p>&#163;{{$tutorlist->rateperhour}}</p>
                                     </div>
                                     <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorlist->profile_pic }}" class="card-img-top" alt="Tutor Image" onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/MCTfavicon.png';">
-                               
+
                                 </div>
                                 <div class="tutorDesc">
                                     <a href="tutorprofile/{{ $tutorlist->tutor_id }}" style="color: black"><span class="tutname">{{ $tutorlist->name }}</span></a><br>

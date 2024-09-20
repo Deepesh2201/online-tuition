@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\Notification;
+use App\Events\RealTimeMessage;
 
 class DemoController extends Controller
 {
@@ -127,7 +128,7 @@ class DemoController extends Controller
         return json_encode(array($demo));
     }
 
- 
+
     public function demoupdate(Request $request){
         $request->validate([
             'slotupdate1'=>'required',
@@ -215,7 +216,7 @@ class DemoController extends Controller
         $type = "tutor";
         $viewTable = view('admin.partials.democlass-search', compact('demos','type'))->render();
         $viewPagination = $demos->links()->render();
-        
+
         $subjects = subjects::where('is_active',1)->get();
         $classes = classes::where('is_active',1)->get();
         $statuses = status::select('*')->get();

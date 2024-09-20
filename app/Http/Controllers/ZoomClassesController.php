@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Events\RealTimeMessage;
 
 class ZoomClassesController extends Controller
 {
