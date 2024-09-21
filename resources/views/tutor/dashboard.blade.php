@@ -140,6 +140,7 @@
                                         <tr class="">
                                             <th>Subject</th>
                                             <th>Student</th>
+                                            <th>Date</th>
                                             <th>Time</th>
                                             <th>Status</th>
                                             {{-- <th>Action</th> --}}
@@ -151,7 +152,8 @@
                                         <tr>
                                             <td>{{$class->subject}}</td>
                                             <td>{{$class->studentname}}</td>
-                                            <td>{{ $class->start_time->format('h:iA') }} - {{ $class->start_time->addMinutes($class->duration)->format('h:iA') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($class->slotdate)->format('d/m/Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($class->slottime)->format('h:i A') }}</td>
                                             <td>
                                                 {{-- @if ($class->is_completed == 1) --}}
                                                 <span class="confirm">{{$class->status}}</span></td>
