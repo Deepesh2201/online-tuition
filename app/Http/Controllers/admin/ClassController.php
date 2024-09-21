@@ -81,7 +81,7 @@ class ClassController extends Controller
         $targetValue = session('userid')->id; // The value we want to check in the JSON array
 // $abc = zoom_classes::select('*')->where('student_id',session('userid')->id)->get();
 // dd($abc);
-        $classes = zoom_classes::select('zoom_classes.*','zoom_classes.id as class_id','tutorregistrations.name as tutor_name','zoom_classes.topic_name as topics','zoom_classes.tutor_id as tutor_id','subjects.id as subject_id','subjects.name as subjects',)
+        $classes = zoom_classes::select('zoom_classes.*','zoom_classes.id as class_id','tutorregistrations.name as tutor_name','zoom_classes.topic_name as topics','zoom_classes.tutor_id as tutor_id','subjects.id as subject_id','subjects.name as subjects','slot_bookings.date as slotdate','slot_bookings.slot as slottime')
         ->join('slot_bookings','slot_bookings.meeting_id','zoom_classes.id')
         ->join('subjects','subjects.id','slot_bookings.subject_id')
         ->join('tutorregistrations','tutorregistrations.id','zoom_classes.tutor_id')

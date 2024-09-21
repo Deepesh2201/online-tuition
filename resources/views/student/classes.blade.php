@@ -132,7 +132,7 @@
                             {{-- <td>{{ $class->batch }}</td> --}}
                             <td>{{ $class->topics }}</td>
                             <td>{{ $class->tutor_name }}</td>
-                           <td>{{$class->start_time ? Carbon\Carbon::parse($class->start_time)->format('d/m/Y h:i A') :''}}</td>
+                           <td>{{$class->slotdate ? Carbon\Carbon::parse($class->slotdate)->format('d/m/Y') :''}} {{$class->slottime ? Carbon\Carbon::parse($class->slottime)->format('h:i A') :''}}</td>
 
                             {{-- <td>{{ $class->duration }} min</td> --}}
                             <td>
@@ -145,10 +145,10 @@
                                         Class</button>
                                     {{-- </a> --}}
                                 @endif
-                                @if ($class->is_completed == 1 || $class->status == 'completed' || $class->status == 'Completed')                               
+                                @if ($class->is_completed == 1 || $class->status == 'completed' || $class->status == 'Completed')
                                 @if (session('usertype') == 'Parent')
                                 @else
-                            
+
                                 <button class="btn btn-sm btn-primary" data-toggle="modal"
                                     data-target="#openreviewsmodal"
                                     onclick="openfeedbackmodal('{{$class->class_id}}','{{$class->subject_id}}','{{$class->tutor_id}}')"><span
@@ -235,9 +235,9 @@
 
                         <div class="col-12 col-md-12 col-ms-12 mb-3">
                             <label>Comments<span style="color:red">*</span></label>
-                           
+
                             <textarea class="form-control" id="comments" name="comments" required></textarea>
-                            
+
                         </div>
                         <span class="text-danger">
                             @error('comments')
@@ -353,7 +353,7 @@ $.ajax({
     data: {
         _token: '{{ csrf_token() }}',
         id: id,
-        
+
     },
     success: function(dataResult) {
         dataResult = JSON.parse(dataResult);

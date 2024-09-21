@@ -161,7 +161,7 @@ class TutorDashboardController extends Controller
         ->orderBy('democlasses.created_at', 'desc')
         ->take(5)
         ->get();
-        
+
 
     $upcoming_demos->transform(function ($demos) {
         $demos->slot_confirmed = Carbon::parse($demos->slot_confirmed);

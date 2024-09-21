@@ -195,7 +195,8 @@
                                             <th>Tutor</th>
                                             <th>Subject</th>
                                             <th>Topic</th>
-                                            <th>Scheduled Time</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
                                             <th>Status</th>
                                             {{-- <th>Action</th> --}}
                                         </tr>
@@ -205,42 +206,9 @@
                                         <tr>
                                             <td>{{ $upcomingclass->tutor_name }}</td>
                                             <td>{{ $upcomingclass->subjects }}</td>
-                                            <td>{{ $upcomingclass->topics }}</td>
-                                            <td>
-                                                <div class="dayTime">
-                                                    @php
-                                                    if ($upcomingclass->start_time) {
-                                                        $startDateTime = \Carbon\Carbon::parse($upcomingclass->start_time);
-                                                        $now = \Carbon\Carbon::now();
-
-                                                        // Difference in hours between the current time and the class start time
-                                                        $hoursDiff = $startDateTime->diffInHours($now, false); // 'false' keeps the sign of the difference
-
-                                                        if ($hoursDiff >= -1) { // Only show if the start time is in the future or within the last 1 hour
-                                                            if ($startDateTime->isToday()) {
-                                                                $message = 'Today';
-                                                            } elseif ($startDateTime->isTomorrow()) {
-                                                                $message = 'Tomorrow';
-                                                            } else {
-                                                                $daysToGo = $now->diffInDays($startDateTime);
-                                                                $message = $daysToGo . ' days to go';
-                                                            }
-                                                        } else {
-                                                            $message = '';  // No message for past events more than 1 hour ago
-                                                        }
-                                                    } else {
-                                                        $message = '';  // Empty if start_time is not available
-                                                    }
-                                                    @endphp
-
-                                                    @if($upcomingclass->start_time && $hoursDiff >= -1)
-                                                        <span>{{ $message }}</span>
-                                                        <small>{{ $startDateTime->format('d-m-Y h:i A') }}</small>  <!-- Formatted as dd-mm-yyyy hh:mm am/pm -->
-                                                    @else
-                                                        <span></span>  <!-- Empty if no start_time or past more than 1 hour -->
-                                                    @endif
-                                                </div>
-                                            </td>
+                                            <td>{{ $upcomingclass->topic_name }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($upcomingclass->slotdate)->format('d/m/Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($upcomingclass->slottime)->format('h:i A') }}</td>
 
 
                                             <td>
