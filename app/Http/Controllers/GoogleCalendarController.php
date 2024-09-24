@@ -110,20 +110,20 @@ class GoogleCalendarController extends Controller
     }
     public function scheduleclass(Request $request)
     {
-        
+
         if (session('userid')->is_active == 0) {
             return back()->with('fail', 'Sorry! your Account is not verified. Please contact administrator');
         }
         $request->validate([
             'classpassword' => 'required',
         ]);
-        
+
         $classdata = SlotBooking::select('*')->where('id', $request->classslotid)->first();
         $studentpayment = paymentstudents::select('*')->where('id', $classdata->class_schedule_id)->first();
         $student = studentregistration::find($studentpayment->student_id);
         $tutor = tutorregistration::find($studentpayment->tutor_id);
         // $slotbooking->class_schedule_id = $studentpayment->id;
-        
+
         // try {
         // Initialize the Google API client with OAuth 2.0 credentials
         $client = new Google_Client();
@@ -226,7 +226,7 @@ class GoogleCalendarController extends Controller
             $data->encrypted_password = $classpassword;
 
             $res = $data->save();
-            
+
             if ($res) {
                 // Retrieve the id after saving
                 $lastInsertedId = $data->id;
@@ -326,7 +326,7 @@ class GoogleCalendarController extends Controller
         $authUrl = $client->createAuthUrl();
         return redirect()->away($authUrl);
     }
-    
+
     $client->setAccessToken($request->session()->get('access_token'));
     $service = new Google_Service_Calendar($client);
 

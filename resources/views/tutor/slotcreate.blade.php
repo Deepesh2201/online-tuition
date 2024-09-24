@@ -41,7 +41,7 @@
                 @endif
                 <div id="" class="mb-3 listHeader page-title-box">
                     <h3>Slots Management </h3>
-                    
+
                     <form action="{{ route('tutor.slots.search') }}" method="GET">
                         @csrf
                         <div style="display: flex">
@@ -80,7 +80,7 @@
                                 onchange="searchSlots();" id="searchDate" name="searchDate">
                             <button class="btn btn-sm btn-primary bookingBtns1" type="submit"><i
                                     class="ri-calendar-todo-fill"></i> &nbsp;Search Slot</button> &nbsp;
-                            
+
                         </div>
                     </form>
                 </div>
@@ -142,7 +142,7 @@
                                     @else
                                         <td>
                                             @if ($slot->is_class_scheduled == 1)
-                                                <a href="getclasslist"><button
+                                                <a href="/tutor/getclasslist"><button
                                                         class="btn btn-sm btn-success bookingBtns">Start Class</button></a>
                                         </td>
                                     @elseif ($slot->is_class_scheduled == 2)
@@ -513,7 +513,7 @@
                 $('#classtime').val(slot);
                 $('#forweekdiv').hide();
                 $('#formonthdiv').hide();
-                
+
 
 
                 $('#scheduleclassmodal').modal('show')
@@ -525,7 +525,7 @@
                 $('#classtime').val(slot);
                 $('#forweekdiv').show();
                 $('#formonthdiv').show();
-                
+
 
 
                 $('#scheduleclassmodal').modal('show')

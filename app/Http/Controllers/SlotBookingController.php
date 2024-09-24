@@ -244,8 +244,9 @@ public function tutorslotsearch(Request $request) {
     $classStatus = $request->classstatus;
     // dd($request->all());
     // Assuming 'date' is the column in your 'slot_bookings' table where the date is stored
-    $slotsQuery = SlotBooking::select('slot_bookings.*', 'studentprofiles.name as student_name', 'subjects.name as subject')
+    $slotsQuery = SlotBooking::select('slot_bookings.*', 'studentprofiles.name as student_name', 'subjects.name as subject','zoom_classes.meeting_id as meeting_id')
     ->leftJoin('studentprofiles', 'studentprofiles.student_id', '=', 'slot_bookings.student_id')
+    ->leftJoin('zoom_classes', 'zoom_classes.id', '=', 'slot_bookings.meeting_id')
     ->leftJoin('subjects', 'subjects.id', '=', 'slot_bookings.subject_id')
     ->where('slot_bookings.tutor_id', session('userid')->id);
 
