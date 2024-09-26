@@ -29,50 +29,45 @@
 
 
 
-            <form id="payment-search">
-                <div class="row ">
-
-
+            <form action="{{route('student.completed-classes-search')}}" method="POST">
+                @csrf
+                <div class="row">
                     <div class="col-md-2 mt-4">
-
                         <select name="subject_name" class="form-control" id="subject" onchange="batchbysubject()">
                             <option value="">Select Subject</option>
                             @foreach ($subjects as $subject)
-                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-2 mt-4" hidden>
+
+                    <div class="col-md-2" hidden>
                         <select class="form-control" name="batch" id="batchid">
                             <option value="">Select Batch</option>
                             @foreach ($batches as $batch)
-                            <option value="{{ $batch->id }}">{{ $batch->name }}</option>
+                                <option value="{{ $batch->id }}">{{ $batch->name }}</option>
                             @endforeach
                         </select>
-
                     </div>
-
-
 
                     <div class="col-md-2">
                         <label>Start Date</label>
-                        <input type="date" class="form-control" name="start_date" id="smob"
-                            placeholder="Student Mobile">
+                        <input type="date" class="form-control" name="start_date" id="start_date">
                     </div>
 
                     <div class="col-md-2">
                         <label>End Date</label>
-                        <input type="date" class="form-control" name="end_date" id="smob" placeholder="Student Mobile">
+                        <input type="date" class="form-control" name="end_date" id="end_date">
                     </div>
 
-
-
                     <div class="col-md-4 mt-4">
-                        <button class="btn btn-primary" style="float:right"> <span class="fa fa-search"></span>
-                            Search</button>
+                        <button class="btn btn-primary" style="float:right">
+                            <span class="fa fa-search"></span> Search
+                        </button>
                     </div>
                 </div>
             </form>
+
             <hr>
 
             <div class="table-responsive">
@@ -82,13 +77,13 @@
                             <th scope="col">S.No.</th>
                             {{-- <th scope="col">Meeting ID</th> --}}
                             {{-- <th scope="col">Status</th> --}}
-                            {{-- <th scope="col">Subject</th> --}}
+                            <th scope="col">Tutor</th>
+                            <th scope="col">Subject</th>
+                            <th scope="col">Topic</th>
                             {{-- <th scope="col">Batch</th> --}}
                             {{-- <th scope="col">Topic</th> --}}
                             <th scope="col">Started At</th>
                             <th scope="col">Completed At</th>
-                            <th scope="col">Tutor</th>
-                            <th scope="col">Topic</th>
                             {{-- <th scope="col">Duration</th> --}}
                             <th scope="col">Recordings</th>
                         </tr>
@@ -99,7 +94,9 @@
                             <td>{{ $loop->iteration }}</td>
                             {{-- <td>{{ $class->meeting_id }}</td> --}}
                             {{-- <td>{{ $class->status }}</td> --}}
-                            {{-- <td>{{ $class->subjects }}</td> --}}
+                            <td>{{ $class->tutor_name }}</td>
+                            <td>{{ $class->subject_name }}</td>
+                            <td>{{ $class->topic_name }}</td>
                             {{-- <td>{{ $class->batch }}</td> --}}
                             {{-- <td>{{ $class->topics }}</td> --}}
                             <td>
@@ -108,9 +105,7 @@
                             <td>
                                 {{ $class->completed_at ? \Carbon\Carbon::parse($class->completed_at)->format('d-m-Y h:i A') : '' }}
                             </td>
-                            
-                            <td>{{ $class->tutor_name }}</td>
-                            <td>{{ $class->topic_name }}</td>
+
                             {{-- <td>{{ $class->duration }}</td> --}}
                             <td>
                                 @if ($class->is_completed == 1)
