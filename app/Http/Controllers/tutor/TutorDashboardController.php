@@ -184,12 +184,49 @@ class TutorDashboardController extends Controller
         return view('tutor.dashboard',get_defined_vars());
     }
 
-    public function notificationslist(){
-        $notifications = Notification::select('*')
-        ->where('show_to_tutor',1)
-        ->where('show_to_tutor_id', session('userid')->id)
-        ->orderBy('created_at','desc')
-        ->paginate(20);
+    public function notificationslist() {
+        // Get the current date minus 30 days
+        $dateLimit = now()->subDays(30);
+
+        // Start building the base query for notifications
+        $notifications = Notification::select('notifications.*')
+            ->where('notifications.show_to_tutor', 1)
+            ->where('notifications.show_to_tutor_id', session('userid')->id)
+            ->where('notifications.created_at', '>=', $dateLimit) // Filter last 30 days
+            ->orderBy('notifications.created_at', 'desc');
+
+        // Apply LEFT JOINs based on the initiator_role
+        $notifications->leftJoin('admins', function($join) {
+            $join->on('notifications.initiator_id', '=', 'admins.id')
+                 ->where('notifications.initiator_role', '=', 1);
+        });
+
+        $notifications->leftJoin('tutorregistrations', function($join) {
+            $join->on('notifications.initiator_id', '=', 'tutorregistrations.id')
+                 ->where('notifications.initiator_role', '=', 2);
+        });
+
+        $notifications->leftJoin('studentregistrations', function($join) {
+            $join->on('notifications.initiator_id', '=', 'studentregistrations.id')
+                 ->where('notifications.initiator_role', '=', 3);
+        });
+
+        // Add the conditional selection for sender_name
+        $notifications->addSelect(DB::raw("
+            CASE
+                WHEN notifications.initiator_role = 1 THEN admins.name
+                WHEN notifications.initiator_role = 2 THEN tutorregistrations.name
+                WHEN notifications.initiator_role = 3 THEN studentregistrations.name
+                ELSE 'Unknown'
+            END as sender_name
+        "));
+
+        // Paginate the result with 20 notifications per page
+        $notifications = $notifications->paginate(20);
+
+        // Return to the view
         return view('tutor.notificationslist', compact('notifications'));
     }
+
+
 }

@@ -32,9 +32,10 @@
                             <tr>
                                 <th scope="col">S.No</th>
                                 <th scope="col">Time</th>
+                                <th scope="col">Sent By</th>
                                 <th scope="col">Notification</th>
                                 {{-- <th scope="col">From</th> --}}
-                                
+
                             </tr>
                         </thead>
                         <tbody>
@@ -48,6 +49,7 @@
                                         ''
                                     @endif
                                 </td>
+                                   <td>{{$notification->sender_name}}</td>
                                    <td>{{$notification->notification}}</td>
                             </tr>
                            @endforeach
