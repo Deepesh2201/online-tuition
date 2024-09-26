@@ -89,8 +89,9 @@
                                         <td><a href="{{ url('uploads/documents/assignments') }}/{{ $assignment->assignment_link }}"
                                                 target="_blank"><button class="badge bg-primary">View
                                                     Assignment</button></td>
-                                        <td>{{ $assignment->assignment_start_date }}</td>
-                                        <td>{{ $assignment->assignment_end_date }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($assignment->assignment_start_date)->format('d-m-Y') }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($assignment->assignment_end_date)->format('d-m-Y') }}</td>
+
                                         <td>
                                             @php
                                                 $isSubmitted = false;
