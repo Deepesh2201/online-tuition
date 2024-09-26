@@ -84,7 +84,7 @@
                             {{-- <th scope="col">Topic</th> --}}
                             <th scope="col">Started At</th>
                             <th scope="col">Completed At</th>
-                            {{-- <th scope="col">Duration</th> --}}
+                            <th scope="col">Attendance</th>
                             <th scope="col">Recordings</th>
                         </tr>
                     </thead>
@@ -106,7 +106,15 @@
                                 {{ $class->completed_at ? \Carbon\Carbon::parse($class->completed_at)->format('d-m-Y h:i A') : '' }}
                             </td>
 
-                            {{-- <td>{{ $class->duration }}</td> --}}
+                            <td>
+                                @if ($class->student_present == 1)
+                                <span style="color: green">Present</span>
+                                @else
+                                <span style="color: red">Absent</span>
+
+                                @endif
+
+                            </td>
                             <td>
                                 @if ($class->is_completed == 1)
                                 <button class="btn btn-sm btn-success" onclick="play('{{$class->recording_link}}');"><i class="ri-play-circle-line"></i> Play</button>
