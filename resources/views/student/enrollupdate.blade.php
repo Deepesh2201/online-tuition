@@ -68,17 +68,22 @@
                 @endif
 
                 <div id="" class="mb-3 listHeader page-title-box">
-                    <h3>Enroll Now</h3>
+                    <h3>Booked Slots</h3>
                     {{-- <a href="completed-classes"> <button class="btn btn-primary">Completed Classes</button></a> --}}
 
                 </div>
-                <div class="avalability">
-                    <i class="fa fa-square red" aria-hidden="true"></i><span>&nbsp;Not Available</span>
-                    <i class="fa fa-square green" aria-hidden="true"></i><span>&nbsp;Available</span>
-                    <i class="fa fa-square lightblue" aria-hidden="true"></i><span>&nbsp;Your Bookings</span>
-                    <i class="fa fa-square blue" aria-hidden="true"></i><span>&nbsp;Current Selection</span>
-
+                <div class="availability d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="fa fa-square red" aria-hidden="true"></i><span>&nbsp;Not Available</span>
+                        <i class="fa fa-square green" aria-hidden="true"></i><span>&nbsp;Available</span>
+                        <i class="fa fa-square lightblue" aria-hidden="true"></i><span>&nbsp;Your Bookings</span>
+                        <i class="fa fa-square blue" aria-hidden="true"></i><span>&nbsp;Current Selection</span>
+                    </div>
+                    <div>
+                        <a href="/student/enrollnow/{{$tutor_profile_id}}"><button class="btn btn-sm btn-primary">Book More Slots</button></a>
+                    </div>
                 </div>
+
                 <form id="payment-search" action="{{ route('student.updateslots') }}" method="POST">
                     @csrf
                     <div class="row ">

@@ -968,6 +968,7 @@ class TutorSearchController extends Controller
 
     public function enrollupdate($id)
     {
+        $tutor_profile_id = $id;
         $studentid = session('userid')->id;
 
         $enrollment = TutorSubjectMapping::select('tutorsubjectmappings.*', 'subjects.name as subject_name', 'tutorprofiles.name as tutor_name', DB::raw('(tutorsubjectmappings.rate + (tutorsubjectmappings.rate * tutorsubjectmappings.admin_commission / 100)) as rate'), )
@@ -1014,7 +1015,8 @@ class TutorSearchController extends Controller
             }
         }
 
-        return view('student.enrollupdate', compact('enrollment', 'groupedSlots', 'bookedSlotsCount'));
+
+        return view('student.enrollupdate', compact('enrollment', 'groupedSlots', 'bookedSlotsCount','tutor_profile_id'));
     }
 
     public function updateslots(Request $request)
