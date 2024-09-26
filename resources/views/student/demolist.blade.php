@@ -112,7 +112,7 @@
                                     <td>
                                         {{ $demo->slot_confirmed ? \Carbon\Carbon::parse($demo->slot_confirmed)->format('d-m-Y h:i A') : '' }}
                                     </td>
-                                    
+
                                     <td>{{ $demo->remarks }}</td>
                                     <td>
                                         @if ($demo->status == 1)
@@ -156,13 +156,12 @@
                                         @else
                                             <td>
                                                 {{-- <button class="btn btn-sm mr-1 btn-primary" disabled><i class="fa fa-calendar" aria-hidden="true"></i> Reschedule</button> --}}
-                                                <button class="badge" style="background-color: grey" disabled>
+                                                <button class="badge" style="background-color: rgb(215, 215, 215)" disabled>
                                                     Cancelled</button>
                                             </td>
                                         @endif
                                         <td>
-                                            @if ($demo->status != 1)
-                                                
+                                            @if ($demo->status == 4)
                                             <a href="enrollnow/{{ $demo->tutor_id }}"><button class="badge bg-success">
                                                 Book Now</button></a>
                                                 @endif
