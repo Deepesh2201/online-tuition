@@ -169,7 +169,7 @@
                                         @if ($demo->status == 8)
                                             <button class="btn btn-sm btn-success"
                                                 onclick="warningModal('{{ $demo->demo_link }}')"><i
-                                                    class="ri-vidicon-fill"></i> Join Class</button>
+                                                    class="ri-vidicon-fill"></i> Launch Class</button>
                                             <button class="btn btn-sm btn-danger"
                                                 onclick="endWarningModal('{{ $demo->demo_id }}')"><i
                                                     class="ri-vidicon-fill"></i> End Class</button>
