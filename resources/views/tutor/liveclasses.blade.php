@@ -90,7 +90,7 @@
                                 @if ($liveclass->status == 'started' || $liveclass->status == 'Started')
                                 <button class="btn btn-sm btn-success "
                                     onclick="warningModal('{{$liveclass->liveclass_id}}','{{$liveclass->start_url}}')"><span
-                                        class="fa fa-play-circle "></span> Join Class</button>
+                                        class="fa fa-play-circle "></span> Launch Class</button>
                                 @endif
                                 @if ($liveclass->status == 'started' || $liveclass->status == 'Started')
                                 <!-- <a href="{{url('tutor/liveclass/completed').'/'.$liveclass->liveclass_id}}">
