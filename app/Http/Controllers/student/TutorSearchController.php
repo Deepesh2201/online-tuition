@@ -60,6 +60,7 @@ class TutorSearchController extends Controller
                 'tutorprofiles.admin_commission',
                 'tutorprofiles.profile_pic'
             )
+            ->orderby('tutorregistrations.created_at','desc')
             ->get();
 
         // dd($tutorlist);
