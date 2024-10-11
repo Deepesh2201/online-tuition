@@ -85,6 +85,7 @@
                             <th scope="col">Started At</th>
                             <th scope="col">Completed At</th>
                             <th scope="col">Attendance</th>
+                            <th scope="col">Feedback</th>
                             <th scope="col">Recordings</th>
                         </tr>
                     </thead>
@@ -116,8 +117,18 @@
 
                             </td>
                             <td>
+                                @if ($class->tutor_review > 0)
+                                <span>{{$class->tutor_review_text}} ({{$class->tutor_review}} ⭐)</span>
+                                @else
+                                <button class="btn btn-sm btn-success" onclick="openfeedbackmodal('{{$class->id}}','{{$class->subject_id}}','{{$class->tutor_id}}')"><i class="ri-play-circle-line"></i> Add Feedback</button>
+
+                                @endif
+
+                            </td>
+                            <td>
                                 @if ($class->is_completed == 1)
                                 <button class="btn btn-sm btn-success" onclick="play('{{$class->recording_link}}');"><i class="ri-play-circle-line"></i> Play</button>
+
                                 @endforelse
 
                             </td>
@@ -155,11 +166,7 @@
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
-
             <div class="modal-body">
-
-
                 <header>
                     <h3 class="text-center mb-4" id="header">Add Feedback</h3>
                 </header>
@@ -171,7 +178,7 @@
                     <input type="hidden" id="tutor_id" name="tutor_id">
                     <div class="row">
 
-                        <div class="col-12 col-md-6 col-ms-6 mb-3">
+                        <div class="col-12 col-md-6 mb-3">
                             <label>Rating<span style="color:red">*</span></label>
                             <select type="text" class="form-control" id="rating" name="rating" required>
                                 <option value="0">0</option>
@@ -185,9 +192,7 @@
                                 <option value="4">4</option>
                                 <option value="4.5">4.5</option>
                                 <option value="5">5</option>
-
                             </select>
-
                         </div>
                         <span class="text-danger">
                             @error('rating')
@@ -195,29 +200,33 @@
                             @enderror
                         </span>
 
-                        <div class="col-12 col-md-6 col-ms-6 mb-3">
+                        <div class="col-12 col-md-6 mb-3">
                             <label>Comments<span style="color:red">*</span></label>
-                            <textarea type="text" class="form-control" id="comments" name="comments" required>
-                                    </textarea>
+                            <textarea type="text" class="form-control" id="comments" name="comments" required></textarea>
                         </div>
                         <span class="text-danger">
                             @error('comments')
                             {{ $message }}
                             @enderror
                         </span>
-
                     </div>
-                    <button type="submit" id="" class="btn btn-sm btn-success float-right"><span
-                            class="fa fa-check"></span> Submit</button>
-                    <button type="button" class="btn btn-sm btn-danger mr-1 moveRight" data-dismiss="modal"><span
-                            class="fa fa-times"></span> Close</button>
+
+                    <!-- Button container -->
+                    <div class="d-flex justify-content-between">
+                        <button type="button" onclick="closefeedbackmodal();" class="btn btn-sm btn-danger" data-dismiss="modal">
+                            <span class="fa fa-times"></span> Close
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <span class="fa fa-check"></span> Submit
+                        </button>
+                    </div>
+
                 </form>
-
-
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="playModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -233,10 +242,17 @@
 
 <script>
 function openfeedbackmodal(id, subjectid, tutorid) {
+    // alert(subjectid)
     $('#id').val(id)
     $('#subject_id').val(subjectid)
     $('#tutor_id').val(tutorid)
     $('#openreviewsmodal').modal('show');
+
+
+}
+function closefeedbackmodal() {
+    // alert(subjectid)
+    $('#openreviewsmodal').modal('hide');
 
 
 }
