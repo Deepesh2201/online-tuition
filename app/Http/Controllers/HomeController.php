@@ -1892,7 +1892,8 @@ class HomeController extends Controller
                     return redirect()->to('tutor/tutorslots');
                 }
                 if (session('userid')->role_id == 3) {
-                    return redirect()->to('student/enrollupdate/' . $notificationData->initiator_id);
+                    // return redirect()->to('student/enrollupdate/' . $notificationData->initiator_id);
+                    return redirect()->to('student/classes');
                 }
 
             }
@@ -1906,7 +1907,8 @@ class HomeController extends Controller
                     return redirect()->to('tutor/tutorslots');
                 }
                 if (session('userid')->role_id == 3) {
-                    return redirect()->to('student/enrollupdate/' . $notificationData->initiator_id);
+                    // return redirect()->to('student/enrollupdate/' . $notificationData->initiator_id);
+                    return redirect()->to('student/classes');
                 }
 
             }

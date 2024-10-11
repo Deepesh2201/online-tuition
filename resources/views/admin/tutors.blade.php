@@ -105,14 +105,21 @@
                                     </td>
                                     <td>{{ $ttrlist->tutor_mobile }}</td>
                                     {{-- <td>£ {{ $ttrlist->rate }}</td> --}}
+                                    @if ($ttrlist->tutor_status == 1)
                                     <td><a href="#"
-                                            onclick="updaterate('{{ $ttrlist->tutor_id }}','{{ $ttrlist->rate }}')">
-                                            {{ $ttrlist->rate }} <span class="badge bg-primary ml-3"> Update</span> </a>
-                                    </td>
-                                    <td><a href="#"
-                                            onclick="updatecommission('{{ $ttrlist->tutor_id }}','{{ $ttrlist->admin_commission }}')">
-                                            {{ $ttrlist->admin_commission }}% <span class="badge bg-primary ml-3">
-                                                Update</span> </a></td>
+                                        onclick="updaterate('{{ $ttrlist->tutor_id }}','{{ $ttrlist->rate }}')">
+                                        {{ $ttrlist->rate }} <span class="badge bg-primary ml-3"> Update</span> </a>
+                                </td>
+                                <td><a href="#"
+                                        onclick="updatecommission('{{ $ttrlist->tutor_id }}','{{ $ttrlist->admin_commission }}')">
+                                        {{ $ttrlist->admin_commission }}% <span class="badge bg-primary ml-3">
+                                            Update</span> </a></td>
+                                            @else
+                                            <td><p style="color: rgb(164, 164, 164)">{{ $ttrlist->rate }}</p></td>
+                                        <td><p style="color: rgb(164, 164, 164)">{{ $ttrlist->admin_commission }}%</p></td>
+
+                                            @endif
+
                                     <td><a href="tutorslotscheck/{{ $ttrlist->tutor_id }}"><span
                                                 class="badge bg-success ml-3">Check Slots</span> </a></td>
                                     {{-- @if ($ttrlist->subject_name) --}}
