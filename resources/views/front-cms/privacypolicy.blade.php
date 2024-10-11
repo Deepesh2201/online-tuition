@@ -18,7 +18,7 @@
 
     </section>
 
-    <section class="container findtutSec">
+    <section class="container findtutSec-ex">
         <h5 calss="mb-2">1. Introduction</h5>
         <p class="mb-5">Welcome to My Choice Tutor, an online platform where students can enroll in courses and participate in live classes with select tutors. We value your privacy and are committed to protecting your personal information. This Privacy Policy outlines the types of information we collect, how we use it, and the measures we take to safeguard it.</p>
 

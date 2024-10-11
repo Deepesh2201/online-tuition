@@ -188,24 +188,19 @@
 </section>
 <section>
     <div class="container">
-        <div class="tutor-banner">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                    <div class="trial">
-                        <h2>Experience our free trial classes today!</h2>
-                        <div class="trialBtn">
-                            <button onclick="redirect();">Book free trial class today</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="tutor-banner bottom-banner1 ">
 
-        <script>
-        function redirect() {
-            window.location.href = "{{('/student/register')}}";
-        }
-        </script>
+            <div class="rightside">
+            <h2>Experience our free trial classes today!</h2>
+            <button onclick="redirect();">Book free trial class today</button>
+            </div>
+
+        </div>
     </div>
+    <script>
+    function redirect() {
+        window.location.href = "{{('/student/register')}}";
+    }
+    </script>
 </section>
 @endsection

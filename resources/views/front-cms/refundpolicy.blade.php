@@ -18,7 +18,7 @@
 
 </section>
 
-<section class="container findtutSec">
+<section class="container findtutSec-ex">
 
 <h5 calss="mb-2">1. No Refunds After Enrollment</h5>
 <p class="mb-5">At My Choice Tutor, we strive to provide high-quality educational experiences through our courses and live classes. Once a student enrolls in a course, all fees paid are non-refundable. This policy applies to all courses offered on our platform, without exception.</p>

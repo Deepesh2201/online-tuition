@@ -19,7 +19,7 @@
     </section>
 
 
-    <section class="container findtutSec">
+    <section class="container findtutSec-ex ">
     <h5 calss="mb-2">1. Acceptance of Terms</h5>
     <p class="mb-5">By accessing and using My Choice Tutor, you acknowledge that you have read, understood, and agree to be bound by these Terms, as well as our Privacy Policy. If you do not agree to these Terms, please do not use our platform.</p>
 

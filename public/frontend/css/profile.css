@@ -7141,16 +7141,24 @@ input.tu-showplaceholder::placeholder {
     padding-left: 10px;
   }
 
+  .searchOrder1{
+    order: 1 !important;
+  }
+
+  .searchOrder2{
+    order: 2;
+  }
   .tu-asidewrapper {
+    
     top: 0;
     right: 0;
     padding: 0;
     width: 100%;
     z-index: 999;
-    height: 100%;
-    position: fixed;
+    /* height: 100%; */
+    /* position: fixed; */
     border-radius: 0;
-    max-width: 330px;
+    /* max-width: 330px; */
     transform: translateX(100%);
     transition: all 0.6s ease-in-out;
   }
@@ -7928,10 +7936,14 @@ input.tu-showplaceholder::placeholder {
   .tu-listinginfo_btn,
 .tu-service-list,
 .tu-btnarea {
-    flex-direction: column;
+    flex-direction:row;
     align-items: flex-start;
+    justify-content: center;
   }
 
+
+
+ 
   .tu-btnarea {
     width: 100%;
     padding-top: 10px;

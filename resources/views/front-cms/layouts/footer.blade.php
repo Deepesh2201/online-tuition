@@ -12,10 +12,12 @@
     }
   
     .radioLogin{
+    display:flex;
       border-radius: 8px;
       padding: 10px;
   
       accent-color: #000;
+      gap:5px;
     }
   </style>
   
@@ -94,7 +96,7 @@
                   </div>
   
                   <hr>
-                  <button type="submit" class="btn brand-bg-Color mb-3">Login</button>
+                  <button type="submit" class="btn brand-bg-Color popuplogin mb-3">Login</button>
   
                   <br>
                   {{-- <a href="#">
@@ -243,30 +245,126 @@
                       <a href="/aboutus"><li>Who we are</li></a>
                       <a href="/findatutor"><li>Find Tutor</li></a>
                       <a href="/subjects"><li>Subjects</li></a>
-                      <a href="/aboutus"><li>Contact Us</li></a>
+                      <a href="/contact"><li>Contact Us</li></a>
                       <a href="/privacypolicy"><li>Privacy Policy</li></a>
-                      <a href="/termscondition"><li>Terms and Conditions</li></a>
+                      <a href="/termsandconditions"><li>Terms and Conditions</li></a>
                       <a href="/refundpolicy"><li>Refund Policy</li></a>
   
                   </ul>
               </div>
-  
               <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                  <h5 class="mb-4">Popular Subjects</h5>
-                  <ul>
-                      <li>Psychology</li>
-                      <li>Biology</li>
-                      <li>Business Studies</li>
-                      <li>Chemistry</li>
-                      <li>Computer Science</li>
-                      <li>English Language</li>
-                      <li>French</li>
-                      <li>German</li>
-                      <li>History</li>
-                      <li>Mathematics</li>
-                      <li>Physics</li>
-                  </ul>
-              </div>
+<h5 class="mb-4">Popular Subjects</h5>
+
+<ul>
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="1">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>Maths</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="2">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>English</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="3">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>Chemistry</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="4">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>Physics</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="5">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>Biology</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="6">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>Science</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="7">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>Spanish</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="8">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>French</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="9">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>German</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="10">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>History</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="11">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>Music</li>
+</button>
+</form>
+
+<form action="{{ url('toptutorsearch') }}" method="POST">
+@csrf
+<input type="hidden" id="subject" name="subject" value="12">
+<button type="submit" style="background:none;border:none;padding:0;">
+
+<li>Psychology</li>
+</button>
+</form>
+</ul>
+</div>
   
   
               <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
@@ -274,7 +372,7 @@
                   <ul class="contactDetail">
                       <li><img src="{{ url('frontendnew/img/icons/Group.png') }}" alt="">07761 975326</li>
                       <li><img src="{{ url('frontendnew/img/icons/Vector.png') }}" alt="">07761 975326</li>
-                      <li><img src="{{ url('frontendnew/img/icons/email.png') }}" alt="">info@mychoicetutor.com
+                      <li><img src="{{ url('frontendnew/img/icons/email.png') }}" alt="">mychoicetutor@gmail.com
                       </li>
   
                   </ul>

@@ -2,7 +2,6 @@
 <html lang="en">
 
 
-<!-- Mirrored from bootstrapdash.com/demo/foi-app-landing-page/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Jun 2023 11:09:47 GMT -->
 
 <head>
     <meta charset="UTF-8">

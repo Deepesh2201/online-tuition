@@ -222,6 +222,8 @@ header .navbar .dropdown-menu a {
   padding: 0 !important;
 }
 .bannerImg img {
+  
+  margin-top: -1px;
   /* display: block;
   width: 100%;
   height: auto; */
@@ -245,11 +247,15 @@ header .navbar .dropdown-menu a {
   margin-top: 30px;
   font-weight: 700;
   font-size: 3rem;
+  
 }
 
 .find-tutor-btns {
   width: 30%;
 }
+
+
+
 
 .subSec {
   background-color: #ffffff;
@@ -259,6 +265,8 @@ header .navbar .dropdown-menu a {
   opacity: 1;
   z-index: -1;
   overflow: hidden;
+  
+ 
 
 }
 
@@ -272,6 +280,8 @@ header .navbar .dropdown-menu a {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+
+  scrollbar-width:none;
   
 }
 
@@ -305,7 +315,20 @@ header .navbar .dropdown-menu a {
 }
 
 .tutorImg img {
+  max-width: 500px;
+  max-height: 500px;
   height: 230px;
+  border-radius: 20px;
+  padding: 0 10px;
+}
+
+.tutorProfPic{
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.tutorProfPic img{
   border-radius: 20px;
 }
 
@@ -339,7 +362,7 @@ header .navbar .dropdown-menu a {
 }
 
 .tutor-section-ex,
-.howitwork-sec, .howitwork-sec2 {
+.howitwork-sec {
   padding: 100px 0;
 }
 
@@ -428,7 +451,7 @@ header .navbar .dropdown-menu a {
 .howitwork-sec2 {
   background-image: url("../img/icons/Vector\ 7344.png");
   background-repeat: no-repeat;
-  background-position: 280px 390px;
+  background-position: 280px 300px;
 }
 
 .how-card {
@@ -699,13 +722,21 @@ header .navbar .dropdown-menu a {
 .btns img{
  width: 10px;
 }
+.bottom-banner1{
+  background-image: url('../img/indexbottombanner.jpg');
+  background-size: cover ;
+ 
 
+}
+
+.bottom-banner2{
+  background-image: url('../img/findTutorBanner.jpg');
+  background-size: cover ;
+}
 
 .tutor-banner{
   width: 100%;
   height: 500px;
-  background-image: url('../img/index_banner.png');
-  background-size: cover ;
   border-radius: 20px;
   padding: 50px;
   margin-bottom: 60px;
@@ -714,7 +745,7 @@ header .navbar .dropdown-menu a {
 .trial{
   background-color: #ffffff;
   border-radius: 20px;
-  padding: 80px 50px;
+  padding: 50px;
   
 }
 
@@ -722,17 +753,19 @@ header .navbar .dropdown-menu a {
   font-weight: 700;
   color: #6a307d; 
   text-align: center;
+  text-transform: uppercase;
 }
 
 .trial button{
-  margin-top: 50px;
+  margin-top: 30px;
   background-color: #F97316;
   color: #ffffff;
   border: none;
   border-radius: 61px;
-  padding: 10px 14px;
+  padding: 10px 40px;
   font-weight: 500;
   font-size: 14px;
+  text-align: center;
 }
 
 
@@ -741,7 +774,7 @@ header .navbar .dropdown-menu a {
 }
 .tutorHeader h1{
   text-align: center;
-  margin-top: 0;
+  /* margin-top: 80px; */
 }
 
 .findtutor-btns{
@@ -769,9 +802,10 @@ header .navbar .dropdown-menu a {
   background-color: #F97316 !important;
   border-radius: 61px;
   color: white;
-  padding: 10px 20px;
+  padding: 7px 20px;
   font-size: 14px;
   font-weight: 500;
+  margin-top: 5px;
 
 }
 
@@ -826,11 +860,12 @@ color: #838181;
   font-weight: 700;
   color: #6a307d; 
   text-align: center;
+  text-transform: uppercase;
 }
 
 .rightside button{
   margin-top: 50px;
-  background-color: #FFA60D;
+  background-color: #F97316;
   color: #ffffff;
   border: none;
   border-radius: 61px;
@@ -1034,6 +1069,11 @@ color: #838181;
     font-weight: 700;
     color: black;
 
+  }
+
+  .popuplogin{
+    border-radius: 61px;
+    padding: 5px 20px;
   }
 
   .brand-bg-Color{
@@ -1457,6 +1497,10 @@ color: #838181;
   margin-bottom: 10px;
 }
 
+.mobBtn button:hover{
+  color: #ffffff;
+}
+
 .mobBtn a{
   text-align: center;
   width: 190px;
@@ -1483,10 +1527,16 @@ color: #838181;
   margin-bottom: 30px;
   background:none;
   margin-right: -20px;
+
+  
 }
+
+
+
 
 .custom-select select {
   display: none; /* Hide original select element */
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .select-selected {
@@ -1499,39 +1549,67 @@ color: #838181;
   border: none;
   cursor: pointer;
   width: 100%;
-}
-
-.select-items div, .select-selected {
-  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
-  color: #6A307D;
-  padding: 10px 16px;
-  cursor: pointer;
-  user-select: none;
-  margin: 3px 0px;
+ 
 }
 
 .select-items {
-  width: 90%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.select-items div, .select-selected {
+  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px; */
+  color: #000000;
+  padding: 7px 16px;
+  cursor: pointer;
+  user-select: none;
+  text-align: left;
+  /* margin: 3px 0px; */
+  font-size: 13px;
+}
+
+.select-items {
+  width: 88%;
   position: absolute;
   background-color: #ffffff;
-  top: 150%;
-  left: 25px;
+  top: 112%;
+  left: 9px;
   right: 0;
   z-index: 99;
   border-radius: 20px; /* Rounded edges */
   opacity: 1;
+  font-size: 13px;
+  
 }
 
 .select-items div {
   background-color: #ffffff;
-  /* border-radius: 20px;  */
+  border-radius: 20px; 
   /* Rounded edges */
+ 
+
+}
+
+.select-items div:first-child{
+  margin-top: 10px;
+}
+
+.select-items div:last-child{
+  margin-bottom: 10px;
+}
+
+.select-items div:first-child:hover{
+  margin-top: 10px;
+}
+
+.select-items div:last-child:hover{
+  margin-bottom: 10px;
 }
 
 .select-items div:hover, .same-as-selected {
   background-color: #e2e0e0; /* Background color on hover */
   opacity: 1;
   border-radius: 20px;
+  margin: 0 15px;
 }
 
 .select-hide {
@@ -1577,7 +1655,7 @@ color: #838181;
 
 
 .drpdwnSearch{
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 
@@ -1586,6 +1664,9 @@ color: #838181;
 }
 
 .tabBanner{
+  display: none;
+}
+.tabBanner2{
   display: none;
 }
 .findtutSec-ex{
@@ -1603,6 +1684,10 @@ color: #838181;
 
 
 
+.trialBtn {
+  display: flex;
+  justify-content: center;
+ }
 
 
 /*
@@ -1611,1498 +1696,6 @@ color: #838181;
 ====================================================================================== */
 
 
-@media only screen and (max-width: 409px) {
-  
-  /* Styles for phones */
-  .navbar-collapse{
-    background-color: #6A307D;
-    padding: 20px;
-    margin: 5px 10px;
-    text-align: center;
-    
-  }
-
-  .findtutorHeader{
-    margin-top: 50px !important;
-  }
-
-  .mobileBanner{
-    display: block !important;
-    margin-top: 80px;
-  }
-
-  .desktopBanner{
-    display: none;
-  }
-
-  .tabBanner{
-    display: none;
-  }
-
-  .navbar-dark .navbar-nav .nav-link{
-    color: white !important;
-    
-  }
-
-  header .navbar .nav-link.active{
-    color: white !important;
-  }
-
-  .topLine{
-    border-top: 1px solid rgba(255, 255, 255, 0.596);
-    margin-top: 20px;
-    padding-top: 20px;
-  }
-    
-  .mobBtn{
-    display: block;
-  }
-  .deskBtn{
-    display: none;
-  }
-
-  .deskBtn span{
-    display: block;
-  }
-
-  .mobLang{
-    display: block;
-  }
-
-  .mobLang li{
-    margin: 0 auto;
-    width: 50px;
-    background-color: white;
-    color: black;
-    border-radius: 60px;
-  }
-  .subSec {
-    padding: 0px 10px;
-    margin: 20px 10px;
-
-  }
-
-  .subSec ul li {
-    flex: 0 0 25%;
-  }
-
-    .tutorHeader h1{
-      font-size: 3.5rem;
-        font-weight: 600;
-     
-    }
-    .bannerSec{
-      padding-top: 0px;
-    }
-
-    .advSearTextLeft{
-      display: none;
-    }
-
-    .tutor-section-ex{
-      margin-top: 100px;
-    }
-
-    .findtutor-btns{
-      display: block;
-      text-align: center;
-    }
-
-    .drpdwn select {
-      width: 80%;
-      margin-bottom: 15px;
-    }
-
-    .findtutor-btns button{
-      width: 150px;
-      padding: 10px;
-    }
-    
-    
-    #accordion{
-      width: 100%;
-    }
-
-    .advceAccordian{
-      width: 16rem;
-      
-    }
-
-    .accor{
-      display: flex;
-      justify-content: center;
-    }
-
-    .logoMobNum{
-      display: block;
-    }
-
-
-    .imgNumber{
-      left:180px;
-    }
-
-    .howitwork-sec{
-      background-image: none;
-    }
-
-    .footer-bottom{
-      text-align: center;
-      padding: 0 60px;
-    }
-
-  
-
-    .overlayMTC{
-      /* height: 750px; */
-    }
-
-
-    .tutor-banner{
-      height: 550px;
-    }
-
-    .rightside {
-      padding: 60px 30px;
-      width: 100%;
-    }
-
-    .trial {
-      padding: 80px 25px;
-    }
-
-    .bannText{
-      padding:0px 45px 0px 60px
-    }
-
-    .dash{
-      display: none;
-    }
-
-    .abc{
-      line-height: 30px;
-    }
-
-
-    .whyChooseUsouter{
-      height: 612px;
-      border-radius: 20px;
-    }
-    
-  .whyChooseUsTop{
-    width: 100%;
-    background-image: url(../img/whyChooseMob.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 760px;
-    border-radius: 20px;
-  }
-
-  .getstartedBtnPosition{
-    position: relative;
-        top: 270px;
-        left: -110px;
-  }
-
-
-  .resourcesTop{
-    width: 100%;
-    height: 530px;
-    border-radius: 20px;
-    background-image: url(../img/Group\ 933.png);
-    background-position: right;
-    background-repeat: no-repeat;
-    background-color: #F6F9F8;
-  }
-
-  .resourcesBottom button{
-    float: none;
-  }
-
-  .logoMobNum{
-    margin: 0 auto;
-  }
-
-  .logo > .mob{
-    margin-left: 0;
-  }
-  .how-card2{
-    width: 100%;
-  }
-    
-  .cardText{
-    width: 100%;
-    padding-bottom: 100px;
-  }
-
-
-  .imgNumber1 {
-    z-index: 1;
-    width: 150px;
-    height: 150px;
-    position: relative;
-    left: 180px;
-    bottom: 100px;
-  }
-  .imgNumber1 .shaddow-shape1{
-    width: 155px;
-   
-  }
-
-  .numbr11 {
-    position: relative;
-    bottom: 160px;
-    left: 60px;
-    width: 55px;
-    z-index: 100;
-  }
-  
-  
-  .imgNumber2 {
-    z-index: 1;
-    width: 150px;
-    height: 150px;
-    position: relative;
-    left: 180px;
-    bottom: 120px;
-  }
-  .imgNumber2 .shaddow-shape2{
-    width: 155px;
-   
-  }
-  .numbr22 {
-    position: relative;
-    bottom: 165px;
-    left: 20px;
-    width: 110px;
-    z-index: 100;
-}
-
-  
-  
-  .imgNumber3 {
-    z-index: 1;
-    width: 150px;
-    height: 150px;
-    position: relative;
-    left: 190px;
-    bottom: 100px;
-  }
-  .imgNumber3 .shaddow-shape3{
-    width: 155px;
-   
-  }
-
-  .numbr33 {
-    position: relative;
-    bottom: 140px;
-    left: 35px;
-    width: 89px;
-    z-index: 100;
-}
-
-.howitwork-sec2{
-  background-image: none;
-}
-
-
-.trialBtn {
-  display: flex;
-  justify-content: center;
- }
-
- .profileSec2{
-  flex:1;
-  background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 0%, hsla(282, 38%, 95%, 1) 58%, hsla(286, 22%, 88%, 1) 100%);
- }
- .profileSec1{
-  float: right;
- }
-
-
- .custom-select {
-  margin-bottom: 15px !important;
- }
-
- .profileSec1{
-  order: 2;
- }
-
- .profileSec2{
-  order: 1;
- }
-
- header {
-  padding-top: 20px ;
-}
-
-
-.padd-200{
-  padding: 10px 50px;
-}
-
-
-.padd-50{
-  padding: 10px 200px;
-}
-
-.topBtn{
-  display: none;
-}
-
- .tutorDetails{
-  padding: 0 30px;
- }
-
-  
-}
-
-@media only screen and (min-width: 410px) and (max-width: 600px) {
-
-  .navbar-collapse{
-    background-color: #6A307D;
-    padding: 20px;
-    margin: 5px 10px;
-    text-align: center;
-    
-  }
-
-
-  .padd-50{
-    padding: 10px 50px;
-  }
-
-  .findtutorHeader{
-    margin-top: 50px !important;
-  }
-
-  .desktopBanner{
-    display: none;
-  }
-
-  .mobileBanner{
-    display: block !important;
-    margin-top: 80px;
-  }
-
-  .tabBanner{
-    display: none;
-  }
-
-  .navbar-dark .navbar-nav .nav-link{
-    color: white !important;
-    
-  }
-
-  header .navbar .nav-link.active{
-    color: white !important;
-  }
-
-  .topLine{
-    border-top: 1px solid rgba(255, 255, 255, 0.596);
-    margin-top: 20px;
-    padding-top: 20px;
-  }
-    
-  .mobBtn{
-    display: block;
-  }
-  .deskBtn{
-    display: none;
-  }
-
-  .deskBtn span{
-    display: block;
-  }
-
-  .mobLang{
-    display: block;
-  }
-
-  .mobLang li{
-    margin: 0 auto;
-    width: 50px;
-    background-color: white;
-    color: black;
-    border-radius: 60px;
-  }
-  .bannerSec{
-    padding-top: 0px;
-  }
-  .advSearTextLeft{
-    display: none;
-  }
-
-  .tutor-section-ex{
-    margin-top: 100px;
-  }
-
-
- 
-
-  .findtutor-btns{
-    display: block;
-    text-align: center;
-  }
-
-  .drpdwn select {
-    width: 80%;
-    margin-bottom: 15px;
-  }
-
-  
-  .drpdwn select {
-    width: 80%;
-    margin-bottom: 15px;
-  }
-
-  .findtutor-btns button{
-    width: 150px;
-    padding: 10px;
-  }
-
-  
-
-  .accor{
-    display: flex;
-    justify-content: center;
-  }
-  #accordion{
-
-    width: 100%;
-  }
-
-  .advceAccordian{
-    width: 18rem;
-    
-  }
-
-  .logoMobNum{
-    display: block;
-  }
-  .imgNumber{
-    left:220px;
-  }
-  
-
-  .howitwork-sec{
-    background-image: none;
-  }
-
-  .footer-bottom{
-    text-align: center;
-    padding: 0 80px;
-  }
-  .subSec {
-    padding: 0px 10px;
-    margin: 20px 10px;
-
-  }
-
-   
-  .tutor-banner{
-    height: 500px;
-  }
-
-  .rightside {
-    padding: 60px 30px;
-    width: 100%;
-  }
-
-  .trial {
-    padding: 80px 25px;
-  }
-
-  .bannText{
-    padding:0px 45px 0px 60px
-  }
-
-  .trialBtn {
-    display: flex;
-    justify-content: center;
-   }
-
-
-   .whyChooseUsouter{
-    height: 590px;
-    border-radius: 20px;
-  }
-  
-.whyChooseUsTop{
-  width: 100%;
-  background-image: url(../img/whyChooseMob.png);
-  background-position: right;
-  background-repeat: no-repeat;
-  height: 730px;
-  border-radius: 20px;
-}
-
-.getstartedBtnPosition{
-  position: relative;
-      top: 270px;
-      left: -110px;
-}
-
-.resourcesTop{
-  width: 100%;
-  height: 530px;
-  border-radius: 20px;
-  background-image: url(../img/Group\ 933.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #F6F9F8;
-}
-
-.resourcesBottom button {
-  float: none;
-}
-
-.how-card2{
-  width: 100%;
-}
-
-
-
-.cardText{
-  width: 100%;
-  padding-bottom: 100px;
-}
-
-
-.imgNumber1 {
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  position: relative;
-  left: 320px;
-  bottom: 100px;
-}
-.imgNumber1 .shaddow-shape1{
-  width: 155px;
- 
-}
-
-.numbr11 {
-  position: relative;
-  bottom: 160px;
-  left: 60px;
-  width: 55px;
-  z-index: 100;
-}
-
-
-.imgNumber2 {
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  position: relative;
-  left: 320px;
-  bottom: 120px;
-}
-.imgNumber2 .shaddow-shape2{
-  width: 155px;
- 
-}
-.numbr22 {
-  position: relative;
-  bottom: 165px;
-  left: 20px;
-  width: 110px;
-  z-index: 100;
-}
-
-
-
-.imgNumber3 {
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  position: relative;
-  left: 320px;
-  bottom: 100px;
-}
-.imgNumber3 .shaddow-shape3{
-  width: 155px;
- 
-}
-
-.numbr33 {
-  position: relative;
-  bottom: 140px;
-  left: 35px;
-  width: 89px;
-  z-index: 100;
-}
-
-.howitwork-sec2{
-  background-image: none;
-}
-
-
-.overlayMTC {
-  /* height: 805px; */
-}
- 
-.custom-select {
-  margin-bottom: 15px !important;
- }
-
-
-
- .profileSec1{
-  order: 2;
- }
-
- .profileSec2{
-  order: 1;
- }
-
- .dash{
-  display: none;
-}
-
-header {
-  padding-top: 20px ;
-}
-
-.padd-200{
-  padding: 30px 80px;
-}
-
-
-
-
-
-  
-}
-
-@media only screen and (min-width: 601px) and (max-width: 767px) {
-  /* Styles for tablets */
-  .tabBanner{
-    display: block !important;
-    margin-top: 80px;
-  }
-  .desktopBanner{
-    display: none;
-  }
-  
-  .mobileBanner{
-    display: none;
-  }
-
- 
-
-  
-  .navbar-collapse{
-    background-color: #6A307D;
-    padding: 20px;
-    margin: 5px 10px;
-    text-align: center;
-    
-  }
-
-  .navbar-dark .navbar-nav .nav-link{
-    color: white !important;
-  }
-
-  header .navbar .nav-link.active{
-    color: white !important;
-  }
-
-  .topLine{
-    border-top: 1px solid rgba(255, 255, 255, 0.596);
-    margin-top: 20px;
-    padding-top: 20px;
-  }
-    
-  .mobBtn{
-    display: block;
-  }
-  .deskBtn{
-    display: none;
-  }
-
-  .deskBtn span{
-    display: block;
-  }
-
-  .mobLang{
-    display: block;
-  }
-
-  .mobLang li{
-    margin: 0 auto;
-    width: 50px;
-    background-color: white;
-    color: black;
-    border-radius: 60px;
-  }
-
-  .tutorHeader h1{
-    
-
-    margin-top: 0;
-  }
-
-  .advSearTextLeft{
-    display: none;
-  }
-
-  .tutor-section-ex{
-    margin-top: 370px;
-  }
-
- 
-
-
-  
-  .findtutor-btns{
-    display: block;
-    text-align: center;
-  }
-
-
-  
- 
-
-  .drpdwn select {
-    width: 80%;
-    margin-bottom: 15px;
-  }
-
-  .findtutor-btns button{
-    width: 150px;
-    padding: 10px;
-  }
-
-  #accordion{
-
-    width: 100%;
-  }
-
-  .accor{
-    display: flex;
-    justify-content: center;
-  }
-
-  .logoMobNum{
-    display: block;
-  }
-  .imgNumber{
-    left:350px;
-  }
-
-  .howitwork-sec{
-    background-image: none;
-  }
-
-  .advceAccordian{
-    width: 20rem;
-    
-  }
-
-  .overlayMTC{
-    /* height: 660px; */
-  }
-
-
-  /* .tutor-banner{
-    height: 500px;
-  } */
-
-  .rightside {
-    padding: 60px 30px;
-    width: 100%;
-  }
-
-  .trial {
-    padding: 80px 25px;
-  }
-
-  .bannText{
-    padding:0px 45px 0px 60px
-  }
-
-
-  .trialBtn {
-    display: flex;
-    justify-content: center;
-   }
- 
-
-   .whyChooseUsouter{
-    height: 590px;
-    border-radius: 20px;
-  }
-  
-.whyChooseUsTop{
-  width: 100%;
-  background-image: url(../img/whyChooseMob.png);
-  background-position: right;
-  background-repeat: no-repeat;
-  height: 730px;
-  border-radius: 20px;
-}
-
-.getstartedBtnPosition{
-  position: relative;
-      top: 270px;
-      left: -110px;
-}
-
-.resourcesTop{
-  width: 100%;
-  height: 530px;
-  border-radius: 20px;
-  background-image: url(../img/Group\ 933.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #F6F9F8;
-}
-
-.resourcesBottom button {
-  float: none;
-}
-
-
-.how-card2{
-  width: 100%;
-}
-
-
-
-.cardText{
-  width: 100%;
-  padding-bottom: 100px;
-}
-
-
-.imgNumber1 {
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  position: relative;
-  left: 320px;
-  bottom: 100px;
-}
-.imgNumber1 .shaddow-shape1{
-  width: 155px;
- 
-}
-
-.numbr11 {
-  position: relative;
-  bottom: 160px;
-  left: 60px;
-  width: 55px;
-  z-index: 100;
-}
-
-
-.imgNumber2 {
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  position: relative;
-  left: 320px;
-  bottom: 120px;
-}
-.imgNumber2 .shaddow-shape2{
-  width: 155px;
- 
-}
-.numbr22 {
-  position: relative;
-  bottom: 165px;
-  left: 20px;
-  width: 110px;
-  z-index: 100;
-}
-
-
-
-.imgNumber3 {
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  position: relative;
-  left: 320px;
-  bottom: 100px;
-}
-.imgNumber3 .shaddow-shape3{
-  width: 155px;
- 
-}
-
-.numbr33 {
-  position: relative;
-  bottom: 140px;
-  left: 35px;
-  width: 89px;
-  z-index: 100;
-}
-
-.howitwork-sec2{
-  background-image: none;
-}
-
-.profileSec1{
-  order: 2;
- }
-
- .profileSec2{
-  order: 1;
- }
- .findtutSec-ex{
-  margin-top: 100px;
- }
-
- .dash{
-  display: none;
-      
-    }
-
-    header {
-      padding-top: 20px ;
-    }
-
-    .padd-200{
-      padding: 10px 100px;
-    }
-
- 
-}
-@media only screen and (min-width: 768px) and (max-width: 992px) {
-  /* Styles for small desktops */
-  
-  .padd-200{
-    padding: 0 200px;
-  }
-  .padd-80{
-    padding: 0 80px;
-  }
-
-
-  /* .order3{
-    order: 2;
-  }
-  .order2{
-    order: 3;
-  }
-   */
-
-   .order3{
-    margin-top: -320px;
-   }
-
-  .profileSec1{
-    order: 2;
-   }
-  
-   .profileSec2{
-    order: 1;
-   }
-
-   header {
-    padding: 30px 0;
-  }
-
-  .navbar-collapse{
-    background-color: #6A307D;
-    padding: 20px;
-    margin: 5px 10px;
-    text-align: center;
-    
-  }
-
-  .findtutorHeader{
-    margin-top: 50px !important;
-  }
-
- 
-
-  .navbar-dark .navbar-nav .nav-link{
-    color: white !important;
-    
-  }
-
-  header .navbar .nav-link.active{
-    color: white !important;
-  }
-
-  .topLine{
-    border-top: 1px solid rgba(255, 255, 255, 0.596);
-    margin-top: 20px;
-    padding-top: 20px;
-  }
-    
-  .mobBtn{
-    display: block;
-  }
-  .deskBtn{
-    display: none;
-  }
-
-  .deskBtn span{
-    display: block;
-  }
-
-  .mobLang{
-    display: block;
-  }
-
-  .mobLang li{
-    margin: 0 auto;
-    width: 50px;
-    background-color: white;
-    color: black;
-    border-radius: 60px;
-  }
-  
-  .pl-lg-5, .px-lg-5{
-    padding-left: 0 !important;
-  }
-
-
-  
-
-  .tutorHeader h1{
-    
-    margin-top: 60px;
-  }
-
-
-  .advSearTextLeft{
-    display: none;
-  }
-
-  /* .tutor-section-ex{
-    margin-top: 250px;
-  } */
-
-  /* .findtutor-btns{
-    display: block;
-  } */
-
-  .drpdwn select {
-    width: 80%;
-    margin-bottom: 15px;
-  }
-
-  .findtutor-btns button{
-    width: 150px;
-    padding: 10px;
-  }
-
-   
-  #accordion{
-    width: 100%;
-  }
-
-  .advceAccordian{
-    width: 16rem;
-    
-  }
-
-  .accor{
-    display: flex;
-    justify-content: center;
-  }
-
-  /* .logoMobNum{
-    display: block;
-  } */
-
-
-  .imgNumber{
-    left:180px;
-  }
-
-  .howitwork-sec{
-    background-image: none;
-  }
-
-  .overlayMTC{
-    /* height: 600px; */
-  }
-
-
- 
-
-  .rightside {
-    padding: 60px 30px;
-    width: 100%;
-  }
-
-  .trial {
-    padding: 80px 25px;
-  }
-
-  .bannText{
-    padding:0px 45px 0px 60px
-  }
-
-  .trialBtn {
-    display: flex;
-    justify-content: center;
-   }
-
-   
-.how-card2{
-  width: 100%;
-}
-
-
-
-.cardText{
-  width: 100%;
-  padding-bottom: 100px;
-}
-
-
-.imgNumber1 {
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  position: relative;
-  left: 490px;
-  bottom: 100px;
-}
-.imgNumber1 .shaddow-shape1{
-  width: 155px;
- 
-}
-
-.numbr11 {
-  position: relative;
-  bottom: 160px;
-  left: 60px;
-  width: 55px;
-  z-index: 100;
-}
-
-
-.imgNumber2 {
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  position: relative;
-  left: 490px;
-  bottom: 120px;
-}
-.imgNumber2 .shaddow-shape2{
-  width: 155px;
- 
-}
-.numbr22 {
-  position: relative;
-  bottom: 165px;
-  left: 20px;
-  width: 110px;
-  z-index: 100;
-}
-
-
-
-.imgNumber3 {
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  position: relative;
-  left: 490px;
-  bottom: 100px;
-}
-.imgNumber3 .shaddow-shape3{
-  width: 155px;
- 
-}
-
-.numbr33 {
-  position: relative;
-  bottom: 140px;
-  left: 35px;
-  width: 89px;
-  z-index: 100;
-}
-
-.howitwork-sec2{
-  background-image: none;
-}
-
-.findtutSec-ex{
-  margin-top: 70px;
- }
-
- .tabBanner{
-  display: block;
-}
-.desktopBanner{
-  display: none;
-}
-
-.mobileBanner{
-  display: none;
-}
- 
-
-.tutorProfPic{
-  padding: 0;
-}
-
-.tabView{
-  display: flex;
-
-}
-
-.btnSize{
-  margin-right: 20px;
-  width: 50%;
-}
-
-
-
-.freeTrial a, .expMore a{
- 
-  padding: 8px 0px;
-
-}
-
-}
-@media only screen and (min-width: 993px) and (max-width: 1200px) {
-  /* Styles for large desktops */
-
-  .navbar-collapse{
-    background-color: #6A307D;
-    padding: 20px;
-    margin: 5px 10px;
-    text-align: center;
-    
-  }
-
-  .findtutorHeader{
-    margin-top: 50px !important;
-  }
-
-  
-
-  .navbar-dark .navbar-nav .nav-link{
-    color: white !important;
-  }
-
-  header .navbar .nav-link.active{
-    color: white !important;
-  }
-
-  .topLine{
-    border-top: 1px solid rgba(255, 255, 255, 0.596);
-    margin-top: 20px;
-    padding-top: 20px;
-  }
-    
-  .mobBtn{
-    display: block;
-  }
-  .deskBtn{
-    display: none;
-  }
-
-  .deskBtn span{
-    display: block;
-  }
-
-  .mobLang{
-    display: block;
-  }
-
-  .mobLang li{
-    margin: 0 auto;
-    width: 50px;
-    background-color: white;
-    color: black;
-    border-radius: 60px;
-  }
-
-
-  
-  .tutorHeader h1{
-   
-
-    margin-top: 0px;
-  }
-
-  .tutorHeader{
-    padding: 120px 0;
-  }
-
-  .tutor-section-ex{
-    margin-top: 200px;
-  }
-
-  .tutor-banner{
-    height: 550px;
-  }
-
-  /* .rightside {
-    padding: 60px 30px;
-    width: 100%;
-  } */
-
-  .trial {
-    padding: 80px 25px;
-  }
-
-  .bannText{
-    padding:0px 45px 0px 60px
-  }
-
-
-  
-  .imgNumber{
-    left:160px;
-  }
-
-  .howitwork-sec{
-    background-position: 130px 245px;
-  }
-
-  .trial {
-    padding: 80px 25px;
-  }
-
-  .trialBtn {
-   display: flex;
-   justify-content: center;
-  }
-
-
-  .imgNumber1 {
-    
-    position: relative;
-    left: 350px;
-    
-  }
-
-  .imgNumber2 {
-    
-    position: relative;
-    left: 715px;
-    top:90px;
-    
-  }
-
-  .imgNumber3 {
-    
-    position: relative;
-    left: 350px;
-    
-  }
-
-  .howitwork-sec2{
-    background-position: 100px 480px;
-  }
-  .overlayMTC{
-    height: 640px;
-  }
-
-   
-  #accordion{
-    width: 100%;
-  }
-
-  .advceAccordian{
-    width: 38rem;
-    
-  }
-
-  .accor{
-    display: flex;
-    justify-content: center;
-  }
-
-
-  header {
-    padding: 30px 0;
-  }
-
-  .pl-lg-5, .px-lg-5{
-    padding-left: 0px;
-  }
-  
-
-}
-
-@media only screen and (min-width: 1201px) and (max-width: 1500px) {
-
- /* my laptop size */
-}
-
-
-@media only screen and (min-width: 1501px) and (max-width: 1800px) {
-  .overlayMTC{
-    /* height: 650px; */
-  }
-
-  .tutorHeader h1{
-    /* background-color: rgb(31, 212, 101); */
-    margin-top: 100px;
-  }
-
-  #accordion{
-    width: 100%;
-  }
-
-  .advceAccordian{
-    width: 44rem;
-    
-  }
-
-  .accor{
-    display: flex;
-    justify-content: center;
-  }
-  header {
-    padding: 30px 0;
-  }
-}
-
-@media only screen and (min-width: 1801px) {
-  /* Styles for extra large desktops */
-  .overlayMTC{
-    /* height: 750px; */
-  }
- 
-  .tutorHeader h1{
-    /* background-color: red; */
-    margin-top: 100px;
-  }
-
-  #accordion{
-    width: 100%;
-  }
-
-  .advceAccordian{
-    width: 46rem;
-    
-  }
-
-  .accor{
-    display: flex;
-    justify-content: center;
-  }
-
-  header {
-    padding: 30px 0;
-}
-
-
-.howitwork-sec{
-  background-position: 650px 245px;;
-}
-
-.howitwork-sec2{
-  background-position: 550px 450px;
-}
-}
 
 
 .blogBanner{
@@ -3115,3 +1708,57 @@ header {
 .navbar-nav .nav-item{
   padding: 0 10px;
 }
+
+
+.contactform {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.contactSubmitBtn button{
+  border-radius: 61px;
+  padding: 7px 25px;
+  float: right;
+}
+
+.contactContainer p{
+  /* font-size: 20px; */
+}
+
+.contactDetails a, .contactDetails p{
+  color: black;
+  font-size: 18px;
+  padding: 2px 10px;
+
+}
+
+.contacts{
+  display: flex;
+  margin: 5px;
+}
+.contactsOuter{
+  margin: 30px;
+}
+
+.contactsOuter p b{
+  color: #6A307D;
+}
+
+.contImg {
+  border: 1px solid #DCDCDC ;
+  padding: 16px;
+  
+}
+
+.openingHr p{
+  line-height: 8px;
+}
+
+
+
+.contactHaeder p{
+  line-height: 10px;
+}
+

@@ -76,10 +76,10 @@
                 margin-bottom: 0;
             }
 
-            #enrollnow {
+            /* #enrollnow {
 
                 margin-top: 4px;
-            }
+            } */
         </style>
         <style>
             .slot {
@@ -214,7 +214,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xl-8 col-xxl-9">
+                    <div class="col-xl-8 col-xxl-9 col-lg-8 col-md-12 col-sm-12 col-xs-12 searchOrder2">
                         <div class="tu-listinginfo-holder">
                             @if (isset($tutorlist))
                                 @foreach ($tutorlist as $tutorlist)
@@ -293,22 +293,28 @@
                                             <div class="tu-btnarea">
                                                 @if (session('usertype') == 'Parent')
                                                 @else
+                                                    <div>
                                                     <a href="#booktrial"> <button data-toggle="modal"
                                                             data-target="#openDemoModal" class="btn btn-sm btn-primary"
                                                             onclick="openDemoModal('{{ $tutorlist->tutor_id }}','{{ $tutorlist->name }}','{{ $tutorlist->subjectid }}','{{ $tutorlist->subject }}')">Trial
                                                             Class</button></a>
+                                                    </div>
 
-                                                    {{-- <a href="tutormessages/{{ $tutorlist->tutor_id }}"> <button class="btn btn-sm btn-success" id="enrollnow">Chat</button></a> --}}
-                                                    {{-- <a href="tutormessages/{{ $tutorlist->tutor_id }}"> <button
-                                                        class="btn btn-sm btn-primary" id="enrollnow">Chat</button></a> --}}
+                                                    <div>
                                                     <a href="enrollnow/{{ $tutorlist->tutor_id }}"> <button
                                                             class="btn btn-sm btn-success" id="enrollnow">Enroll
                                                             Now</button></a>
+                                                    </div>
+
+                                                   
+                                                    
                                                 @endif
-                                                {{-- <a href="#checkslots" onclick="checkslots('{{$tutorlist->tutor_id}}')" class="btn btn-success">Check Slots</a> --}}
-                                                {{-- <a href="{{url('student/searchtutor')}}" class="btn btn-primary">Book Trial</a> --}}
-                                                <a href="/student/tutorprofile/{{ $tutorlist->tutor_id }}"
-                                                    class="tu-primbtn">View full profile</a>
+                                               
+                                                <!-- <a href="/student/tutorprofile/{{ $tutorlist->tutor_id }}"
+                                                    class="tu-primbtn">View full profile</a> -->
+
+                                                    <!-- <a  href="/student/tutorprofile/{{ $tutorlist->tutor_id }}"> <button
+                                                            class="btn btn-sm btn-primary" id="enrollnow">View Full Profile</button></a> -->
                                             </div>
                                         </div>
                                     </div>
@@ -330,8 +336,8 @@
                     </div>
                     <br>
                     {{-- Search/Filter --}}
-                    <div class="col-xl-4 col-xxl-3">
-                        <aside class="tu-asidewrapper">
+                    <div class="col-xl-4 col-xxl-3 col-lg-4 col-md-12 col-sm-12 col-xs-12 searchOrder1">
+                        <aside class="tu-asidewrapperq">
                             <a href="javascript:void(0)" class="tu-dbmenu"><i class="icon icon-chevron-left"></i></a>
                             <form action="{{ route('student.tutoradvs') }}" method="POST">
                                 @csrf
@@ -525,9 +531,9 @@
                                     </div>
                                     <div class="tu-filterbtns">
 
-                                        <button type="submit" class="tu-primbtn">Apply filters</button>
+                                        <button type="submit" class="btn btn-primary mb-2">Apply filters</button>
                                         <button type="button" onclick="clearfilter()"> <a
-                                                href="{{ url('student/searchtutor') }}" class="tu-sb-sliver">Clear all
+                                                href="{{ url('student/searchtutor') }}" class="btn btn-info ">Clear all
                                                 filters</a></button>
                                     </div>
                                 </div>

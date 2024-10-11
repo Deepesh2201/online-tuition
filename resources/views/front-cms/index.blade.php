@@ -8,6 +8,7 @@
                 <img class="desktopBanner" src="{{ url('frontendnew/img/bg-mtc.png') }}" alt="" width="100%">
                 <img class="mobileBanner" src="{{ url('frontendnew/img/MobBan.png') }}" alt="" width="100%">
                 <img class="tabBanner" src="{{ url('frontendnew/img/bannerIpad.png') }}" alt="" width="100%">
+                <img class="tabBanner2" src="{{ url('frontendnew/img/ipad2.png') }}" alt="" width="100%">
             </div>
             <div class="overlayMTC">
                 <div class="tutorHeader">
@@ -18,9 +19,9 @@
                         @csrf
                         <div class="findtutor-btns">
 
-                            <div class="custom-select" style="width:300px;">
-                                <select id="subject" name="subject">
-                                    <option value="">Select a Subject</option>
+                            <div class="custom-select " style="width:300px;" class="dropdown-menu">
+                                <select id="subject"  name="subject" >
+                                    <option value="">Select a Subject </option>
                                     @foreach ($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                     @endforeach
@@ -149,6 +150,7 @@
 
 
                 </div>
+                <div class="container subjContainer">
                 <div class="subSec">
                     <ul>
                         <li>
@@ -284,6 +286,7 @@
                         </li>
                     </ul>
                 </div>
+                </div>
             </div>
         </div>
     </div>
@@ -299,6 +302,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 tutorCol">
                     <div class="tutorDetails">
                         <div class="tutorImg">
+                        
                             <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutor->profile_pic }}" width="100%" alt="" onerror="this.onerror=null;this.src='https://mychoicetutor.com/frontendnew/img/icons/mct-favicon.png';">
                         </div>
                         <div class="star">
@@ -511,22 +515,29 @@
 </section>
 <!-- fact sector END -->
 <!-- fact sector END -->
+
+
 <section>
     <div class="container">
-        <div class="tutor-banner ">
-
-            <div class="rightside">
-                <h2>Begin your tutoring journey now! Join us as a tutor.</h2>
-                <button onclick="redirect();">Get Started</button>
+        <div class="tutor-banner bottom-banner2">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="trial">
+                        <h2>Begin your tutoring journey now!<br> Join us as a tutor.</h2>
+                        <div class="trialBtn">
+                            <button onclick="redirect();">Get Started</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
+
+        <script>
+        function redirect() {
+            window.location.href = "{{('/student/register')}}";
+        }
+        </script>
     </div>
-    <script>
-    function redirect() {
-        window.location.href = "{{('/student/register')}}";
-    }
-    </script>
 </section>
 
 

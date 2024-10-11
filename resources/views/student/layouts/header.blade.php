@@ -1,6 +1,6 @@
 @php
-    use App\Models\studentprofile;
-    $studentprofile = studentprofile::where('student_id', session('userid')->id)->first();
+use App\Models\studentprofile;
+$studentprofile = studentprofile::where('student_id', session('userid')->id)->first();
 
 @endphp
 <!doctype html>
@@ -98,14 +98,22 @@
 
                     </div>
 
-                    <div class="studentTopBtn d-flex">
+                    <!-- <div class="studentTopBtn d-flex">
                         <a href="/student/classes" style="padding-right: 20px"> <button
                                 class="btn btn-primary">Scheduled
                                 Classes</button></a>
                         <a href="/student/searchtutor" style="padding-right: 20px"> <button
                                 class="btn btn-primary">Explore Tutors</button></a>
                         <a href="/" target="_blank"> <button class="btn btn-primary">Visit Website</button></a>
-                    </div>
+                    </div> -->
+<!-- 
+                    <div class="topBtn" style="margin-top:15px">
+                        <a href="/student/classes" style="padding-right: 10px"> <button class="btn btn-primary">Upcoming
+                                Classes</button></a>
+                        <a href="/student/searchtutor" style="padding-right: 10px"> <button
+                                class="btn btn-primary">Explore Tutors</button></a>
+                        <a href="/" target="_blank"> <button class="btn btn-primary">Visit Website</button></a>
+                    </div> -->
 
                     <div class="d-flex">
 
@@ -182,8 +190,8 @@
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="" id="all-notification-check01">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="all-notification-check01">
                                                             <label class="form-check-label"
                                                                 for="all-notification-check01"></label>
                                                         </div>
@@ -224,8 +232,8 @@
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="" id="messages-notification-check01">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="messages-notification-check01">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check01"></label>
                                                         </div>
@@ -253,8 +261,8 @@
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="" id="messages-notification-check02">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="messages-notification-check02">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check02"></label>
                                                         </div>
@@ -283,8 +291,8 @@
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="" id="messages-notification-check03">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="messages-notification-check03">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check03"></label>
                                                         </div>
@@ -311,8 +319,8 @@
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="" id="messages-notification-check04">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="messages-notification-check04">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check04"></label>
                                                         </div>
@@ -367,8 +375,8 @@
                                     </div>
 
                                     <div class="px-2 pt-2">
-                                        <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom"
-                                            data-dropdown-tabs="true" id="notificationItemsTab" role="tablist">
+                                        <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom" data-dropdown-tabs="true"
+                                            id="notificationItemsTab" role="tablist">
                                             <li class="nav-item waves-effect waves-light">
                                                 <a class="nav-link active" data-bs-toggle="tab" href="#all-noti-tab"
                                                     role="tab" aria-selected="true">All</a>
@@ -386,8 +394,7 @@
                                 </div>
 
                                 <div class="tab-content position-relative" id="notificationItemsTabContent1">
-                                    <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab"
-                                        role="tabpanel">
+                                    <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
                                         <div data-simplebar style="max-height: 300px;" class="pe-2">
 
 
@@ -417,8 +424,8 @@
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="" id="messages-notification-check01">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="messages-notification-check01">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check01"></label>
                                                         </div>
@@ -446,8 +453,8 @@
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="" id="messages-notification-check02">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="messages-notification-check02">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check02"></label>
                                                         </div>
@@ -476,8 +483,8 @@
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="" id="messages-notification-check03">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="messages-notification-check03">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check03"></label>
                                                         </div>
@@ -504,8 +511,8 @@
                                                     </div>
                                                     <div class="px-2 fs-15">
                                                         <div class="form-check notification-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="" id="messages-notification-check04">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="messages-notification-check04">
                                                             <label class="form-check-label"
                                                                 for="messages-notification-check04"></label>
                                                         </div>
@@ -537,8 +544,8 @@
                         </div>
 
                         <div class="dropdown ms-sm-3 header-item topbar-user">
-                            <button type="button" class="btn" id="page-header-user-dropdown"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
                                         src="{{ url('images/students/profilepics/') }}/{{ $studentprofile->profile_pic ?? '' }}"
@@ -547,7 +554,7 @@
                                         <span
                                             class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ session('userid')->name }}</span>
                                         @if (session('usertype') == 'Parent')
-                                            <p style="color: grey; font-size:10px">Logged In As Parent</p>
+                                        <p style="color: grey; font-size:10px">Logged In As Parent</p>
                                         @endif
                                         {{-- <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Founder</span> --}}
                                     </span>
@@ -570,8 +577,8 @@
                                 {{-- <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$5971.67</b></span></a> --}}
                                 {{-- <a class="dropdown-item" href="pages-profile-settings.html"><span class="badge bg-success-subtle text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a> --}}
                                 <a class="dropdown-item" href="{{ route('student.notifications') }}"><i
-                                    class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle" data-key="t-logout">Notifications</span></a>
+                                        class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i>
+                                    <span class="align-middle" data-key="t-logout">Notifications</span></a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"><i
                                         class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
@@ -594,8 +601,7 @@
                     <div class="modal-body">
                         <div class="mt-2 text-center">
                             <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
-                                colors="primary:#f7b84b,secondary:#f06548"
-                                style="width:100px;height:100px"></lord-icon>
+                                colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
                             <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
                                 <h4>Are you sure ?</h4>
                                 <p class="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
@@ -677,40 +683,47 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('student.messages')}}" class="nav-link" data-key="t-chat"> Chat
-                        </a>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        </li> --}}
+
+
+                        <li class="nav-item">
+                            <a href="{{ route('student.yourtutor') }}"
+                                class="nav-link menu-link {{ Request::is('student/yourtutor') ? 'active' : '' }}">
+                                <img src="/images/Student-dashboard-menu-icon/My Tutors.svg" alt="">&nbsp;
+                                <span data-key="t-starter">My Tutor </span> </a>
                         </li>
 
-                    </ul>
-                </div>
-                </li> --}}
 
-                        <li class="nav-item ">
-
+                        <li class="nav-item">
                             <a href="{{ route('student.demolist') }}"
-                                class="nav-link {{ Request::is('student/demolist') ? 'active' : '' }}"
-                                data-key="">
-                                <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg"
-                                    alt="">&nbsp; Trial
-                                Classes</a>
+                                class="nav-link menu-link {{ Request::is('student/demolist') ? 'active' : '' }}">
+                                <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt="">&nbsp;
+                                <span data-key="t-starter">Trial Classes</span> </a>
                         </li>
-                        <li class="nav-item ">
 
+                        <li class="nav-item">
                             <a href="{{ route('student.classes') }}"
-                                class="nav-link {{ Request::is('student/classes') ? 'active' : '' }}" data-key="">
-                                <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg"
-                                    alt=""> &nbsp; Scheduled
-                                Classes</a>
+                                class="nav-link menu-link {{ Request::is('student/classes') ? 'active' : '' }}">
+                                <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt="">&nbsp;
+                                <span data-key="t-starter">Scheduled Classes</span> </a>
                         </li>
-                        <li class="nav-item ">
-
+                        <li class="nav-item">
                             <a href="{{ route('student.completed-classes') }}"
-                                class="nav-link {{ Request::is('student/completed-classes') ? 'active' : '' }}"
-                                data-key="t-horizontal"><img
-                                    src="/images/Student-dashboard-menu-icon/My recordings.svg"
-                                    alt="">&nbsp;&nbsp; Completed Classes</a>
+                                class="nav-link menu-link {{ Request::is('student/completed-classes') ? 'active' : '' }}">
+                                <img src="/images/Student-dashboard-menu-icon/My Scheduled Classes.svg" alt="">&nbsp;
+                                <span data-key="t-starter">Completed Classes</span> </a>
                         </li>
 
-                        <!-- <li class="nav-item">
+               
+                
+                
+
+                <!-- <li class="nav-item">
                     @php
                         $isClassesActive =
                             Request::is('student/demolist') ||
@@ -747,21 +760,21 @@
                 </li> -->
 
 
-                        <li class="nav-item">
-                            <a href="{{ route('student.searchtutor') }}"
-                                class="nav-link menu-link {{ Request::is('student/searchtutor') ? 'active' : '' }}">
-                                <img src="/images/Student-dashboard-menu-icon/Explore tutors.svg"
-                                    alt="">&nbsp; <span data-key="t-dashboards"> Explore Tutors</span> </a>
-                        </li>
+                <li class="nav-item">
+                    <a href="{{ route('student.searchtutor') }}"
+                        class="nav-link menu-link {{ Request::is('student/searchtutor') ? 'active' : '' }}">
+                        <img src="/images/Student-dashboard-menu-icon/Explore tutors.svg" alt="">&nbsp; <span
+                            data-key="t-dashboards"> Explore Tutors</span> </a>
+                </li>
 
-                        {{-- <li class="nav-item">
+                {{-- <li class="nav-item">
                             <a href="{{route('student.subjects')}}" class="nav-link menu-link"> <img
                     src="/images/Student-dashboard-menu-icon/My Subjects.svg" alt="">&nbsp; <span
                     data-key="t-dashboards"> My Subjects</span> </a>
                 </li> --}}
 
 
-                        {{--
+                {{--
                         <li class="nav-item">
                             <a href="{{route('student.subjectlist')}}" class="nav-link menu-link"> <img
                     src="/images/Student-dashboard-menu-icon/Explore Subjects.svg" alt="">&nbsp; <span
@@ -771,187 +784,179 @@
 
 
 
-                        <!-- <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Purchase</span></li> -->
-
-                        <li class="nav-item" hidden>
-                            <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse"
-                                role="button" aria-expanded="false" aria-controls="sidebarPages">
-                                <i class="ri-pages-line"></i> <span data-key="t-pages">My Purchases</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="sidebarPages">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                    <li class="nav-item">
-                                        <a href="{{ route('student.searchtutor') }}" class="nav-link"
-                                            data-key="t-starter">Purchase New Tutor </a>
-                                    </li>
-                                    <a href="{{ route('student.yourtutor') }}" class="nav-link"
-                                        data-key="t-starter">
-                                        Tutor </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('student.subjects') }}" class="nav-link" data-key="t-starter">
-                                Subjects </a>
-                        </li>
-
-                    </ul>
-                </div>
-                </li>
-
-                <li class="nav-item">
-                    @php
-                        $isStudyMaterialsActive =
-                            Request::is('student/mylearnings') || Request::is('student/assignments');
-                    @endphp
-                    <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
-                        aria-expanded="{{ $isStudyMaterialsActive ? 'true' : 'false' }}"
-                        aria-controls="sidebarLanding">
-                        <img src="/images/Student-dashboard-menu-icon/Study Materials.svg" alt="">&nbsp;<span
-                            data-key="t-landing">Study Materials</span>
-                    </a>
-                    <div class="collapse menu-dropdown {{ $isStudyMaterialsActive ? 'show' : '' }}"
-                        id="sidebarLanding">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('student.mylearnings') }}"
-                                    class="nav-link menu-link {{ Request::is('student/mylearnings') ? 'active' : '' }}"
-                                    data-key="t-one-page">Learning Contents</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('student.assignments.list') }}"
-                                    class="nav-link menu-link {{ Request::is('student/assignments') ? 'active' : '' }}"
-                                    data-key="t-one-page">Assignments</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-
-
-
-                <li class="nav-item">
-                    @php
-                        $isOnlineTestsActive = Request::is('student/exams');
-                    @endphp
-                    <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button"
-                        aria-expanded="{{ $isOnlineTestsActive ? 'true' : 'false' }}"
-                        aria-controls="sidebarAdvanceUI">
-                        <img src="/images/Student-dashboard-menu-icon/Online Tests.svg" alt="">&nbsp; <span
-                            data-key="t-advance-ui">Online Tests</span>
-                    </a>
-                    <div class="collapse menu-dropdown {{ $isOnlineTestsActive ? 'show' : '' }}"
-                        id="sidebarAdvanceUI">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('student.exams') }}"
-                                    class="nav-link {{ Request::is('student/exams') ? 'active' : '' }}"
-                                    data-key="t-alerts">Quizes</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-
-
-                <li class="nav-item">
-                    @php
-                        $isPaymentsActive = Request::is('student/studentpayments');
-                    @endphp
-                    <a class="nav-link menu-link" href="#sidebarForms" data-bs-toggle="collapse" role="button"
-                        aria-expanded="{{ $isPaymentsActive ? 'true' : 'false' }}" aria-controls="sidebarForms">
-                        <img src="/images/Student-dashboard-menu-icon/Payments.svg" alt="">&nbsp; <span
-                            data-key="t-forms">Payments</span>
-                    </a>
-                    <div class="collapse menu-dropdown {{ $isPaymentsActive ? 'show' : '' }}" id="sidebarForms">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('student.studentpayments') }}"
-                                    class="nav-link {{ Request::is('student/studentpayments') ? 'active' : '' }}"
-                                    data-key="t-form-select">
-                                    Payment History
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-
-                <li class="nav-item">
-                    @php
-                        $isReportsActive =
-                            Request::is('student/class-reports') || Request::is('student/attendance-reports');
-                    @endphp
-                    <a class="nav-link menu-link" href="#sidebarCharts" data-bs-toggle="collapse" role="button"
-                        aria-expanded="{{ $isReportsActive ? 'true' : 'false' }}" aria-controls="sidebarCharts">
-                        <img src="/images/Student-dashboard-menu-icon/Reports.svg" alt="">&nbsp; <span
-                            data-key="t-charts">Reports</span>
-                    </a>
-                    <div class="collapse menu-dropdown {{ $isReportsActive ? 'show' : '' }}" id="sidebarCharts">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('student.class.report') }}"
-                                    class="nav-link {{ Request::is('student/class-reports') ? 'active' : '' }}"
-                                    data-key="t-chartjs">
-                                    Classes
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('student.attendance.report') }}"
-                                    class="nav-link {{ Request::is('student/attendance-reports') ? 'active' : '' }}"
-                                    data-key="t-chartjs">
-                                    Attendance
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-
-                <li class="nav-item">
-                    <a href="{{ route('student.messages') }}"
-                        class="nav-link menu-link {{ Request::is('student/messages') ? 'active' : '' }}"> <img
-                            src="/images/Student-dashboard-menu-icon/Chat.svg" alt="">&nbsp; <span
-                            data-key="t-dashboards">
-                            Chat</span> </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('student.myfeedback') }}"
-                        class="nav-link menu-link {{ Request::is('student/myfeedback') ? 'active' : '' }}"
-                        data-key="t-starter"> <img src="/images/Student-dashboard-menu-icon/Feedback.svg"
-                            alt="">&nbsp;
-                        <span data-key="t-dashboards"> Feedback</span> </a>
-                </li>
-
+                <!-- <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Purchase</span></li> -->
 
                 <li class="nav-item" hidden>
-                    <a class="nav-link menu-link" href="#sidebarFormsChat" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarForms">
-                        <i class="ri-file-list-3-line"></i> <span data-key="t-forms">Chat & Feedbacks</span>
+                    <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarPages">
+                        <i class="ri-pages-line"></i> <span data-key="t-pages">My Purchases</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarFormsChat">
+                    <div class="collapse menu-dropdown" id="sidebarPages">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('student.messages') }}" class="nav-link" data-key="t-form-select">
-                                    Chat/Messages </a>
-                            </li>
                             <li class="nav-item">
-                                <a href="{{ route('student.myfeedback') }}" class="nav-link"
-                                    data-key="t-form-select">
-                                    Feedbacks </a>
+                                <a href="{{ route('student.searchtutor') }}" class="nav-link"
+                                    data-key="t-starter">Purchase New Tutor </a>
                             </li>
-
-
-                        </ul>
-                    </div>
+                            <a href="{{ route('student.yourtutor') }}" class="nav-link" data-key="t-starter">
+                                Tutor </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="{{ route('student.subjects') }}" class="nav-link" data-key="t-starter">
+                        Subjects </a>
+                </li>
 
                 </ul>
             </div>
-            <!-- Sidebar -->
-        </div>
+            </li>
 
-        <div class="sidebar-background"></div>
+            <li class="nav-item">
+                @php
+                $isStudyMaterialsActive =
+                Request::is('student/mylearnings') || Request::is('student/assignments');
+                @endphp
+                <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
+                    aria-expanded="{{ $isStudyMaterialsActive ? 'true' : 'false' }}" aria-controls="sidebarLanding">
+                    <img src="/images/Student-dashboard-menu-icon/Study Materials.svg" alt="">&nbsp;<span
+                        data-key="t-landing">Study Materials</span>
+                </a>
+                <div class="collapse menu-dropdown {{ $isStudyMaterialsActive ? 'show' : '' }}" id="sidebarLanding">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a href="{{ route('student.mylearnings') }}"
+                                class="nav-link menu-link {{ Request::is('student/mylearnings') ? 'active' : '' }}"
+                                data-key="t-one-page">Learning Contents</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('student.assignments.list') }}"
+                                class="nav-link menu-link {{ Request::is('student/assignments') ? 'active' : '' }}"
+                                data-key="t-one-page">Assignments</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
+
+
+            <li class="nav-item">
+                @php
+                $isOnlineTestsActive = Request::is('student/exams');
+                @endphp
+                <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button"
+                    aria-expanded="{{ $isOnlineTestsActive ? 'true' : 'false' }}" aria-controls="sidebarAdvanceUI">
+                    <img src="/images/Student-dashboard-menu-icon/Online Tests.svg" alt="">&nbsp; <span
+                        data-key="t-advance-ui">Online Tests</span>
+                </a>
+                <div class="collapse menu-dropdown {{ $isOnlineTestsActive ? 'show' : '' }}" id="sidebarAdvanceUI">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a href="{{ route('student.exams') }}"
+                                class="nav-link {{ Request::is('student/exams') ? 'active' : '' }}"
+                                data-key="t-alerts">Quizes</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
+
+            <li class="nav-item">
+                @php
+                $isPaymentsActive = Request::is('student/studentpayments');
+                @endphp
+                <a class="nav-link menu-link" href="#sidebarForms" data-bs-toggle="collapse" role="button"
+                    aria-expanded="{{ $isPaymentsActive ? 'true' : 'false' }}" aria-controls="sidebarForms">
+                    <img src="/images/Student-dashboard-menu-icon/Payments.svg" alt="">&nbsp; <span
+                        data-key="t-forms">Payments</span>
+                </a>
+                <div class="collapse menu-dropdown {{ $isPaymentsActive ? 'show' : '' }}" id="sidebarForms">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a href="{{ route('student.studentpayments') }}"
+                                class="nav-link {{ Request::is('student/studentpayments') ? 'active' : '' }}"
+                                data-key="t-form-select">
+                                Payment History
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                @php
+                $isReportsActive =
+                Request::is('student/class-reports') || Request::is('student/attendance-reports');
+                @endphp
+                <a class="nav-link menu-link" href="#sidebarCharts" data-bs-toggle="collapse" role="button"
+                    aria-expanded="{{ $isReportsActive ? 'true' : 'false' }}" aria-controls="sidebarCharts">
+                    <img src="/images/Student-dashboard-menu-icon/Reports.svg" alt="">&nbsp; <span
+                        data-key="t-charts">Reports</span>
+                </a>
+                <div class="collapse menu-dropdown {{ $isReportsActive ? 'show' : '' }}" id="sidebarCharts">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a href="{{ route('student.class.report') }}"
+                                class="nav-link {{ Request::is('student/class-reports') ? 'active' : '' }}"
+                                data-key="t-chartjs">
+                                Classes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('student.attendance.report') }}"
+                                class="nav-link {{ Request::is('student/attendance-reports') ? 'active' : '' }}"
+                                data-key="t-chartjs">
+                                Attendance
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="{{ route('student.messages') }}"
+                    class="nav-link menu-link {{ Request::is('student/messages') ? 'active' : '' }}"> <img
+                        src="/images/Student-dashboard-menu-icon/Chat.svg" alt="">&nbsp; <span data-key="t-dashboards">
+                        Chat</span> </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('student.myfeedback') }}"
+                    class="nav-link menu-link {{ Request::is('student/myfeedback') ? 'active' : '' }}"
+                    data-key="t-starter"> <img src="/images/Student-dashboard-menu-icon/Feedback.svg" alt="">&nbsp;
+                    <span data-key="t-dashboards"> Feedback</span> </a>
+            </li>
+
+
+            <li class="nav-item" hidden>
+                <a class="nav-link menu-link" href="#sidebarFormsChat" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="sidebarForms">
+                    <i class="ri-file-list-3-line"></i> <span data-key="t-forms">Chat & Feedbacks</span>
+                </a>
+                <div class="collapse menu-dropdown" id="sidebarFormsChat">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a href="{{ route('student.messages') }}" class="nav-link" data-key="t-form-select">
+                                Chat/Messages </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('student.myfeedback') }}" class="nav-link" data-key="t-form-select">
+                                Feedbacks </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </li>
+
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+
+    <div class="sidebar-background"></div>
     </div>
     <!-- Left Sidebar End -->
     <!-- Vertical Overlay-->

@@ -2,6 +2,7 @@
 @section('main-section')
     <!-- tutor section -->
     <section class="tutor-section">
+        <hr>
         <div class="container tutor-card topheader-tutor">
 
             <div class="row">

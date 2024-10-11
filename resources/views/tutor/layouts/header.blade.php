@@ -76,7 +76,7 @@
                             </span>
                         </button>
 
-                        <div class="topBtn">
+                        <!-- <div class="topBtn">
                             <button type="button" style=""
                                 class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                                 id="topnav-hamburger-icon">
@@ -98,7 +98,7 @@
                                     <div class="btn btn-primary">Visit Website</div>
                                 </a>
                             </button>
-                        </div>
+                        </div> -->
 
                     </div>
 
@@ -605,7 +605,7 @@
 
                                     <div class="text-reset notification-item d-block dropdown-item position-relative">
                                         <div class="d-flex">
-                                            <img src="{{url('new-styles/assets/images/users/avatar-2.jpg')}}" class="me-3 rounded-circle avatar-xs flex-shrink-0" alt="user-pic">
+                                            <!-- <img src="{{url('new-styles/assets/images/users/avatar-2.jpg')}}" class="me-3 rounded-circle avatar-xs flex-shrink-0" alt="user-pic"> -->
                                             <div class="flex-grow-1">
                                                 <a href="#!" class="stretched-link">
                                                     <h6 class="mt-0 mb-1 fs-13 fw-semibold">Angela Bernier</h6>
@@ -950,34 +950,34 @@
                                 class="nav-link {{ Request::is('tutor/tutorslots') ? 'active' : '' }}"
                                 data-key="t-horizontal">
                                 <img src="/images/Tutor-Dashboard-menu-icons/Trial Classes.svg" alt="">&nbsp;
-                                <span data-key="t-dashboards"> Slots Management</span>
+                                <span data-key="t-dashboards">&nbsp; Slots Management</span>
                             </a>
                             <a href="{{ route('tutor.demolist') }}"
                                 class="nav-link {{ Request::is('tutor/demolist') ? 'active' : '' }}"
                                 data-key="t-horizontal">
                                 <img src="/images/Tutor-Dashboard-menu-icons/Trial Classes.svg" alt="">&nbsp;
-                                <span data-key="t-dashboards"> Trial Classes</span>
+                                <span data-key="t-dashboards">&nbsp; Trial Classes</span>
                             </a>
 
                             <a href="{{ route('tutor.liveclass.classlist') }}"
                                 class="nav-link {{ Request::is('tutor/getclasslist') ? 'active' : '' }}"
                                 data-key="t-horizontal">
                                 <img src="/images/Tutor-Dashboard-menu-icons/My Scheduled Classes.svg"
-                                    alt="">&nbsp; <span data-key="t-dashboards"> Scheduled Classes</span>
+                                    alt="">&nbsp; <span data-key="t-dashboards">&nbsp; Scheduled Classes</span>
                             </a>
 
                             <a href="{{ route('tutor.classes') }}"
                                 class="nav-link {{ Request::is('tutor/classes') ? 'active' : '' }}"
                                 data-key="t-horizontal">
                                 <img src="/images/Tutor-Dashboard-menu-icons/My Complete Classes.svg"
-                                    alt="">&nbsp; <span data-key="t-dashboards"> Completed Classes</span>
+                                    alt="">&nbsp; <span data-key="t-dashboards">&nbsp; Completed Classes</span>
                             </a>
 
                             <a href="{{ route('tutor.studentslist') }}"
                                 class="nav-link {{ Request::is('tutor/students') ? 'active' : '' }}"
                                 data-key="t-horizontal">
                                 <img src="/images/Tutor-Dashboard-menu-icons/My Batches.svg" alt="">&nbsp;
-                                <span data-key="t-dashboards"> My Students</span>
+                                <span data-key="t-dashboards">&nbsp; My Students</span>
                             </a>
 
                         </li> <!-- end Dashboard Menu -->

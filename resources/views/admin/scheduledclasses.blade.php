@@ -22,7 +22,7 @@
                     <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                 @endif
                 <div class="page-title-box">
-                    <h3 class="text-center">Scheduled Classes</h3>
+                    <h3 class="">Scheduled Classes</h3>
                 </div>
                 <form action="{{route('admin.scheduledclass-search')}}" method="POST">
                     @csrf

@@ -14,13 +14,14 @@
         <link rel="stylesheet" href="{{url('frontendnew/css/bootstrap.min.css')}}">
         <!-- Style -->
         <link rel="stylesheet" href="{{url('frontendnew/css/style.css')}}">
+        <link rel="stylesheet" href="{{url('frontendnew/css/responsive.css')}}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Favicon -->
         <link rel="icon" href="{{url('frontendnew/img/icons/mct-favicon.png')}}" type="image/x-icon">
         <title>My Choice Tutor</title>
     </head>
     <body>
-        <header role="banner" style="background-color: #fff;">
+        <header role="banner" style="background-color: #fff; border-bottom: 1px solid #dcdcdc">
             <nav class="navbar navbar-expand-xl  navbar-dark bg-dark">
                 <div class="container-fluid">
                     <div class="navFlx">
@@ -79,6 +80,10 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('howitworks') ? 'active' : '' }}" href="{{ url('/howitworks') }}">How it works</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Contact Us</a>
                             </li>
                         </ul>
                         

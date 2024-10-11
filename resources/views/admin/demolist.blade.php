@@ -22,7 +22,7 @@
                     <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                 @endif
                 <div class="page-title-box">
-                    <h3 class="text-center">Demo List</h3>
+                    <h3 class="">Trial List</h3>
                 </div>
                 <form id="payment-search">
                     <div class="row py-3">
@@ -136,7 +136,7 @@
                                 <th scope="col">Prefered Slot-2</th>
                                 <th scope="col">Prefered Slot-3</th>
                                 <th scope="col">Confirmed Slot</th>
-                                {{-- <th scope="col">Demo Link</th> --}}
+                                {{-- <th scope="col">Trial Link</th> --}}
                                 <th scope="col">Remarks</th>
                                 {{-- <th scope="col">Change Status</th> --}}
                                 <th scope="col">Action</th>
@@ -220,7 +220,7 @@
 
 
                     <header>
-                        <h3 class="text-center mb-4">Confirm Demo</h3>
+                        <h3 class="text-center mb-4">Confirm Trial</h3>
                     </header>
 
                     <form action="{{ route('admin.demo.confirm') }}" method="POST">
@@ -252,9 +252,9 @@
 
 
                             {{-- <div class="col-12 col-md-12 col-ms-12">
-                                    <label>Demo Link<i style="color: red;">*</i></label>
+                                    <label>Trial Link<i style="color: red;">*</i></label>
                                     <input type="text" class="form-control" id="demolink" name="demolink"
-                                        placeholder="Paste Demo Link Here">
+                                        placeholder="Paste Trial Link Here">
                                     <span class="text-danger">
                                         @error('demolink')
                                             {{ $message }}

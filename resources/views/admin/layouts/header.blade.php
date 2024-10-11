@@ -81,12 +81,12 @@
             </div>
             {{-- <a href="/student/classes" style="padding-right: 10px"> <button class="btn btn-primary">Upcoming Classes</button></a>
                         <a href="/student/searchtutor" style="padding-right: 10px"> <button class="btn btn-primary">Explore Tutors</button></a> --}}
-                        <div class="topBlueBtn">
+                        <!-- <div class="topBlueBtn">
                             <a href="/admin/students" > <button class="btn btn-primary">Students List</button></a>
                             <a href="/admin/tutors" > <button class="btn btn-primary">Tutors List</button></a>
                             <a href="/admin/messages" > <button class="btn btn-primary">Chat</button></a>
                             <a href="/" target="_blank" > <button class="btn btn-primary">Visit Website</button></a>
-                        </div>
+                        </div> -->
             <div class="d-flex align-items-center">
 
                 <div class="dropdown d-md-none topbar-head-dropdown header-item">
@@ -583,65 +583,48 @@
                             </div>
                         </li> --}}
 
-                        <li class="nav-item">
-                        @php
-                            $isClassesActive = Request::is('admin/demolist') || Request::is('admin/scheduledclasses') || Request::is('admin/tutorslots');
-                        @endphp
-                            <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isClassesActive ? 'true' : 'false' }}" aria-controls="sidebarLayouts">
-                                <i class="ri-layout-3-line"></i> <span data-key="t-layouts">Classes</span>
-                                {{-- <span class="badge badge-pill bg-danger" data-key="t-hot">Updates</span> --}}
-                            </a>
-                            <div class="collapse menu-dropdown {{ $isClassesActive ? 'show' : '' }}" id="sidebarLayouts">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.demolist')}}" class="nav-link {{ Request::is('admin/demolist') ? 'active' : '' }}" data-key="t-horizontal">Demo Classes</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.scheduledclasses')}}" class="nav-link {{ Request::is('admin/scheduledclasses') ? 'active' : '' }}" data-key="t-horizontal">Scheduled Classes</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.tutorslots')}}" class="nav-link {{ Request::is('admin/tutorslots') ? 'active' : '' }}" data-key="t-horizontal">Tutor Slots</a>
-                                    </li>
 
-                                </ul>
-                            </div>
-                        </li> <!-- end Dashboard Menu -->
-
-                        <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
+                       
 
                         <li class="nav-item">
-                        @php
-                            $isStudentActive = Request::is('admin/students');
-                        @endphp
-                            <a class="nav-link menu-link" href="#sidebarPagesStudents" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isStudentActive ? 'true' : 'false' }}" aria-controls="sidebarPages">
-                                <i class="ri-pages-line"></i> <span data-key="t-pages">Students</span>
+                            <a class="nav-link menu-link{{ Request::is('admin/demolist') ? 'active' : '' }}" href="{{route('admin.demolist')}}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="ri-layout-3-line"></i> <span data-key="t-dashboards">Trial Classes</span>
                             </a>
-                            <div class="collapse menu-dropdown {{ $isStudentActive ? 'show' : '' }}" id="sidebarPagesStudents">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.students')}}" class="nav-link {{ Request::is('admin/students') ? 'active' : '' }}" data-key="t-starter"> Student List </a>
-                                    </li>
 
-                                </ul>
-                            </div>
                         </li>
 
                         <li class="nav-item">
-                        @php
-                            $isTutorActive = Request::is('admin/tutor');
-                        @endphp
-                            <a class="nav-link menu-link" href="#sidebarLandingTutor" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isTutorActive ? 'true' : 'false' }}" aria-controls="sidebarLanding">
-                                <i class="ri-rocket-line"></i> <span data-key="t-landing">Tutors</span>
+                            <a class="nav-link menu-link{{ Request::is('admin/scheduledclasses') ? 'active' : '' }}" href="{{route('admin.scheduledclasses')}}" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                            <i class="ri-layout-3-line"></i> <span data-key="t-dashboards">Scheduled Classes</span>
                             </a>
-                            <div class="collapse menu-dropdown {{ $isTutorActive ? 'show' : '' }}" id="sidebarLandingTutor">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.tutors')}}" class="nav-link {{ Request::is('admin/tutor') ? 'active' : '' }}" data-key="t-one-page"> Tutor List </a>
-                                    </li>
 
-                                </ul>
-                            </div>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link menu-link{{ Request::is('admin/tutorslots') ? 'active' : '' }}" href="{{route('admin.tutorslots')}}" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                            <i class="ri-layout-3-line"></i> <span data-key="t-dashboards">Tutor Slots</span>
+                            </a>
+
+                        </li>
+
+                      
+
+                         <li class="nav-item">
+                            <a class="nav-link menu-link {{ Request::is('admin/students') ? 'active' : '' }}" href="{{route('admin.students')}}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="ri-pages-line"></i> <span data-key="t-dashboards">Student List</span>
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link menu-link {{ Request::is('admin/tutor') ? 'active' : '' }}" href="/admin/tutors" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                <i class="ri-rocket-line"></i> <span data-key="t-dashboards">Tutor List</span>
+                            </a>
+
+                        </li>
+
+
+                       
 
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Contents</span></li>
                         <li class="nav-item">
