@@ -6,12 +6,12 @@ use App\Events\RealTimeMessage;
 use App\Http\Controllers\Controller;
 use App\Mail\SendMail;
 use App\Models\classes;
+use App\Models\subjects;
 use App\Models\country;
 use App\Models\Notification;
 use App\Models\payments\paymentdetails;
 use App\Models\payments\paymentstudents;
 use App\Models\SlotBooking;
-use App\Models\subjects;
 use App\Models\tutorachievements;
 use App\Models\tutorprofile;
 use App\Models\tutorregistration;
@@ -931,6 +931,11 @@ class TutorSearchController extends Controller
 
     public function enrollnow($id)
     {
+        $subjects = subjects::select('subjects.*')
+        ->join('tutorsubjectmappings','tutorsubjectmappings.subject_id','subjects.id')
+        ->where('tutorsubjectmappings.tutor_id',$id)->get();
+
+
         $currentDate = Carbon::now()->toDateString();
         $enrollment = TutorSubjectMapping::select('tutorsubjectmappings.*', 'subjects.name as subject_name', 'tutorprofiles.name as tutor_name', \DB::raw('(tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100) + tutorprofiles.rateperhour as rate'))
             ->join('tutorprofiles', 'tutorprofiles.tutor_id', '=', 'tutorsubjectmappings.tutor_id')
@@ -964,7 +969,7 @@ class TutorSearchController extends Controller
             ];
         }
 
-        return view('student.enrollnow', compact('enrollment', 'groupedSlots'));
+        return view('student.enrollnow', compact('enrollment', 'groupedSlots','subjects'));
     }
 
     public function enrollupdate($id)

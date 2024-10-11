@@ -398,14 +398,14 @@ class ClassController extends Controller
         $subjects = subjects::where('is_active', 1)->get();
         $classes = classes::where('is_active', 1)->get();
         $statuses = status::select('*')->get();
-        $scheduledclasses = zoom_classes::select('zoom_classes.id as class_id', 'zoom_classes.meeting_id as meeting_id', 'zoom_classes.topic_name as topic_name', 'zoom_classes.status as meeting_status', 'zoom_classes.start_time as meeting_start_time', 'zoom_classes.is_completed as is_completed', 'zoom_classes.recording_link as recording_link', 'tutorregistrations.id as tutor_id', 'tutorregistrations.name as tutor_name', 'tutorregistrations.mobile as tutor_mobile', 'studentregistrations.id as student_id', 'studentregistrations.name as student_name', 'studentregistrations.mobile as student_mobile', 'topics.name as topic_name', 'subjects.name as subject_name', 'classes.name as class_name')
+        $scheduledclasses = zoom_classes::select('zoom_classes.id as class_id','zoom_classes.started_at', 'zoom_classes.completed_at', 'zoom_classes.meeting_id as meeting_id', 'zoom_classes.topic_name as topic_name', 'zoom_classes.status as meeting_status', 'zoom_classes.start_time as meeting_start_time', 'zoom_classes.is_completed as is_completed', 'zoom_classes.recording_link as recording_link', 'tutorregistrations.id as tutor_id', 'tutorregistrations.name as tutor_name', 'tutorregistrations.mobile as tutor_mobile', 'studentregistrations.id as student_id', 'studentregistrations.name as student_name', 'studentregistrations.mobile as student_mobile', 'topics.name as topic_name', 'subjects.name as subject_name', 'classes.name as class_name')
             ->leftjoin('tutorregistrations', 'tutorregistrations.id', '=', 'zoom_classes.tutor_id')
             ->leftjoin('studentregistrations', 'studentregistrations.id', '=', 'zoom_classes.student_id')
             ->leftjoin('topics', 'topics.id', '=', 'zoom_classes.topic_id')
             ->leftjoin('subjects', 'subjects.id', '=', 'topics.subject_id')
             ->leftjoin('classes', 'classes.id', '=', 'subjects.class_id')
             ->orderby('zoom_classes.created_at', 'desc')
-            ->paginate(100);
+            ->paginate(1000000);
 
         // dd($scheduledclasses);
         return view('admin.scheduledclasses', get_defined_vars());

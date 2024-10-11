@@ -106,7 +106,7 @@ $studentprofile = studentprofile::where('student_id', session('userid')->id)->fi
                                 class="btn btn-primary">Explore Tutors</button></a>
                         <a href="/" target="_blank"> <button class="btn btn-primary">Visit Website</button></a>
                     </div> -->
-<!-- 
+<!--
                     <div class="topBtn" style="margin-top:15px">
                         <a href="/student/classes" style="padding-right: 10px"> <button class="btn btn-primary">Upcoming
                                 Classes</button></a>
@@ -664,12 +664,12 @@ $studentprofile = studentprofile::where('student_id', session('userid')->id)->fi
                             </a>
                         </li> <!-- end Dashboard Menu -->
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('student.yourtutor') }}"
                                 class="nav-link menu-link {{ Request::is('student/yourtutor') ? 'active' : '' }}">
                                 <img src="/images/Student-dashboard-menu-icon/My Tutors.svg" alt="">&nbsp;
                                 <span data-key="t-starter">My Tutor </span> </a>
-                        </li>
+                        </li> --}}
 
                         {{-- <li class="nav-item" hidden>
                         <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button"
@@ -719,9 +719,9 @@ $studentprofile = studentprofile::where('student_id', session('userid')->id)->fi
                                 <span data-key="t-starter">Completed Classes</span> </a>
                         </li>
 
-               
-                
-                
+
+
+
 
                 <!-- <li class="nav-item">
                     @php

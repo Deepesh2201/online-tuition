@@ -18,7 +18,7 @@ use DB;
 class DashboardController extends Controller
 {
     public function index(){
-        
+
         $studentpro = tutorprofile::select('*')
             // ->where('tutor_id', '=', session('userid')->id)
             ->first();
@@ -55,28 +55,19 @@ class DashboardController extends Controller
             ];
         }
 
-        $upcomingClasses = zoom_classes::select(
-            'zoom_classes.*',
-            'subjects.name as subject',
-            DB::raw('JSON_LENGTH(batchstudentmappings.student_data) as student_count')
-        )
-            ->join('topics', 'topics.id', 'zoom_classes.batch_id')
-            ->join('subjects', 'subjects.id', 'topics.subject_id')
-            ->join('batchstudentmappings', 'batchstudentmappings.batch_id', 'zoom_classes.batch_id')
-            // ->where('zoom_classes.tutor_id', '=', session('userid')->id)
-            ->orderBy('zoom_classes.start_time', 'asc')
-            ->take(5)
-            ->get();
-        
-        $upcomingClasses->transform(function ($class) {
-            $class->start_time = Carbon::parse($class->start_time);
-            return $class;
-        });
-        
-        
-        
+        $upcomingClasses = zoom_classes::select('zoom_classes.id as class_id','zoom_classes.started_at', 'zoom_classes.completed_at', 'zoom_classes.meeting_id as meeting_id', 'zoom_classes.topic_name as topic_name', 'zoom_classes.status as meeting_status', 'zoom_classes.start_time as meeting_start_time', 'zoom_classes.is_completed as is_completed', 'zoom_classes.recording_link as recording_link', 'tutorregistrations.id as tutor_id', 'tutorregistrations.name as tutor_name', 'tutorregistrations.mobile as tutor_mobile', 'studentregistrations.id as student_id', 'studentregistrations.name as student_name', 'studentregistrations.mobile as student_mobile', 'topics.name as topic_name', 'subjects.name as subject_name', 'classes.name as class_name')
+            ->leftjoin('tutorregistrations', 'tutorregistrations.id', '=', 'zoom_classes.tutor_id')
+            ->leftjoin('studentregistrations', 'studentregistrations.id', '=', 'zoom_classes.student_id')
+            ->leftjoin('topics', 'topics.id', '=', 'zoom_classes.topic_id')
+            ->leftjoin('subjects', 'subjects.id', '=', 'topics.subject_id')
+            ->leftjoin('classes', 'classes.id', '=', 'subjects.class_id')
+            ->orderby('zoom_classes.created_at', 'desc')
+            ->paginate(5);
 
-       
+
+
+
+
 
         $upcomingQuizes = OnlineTests::where('test_start_date', '>', Carbon::now())->orderBy('test_start_date', 'asc')
                                        ->take(5)->get();
@@ -85,7 +76,7 @@ class DashboardController extends Controller
             $quiz->test_end_date = Carbon::parse($quiz->test_end_date);
             return $quiz;
         });
-        
+
         $tUpcomingClasses = zoom_classes::where('start_time', '>', Carbon::now())
     ->orderBy('start_time', 'asc')
     ->get();

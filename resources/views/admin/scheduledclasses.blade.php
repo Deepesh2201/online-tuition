@@ -97,7 +97,7 @@
                             </div>
                         </div>
 
-                       
+
                         <div class="col-md-6 mt-4">
                             <div class="form-group">
                                 <button class="btn btn-primary" style="float:right"> <span class="fa fa-search"></span>
@@ -118,6 +118,8 @@
                             <tr>
                                 <th scope="col">S.No</th>
                                 <th scope="col">Current Status</th>
+                                <th scope="col">Start Time</th>
+                                <th scope="col">End Time</th>
                                 <th scope="col">Student Name</th>
                                 <th scope="col">Student Mobile</th>
                                 <th scope="col">Tutor Name</th>
@@ -138,6 +140,13 @@
                             @endif
                                <td>{{$loop->iteration}}</td>
                                <td>{{$scheduledclass->meeting_status}}</td>
+                               <td>
+                                {{ $scheduledclass->started_at ? \Carbon\Carbon::parse($scheduledclass->started_at)->format('d-m-Y h:i A') : '' }}
+                            </td>
+                            <td>
+                                {{ $scheduledclass->completed_at ? \Carbon\Carbon::parse($scheduledclass->completed_at)->format('d-m-Y h:i A') : '' }}
+                            </td>
+
                                <td>{{$scheduledclass->student_name}}</td>
                                <td>{{$scheduledclass->student_mobile}}</td>
                                <td>{{$scheduledclass->tutor_name}}</td>
@@ -157,9 +166,9 @@
                         </tbody>
                     </table>
                 </div>
-                
+
             </div>
-           
+
         </div>
     </div>
     <!-- content-wrapper ends -->

@@ -30,7 +30,7 @@
         z-index: 1000;
         text-align: center;
     }
-    
+
     .notification-popup button {
         margin-top: 10px;
         padding: 5px 10px;
@@ -40,42 +40,42 @@
         border-radius: 3px;
         cursor: pointer;
     }
-    
+
     .notification-popup button:hover {
         background-color: #cc0000;
     }
     </style>
-    
-    
-    
+
+
+
 <!-- end main content-->
-<div id="notification-popup" class="notification-popup">
+{{-- <div id="notification-popup" class="notification-popup">
     <p id="notificationpopupdata"></p>
     <button onclick="closeNotification()">Close</button>
     <audio id="notification-sound" src="{{url('sounds/notification.mp3')}}" preload="auto"></audio>
-</div>
+</div> --}}
 
 <script>
     function showNotification(count) {
         var popup = document.getElementById('notification-popup');
         var sound = document.getElementById('notification-sound');
         document.getElementById('notificationpopupdata').innerHTML='You have '+ count +' unread notifications';
-        
+
         popup.style.display = 'block';
         sound.play();
     }
-    
+
     function closeNotification() {
         var popup = document.getElementById('notification-popup');
         popup.style.display = 'none';
     }
-    
+
     // Call the function to show the notification
     // showNotification();
     </script>
-    
-    
-    
+
+
+
 <!-- JAVASCRIPT -->
 @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 <script src="{{ url('new-styles/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -148,10 +148,10 @@
             } else {
                 $('#unreadNotificationCount').removeClass('bg-primary').addClass('bg-danger');
             }
-            
+
             // Clear previous notifications
             var notificationList = $('#all-noti-tab .pe-2');
-            notificationList.empty(); 
+            notificationList.empty();
             console.log(response.notifications);
             // Loop through the notifications and append them to the appropriate tab
             $.each(response.notifications, function(index, notification) {
@@ -191,18 +191,18 @@
                             <div class="px-2 fs-15">
                                 <div class="form-check notification-check">
                                     <input class="form-check-input" title="Mark as read" onclick="markAsRead('${notification.id}')" type="radio" value="" id="notification-check-${index}">
-                                    
+
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
-                    
+
                 `;
 
                 // <div style="float:right; margin-top:20px;">
-                //             <p style="cursor:pointer" class="text-danger">Clear All</p>    
+                //             <p style="cursor:pointer" class="text-danger">Clear All</p>
                 //         </div>
 
 
@@ -225,7 +225,7 @@
 $(document).ready(function() {
     // Call the function immediately once the document is ready
     fetchNotificationsAndUpdateCount();
-    
+
     // Set an interval to call the function every 5 seconds (5000 milliseconds)
     setInterval(fetchNotificationsAndUpdateCount, 5000);
 });

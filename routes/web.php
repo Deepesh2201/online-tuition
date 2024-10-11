@@ -598,4 +598,4 @@ Route::get('termsandconditions', function(){
 
 Route::get('contact', function(){
     return view('front-cms/contact');
-}); 
+});

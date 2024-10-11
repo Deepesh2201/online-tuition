@@ -39,7 +39,7 @@
                                     <div class="topCradCount">
                                         <h2 class="pt-2" style="color:#D63531;"><span class="counter-value" data-target="{{$stud_count ?? "0"}}">{{$stud_count ?? "0"}}</span>
                                         </h2>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +131,8 @@
                                     <thead>
                                         <tr class="">
                                             <th>Subject</th>
-                                            {{-- <th>Student</th> --}}
+                                            <th>Student</th>
+                                            <th>Tutor</th>
                                             <th>Time</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -141,9 +142,11 @@
                                     <tbody>
                                         @foreach ($upcomingClasses as $class)
                                         <tr>
-                                            <td>{{$class->subject}}</td>
+                                            <td>{{$class->subject_name}}</td>
+                                            <td>{{$class->student_name}}</td>
+                                            <td>{{$class->tutor_name}}</td>
                                             {{-- <td>{{$class->student_count}}</td> --}}
-                                            <td>{{ $class->start_time->format('h:iA') }} - {{ $class->start_time->addMinutes($class->duration)->format('h:iA') }}</td>
+                                            <td>{{ $class->started_at ? \Carbon\Carbon::parse($class->started_at)->format('d-m-Y h:i A') : '' }}</td>
                                             <td>
                                                 @if ($class->is_completed == 1)
                                                 <span class="live">Live</span></td>
@@ -156,14 +159,14 @@
                                                <a href="{{$class->join_url}}" target="_blank"> <span class="endClass"> Join Class</span></a>
                                                 @else
                                                  {{-- <a href="getclasslist">   <span class="endClass"> Start Class</span> </a> --}}
-                                                
+
                                                 @endif
                                             </td>
                                             {{-- <td><span class="endClass"> End Class</span></td> --}}
                                         </tr>
                                         @endforeach
                                     </tbody>
-                                   
+
                                 </table>
                             </div>
 
@@ -184,7 +187,7 @@
                                 <table class="table dash_table">
                                     <thead>
                                         <tr class="">
-                                            
+
                                             <th>Student</th>
                                             <th>Subject</th>
                                             <th>slot</th>
@@ -196,15 +199,19 @@
                                     <tbody>
                                         @foreach ($upcoming_demos as $demo)
                                         <tr>
-                                            <td><div class="namePic">
+                                            {{-- <td><div class="namePic">
                                                     <img src="/images/students/profilepics/{{$demo->student_img}}"
                                                         alt="">
                                                     <span>{{$demo->student}}</span>
                                                 </div>
-                                            </td>
+                                            </td> --}}
+                                            <td>{{$demo->student}}</td>
                                             <td>{{$demo->subject}}</td>
-                                            
-                                            <td>{{ $demo->slot_confirmed ? $demo->slot_confirmed->format('d/m/Y h:i:s A') :  $demo->slot_1->format('d/m/Y h:i:s A') }}</td>
+
+                                            <td>
+                                                {{ $demo->slot_confirmed ? \Carbon\Carbon::parse($demo->slot_confirmed)->format('d-m-Y h:i:s A') : '' }}
+                                            </td>
+
                                             <td>
                                             @if ($demo->status == 1)
                                             <span class="confirm">New</span>
@@ -223,8 +230,8 @@
                                             {{-- <td><a href="{{ $demo->remarks ?? $demo->demo_link}}"><span class="endClass"> Launch Trial Class</span></a></td> --}}
                                         </tr>
                                         @endforeach
-                                       
-{{-- 
+
+{{--
                                         <tr>
                                             <td>
                                                 <div class="namePic">
@@ -234,13 +241,13 @@
                                                 </div>
                                             </td>
                                             <td>Maths</td>
-                                            
+
                                             <td>Today<br>10:00am</td>
                                             <td> <span class="confirm">Conffirmed</span></td>
                                             <td><span class="hrsLeft">9 Hours Left</span></td>
                                         </tr>
 
-                                       
+
 
                                         <tr>
                                         <td>
@@ -251,7 +258,7 @@
                                                 </div>
                                             </td>
                                             <td>Maths</td>
-                                           
+
                                             <td>Today<br>10:00am</td>
                                             <td> <span class="pending">Pending</span></td>
                                             <td>
@@ -271,7 +278,7 @@
                                                 </div>
                                             </td>
                                             <td>Maths</td>
-                                        
+
                                             <td>Today<br>10:00am</td>
                                             <td> <span class="pending">Pending</span></td>
                                             <td>
@@ -283,7 +290,7 @@
                                             </td>
                                         </tr> --}}
                                     </tbody>
-                                   
+
                                 </table>
                             </div>
 

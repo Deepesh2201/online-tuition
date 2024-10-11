@@ -84,18 +84,7 @@
                                 @enderror
                             </span>
                         </div>
-                        <div class="col-md-3 mt-4" hidden>
-                            {{-- <label for="">Subject</label> --}}
-                            <input type="hidden" id="subjectenrollid" name="subjectenrollid"
-                                value="{{ $enrollment->subject_id }}">
-                            <input type="hidden" class="form-control readonly" name="subjectenroll" id="subjectenroll"
-                                readonly value="{{ $enrollment->subject_name }}">
-                            <span class="text-danger">
-                                @error('subjectenrollid')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                        </div>
+
 
                         <div class="col-md-2 mt-4">
                             <label for="">Rate/Hr(£)</label>
@@ -103,6 +92,24 @@
                                 id="rateperhourenroll" readonly value="{{ $enrollment->rate }}">
                             <span class="text-danger">
                                 @error('rateperhourenroll')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+                        <div class="col-md-3 mt-4">
+                            <label for="">Subject</label>
+                            {{-- <input type="hidden" id="subjectenrollid" name="subjectenrollid"
+                                value="{{ $enrollment->subject_id }}"> --}}
+                            {{-- <input type="text" class="form-control readonly" name="subjectenroll" id="subjectenroll"
+                                readonly value="{{ $enrollment->subject_name }}"> --}}
+                                <Select type="text" class="form-control" name="subjectenrollid" id="subjectenrollid">
+                                    @foreach ($subjects as $subject)
+
+                                    <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                    @endforeach
+                                </Select>
+                            <span class="text-danger">
+                                @error('subjectenrollid')
                                     {{ $message }}
                                 @enderror
                             </span>
@@ -185,9 +192,14 @@
                     <input type="checkbox" id="contactadmin" name="contactadmin"> <span><label for="contactadmin"> Please
                             select to contact Admin, if you are not able to select slots.</label></span>
                 </div>
+
+
                 <button class="btn btn-sm btn-primary">Pay Now</button>
                 </form>
             </div>
+            <div class="">
+                <p style="color: #99A7AE">Subject selection is a formality—you can take any subject by mutual agreement with your tutor.</p>
+                </div>
         </div>
     </div>
 
