@@ -46,7 +46,7 @@
                         });
                     </script>
                 @endif
-                
+
                 @if(Session::has('fail'))
                     <script>
                         Swal.fire({
@@ -98,8 +98,8 @@
                                                 <ul class="tu-tutorreview">
                                                     <li>
                                                         <span><i class="fa fa-star tu-coloryellow">
-                                                                <em>4.5<span>/5.0</span></em> </i>
-                                                            <em>({{ count($reviews) }})</em></span>
+                                                                <em>{{$tutorpd->avg_rating}}<span></span></em> </i>
+                                                            <em>({{$tutorpd->total_reviews}})</em></span>
                                                     </li>
                                                     <li>
                                                         <span><i

@@ -76,8 +76,8 @@
                             </span>
                         </button>
 
-                        <!-- <div class="topBtn">
-                            <button type="button" style=""
+                        <div class="topBtn">
+                            {{-- <button type="button" style=""
                                 class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                                 id="topnav-hamburger-icon">
                                 <a href="/tutor/tutorslots">
@@ -90,20 +90,20 @@
                                 <a href="/tutor/getclasslist">
                                     <div class="btn btn-primary">Scheduled Classes</div>
                                 </a>
-                            </button>
-                            <button type="button"
-                                class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
-                                id="topnav-hamburger-icon">
-                                <a href="/" target="_blank">
-                                    <div class="btn btn-primary">Visit Website</div>
-                                </a>
-                            </button>
-                        </div> -->
+                            </button> --}}
+
+                        </div>
 
                     </div>
 
                     <div class="d-flex align-items-center">
-
+                        <button type="button"
+                        class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+                        id="topnav-hamburger-icon">
+                        <a href="/" target="_blank">
+                            <div class="btn btn-sm" style="color: black; background-color:#F3F3F9">Visit Website</div>
+                        </a>
+                    </button>
                         <div class="dropdown d-md-none topbar-head-dropdown header-item" hidden>
                             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                                 id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -1087,12 +1087,12 @@
                                     src="/images/Student-dashboard-menu-icon/Chat.svg" alt="">&nbsp; <span
                                     data-key="t-dashboards"> Chat</span> </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('tutor.feedback.list') }}"
                                 class="nav-link menu-link {{ Request::is('tutor/feedback') ? 'active' : '' }}"
                                 data-key="t-starter"> <img src="/images/Student-dashboard-menu-icon/Feedback.svg"
                                     alt="">&nbsp; <span data-key="t-dashboards"> Feedback</span> </a>
-                        </li>
+                        </li> --}}
 
 
 

@@ -42,6 +42,7 @@
                                     <th scope="col">Status</th>
                                     <th scope="col">Attendance</th>
                                     <th scope="col">Recording Link</th>
+                                    {{-- <th scope="col">Feedback</th> --}}
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -82,7 +83,8 @@
                                                 <span class="badge bg-danger">Not taken</span>
                                             @endif
                                         </td>
-                                        <td>{{ $liveclass->recording_link }}</td>
+                                        <td><a href="{{ $liveclass->recording_link }}" target="_blank"><button class="btn btn-sm btn-success">Play Now</button></a></td>
+                                        {{-- <td>{{ $liveclass->tutor_review }} ({{$liveclass->tutor_rating}} ⭐)</td> --}}
                                         <td><button class="btn btn-sm btn-primary"
                                                 onclick="openAttModal('{{ $liveclass->id }}','{{ $liveclass->student }}','{{ $liveclass->student_present }}')">Attendance</button>
                                         </td>

@@ -28,6 +28,7 @@ class PaymentsController extends Controller
         ->join('subjects','subjects.id','paymentstudents.subject_id')
         ->join('tutorregistrations','tutorregistrations.id','paymentstudents.tutor_id')
         ->join('statuses','statuses.id','paymentdetails.status')
+        ->orderby('paymentdetails.payment_date','desc')
         ->paginate(10);
         $subjects = subjects::where('is_active',1)->get();
         $classes = classes::where('is_active',1)->get();
@@ -48,6 +49,7 @@ class PaymentsController extends Controller
         ->join('subjects','subjects.id','paymentstudents.subject_id')
         ->join('tutorregistrations','tutorregistrations.id','paymentstudents.tutor_id')
         ->join('statuses','statuses.id','paymentdetails.status')
+        ->orderby('paymentdetails.payment_date','desc')
         ->where('paymentstudents.tutor_id',session('userid')->id)
         ->paginate(10);
         $subjects = subjects::where('is_active',1)->get();
@@ -299,6 +301,7 @@ class PaymentsController extends Controller
         $PaymentModes = PaymentMode::all();
         $tutorpayouts = payout::select('payouts.*','tutorregistrations.name','statuses.name as status_name','tutorregistrations.mobile','tutorregistrations.email')
         ->join('tutorregistrations','tutorregistrations.id','payouts.tutor_id')->join('statuses','statuses.id','payouts.status')
+        ->orderby('payouts.transaction_date','desc')
         ->paginate(10);
         return view('admin.tutorpaymentlist',get_defined_vars());
     }
@@ -396,6 +399,7 @@ class PaymentsController extends Controller
         ->join('subjects', 'subjects.id', '=', 'paymentstudents.subject_id')
         ->join('tutorregistrations', 'tutorregistrations.id', '=', 'paymentstudents.tutor_id')
         ->where('paymentstudents.student_id', session('userid')->id)
+        ->orderby('paymentstudents.created_at','desc')
         ->paginate(10);
     // dd($payments);
 

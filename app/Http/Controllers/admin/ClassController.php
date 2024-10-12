@@ -65,20 +65,39 @@ class ClassController extends Controller
     }
 
     public function tutorclasses()
-    {
-        $liveclasses = zoom_classes::select('zoom_classes.*', 'classes.id as class_id', 'subjects.id as subject_id', 'subjects.name as subjects', 'studentregistrations.name as student', 'classes.name as class', 'slot_bookings.date as slotdate', 'slot_bookings.slot as slottime')
-            ->join('slot_bookings', 'slot_bookings.meeting_id', 'zoom_classes.id')
-            ->join('studentregistrations', 'studentregistrations.id', 'slot_bookings.student_id')
-            ->join('subjects', 'subjects.id', 'slot_bookings.subject_id')
-            ->join('classes', 'subjects.class_id', 'classes.id')
-            ->where('zoom_classes.is_completed', 1)
-            ->where('zoom_classes.is_active', 1)
-            ->where('zoom_classes.tutor_id', session('userid')->id)
-            ->get();
-        $classes = (new CommonController)->classes();
-        // dd($liveclasses);
-        return view('tutor.classes', compact('liveclasses', 'classes'));
-    }
+{
+    $liveclasses = zoom_classes::select(
+            'zoom_classes.*',
+            'classes.id as class_id',
+            'subjects.id as subject_id',
+            'subjects.name as subjects',
+            'studentregistrations.name as student',
+            'classes.name as class',
+            'slot_bookings.date as slotdate',
+            'slot_bookings.slot as slottime',
+            'tutorreviews.id as review_id', // to check if a review exists
+            'tutorreviews.ratings as tutor_rating',
+            'tutorreviews.name as tutor_review'
+        )
+        ->join('slot_bookings', 'slot_bookings.meeting_id', 'zoom_classes.id')
+        ->join('studentregistrations', 'studentregistrations.id', 'slot_bookings.student_id')
+        ->join('subjects', 'subjects.id', 'slot_bookings.subject_id')
+        ->join('classes', 'subjects.class_id', 'classes.id')
+        ->leftJoin('tutorreviews', function($join) {
+            $join->on('tutorreviews.subject_id', '=', 'subjects.id')
+                 ->on('tutorreviews.tutor_id', '=', 'zoom_classes.tutor_id')
+                 ->on('tutorreviews.student_id', '=', 'studentregistrations.id');
+        })
+        ->where('zoom_classes.is_completed', 1)
+        ->where('zoom_classes.is_active', 1)
+        ->where('zoom_classes.tutor_id', session('userid')->id)
+        ->get();
+
+    $classes = (new CommonController)->classes();
+
+    return view('tutor.classes', compact('liveclasses', 'classes'));
+}
+
 
     public function studentclass()
     {

@@ -149,7 +149,7 @@
                             <div class="star">
                                 <span>
                                     <i class="fa fa-star"></i>
-                                    5 (36 reviews)
+                                   {{$othertutor->avg_rating}} ({{$othertutor->total_reviews}})
                                 </span>
                                 <span>£{{ $othertutor->rateperhour }}/h</span>
                             </div>

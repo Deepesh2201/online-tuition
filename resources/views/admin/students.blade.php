@@ -77,6 +77,7 @@
                                 <tr>
                                     <th scope="col">S.No</th>
                                     <th scope="col">Student Name</th>
+                                    <th scope="col">Student Email</th>
                                     <th scope="col">Student Mobile</th>
                                     <th scope="col">Class</th>
                                     <th scope="col">Current Status</th>
@@ -88,6 +89,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td><a href="studentprofile/{{$stdlist->student_id}}">{{ $stdlist->student_name }}</a></td>
+                                        <td>{{ $stdlist->email }}</td>
                                         <td>{{ $stdlist->student_mobile }}</td>
 
                                         <td>{{ $stdlist->class_name }}</td>

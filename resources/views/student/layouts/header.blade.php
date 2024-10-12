@@ -116,7 +116,10 @@ $studentprofile = studentprofile::where('student_id', session('userid')->id)->fi
                     </div> -->
 
                     <div class="d-flex">
+                        <div class="topBtn" style="margin-top:15px">
 
+                            <a href="/" target="_blank"> <button class="btn btn-sm" style="color: black; background-color:#F3F3F9">Visit Website</button></a>
+                        </div>
                         <div class="dropdown d-md-none topbar-head-dropdown header-item" hidden>
                             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                                 id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -921,12 +924,12 @@ $studentprofile = studentprofile::where('student_id', session('userid')->id)->fi
                         src="/images/Student-dashboard-menu-icon/Chat.svg" alt="">&nbsp; <span data-key="t-dashboards">
                         Chat</span> </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route('student.myfeedback') }}"
                     class="nav-link menu-link {{ Request::is('student/myfeedback') ? 'active' : '' }}"
                     data-key="t-starter"> <img src="/images/Student-dashboard-menu-icon/Feedback.svg" alt="">&nbsp;
                     <span data-key="t-dashboards"> Feedback</span> </a>
-            </li>
+            </li> --}}
 
 
             <li class="nav-item" hidden>

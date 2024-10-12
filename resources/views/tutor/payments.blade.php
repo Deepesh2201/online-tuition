@@ -90,7 +90,7 @@
                             <td>{{ $payment->class_name }}</td>
                             <td>{{ $payment->subject_name }}</td>
                             {{-- <td><a href="tutorprofile/{{$payment->tutor_id}}">{{ $payment->tutor_name }}</a></td> --}}
-                            <td>{{ $payment->transaction_date }}</td>
+                            <td>{{ $payment->transaction_date ? \Carbon\Carbon::parse($payment->transaction_date)->format('d-m-Y h:i A') : '' }}</td>
                             <td>{{ $payment->transaction_no }}</td>
                             <td>£{{ $payment->transaction_amount }}</td>
                             <td>{{ $payment->payment_mode }}</td>
@@ -110,11 +110,7 @@
                             </td>
                         </tr>
                         @endforeach
-                        <tr>
-                            <td colspan="7"><strong>Grand Total:</strong></td>
-                            <td>{{ $totalTransactionAmount }}</td>
-                            <td colspan="5"></td>
-                        </tr>
+
                     </tbody>
                 </table>
 

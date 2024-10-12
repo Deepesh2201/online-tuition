@@ -133,7 +133,7 @@
                                             <th>Subject</th>
                                             <th>Student</th>
                                             <th>Tutor</th>
-                                            <th>Time</th>
+                                            <th>Booked Slot</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -145,8 +145,7 @@
                                             <td>{{$class->subject_name}}</td>
                                             <td>{{$class->student_name}}</td>
                                             <td>{{$class->tutor_name}}</td>
-                                            {{-- <td>{{$class->student_count}}</td> --}}
-                                            <td>{{ $class->started_at ? \Carbon\Carbon::parse($class->started_at)->format('d-m-Y h:i A') : '' }}</td>
+                                            <td>{{ $class->start_time ? \Carbon\Carbon::parse($class->start_time)->format('d-m-Y h:i A') : '' }}</td>
                                             <td>
                                                 @if ($class->is_completed == 1)
                                                 <span class="live">Live</span></td>
@@ -189,6 +188,7 @@
                                         <tr class="">
 
                                             <th>Student</th>
+                                            <th>Tutor</th>
                                             <th>Subject</th>
                                             <th>slot</th>
                                             <th>Status</th>
@@ -206,10 +206,11 @@
                                                 </div>
                                             </td> --}}
                                             <td>{{$demo->student}}</td>
+                                            <td>{{$demo->tutor_name}}</td>
                                             <td>{{$demo->subject}}</td>
 
                                             <td>
-                                                {{ $demo->slot_confirmed ? \Carbon\Carbon::parse($demo->slot_confirmed)->format('d-m-Y h:i:s A') : '' }}
+                                                {{ $demo->slot_1 ? \Carbon\Carbon::parse($demo->slot_1)->format('d-m-Y h:i:s A') : '' }}
                                             </td>
 
                                             <td>

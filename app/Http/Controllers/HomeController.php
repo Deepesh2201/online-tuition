@@ -56,31 +56,33 @@ class HomeController extends Controller
             'tutorprofiles.profile_pic',
             // Limit subjects to a maximum of two
             DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", "), ",", 2) as subject'),
-            DB::raw('SUM(tutorreviews.ratings) / COUNT(tutorreviews.id) AS starrating'),
+            // Round avg_rating to one decimal place
+            DB::raw('ROUND((SELECT AVG(tutorreviews.ratings) FROM tutorreviews WHERE tutorreviews.tutor_id = tutorprofiles.tutor_id), 1) AS avg_rating'),
+            DB::raw('(SELECT COUNT(tutorreviews.id) FROM tutorreviews WHERE tutorreviews.tutor_id = tutorprofiles.tutor_id) AS total_reviews'),
             DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
             DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
         )
-            ->join('teacherclassmappings', 'teacherclassmappings.teacher_id', '=', 'tutorprofiles.tutor_id')
-            ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
-            ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
-            ->join('classes', 'classes.id', '=', 'tutorsubjectmappings.class_id')
-            ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id')
-            ->join('topics', 'topics.subject_id', '=', 'subjects.id')
-            ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
-            ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
-            ->where('tutorregistrations.is_active', 1)
-            ->groupBy(
-                'tutorprofiles.tutor_id',
-                'tutorprofiles.name',
-                'tutorprofiles.headline',
-                'tutorprofiles.qualification',
-                'tutorprofiles.intro_video_link',
-                'tutorprofiles.experience',
-                'tutorprofiles.rateperhour',
-                'tutorprofiles.admin_commission',
-                'tutorprofiles.profile_pic'
-            )
-            ->get();
+        ->join('teacherclassmappings', 'teacherclassmappings.teacher_id', '=', 'tutorprofiles.tutor_id')
+        ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
+        ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
+        ->join('classes', 'classes.id', '=', 'tutorsubjectmappings.class_id')
+        ->join('topics', 'topics.subject_id', '=', 'subjects.id')
+        ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
+        ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
+        ->where('tutorregistrations.is_active', 1)
+        ->groupBy(
+            'tutorprofiles.tutor_id',
+            'tutorprofiles.name',
+            'tutorprofiles.headline',
+            'tutorprofiles.qualification',
+            'tutorprofiles.intro_video_link',
+            'tutorprofiles.experience',
+            'tutorprofiles.rateperhour',
+            'tutorprofiles.admin_commission',
+            'tutorprofiles.profile_pic'
+        )
+        ->get();
+
 
         $tutorlists = tutorprofile::select('tutorprofiles.id', 'tutorprofiles.tutor_id', 'classes.name as class_name', 'tutorprofiles.name', 'tutorprofiles.headline', 'tutorprofiles.qualification as tutor_qualification', 'tutorprofiles.intro_video_link', 'tutorprofiles.experience', 'tutorprofiles.rate as rateperhour', DB::raw('(tutorsubjectmappings.rate + (tutorsubjectmappings.rate * tutorsubjectmappings.admin_commission / 100)) as rate'), 'tutorprofiles.profile_pic', 'subjects.id as subjectid', 'subjects.name as subject', DB::raw('SUM(ratings) / COUNT(ratings) AS starrating, COUNT(DISTINCT topics.name) as total_topics'), 'tutorsubjectmappings.id as sub_map_id',
             DB::raw('(SELECT COUNT(*) FROM classschedules WHERE classschedules.tutor_id = tutorprofiles.id) AS total_classes_done')
@@ -425,31 +427,33 @@ class HomeController extends Controller
             'tutorprofiles.profile_pic',
             // Limit subjects to a maximum of two
             DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", "), ",", 2) as subject'),
-            DB::raw('SUM(tutorreviews.ratings) / COUNT(tutorreviews.id) AS starrating'),
+            // Round avg_rating to one decimal place
+            DB::raw('ROUND((SELECT AVG(tutorreviews.ratings) FROM tutorreviews WHERE tutorreviews.tutor_id = tutorprofiles.tutor_id), 1) AS avg_rating'),
+            DB::raw('(SELECT COUNT(tutorreviews.id) FROM tutorreviews WHERE tutorreviews.tutor_id = tutorprofiles.tutor_id) AS total_reviews'),
             DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
             DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
         )
-            ->join('teacherclassmappings', 'teacherclassmappings.teacher_id', '=', 'tutorprofiles.tutor_id')
-            ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
-            ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
-            ->join('classes', 'classes.id', '=', 'tutorsubjectmappings.class_id')
-            ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id')
-            ->join('topics', 'topics.subject_id', '=', 'subjects.id')
-            ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
-            ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
-            ->where('tutorregistrations.is_active', 1)
-            ->groupBy(
-                'tutorprofiles.tutor_id',
-                'tutorprofiles.name',
-                'tutorprofiles.headline',
-                'tutorprofiles.qualification',
-                'tutorprofiles.intro_video_link',
-                'tutorprofiles.experience',
-                'tutorprofiles.rateperhour',
-                'tutorprofiles.admin_commission',
-                'tutorprofiles.profile_pic'
-            )
-            ->get();
+        ->join('teacherclassmappings', 'teacherclassmappings.teacher_id', '=', 'tutorprofiles.tutor_id')
+        ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
+        ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
+        ->join('classes', 'classes.id', '=', 'tutorsubjectmappings.class_id')
+        ->join('topics', 'topics.subject_id', '=', 'subjects.id')
+        ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
+        ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
+        ->where('tutorregistrations.is_active', 1)
+        ->groupBy(
+            'tutorprofiles.tutor_id',
+            'tutorprofiles.name',
+            'tutorprofiles.headline',
+            'tutorprofiles.qualification',
+            'tutorprofiles.intro_video_link',
+            'tutorprofiles.experience',
+            'tutorprofiles.rateperhour',
+            'tutorprofiles.admin_commission',
+            'tutorprofiles.profile_pic'
+        )
+        ->get();
+
 
         $subjectlists = DB::table('subjects')
             ->join('subjectcategories', 'subjects.category', '=', 'subjectcategories.id')
@@ -509,10 +513,11 @@ class HomeController extends Controller
 
         // dd($reviews);
         $averagereview = tutorreviews::select(
-            DB::raw('AVG(tutorreviews.ratings) as avg_rating')
+            DB::raw('ROUND(AVG(tutorreviews.ratings), 1) as avg_rating')
         )
-            ->where('tutorreviews.tutor_id', $id)
-            ->first();
+        ->where('tutorreviews.tutor_id', $id)
+        ->first();
+
 
         $averagecount = tutorreviews::where('tutorreviews.tutor_id', $id)->count();
         $totalStudents = SlotBooking::where('tutor_id', $id)
@@ -525,29 +530,67 @@ class HomeController extends Controller
             ->where('tutor_id', $id)
             ->first();
 
-        $othertutors = tutorprofile::select(
-            'tutorprofiles.tutor_id as tutor_id',
-            'tutorprofiles.name',
-            'tutorprofiles.headline',
-            'tutorprofiles.qualification as tutor_qualification',
-            'tutorprofiles.intro_video_link',
-            'tutorprofiles.experience',
-            DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100)) as rateperhour'),
-            'tutorprofiles.profile_pic',
-            DB::raw('GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", ") as subject'),
-            DB::raw('SUM(tutorreviews.ratings) / COUNT(tutorreviews.id) AS starrating'),
-            DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
-            DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
-        )
+            // $othertutors = tutorprofile::select(
+            //     'tutorprofiles.tutor_id as tutor_id',
+            //     'tutorprofiles.name',
+            //     'tutorprofiles.headline',
+            //     'tutorprofiles.qualification as tutor_qualification',
+            //     'tutorprofiles.intro_video_link',
+            //     'tutorprofiles.experience',
+            //     DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100)) as rateperhour'),
+            //     'tutorprofiles.profile_pic',
+            //     DB::raw('GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", ") as subject'),
+            //     DB::raw('ROUND(COALESCE(AVG(tutorreviews.ratings), 0), 1) AS avg_rating'), // Calculate average rating and round it
+            //     DB::raw('COUNT(tutorreviews.id) AS review_count'), // Count of reviews
+            //     DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
+            //     DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
+            // )
+            // ->join('teacherclassmappings', 'teacherclassmappings.teacher_id', '=', 'tutorprofiles.tutor_id')
+            // ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
+            // ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
+            // ->join('classes', 'classes.id', '=', 'tutorsubjectmappings.class_id')
+            // ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id')
+            // ->join('topics', 'topics.subject_id', '=', 'subjects.id')
+            // ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
+            // ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
+            // ->where('tutorregistrations.is_active', 1)
+            // ->where('tutorsubjectmappings.subject_id', '=', $primarysubjects->subject_id)
+            // ->groupBy(
+            //     'tutorprofiles.tutor_id',
+            //     'tutorprofiles.name',
+            //     'tutorprofiles.headline',
+            //     'tutorprofiles.qualification',
+            //     'tutorprofiles.intro_video_link',
+            //     'tutorprofiles.experience',
+            //     'tutorprofiles.rateperhour',
+            //     'tutorprofiles.admin_commission',
+            //     'tutorprofiles.profile_pic'
+            // )
+            // ->get();
+            $othertutors = tutorprofile::select(
+                'tutorprofiles.tutor_id as tutor_id',
+                'tutorprofiles.name',
+                'tutorprofiles.headline',
+                'tutorprofiles.qualification as tutor_qualification',
+                'tutorprofiles.intro_video_link',
+                'tutorprofiles.experience',
+                DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100)) as rateperhour'),
+                'tutorprofiles.profile_pic',
+                // Limit subjects to a maximum of two
+                DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", "), ",", 2) as subject'),
+                // Round avg_rating to one decimal place
+                DB::raw('ROUND((SELECT AVG(tutorreviews.ratings) FROM tutorreviews WHERE tutorreviews.tutor_id = tutorprofiles.tutor_id), 1) AS avg_rating'),
+                DB::raw('(SELECT COUNT(tutorreviews.id) FROM tutorreviews WHERE tutorreviews.tutor_id = tutorprofiles.tutor_id) AS total_reviews'),
+                DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
+                DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
+            )
             ->join('teacherclassmappings', 'teacherclassmappings.teacher_id', '=', 'tutorprofiles.tutor_id')
             ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
             ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
             ->join('classes', 'classes.id', '=', 'tutorsubjectmappings.class_id')
-            ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id')
             ->join('topics', 'topics.subject_id', '=', 'subjects.id')
             ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
             ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
-            ->where('tutorregistrations.is_active', 1)
             ->where('tutorsubjectmappings.subject_id', '=', $primarysubjects->subject_id)
             ->groupBy(
                 'tutorprofiles.tutor_id',
@@ -561,6 +604,8 @@ class HomeController extends Controller
                 'tutorprofiles.profile_pic'
             )
             ->get();
+
+
 
         // dd($othertutors);
 

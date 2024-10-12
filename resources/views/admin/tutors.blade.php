@@ -84,6 +84,7 @@
                             <tr>
                                 <th scope="col">S.No</th>
                                 <th scope="col">Tutor Name</th>
+                                <th scope="col">Tutor Email</th>
                                 <th scope="col">Tutor Mobile</th>
                                 <th scope="col">Rate/Hr (£)</th>
                                 <th scope="col">Commission/Hr</th>
@@ -103,6 +104,7 @@
                                             {{ $ttrlist->tutor_name }}
                                         @endif
                                     </td>
+                                    <td>{{ $ttrlist->tutor_email }}</td>
                                     <td>{{ $ttrlist->tutor_mobile }}</td>
                                     {{-- <td>£ {{ $ttrlist->rate }}</td> --}}
                                     @if ($ttrlist->tutor_status == 1)

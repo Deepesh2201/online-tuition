@@ -55,7 +55,7 @@ class DashboardController extends Controller
             ];
         }
 
-        $upcomingClasses = zoom_classes::select('zoom_classes.id as class_id','zoom_classes.started_at', 'zoom_classes.completed_at', 'zoom_classes.meeting_id as meeting_id', 'zoom_classes.topic_name as topic_name', 'zoom_classes.status as meeting_status', 'zoom_classes.start_time as meeting_start_time', 'zoom_classes.is_completed as is_completed', 'zoom_classes.recording_link as recording_link', 'tutorregistrations.id as tutor_id', 'tutorregistrations.name as tutor_name', 'tutorregistrations.mobile as tutor_mobile', 'studentregistrations.id as student_id', 'studentregistrations.name as student_name', 'studentregistrations.mobile as student_mobile', 'topics.name as topic_name', 'subjects.name as subject_name', 'classes.name as class_name')
+        $upcomingClasses = zoom_classes::select('zoom_classes.id as class_id','zoom_classes.started_at','zoom_classes.start_time', 'zoom_classes.completed_at', 'zoom_classes.meeting_id as meeting_id', 'zoom_classes.topic_name as topic_name', 'zoom_classes.status as meeting_status', 'zoom_classes.start_time as meeting_start_time', 'zoom_classes.is_completed as is_completed', 'zoom_classes.recording_link as recording_link', 'tutorregistrations.id as tutor_id', 'tutorregistrations.name as tutor_name', 'tutorregistrations.mobile as tutor_mobile', 'studentregistrations.id as student_id', 'studentregistrations.name as student_name', 'studentregistrations.mobile as student_mobile', 'topics.name as topic_name', 'subjects.name as subject_name', 'classes.name as class_name')
             ->leftjoin('tutorregistrations', 'tutorregistrations.id', '=', 'zoom_classes.tutor_id')
             ->leftjoin('studentregistrations', 'studentregistrations.id', '=', 'zoom_classes.student_id')
             ->leftjoin('topics', 'topics.id', '=', 'zoom_classes.topic_id')
@@ -92,9 +92,10 @@ class DashboardController extends Controller
             return $payment;
         });
 
-        $upcoming_demos = democlasses::select('democlasses.*','subjects.name as subject','studentprofiles.name as student','studentprofiles.profile_pic as student_img')
+        $upcoming_demos = democlasses::select('democlasses.*','subjects.name as subject','studentprofiles.name as student','studentprofiles.profile_pic as student_img','tutorregistrations.name as tutor_name')
         ->join('studentprofiles','studentprofiles.student_id','democlasses.student_id')
         ->join('subjects','subjects.id','democlasses.subject_id')
+        ->join('tutorregistrations','tutorregistrations.id','democlasses.tutor_id')
         // ->where('democlasses.slot_confirmed', '>', Carbon::now())
         ->where('democlasses.status','!=','5')
         // ->where('democlasses.tutor_id', '=', session('userid')->id)
