@@ -1108,4 +1108,45 @@ class TutorSearchController extends Controller
         return view('student.enrollsuccess');
     }
 
+    public function tutordelete($id)
+{
+    // Check if there are any payments related to the tutor
+    $check = paymentstudents::where('tutor_id', $id)->first();
+
+    if ($check) {
+        // Return with a failure message if the tutor has been involved in payments
+        return back()->with('fail', "Tutor can't be deleted because it is in use; a student has purchased some classes from this tutor.");
+    } else {
+        // Use transaction to ensure both deletions happen atomically
+        DB::beginTransaction();
+        try {
+            // Find the tutor profile by tutor_id and delete it
+            $tutorProfile = tutorprofile::where('tutor_id', $id)->first();
+            // $tutorProfile->delete();
+            if ($tutorProfile) {
+                $tutorProfile->delete();
+            }
+
+            // Find the tutor registration by id and delete it
+            $tutorRegistration = tutorregistration::find($id);
+            if ($tutorRegistration) {
+                $tutorRegistration->delete();
+            } else {
+                // If the tutor registration doesn't exist, return with an error message
+                return back()->with('fail', 'Tutor registration not found.');
+            }
+
+            // Commit the transaction
+            DB::commit();
+
+            return back()->with('success', 'Tutor deleted successfully.');
+        } catch (\Exception $e) {
+            // Rollback the transaction in case of any error
+            DB::rollBack();
+            return back()->with('fail', 'Something went wrong, please try again later.');
+        }
+    }
+}
+
+
 }

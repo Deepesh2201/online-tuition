@@ -27,95 +27,69 @@
 
         </div>
 
-        <form id="payment-search">
+        <form action="{{route('admin.assignmentsearch')}}" method="POST">
+            @csrf
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
-                        <input type="text"  class="form-control" name="assaignment_name" id="sname" placeholder="Assignment Name">
-
-                    </div>
-                </div>
-
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select name="class_name" class="form-control" id="classname" onchange="fetchSubjects()">
-                            <option value="">Select Class</option>
+                        <label>Class</label>
+                        <select name="class_id" class="form-control" id="classid" onchange="fetchSubjects()">
+                            <option value="">All Classes</option>
                             @foreach ($classes as $class)
-                                <option  value="{{ $class->id }}">{{ $class->name }}</option>
+                                <option value="{{ $class->id }}">{{ $class->name }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
+
                 <div class="col-md-2">
                     <div class="form-group">
-                        <select name="subject_name" class="form-control" id="subject" onchange="fetchTopics()">
-                            <option value="">Select Subject</option>
+                        <label>Subject</label>
+                        <select name="subject_id" class="form-control" id="subject" onchange="fetchTopics()">
+                            <option value="">All Subjects</option>
                             @foreach ($subjects as $subject)
-                                <option  value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
+
                 <div class="col-md-2">
                     <div class="form-group">
-                        <select  class="form-control" name="topic_name" id="topicid">
-                            <option value="">Select Topic</option>
-                            @foreach ($topics as $topic)
-                                <option  value="{{ $topic->id }}">{{ $topic->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select  class="form-control" name="assigned_by" id="assgnBy">
-                            <option value="">Assigned By</option>
+                        <label>Tutor</label>
+                        <select class="form-control" name="assigned_by" id="assgnBy">
+                            <option value="">All Tutors</option>
                             @foreach ($tutors as $tutor)
-                                <option  value="{{ $tutor->id }}">{{ $tutor->name }}</option>
+                                <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
                             @endforeach
-
                         </select>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-group">
-                            <select  class="form-control" name="status_field" id="class">
-                                <option value="">Select Status</option>
-                                <option value="1">Active</option>
-                                <option value="2">In Active</option>
-                            </select>
+                        <label>Start Date</label>
+                        <input type="date" class="form-control" name="start_date" id="smob">
                     </div>
                 </div>
 
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="date" class="form-control" name="end_date" id="smob">
+                    </div>
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end justify-content-end">
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="fa fa-search"></span> Search
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                            <label>Start Date</label>
-                                <input type="date" class="form-control" name="start_date" id="smob" placeholder="Student Mobile">
-
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                            <label>End Date</label>
-                                <input type="date" class="form-control" name="end_date" id="smob" placeholder="Student Mobile">
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-8 mt-4">
-                            <div class="form-group">
-                            <button class="btn btn-primary" style="float:right"> <span
-                                class="fa fa-search"></span> Search</button>
-                            </div>
-                        </div>
-            </div>
-
         </form>
+
         <hr>
 
 
@@ -128,13 +102,12 @@
                         <th scope="col">Assignment Name </th>
                         <th scope="col">Class/Grade</th>
                         <th scope="col">Subject</th>
-                        <th scope="col">Topic</th>
+                        <th scope="col">Assigned To</th>
                         <th scope="col">Assigned By</th>
                         <th scope="col">Assigned On</th>
                         <th scope="col">Assignment End Date</th>
-                        {{-- <th scope="col">Assignment To</th> --}}
                         <th scope="col">View Submissions</th>
-                        <th>Status</th>
+                        {{-- <th>Status</th> --}}
 
 
                     </tr>
@@ -143,16 +116,21 @@
                     @foreach ($data as $datalist)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$datalist->assignment_name}}</td>
-                            <td>{{$datalist->class_name}}</td>
-                            <td>{{$datalist->subject_name}}</td>
-                            <td>{{$datalist->topic_name}}</td>
+                            <td>{{$datalist->name}}</td>
+                            <td>{{$datalist->class}}</td>
+                            <td>{{$datalist->subject}}</td>
+                            <td>{{$datalist->student_name}}</td>
                             <td><a href="{{url('admin/tutorprofile').'/'.$datalist->tutor_id}}">{{$datalist->tutor_name}}</td>
-                            <td>{{$datalist->assignment_start_date}}</td>
-                            <td>{{$datalist->assignment_end_date}}</td>
+                                <td>
+                                    {{ $datalist->assignment_start_date ? \Carbon\Carbon::parse($datalist->assignment_start_date)->format('d-m-Y') : 'N/A' }}
+                                </td>
+                                <td>
+                                    {{ $datalist->assignment_end_date ? \Carbon\Carbon::parse($datalist->assignment_end_date)->format('d-m-Y') : 'N/A' }}
+                                </td>
+
                             {{-- <td>{{$datalist->assigned_to}}</td> --}}
-                            <td><div class="text-center"> <a href="{{url('admin/assignments/').'/'.$datalist->assignment_id}}" class="badge bg-primary">View</a></div></td>
-                            <td>
+                            <td><div class="text-center"> <a href="{{url('admin/assignments/').'/'.$datalist->id}}" class="badge bg-primary">View</a></div></td>
+                            {{-- <td>
                                 <div class="form-check form-switch">
                                     @if ($datalist->assignment_status == 1)
                                     <i class="ri-checkbox-circle-line align-middle text-success"></i> Active
@@ -163,7 +141,7 @@
 
                                     @endif>
                                 </div>
-                            </td>
+                            </td> --}}
 
 
                         </tr>
@@ -177,9 +155,9 @@
 
 
 <!-- content-wrapper ends -->
-<div class="d-flex justify-content-center" id="paginationContainer">
+{{-- <div class="d-flex justify-content-center" id="paginationContainer">
     {!! $data->links() !!}
-</div>
+</div> --}}
 
 
 

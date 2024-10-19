@@ -90,7 +90,7 @@
                                 <th scope="col">Commission/Hr</th>
                                 <th scope="col">Check Slots</th>
                                 <th scope="col">Current Status</th>
-                                {{-- <th scope="col">Action</th> --}}
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -138,6 +138,8 @@
 
                                         </div>
                                     </td>
+                                    <td><a href="tutordelete/{{ $ttrlist->tutor_id }}"><span
+                                        class="btn btn-sm btn-danger ml-3" style="background-color: red">Delete</span> </a></td>
                                     {{-- @else
                                         <td class="text-danger">Profile Not Updated</td>
                                         @endif --}}

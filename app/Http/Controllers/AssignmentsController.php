@@ -19,12 +19,12 @@ class AssignmentsController extends Controller
 {
     public function adminindex()
     {
-        $data = StudentAssignmentList::select('*', 'student_assignment_lists.id as assignment_id', 'student_assignment_lists.name as assignment_name', 'student_assignment_lists.student_id as assigned_to', 'student_assignment_lists.is_active as assignment_status', 'classes.name as class_name', 'subjects.name as subject_name', 'topics.name as topic_name', 'tutorregistrations.name as tutor_name', 'tutorregistrations.id as tutor_id')
-            ->join('classes', 'classes.id', 'student_assignment_lists.class_id')
-            ->join('subjects', 'subjects.id', 'student_assignment_lists.subject_id')
-            ->join('topics', 'topics.id', 'student_assignment_lists.topic_id')
-            ->join('tutorregistrations', 'tutorregistrations.id', 'student_assignment_lists.assigned_by')
-            ->paginate(10);
+        $data = StudentAssignmentList::select('student_assignment_lists.*','classes.name as class','subjects.name as subject','tutorregistrations.name as tutor_name','studentregistrations.name as student_name')
+            ->leftJoin('classes', 'classes.id', 'student_assignment_lists.class_id')
+            ->leftJoin('subjects', 'subjects.id', 'student_assignment_lists.subject_id')
+            ->leftJoin('tutorregistrations', 'tutorregistrations.id', 'student_assignment_lists.assigned_by')
+            ->leftJoin('studentregistrations', 'studentregistrations.id', 'student_assignment_lists.student_id')
+            ->get();
         $classes = classes::where('is_active',1)->get();
         $subjects = subjects::where('is_active',1)->get();
         $topics = topics::where('is_active',1)->get();
@@ -32,6 +32,56 @@ class AssignmentsController extends Controller
         return view('admin.assignmentslist', get_defined_vars());
     }
     // search functionality
+    public function adminassignmentsSearch(Request $request) {
+        // Get the request data
+        $class_id = $request->class_id;
+        $subject_id = $request->subject_id;
+        $assigned_by = $request->assigned_by;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+
+        // Build the query with dynamic conditions
+        $query = StudentAssignmentList::select('student_assignment_lists.*', 'classes.name as class', 'subjects.name as subject', 'tutorregistrations.name as tutor_name', 'studentregistrations.name as student_name')
+            ->leftJoin('classes', 'classes.id', 'student_assignment_lists.class_id')
+            ->leftJoin('subjects', 'subjects.id', 'student_assignment_lists.subject_id')
+            ->leftJoin('tutorregistrations', 'tutorregistrations.id', 'student_assignment_lists.assigned_by')
+            ->leftJoin('studentregistrations', 'studentregistrations.id', 'student_assignment_lists.student_id');
+
+        // Apply filters dynamically
+        if ($class_id) {
+            $query->where('student_assignment_lists.class_id', $class_id);
+        }
+        if ($subject_id) {
+            $query->where('student_assignment_lists.subject_id', $subject_id);
+        }
+        if ($assigned_by) {
+            $query->where('student_assignment_lists.assigned_by', $assigned_by);
+        }
+        // Date filtering logic
+        if ($start_date && !$end_date) {
+            // If only start date is passed, show records from start date till the latest
+            $query->whereDate('student_assignment_lists.assignment_start_date', '>=', $start_date);
+        } elseif (!$start_date && $end_date) {
+            // If only end date is passed, show records up till the end date
+            $query->whereDate('student_assignment_lists.assignment_start_date', '<=', $end_date);
+        } elseif ($start_date && $end_date) {
+            // If both dates are passed, show records within that range
+            $query->whereBetween('student_assignment_lists.assignment_start_date', [$start_date, $end_date]);
+        }
+
+        // Paginate the results
+        $data = $query->get();
+
+        // Get additional data for the filters
+        $classes = classes::where('is_active', 1)->get();
+        $subjects = subjects::where('is_active', 1)->get();
+        $topics = topics::where('is_active', 1)->get();
+        $tutors = tutorregistration::all();
+
+        // Return the view with the filtered data
+        return view('admin.assignmentslist', get_defined_vars());
+    }
+
     public function assignmentsSearch(Request $request)
     {
         // return $request->all();
@@ -68,7 +118,7 @@ class AssignmentsController extends Controller
             }
             $query->where('student_assignment_lists.is_active',$request->status_field);
         }
-        $data = $query->paginate(10);
+        $data = $query->get();
         $type = 'assignments';
         $viewTable = view('admin.partials.students-tutor-search', compact('data','type'))->render();
         $viewPagination = $data->links()->render();

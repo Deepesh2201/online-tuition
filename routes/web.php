@@ -264,6 +264,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['AdminAuthenticate']], funct
     // tutor profile view by admin
     Route::get('tutorprofile/{id}', [TutorSearchController::class, 'admintutorprofile'])->name('admin.tutorprofile');
     Route::get('tutors', [TutorSearchController::class, 'tutorslist'])->name('admin.tutors');
+    Route::get('tutordelete/{id}', [TutorSearchController::class, 'tutordelete'])->name('admin.tutordelete');
+
     Route::get('tutors/status', [TutorSearchController::class, 'status'])->name('admin.tutors.status');
     Route::post('tutors-search', [TutorSearchController::class, 'tutorslistsearch'])->name('admin.tutors-search');
     // Tutor slots check
@@ -307,6 +309,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['AdminAuthenticate']], funct
     Route::get('assignments/status', [AssignmentsController::class, 'status'])->name('admin.assignments.status');
     Route::get('assignments/{id}', [AssignmentsController::class, 'view'])->name('admin.assignments.view');
     Route::post('assignments-search', [AssignmentsController::class, 'assignmentsSearch'])->name('admin.assignments-search');
+    Route::post('admin-assignments-search', [AssignmentsController::class, 'adminassignmentsSearch'])->name('admin.assignmentsearch');
     // Question Bank
     Route::get('questionbank', [QuestionBankController::class, 'index'])->name('admin.questionbank');
     Route::get('questionbank/create', [QuestionBankController::class, 'create'])->name('admin.questionbank.create');
