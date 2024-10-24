@@ -198,7 +198,7 @@
                             <div class="tutorImg">
                                 <img src="{{ url('images/tutors/profilepics', '/') }}{{ $othertutor->profile_pic }}"
                                     width="100%" alt=""
-                                    onerror="this.onerror=null;this.src='https://mychoicetutor.com/frontendnew/img/icons/mct-favicon.png';">
+                                    onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
                             </div>
                             <div class="star">
                                 <span>
