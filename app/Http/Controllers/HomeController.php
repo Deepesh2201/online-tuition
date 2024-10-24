@@ -497,10 +497,23 @@ class HomeController extends Controller
         if ($tutorpd) {
             $achievement = tutorachievements::select('*')->where('tutor_id', '=', $tutorpd->tutor_id)->get();
 
-            $reviews = tutorreviews::select('tutorreviews.id', 'tutorreviews.name', 'tutorreviews.ratings', 'studentprofiles.name as student_name', 'studentprofiles.profile_pic as student_pic', 'tutorreviews.subject_id', 'tutorreviews.tutor_id', 'subjects.name as subject')
-                ->leftjoin('subjects', 'subjects.id', '=', 'tutorreviews.subject_id')
-                ->leftjoin('studentprofiles', 'studentprofiles.student_id', '=', 'tutorreviews.student_id')
-                ->where('tutorreviews.tutor_id', '=', $tutorpd->id)->get();
+            // Fetch detailed reviews for the tutor
+            $reviews = tutorreviews::select(
+                'tutorreviews.id',
+                'tutorreviews.name',
+                'tutorreviews.ratings',
+                'studentprofiles.name as student_name',
+                'studentprofiles.profile_pic as student_pic',
+                'tutorreviews.subject_id',
+                'tutorreviews.tutor_id',
+                'subjects.name as subject'
+            )
+            ->leftJoin('subjects', 'subjects.id', '=', 'tutorreviews.subject_id')
+            ->leftJoin('studentprofiles', 'studentprofiles.student_id', '=', 'tutorreviews.student_id')
+            ->where('tutorreviews.tutor_id', '=', $tutorpd->tutor_id)
+            ->get();
+
+                // dd($reviews);
         }
 
         if (!$tutorpd) {

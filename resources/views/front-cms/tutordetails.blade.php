@@ -21,40 +21,63 @@
 
                         <h5>About {{ $tutorpd->name }}</h5>
                         <p class="charcol">{{ $tutorpd->goal }}</p>
-                        {{-- <h5 class="">About the lesson</h5>
-                        <p class="charcol">Have trouble understanding your workload? There are a million tutors, and you
-                            have landed on the right page.<br><br> Hi, My name's Mr. Thompson, and I have the patience
-                            and key to your understanding. I am a dynamic tutor. I know your needs change from session
-                            to session. <br><br> That's why I provide 3 different rate prices just for you. I have the
-                            notes and recordings that can help you. <br><br> I look forward to your message because I'm
-                            a fast responder; Oh, and before I forget the most important thing, you can get answers to
-                            questions and concepts from me even outside of scheduled classes.</p> --}}
+                        <p class="charcol">{{ $tutorpd->detail_1 }}</p>
+
+                    </div>
+                    <div class="aboutTutor">
+
+                        <h5>Qualification</h5>
+                        <p class="charcol">{{ $tutorpd->qualification }}</p>
+
+                    </div>
+                    <div class="aboutTutor">
+
+                        <h5>Certification</h5>
+                        <p class="charcol">{{ $tutorpd->certification }}</p>
+
                     </div>
 
 
 
                     <div class="aboutTutor review-top">
-                        <h5>Review</h5>
+                        <h5>Recent Review</h5>
                         <div class="star">
                             <span>
-                                <i class="fa fa-star"></i> {{ $averagereview->avg_rating ?? '0' }}
-                                ({{ $averagecount ?? '0' }}
-                                reviews)
+                                {{-- Loop to display the average number of stars --}}
+                                @if (isset($averagereview->avg_rating))
+                                    @for ($i = 1; $i <= round($averagereview->avg_rating); $i++)
+                                        <i class="fa fa-star"></i>
+                                    @endfor
+                                @else
+                                    {{-- Display no stars if no average rating is available --}}
+                                    <i class="fa fa-star"></i>
+                                @endif
+
+                                {{-- Show the average rating and review count --}}
+                                <span class="ml-2">
+                                    {{ $averagereview->avg_rating ?? '0' }}
+                                    ({{ $averagecount ?? '0' }} reviews)
+                                </span>
                             </span>
                         </div>
                     </div>
 
 
-                    <div class="row mt-4">
-                        @foreach ($reviews as $review)
-                            <div class="col-12 mb-4">
 
-                                <div class="review-text">
-                                    <div class=" review-top">
+                    <div class="row mt-4">
+                        @foreach ($reviews->take(10) as $review)
+                            <div class="col-12 mb-4">
+                                <div class="review-text" style="padding: 20px !important">
+                                    <div class="review-top">
                                         <h6>{{ $review->student_name }}</h6>
                                         <div class="star">
                                             <span>
-                                                <i class="fa fa-star"></i> {{ $review->ratings }}
+                                                {{-- Loop to display the number of stars based on rating --}}
+                                                @for ($i = 1; $i <= $review->ratings; $i++)
+                                                    <i class="fa fa-star"></i>
+                                                @endfor
+                                                {{-- Display the numeric value of the rating --}}
+                                                <span class="ml-2">{{ $review->ratings }}</span>
                                             </span>
                                         </div>
                                     </div>
@@ -66,8 +89,10 @@
 
 
 
+
+
                     <div class="aboutTutor">
-                        <h5>{{ $tutorpd->name }}'s Video</h5>
+                        <h5>Introduction Video</h5>
 
                         <div class="tutor-Video">
                             <iframe width="100%" height="400" src="{{ $tutorpd->intro_video_link }}"
@@ -77,10 +102,19 @@
 
                         </div>
                     </div>
+                    <br>
+                    <h6 class="mb-2">Skills</h6>
+
+                    <div class="sub-btns">
+                        @foreach (explode(',', $tutorpd->keywords) as $keyword)
+                            <button>{{ trim($keyword) }}</button>
+                        @endforeach
+                    </div>
 
                 </div>
+
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                    <div class="tutorDetails tutorProfPic mar-top-40">
+                    <div class="tutorDetails tutorProfPic mar-top-40" style="padding: 30px !important">
                         <div class="row">
                             <div class="col-lg-12 col-md-5">
 
@@ -94,17 +128,35 @@
                             <p class="name mt-3">{{ $tutorpd->name }}</p>
                             <div class="star">
                                 <span>
-                                    <i class="fa fa-star"></i>
-                                    {{ $averagereview->avg_rating ?? '0' }} ({{ $averagecount ?? '0' }})
-                                </span>
+                                    {{-- Loop to display the average number of stars --}}
+                                    @if (isset($averagereview->avg_rating))
+                                        @for ($i = 1; $i <= round($averagereview->avg_rating); $i++)
+                                            <i class="fa fa-star"></i>
+                                        @endfor
+                                    @else
+                                        {{-- Display no stars if no average rating is available --}}
+                                        <i class="fa fa-star"></i>
+                                    @endif
 
+                                    {{-- Show the average rating and review count --}}
+                                    <span class="ml-2">
+                                        {{ $averagereview->avg_rating ?? '0' }}
+                                        ({{ $averagecount ?? '0' }} reviews)
+                                    </span>
+                                </span>
                             </div>
 
 
                             <table class="priceTable">
+
+
                                 <tr>
-                                    <td>Hourly rate</td>
+                                    <td>Hourly rate:</td>
                                     <td>£{{ $tutorpd->rateperhour }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Experience:</td>
+                                    <td>{{ $tutorpd->experience }}</td>
                                 </tr>
 
                             </table>
