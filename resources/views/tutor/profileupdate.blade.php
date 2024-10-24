@@ -86,7 +86,7 @@
                                     <label for="file" id="uploadBtn"><span class="ri-camera-line">&nbsp;Choose Photo</span></label>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6 col-12">
                                 <h2 style="margin-top: 60px; color: black; padding-left: 30px;">
                                     {{ $tutorpd->name ?? session('userid')->name }}</h2>
@@ -167,21 +167,21 @@
                                     placeholder="Enter Headline" value="{{ $tutorpd->headline ?? '' }}" >
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="">Goals</label>
+                                <label for="">About Me</label>
                                 <input type="text" class="form-control" id="goals" name="goals"
                                     placeholder="Enter Goals " value="{{ $tutorpd->goal ?? '' }}">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="">Details 1</label>
+                                <label for="">Other Details</label>
                                 <input type="text" class="form-control" id="details1" name="details1"
                                     placeholder="Enter Details" value="{{ $tutorpd->detail_1 ?? '' }}" >
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6" hidden>
                                 <label for="name">Details 2</label>
                                 <input type="text" class="form-control" id="details2" name="details2"
                                     placeholder="Enter Details" value="{{ $tutorpd->detail_2 ?? '' }}">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6" hidden>
                                 <label for="name">Details 3</label>
                                 <input type="text" class="form-control" id="details3" name="details3"
                                     placeholder="Enter Details" value="{{ $tutorpd->detail_3 ?? '' }}">
@@ -196,13 +196,13 @@
                             {{-- Added new field for rate per hour based on profile ends here --}}
 
                             <div class="form-group col-md-6">
-                                <label for="name">Intro Video Link</label>
+                                <label for="name">Intro Video Link<span style="font-size: 8px;color:red"> (Ex : https://www.youtube.com/embed/1Yg5GOospcE)</span></label>
                                 <input type="text" class="form-control" id="introvideolink" name="introvideolink"
                                     placeholder="https://youtube.com/abZpqYUppz"
                                     value="{{ $tutorpd->intro_video_link ?? ''}}">
                             </div>
 
-                           
+
 
                         </div>
                         <div class="row">
@@ -418,7 +418,7 @@
       </div>
     </div>
   </div>
-  
+
     </div>
     <!-- content-wrapper ends -->
 
@@ -567,7 +567,7 @@ function fetchSubjects() {
 </script>
 <script>
     function validateImage() {
-       
+
     const fileInput = document.getElementById('file');
     const filePath = fileInput.value;
     const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
@@ -577,14 +577,14 @@ function fetchSubjects() {
 
     // Reset previous error message
     errorElement.textContent = '';
-       
+
     // Check file extension
     if (!allowedExtensions.exec(filePath)) {
         errorElement.textContent = 'Only .jpg, .jpeg, and .png files are allowed';
         fileInput.value = '';
         return false;
     }
-   
+
     // Check file size
     if (file.size > maxSize) {
         errorElement.textContent = 'File size must not exceed 2MB';
@@ -605,7 +605,7 @@ function fetchSubjects() {
     // Loop through each form
     forms.forEach(form => {
         const inputs = form.querySelectorAll('input, select, textarea');
-        
+
         // Attach 'input' event listeners to each form's inputs
         inputs.forEach(input => {
             input.addEventListener('input', () => {
