@@ -122,8 +122,9 @@
 
                                 <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic }}"
                                     width="100%" alt=""
-                                    onerror="this.onerror=null;this.src='https://mychoicetutor.com/frontendnew/img/icons/mct-favicon.png';">
+                                    onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
                             </div>
+
                         </div>
                         <div class="col-lg-12 col-md-7">
 
