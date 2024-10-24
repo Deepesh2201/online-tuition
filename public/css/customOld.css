@@ -1,0 +1,917 @@
+#addNewForm {
+    border: 1px lightgray solid;
+    border-radius: 2%;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.moveRight {
+    float: right;
+}
+
+
+
+#listHeader h3 {
+    margin: 0 auto;
+}
+
+.tutorCrad img {
+    width: 50%;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+    padding: 1.5em 0.5em 0.5em;
+    border-radius: 2em;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.card-title {
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+.btn {
+    border-radius: 2em;
+    /* background-color: #620ca8; */
+    color: #ffffff;
+    padding: 0.5em 1.5em;
+}
+/* .btn:hover {
+  background-color: rgba(34, 18, 125, 0.7);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+} */
+
+.checked {
+    color: gold;
+}
+
+/* student Profile */
+#studentTable label {
+    float: right;
+    color: red;
+}
+
+#studentTable p {
+    float: left;
+}
+
+/* IISGHIUSGHUISH */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap");
+.main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contnr {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    width: 55rem;
+    margin: 0 auto;
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.col {
+    text-align: justify;
+    padding: 15px;
+    width: 95%;
+}
+
+/* #submit {
+    width: 100%;
+    background-color: #4b49ac;
+    transition: 0.5s;
+    color: white;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#submit:hover {
+    background-color: rgb(34, 6, 53);
+} */
+
+.box {
+    box-shadow: 0px -1px 1px gray;
+    width: 100%;
+}
+
+/* change profile pic */
+
+.profile-pic-div {
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid grey;
+}
+
+#photo {
+    object-fit: cover;
+    height: 150px;
+    width: 150px;
+}
+
+#file {
+    display: none;
+}
+
+#uploadBtn {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    color: wheat;
+    line-height: 30px;
+    font-family: sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    display: none;
+}
+
+/* range slider css starts */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #251c5a;
+    --range-thumb-bg: #efedfc;
+    --range-thumb-br: #5b43e1;
+    --track-bg: #eeeeee;
+    --track-active-bg: #4b49ac;
+    --text: #4b49ac;
+}
+
+.rangeBody {
+    font-size: 1.6rem;
+    /* background: var(--bg); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.wrapper1 {
+    width: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.multi-range-slider {
+    position: relative;
+    width: 100%;
+    height: 2rem;
+    display: block;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    background: transparent;
+    appearance: none;
+    position: absolute;
+    z-index: 10;
+    height: 85%;
+    pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type="range"].hover.active::-webkit-slider-thumb {
+    background: var(--range-thumb-br);
+    border: 0.35rem solid var(--range-thumb-bg);
+    box-shadow: 0 0 0.7rem 0.5rem var(--range-thumb-br);
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+
+input[type="range"]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    pointer-events: all;
+    -webkit-appearance: none;
+    cursor: pointer;
+    border: 0 none;
+    width: 1rem;
+    height: 1rem;
+    background: var(--range-thumb-bg);
+    border: 0.25rem solid var(--range-thumb-br);
+    border-radius: 50%;
+}
+
+input[type="range"]::-moz-slider-thumb {
+    pointer-events: all;
+    cursor: pointer;
+    border: 0 none;
+    width: 1rem;
+    height: 1rem;
+    background: var(--range-thumb-bg);
+    border: 0.35rem solid var(--range-thumb-br);
+    border-radius: 50%;
+}
+
+input[type="range"]::-moz-focus-outer {
+    border: 0;
+}
+
+input[type="range"]::-ms-thumb {
+    pointer-events: all;
+    cursor: pointer;
+    border: 0 none;
+    width: 1rem;
+    height: 1rem;
+    background: var(--range-thumb-bg);
+    border: 0.35rem solid var(--range-thumb-br);
+    border-radius: 50%;
+}
+
+.slider,
+.slider2,
+.slider1 {
+    position: absolute;
+    width: 100%;
+    top: 0.6rem;
+    z-index: 1;
+    height: 0.5rem;
+}
+
+.slider > .track,
+.slider2 > .track2,
+.slider1 > .track1 {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    border-radius: 5rem;
+    background-color: var(--track-bg);
+}
+
+.slider > .range,
+.slider2 > .range2,
+.slider1 > .range1 {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    border-radius: 5rem;
+    background: var(--track-active-bg);
+}
+
+.price__wrapper,
+.price__wrapper1,
+.price__wrapper2 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-top: -10px;
+}
+
+/* range slider css ends */
+
+/* toggle/ slide/switch btn css */
+
+.toggle-button-cover {
+    display: table-cell;
+    position: relative;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+}
+
+.button-cover:before {
+    counter-increment: button-counter;
+    content: counter(button-counter);
+    position: absolute;
+}
+
+.button-cover,
+.knobs,
+.layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button {
+    position: relative;
+
+    width: 60px;
+    height: 26px;
+    /* margin: -20px auto 0 auto; */
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.button.r,
+.button.r .layer {
+    border-radius: 100px;
+}
+
+.button.b2 {
+    border-radius: 2px;
+}
+
+.checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.knobs {
+    z-index: 2;
+}
+
+.layer {
+    width: 100%;
+    background-color: rgb(244, 179, 179);
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+/* Button 3 */
+#button-3 .knobs:before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 20px;
+    height: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 9px 4px;
+    background-color: red;
+    border-radius: 50%;
+    transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+}
+
+#button-3 .checkbox:active + .knobs:before {
+    width: 46px;
+    border-radius: 100px;
+}
+
+#button-3 .checkbox:checked:active + .knobs:before {
+    margin-left: -26px;
+}
+
+#button-3 .checkbox:checked + .knobs:before {
+    content: "";
+    left: 36px;
+    background-color: green;
+}
+
+#button-3 .checkbox:checked ~ .layer {
+    background-color: #baf1b8;
+}
+
+.gradeBox {
+    border: 1px solid lightgray;
+    height: 200px;
+    border-radius: 10px;
+}
+.gradeBox:hover {
+    background-color: #dfceee;
+}
+.grades {
+    padding: 30px;
+}
+
+.headerText {
+    color: #3c4852;
+    font-size: 44px;
+    font-weight: 800;
+    font-family: AvertaStd, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.section-title {
+    color: #3c4852;
+    font-weight: 700;
+}
+
+.carousel-container {
+    /* width: 100%; */
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    /* Add this to position buttons */
+}
+
+.carousel {
+    display: flex;
+    margin-left: 30px;
+}
+
+.contentBox {
+    flex: 0 0 30%;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.carousel-button {
+    position: absolute;
+    /* Position the buttons */
+    top: 50%;
+    /* Adjust this to vertically center the buttons */
+    transform: translateY(-50%);
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.next-btn {
+    right: 0;
+    /* Position the next button on the right */
+}
+
+.prev-btn {
+    left: 0;
+    /* Position the previous button on the left */
+}
+.loginForm {
+    padding: 50px;
+}
+
+.imgBorder {
+    border: 1px solid darkgray;
+    text-align: center;
+    border-radius: 5px;
+}
+.imgBorder:hover {
+    background-color: rgb(191, 244, 185);
+}
+.imgBorder img {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+}
+.imgBorder .fa-check-circle {
+    display: none;
+}
+.selected .fa-check-circle {
+    color: #4fa746;
+    display: inline;
+}
+
+.selectable {
+    cursor: pointer;
+}
+
+.selected {
+    border: 3px solid #4fa746;
+}
+
+.pre, .next{
+    width: 50%; 
+ }
+ 
+ .ansSec{
+   border: 1px solid darkgray;
+   padding: 20px;
+ }
+ 
+ .optionDiv{
+   border-bottom: 1px solid lightgray;
+ }
+
+ .tutorCrad p{
+    line-height: 1;
+ }
+
+ .back button{
+    background-color: rgb(206, 56, 56);
+ }
+
+ .btns {
+    display: flex;
+    justify-content: end;
+ }
+
+
+
+ .dashCard p{
+    font-size: 16px;
+  }
+
+  .dashCard h2{
+    font-size: 36px;
+  }
+
+  .dashboardcard{
+    padding: 0px;
+  }
+
+.cardTitle{
+    display: flex;
+    justify-content:space-between;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+.dash_table thead tr{
+    background-color:#eeeded;  
+}
+.dayTime{
+    display: grid;
+    
+}
+  
+.namePic{
+    display: flex;
+
+}
+
+.namePic img{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+
+
+.live{
+    font-size: smaller;
+    background-color: rgb(248, 224, 224);
+    padding: 0px 20px 0px 20px;
+    outline: 1px solid #ec3131;
+    border-radius: 3px;
+}
+
+.joinclass button{
+    background-color: rgb(64, 184, 64) !important;
+}
+
+.confirm{
+    background-color: #d2ecee;
+    font-size: smaller;
+    padding: 1px 10px 1px 10px;
+    border-radius: 3px;
+    
+}
+
+.pending{
+    background-color: #f7e6d2;
+    font-size: smaller;
+    padding: 1px 10px 1px 10px;
+    border-radius: 3px;
+}
+
+.test{
+    font-size: smaller;
+    padding: 1px 15px 1px 15px;
+    outline: 1px solid #47ec31;
+    border-radius: 3px;
+    color: #47ec31;
+    font-weight: 500;
+
+}
+
+.quizs{
+    font-weight: 500;
+    font-size: smaller;
+    padding: 1px 15px 1px 15px;
+    outline: 1px solid #87e0f7;
+    border-radius: 3px;
+    color: #87e0f7;
+}
+
+.btnarea{
+    display: flex;
+    /* justify-content: start; */
+
+}
+
+.btnarea button{
+    border-radius: 5px;
+    padding: 2px 10px 2px 10px;
+    font-size: smaller;
+    font-weight: 600;
+    margin-right: 5px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+   
+}
+
+.btn1{
+    outline:1px solid lightgray !important;
+    color: black;
+}
+
+.View_Details{
+    /* background-color: #6a42d8; */
+    font-size: smaller;
+    padding: 1px 10px 1px 10px;
+    border-radius: 3px;
+
+}
+
+.sliderr {
+    width: 100%;
+    /* text-align: center; */
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+   
+
+   
+}
+.slides::-webkit-scrollbar {
+    width: 10px;
+    height: 3px;
+    /* display: none; */
+}
+.slides::-webkit-scrollbar-thumb {
+    background: #405189;
+    border-radius: 10px;
+}
+.slides::-webkit-scrollbar-track {
+    background: transparent;
+}
+.slides > div {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+   
+    /* margin-right: 15px;
+    border-radius: 20px; */
+    /* background: #ccf3d9; */
+    /* border: #4caf4f 1px solid; */
+    transform-origin: center center;
+    transform: scale(1);
+    transition: transform 0.5s;
+    position: relative;
+
+   
+    
+}
+
+
+
+
+
+.tutorcard{
+    border: 1px solid lightgrey;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    margin-bottom: 30px;
+    margin-right: 10px;
+    
+  }
+  
+  .ratePerHr{
+    width:100%;
+    position: relative;
+    top:141px;
+    background-color: black;
+    opacity: 0.7;
+    border-radius: 0 0 10px 10px;
+  
+  }
+  
+  .ratePerHr p{
+    color: White;
+    text-align: center;
+  
+  }
+  
+  .tutorcardImg{
+    width: 35%;
+  }
+  
+  .tutorDesc{
+    width: 65%;
+    
+  }
+  
+  .tutorcardImg img{
+    border-radius: 10px;
+    /* width: 140px; */
+    height: 160px;
+    margin-top: -35px;
+   
+  }
+  
+  /* .tutorcardImg p{
+    background-color: red;
+    position: relative;
+    top: -28px;
+    border-radius: 0 0 10px 10px;
+    opacity: 0.6;
+    text-align: center;
+  } */
+  
+  .tutorDesc{
+    margin-left: 20px;
+  }
+  
+  .tutorDesc .tutname{
+    font-size: 16px;
+    font-weight: 700;
+  }
+  
+  .tutorTable tr td{
+    font-size: 14px;
+    line-height: 2.4 !important;
+    
+  }
+  
+  .btnSec{
+    margin-top: 12px;
+    
+  }
+  
+  .btnSec button{
+    background-color: #405189;
+    color: white;
+    border-radius: 5px;
+    padding: 1px 7px 1px 7px;
+    
+  }
+  
+  .btnSec button:hover{
+    background-color: #162557;
+    color: white;
+  }
+  
+  .floattright{
+    float: right;
+  }
+
+  .righttutor{
+    margin: 30px 0px 30px 0px;
+  }
+
+  .righttutor button{
+    border-radius: 5px;
+    margin-top: 28px;
+  }
+
+  .tutor_sub{
+    margin-top: 40px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  .tutor_sub button{
+    color: black;
+    border-radius: 0px;
+    border:0;
+  }
+
+  .tutor_sub .active {
+    border-bottom: 3px solid #162557;
+
+  }
+
+
+
+  .dashCard .circular-progress{
+   margin-left: 35px ;
+  }
+
+
+
+
+  :root {
+    --progress-bar-width: 55px;
+    --progress-bar-height: 55px;
+    --font-size: 10px;
+  }
+  .circular-progress {
+    width: var(--progress-bar-width);
+    height: var(--progress-bar-height);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+ 
+  
+  .percentage {
+    position: relative;
+    left: 13px;
+    top:10px;
+    font-size: var(--font-size) !important;
+    color: white !important;
+    font-weight: 600;
+
+  }
+  
+  @media screen and (max-width: 800px) {
+    :root {
+      --progress-bar-width: 40px;
+      --progress-bar-height: 40px;
+      --font-size: 1.3rem;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    :root {
+      --progress-bar-width: 30px;
+      --progress-bar-height: 30px;
+      --font-size: 1rem;
+    }
+  }
+
+ 
+
+  .subItems {
+    display: grid;  
+    height: 150px;
+   
+  }
+  .subItems ul li a{
+    float: left;
+
+  }
+
+   .subSlide{
+    margin-left: 15px !important;
+    
+  }
+
+  .allSubjects{
+    margin-top: 50px;
+  }
+
+  .hwMenu a{
+    padding-left: 5px;
+   }
+
+   .assign{
+    font-size: smaller;
+    padding: 1px 15px 1px 15px;
+    outline: 1px solid #81a6ec;
+    border-radius: 3px;
+    color: #448ec0;
+    font-weight: 500;
+
+   }
