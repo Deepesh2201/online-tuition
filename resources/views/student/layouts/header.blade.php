@@ -551,8 +551,8 @@ $studentprofile = studentprofile::where('student_id', session('userid')->id)->fi
                                 aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                        src="{{ url('images/students/profilepics/') }}/{{ $studentprofile->profile_pic ?? '' }}"
-                                        alt="Header Avatar">
+                                        src="{{ url('images/students/profilepics/') }}/{{ $studentprofile->profile_pic}}"
+                                    alt="" onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
                                     <span class="text-start ms-xl-2">
                                         <span
                                             class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ session('userid')->name }}</span>

@@ -72,15 +72,19 @@
                                     <span class="tu-cardtag"></span>
                                     <div class="tu-profileview">
                                         <figure>
-                                            <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic ?? url('images/avatar/default_avatar_img.jpg') }}"
-                                                alt="image-description">
+                                            {{-- <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic ?? url('images/avatar/default_avatar_img.jpg') }}"
+                                                alt="image-description"> --}}
+                                                <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic }}"
+                                    alt="" onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
                                         </figure>
                                         <div class="tu-protutorinfo">
                                             <div class="tu-protutordetail">
                                                 <div class="tu-productorder-content">
                                                     <figure>
-                                                        <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic ?? url('images/avatar/default_avatar_img.jpg') }}"
-                                                            alt="images">
+                                                        {{-- <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic ?? url('images/avatar/default_avatar_img.jpg') }}"
+                                                            alt="images"> --}}
+                                                            <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic }}"
+                                    alt="" onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
                                                     </figure>
                                                     <div class="tu-product-title">
                                                         <h3>{{ $tutorpd->name }} <i

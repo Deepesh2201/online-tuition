@@ -224,8 +224,11 @@
                                             <div class="tu-listinginfo_title">
                                                 <div class="tu-listinginfo-img">
                                                     <figure>
-                                                        <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorlist->profile_pic ?? url('images/avatar/default_avatar_img.jpg') }}"
-                                                            width="60px" alt="imge">
+                                                        {{-- <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorlist->profile_pic ?? url('images/avatar/default_avatar_img.jpg') }}"
+                                                            width="60px" alt="imge"> --}}
+                                                            <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorlist->profile_pic }}"
+                                    width="60px" alt=""
+                                    onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
                                                     </figure>
                                                     <div class="tu-listing-heading">
                                                         <h5><a

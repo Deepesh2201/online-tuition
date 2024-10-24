@@ -809,7 +809,7 @@
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
                                         src="{{ asset('/images/tutors/profilepics') }}/{{ $tutorProfile ? $tutorProfile->profile_pic : '1703078631.png' }}"
-                                        alt="Header Avatar">
+                                        alt="Header Avatar" onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
                                     <span class="text-start ms-xl-2">
                                         <span
                                             class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ session('userid')->name }}</span>

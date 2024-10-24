@@ -21,9 +21,9 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="ms-4 d-flex flex-column" style="width: 150px;">
-                                <img src="{{url('images/students/profilepics','/')}}{{ $student->profile_pic ?? url('images/avatar/default-profile-pic.png')}}"
+                                <img src="{{url('images/students/profilepics','/')}}{{ $student->profile_pic}}"
                                     alt="Generic placeholder image" class="img-fluid img-thumbnail mb-2"
-                                    style="width: 150px; z-index: 1; border-radius: 50%;">
+                                    style="width: 150px; z-index: 1; border-radius: 50%;" onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
                                     @if (session('usertype') == 'Parent')
                                     @else
                                     <a type="button" class="btn btn-outline-dark bg-primary" href="profileupdate/{{session('userid')->id}}"
@@ -123,9 +123,9 @@
                             <th>details</th>
                             <th>Rating</th>
                         </tr>
-                        
+
                         @foreach ($reviews as $reviews)
-                            
+
                         <tr>
                             <td>{{$reviews->subject}}</td>
                             <td>{{$reviews->name}}</td>
