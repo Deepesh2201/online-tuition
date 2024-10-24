@@ -373,6 +373,14 @@ class ZoomClassesController extends Controller
         $data->topic_name = $request->video_topic;
         $data->status = 'Completed';
         $data->completed_at = Carbon::now();
+        if($request->student_status == 'present'){
+            $data->student_present = 1;
+        }
+        if($request->student_status == 'absent'){
+            $data->student_present = 0;
+        }
+
+
         $res = $data->save();
 
         $slotupdate = SlotBooking::where('meeting_id', '=', $data->id)->first();

@@ -324,8 +324,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="markcompleted" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="markcompleted" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -334,25 +333,42 @@
                     <form id="change-class-status">
                         <input type="hidden" id="liveclass-id" name="class_id">
                         <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-12 col-12 col-sm-12">
-                                    <input type="text" class="form-control" placeholder="Enter Topic Here" name="video_topic">
+                            <!-- Topic Input -->
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" placeholder="Enter Topic Here" name="video_topic" required>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 col-12 col-sm-12">
-                                    <input type="text" class="form-control" placeholder="Paste Video Link Here" name="video_link">
+                            <!-- Video Link Input -->
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" placeholder="Paste Video Link Here" name="video_link" required>
                                 </div>
                             </div>
-                            <div style="float:right; margin-top:5px; margin-bottom:5px">
-                                <button class="btn btn-sm btn-success">Submit</button>
+                            <!-- Student Present/Absent Radio Buttons -->
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label>Student Status:</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="student_status" id="studentPresent" value="present" required>
+                                        <label class="form-check-label" for="studentPresent">Present</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="student_status" id="studentAbsent" value="absent" required>
+                                        <label class="form-check-label" for="studentAbsent">Absent</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                        </div>
                     </form>
-
                 </div>
             </div>
         </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -564,6 +580,7 @@
                     success: function (response) {
                         toastr.success(response.message);
                         $('#markcompleted').modal('hide');
+                        reloadpage();
 
                     },
                     error: function (xhr, status, error) {
