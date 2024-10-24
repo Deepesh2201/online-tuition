@@ -88,7 +88,11 @@
                                                                 data-tippy-trigger="mouseenter"
                                                                 data-tippy-html="#tu-verifed" data-tippy-interactive="true"
                                                                 data-tippy-placement="top"></i></h3>
-                                                        <h5>{{ $tutorpd->subject }}</h5>
+                                                                <div class="sub-btns">
+                                                                    @foreach ($subjects as $subject)
+                                                                        <button>{{ $subject->subject_name }}</button>
+                                                                    @endforeach
+                                                                </div>
                                                     </div>
                                                     <div class="tu-listinginfo_price">
                                                         <span>Starting from:</span>
@@ -135,8 +139,8 @@
                                             Class</button></a>
 
                                             <a href="/student/enrollnow/{{ $tutorpd->tutor_id }}"> <button
-                                                class="btn btn-sm btn-success" id="enrollnow">Enroll
-                                                Now</button></a>
+                                                class="btn btn-sm btn-success" id="enrollnow">Book
+                                                Classes</button></a>
 @endif
                                         <a href="/student/tutormessages/{{ $tutorpd->tutor_id }}"><button
                                                 class="btn btn-sm btn-success">Start Chat</button></a>
@@ -171,14 +175,12 @@
                                             aria-labelledby="home-tab">
                                             <div class="tu-tabswrapper">
                                                 <div class="tu-tabstitle">
-                                                    <h4>A brief introduction</h4>
+                                                    <h4>{{ $tutorpd->headline }}</h4>
                                                 </div>
-                                                <div class="tu-description">
-                                                    <p> {{ $tutorpd->headline }}</p>
-                                                </div><br>
+                                               <br>
                                                 <hr>
                                                 <div class="tu-tabstitle">
-                                                    <h4>Goal</h4>
+                                                    <h4>About {{$tutorpd->name}}</h4>
                                                 </div>
                                                 <div class="tu-description">
                                                     <p> {{ $tutorpd->goal }}</p>

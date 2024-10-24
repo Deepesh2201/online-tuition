@@ -230,8 +230,12 @@ class TutorSearchController extends Controller
         if (!$tutorpd) {
             return view('student.tutorprofile')->with('fail', 'Something went wrong');
         }
+        $subjects = tutorSubjectMapping::select('tutorsubjectmappings.*', 'subjects.name as subject_name')
+        ->join('subjects', 'subjects.id', 'tutorsubjectmappings.subject_id')
+        ->where('tutor_id', $id)
+        ->get();
 
-        return view('student.tutorprofile', compact('tutorpd', 'achievement', 'reviews'));
+        return view('student.tutorprofile', compact('tutorpd', 'achievement', 'reviews','subjects'));
     }
 
     public function admintutorprofile($id)

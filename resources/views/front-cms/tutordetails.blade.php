@@ -1,6 +1,7 @@
 @extends('front-cms.layouts.main')
 @section('main-section')
     <!-- tutor section -->
+
     <section class="tutor-details">
         <div class="container tutor-card topheader-tutor">
 
@@ -10,6 +11,7 @@
                     <h2>{{ $tutorpd->headline }}</h2>
 
                     <h6 class="mb-2">Subjects</h6>
+
 
                     <div class="sub-btns">
                         @foreach ($subjects as $subject)
