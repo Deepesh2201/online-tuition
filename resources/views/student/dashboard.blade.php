@@ -605,7 +605,7 @@
                                     <div class="ratePerHr">
                                         <p>&#163;{{$tutorlist->rateperhour}}</p>
                                     </div>
-                                    <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorlist->profile_pic }}" class="card-img-top" alt="Tutor Image" onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/MCTfavicon.png';">
+                                    <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorlist->profile_pic }}" class="card-img-top" alt="Tutor Image" onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
 
                                 </div>
                                 <div class="tutorDesc">
