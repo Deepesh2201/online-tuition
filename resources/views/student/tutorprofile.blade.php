@@ -72,14 +72,14 @@
                                     <span class="tu-cardtag"></span>
                                     <div class="tu-profileview">
                                         <figure>
-                                            <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic ?? url('images/avatar/default-profile-pic.png') }}"
+                                            <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic ?? url('images/avatar/default_avatar_img.jpg') }}"
                                                 alt="image-description">
                                         </figure>
                                         <div class="tu-protutorinfo">
                                             <div class="tu-protutordetail">
                                                 <div class="tu-productorder-content">
                                                     <figure>
-                                                        <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic ?? url('images/avatar/default-profile-pic.png') }}"
+                                                        <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorpd->profile_pic ?? url('images/avatar/default_avatar_img.jpg') }}"
                                                             alt="images">
                                                     </figure>
                                                     <div class="tu-product-title">
@@ -247,7 +247,7 @@
                                                     <div class="tu-commentarea">
                                                         <div class="tu-commentlist">
                                                             <figure>
-                                                                <img src="{{ url('images/students/profilepics', '/') }}{{ $reviews->student_pic ?? url('images/avatar/default-profile-pic.png') }}"
+                                                                <img src="{{ url('images/students/profilepics', '/') }}{{ $reviews->student_pic ?? url('images/avatar/default_avatar_img.jpg') }}"
                                                                     alt="images">
                                                             </figure>
                                                             <div class="tu-coomentareaauth">

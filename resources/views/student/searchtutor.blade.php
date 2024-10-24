@@ -224,7 +224,7 @@
                                             <div class="tu-listinginfo_title">
                                                 <div class="tu-listinginfo-img">
                                                     <figure>
-                                                        <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorlist->profile_pic ?? url('images/avatar/default-profile-pic.png') }}"
+                                                        <img src="{{ url('images/tutors/profilepics', '/') }}{{ $tutorlist->profile_pic ?? url('images/avatar/default_avatar_img.jpg') }}"
                                                             width="60px" alt="imge">
                                                     </figure>
                                                     <div class="tu-listing-heading">
@@ -306,10 +306,10 @@
                                                             Now</button></a>
                                                     </div>
 
-                                                   
-                                                    
+
+
                                                 @endif
-                                               
+
                                                 <!-- <a href="/student/tutorprofile/{{ $tutorlist->tutor_id }}"
                                                     class="tu-primbtn">View full profile</a> -->
 
