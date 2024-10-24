@@ -808,7 +808,7 @@ input[type="range"]::-ms-thumb {
   }
 
   .tutorcardImg{
-    width: 35%;
+    /* width: 35%; */
   }
 
   .tutorDesc{
@@ -1148,4 +1148,3 @@ input[type="range"]::-ms-thumb {
       }
   }
 
-  

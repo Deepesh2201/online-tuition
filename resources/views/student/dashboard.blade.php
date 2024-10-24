@@ -596,7 +596,7 @@
 
                 <div class="sliderr mb-5">
                     <div class="slides" id="tutor-slides">
-                        @foreach ($tutorlists as $tutorlist)
+                        @foreach ($tutorlists->slice(0, 10) as $tutorlist)
 
 
                         <div id="slide-1">

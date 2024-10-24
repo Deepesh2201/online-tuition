@@ -132,9 +132,9 @@
                                 <th scope="col">class</th>
                                 <th scope="col">Subject</th>
                                 <th scope="col">Current Status</th>
-                                <th scope="col">Prefered Slot-1</th>
-                                <th scope="col">Prefered Slot-2</th>
-                                <th scope="col">Prefered Slot-3</th>
+                                <th scope="col">Slot-1</th>
+                                <th scope="col">Slot-2</th>
+                                <th scope="col">Slot-3</th>
                                 <th scope="col">Confirmed Slot</th>
                                 {{-- <th scope="col">Trial Link</th> --}}
                                 <th scope="col">Remarks</th>

@@ -363,6 +363,7 @@ class GoogleCalendarController extends Controller
 
     if ($response->status == 'confirmed') {
         $dcnf = democlasses::find($request->confirmid);
+        $dcnf->slot_1 = $demodata->slot_1;
         $dcnf->slot_confirmed = $request->slot;
         $dcnf->slot_confirmed_at = Carbon::now();
         $dcnf->slot_confirmed_by = session('userid')->id;
