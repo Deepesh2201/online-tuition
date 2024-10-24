@@ -49,11 +49,32 @@
 
 
 <!-- end main content-->
-{{-- <div id="notification-popup" class="notification-popup">
-    <p id="notificationpopupdata"></p>
+<div id="notification-popup" class="notification-popup" style="display: none;">
+    <p id="notificationpopupdata">Your notification message here.</p>
     <button onclick="closeNotification()">Close</button>
     <audio id="notification-sound" src="{{url('sounds/notification.mp3')}}" preload="auto"></audio>
-</div> --}}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if the notification has been acknowledged
+    if (!sessionStorage.getItem('notificationAcknowledged')) {
+        // Show the notification popup
+        document.getElementById('notification-popup').style.display = 'block';
+        document.getElementById('notification-sound').play(); // Play notification sound
+    }
+});
+
+// Function to close the notification
+function closeNotification() {
+    // Set a session storage item to remember the acknowledgment
+    sessionStorage.setItem('notificationAcknowledged', 'true');
+
+    // Hide the notification popup
+    document.getElementById('notification-popup').style.display = 'none';
+}
+</script>
+
 
 <script>
     function showNotification(count) {
@@ -127,139 +148,123 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </body>
 <script>
-   // Function to fetch notifications and update unread count
-   function fetchNotificationsAndUpdateCount() {
-    $.ajax({
-        url: '/notifications', // Update this URL to your endpoint that fetches notifications
-        type: 'GET',
-        success: function(response) {
-            var unreadCount = response.unread_count;
-            // alert(response.unread_count)
-            if(response.unread_count > 0){
-                showNotification(response.unread_count);
-            }
-            else{
-                closeNotification();
-            }
-            $('#unreadNotificationCount').text(unreadCount);
-            // Update the class of the badge to visually indicate unread count
-            if (unreadCount > 0) {
-                $('#unreadNotificationCount').removeClass('bg-danger').addClass('bg-primary');
-            } else {
-                $('#unreadNotificationCount').removeClass('bg-primary').addClass('bg-danger');
-            }
+    // Function to fetch notifications and update unread count
+    function fetchNotificationsAndUpdateCount() {
+        $.ajax({
+            url: '/notifications', // Update this URL to your endpoint that fetches notifications
+            type: 'GET',
+            success: function(response) {
+                var unreadCount = response.unread_count;
 
-            // Clear previous notifications
-            var notificationList = $('#all-noti-tab .pe-2');
-            notificationList.empty();
-            console.log(response.notifications);
-            // Loop through the notifications and append them to the appropriate tab
-            $.each(response.notifications, function(index, notification) {
-                let createdAt = new Date(notification.created_at);
+                // Only show the notification if it hasn't been acknowledged
+                if (unreadCount > 0 && !sessionStorage.getItem('notificationAcknowledged')) {
+                    showNotification(unreadCount);
+                } else {
+                    closeNotification();
+                }
 
-                // Extracting hours, minutes, seconds, day, month, and year
-                let hours = createdAt.getHours();
-                let minutes = createdAt.getMinutes();
-                let seconds = createdAt.getSeconds();
-                let day = createdAt.getDate();
-                let month = createdAt.getMonth() + 1; // Months are zero-indexed, so add 1
-                let year = createdAt.getFullYear();
+                $('#unreadNotificationCount').text(unreadCount);
+                // Update the class of the badge to visually indicate unread count
+                if (unreadCount > 0) {
+                    $('#unreadNotificationCount').removeClass('bg-danger').addClass('bg-primary');
+                } else {
+                    $('#unreadNotificationCount').removeClass('bg-primary').addClass('bg-danger');
+                }
 
-                // Padding single digits with leading zeros
-                hours = ('0' + hours).slice(-2);
-                minutes = ('0' + minutes).slice(-2);
-                seconds = ('0' + seconds).slice(-2);
-                day = ('0' + day).slice(-2);
-                month = ('0' + month).slice(-2);
-                let formattedDateTime = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
-                var notificationItem = `
-                    <div class="text-reset notification-item d-block dropdown-item position-relative">
-                        <div class="d-flex">
-                            <div class="avatar-xs me-3 flex-shrink-0">
-                                <span class="avatar-title bg-info-subtle  rounded-circle fs-16">
-                                    <img src="/images/students/profilepics/${notification.initiator_pic}" class="">
-                                </span>
-                            </div>
-                            <div class="flex-grow-1">
-                                <a onclick="markAsRead(${notification.id})" href="/checkNotificationDetails/${notification.id}" class="stretched-link">
-                                    <h6 class="mt-0 mb-2 lh-base">${notification.notification}</h6>
-                                </a>
-                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                    <span><i class="mdi mdi-clock-outline"></i> ${formattedDateTime} - ${notification.initiator_name} - (${notification.initiator_role})</span>
-                                </p>
-                            </div>
-                            <div class="px-2 fs-15">
-                                <div class="form-check notification-check">
-                                    <input class="form-check-input" title="Mark as read" onclick="markAsRead('${notification.id}')" type="radio" value="" id="notification-check-${index}">
+                // Clear previous notifications
+                var notificationList = $('#all-noti-tab .pe-2');
+                notificationList.empty();
+                console.log(response.notifications);
+                // Loop through the notifications and append them to the appropriate tab
+                $.each(response.notifications, function(index, notification) {
+                    let createdAt = new Date(notification.created_at);
 
+                    // Extracting hours, minutes, seconds, day, month, and year
+                    let hours = createdAt.getHours();
+                    let minutes = createdAt.getMinutes();
+                    let seconds = createdAt.getSeconds();
+                    let day = createdAt.getDate();
+                    let month = createdAt.getMonth() + 1; // Months are zero-indexed, so add 1
+                    let year = createdAt.getFullYear();
+
+                    // Padding single digits with leading zeros
+                    hours = ('0' + hours).slice(-2);
+                    minutes = ('0' + minutes).slice(-2);
+                    seconds = ('0' + seconds).slice(-2);
+                    day = ('0' + day).slice(-2);
+                    month = ('0' + month).slice(-2);
+                    let formattedDateTime = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
+                    var notificationItem = `
+                        <div class="text-reset notification-item d-block dropdown-item position-relative">
+                            <div class="d-flex">
+                                <div class="avatar-xs me-3 flex-shrink-0">
+                                    <span class="avatar-title bg-info-subtle rounded-circle fs-16">
+                                        <img src="/images/students/profilepics/${notification.initiator_pic}" class="">
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <a onclick="markAsRead(${notification.id})" href="/checkNotificationDetails/${notification.id}" class="stretched-link">
+                                        <h6 class="mt-0 mb-2 lh-base">${notification.notification}</h6>
+                                    </a>
+                                    <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                        <span><i class="mdi mdi-clock-outline"></i> ${formattedDateTime} - ${notification.initiator_name} - (${notification.initiator_role})</span>
+                                    </p>
+                                </div>
+                                <div class="px-2 fs-15">
+                                    <div class="form-check notification-check">
+                                        <input class="form-check-input" title="Mark as read" onclick="markAsRead('${notification.id}')" type="radio" value="" id="notification-check-${index}">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    `;
+                    notificationList.append(notificationItem); // Append to All tab regardless of type
+                });
+            }
+        });
+    }
 
+    // Show notification function
+    function showNotification(count) {
+        var popup = document.getElementById('notification-popup');
+        var sound = document.getElementById('notification-sound');
+        document.getElementById('notificationpopupdata').innerHTML = 'You have ' + count + ' unread notifications';
 
-                    </div>
+        popup.style.display = 'block';
+        sound.play();
+    }
 
-                `;
+    // Function to close the notification
+    function closeNotification() {
+        // Set a session storage item to remember the acknowledgment
+        sessionStorage.setItem('notificationAcknowledged', 'true');
 
-                // <div style="float:right; margin-top:20px;">
-                //             <p style="cursor:pointer" class="text-danger">Clear All</p>
-                //         </div>
+        // Hide the notification popup
+        document.getElementById('notification-popup').style.display = 'none';
+    }
 
+    // Fetch notifications and update count on page load
+    $(document).ready(function() {
+        // Call the function immediately once the document is ready
+        fetchNotificationsAndUpdateCount();
 
-                //<label class="form-check-label" for="notification-check-${index}"></label>
-                // Append the notification to the appropriate tab based on its type
-                // if (notification.type === 'message') {
-                //     $('#messages-tab .pe-2').append(notificationItem);
-                // } else if (notification.type === 'alert') {
-                //     $('#alerts-tab').append(notificationItem);
-                // }
-                notificationList.append(notificationItem); // Append to All tab regardless of type
-            });
-        }
+        // Set an interval to call the function every 5 seconds (5000 milliseconds)
+        setInterval(fetchNotificationsAndUpdateCount, 5000);
     });
-}
 
-
-// Fetch notifications and update count on page load
-
-$(document).ready(function() {
-    // Call the function immediately once the document is ready
-    fetchNotificationsAndUpdateCount();
-
-    // Set an interval to call the function every 5 seconds (5000 milliseconds)
-    setInterval(fetchNotificationsAndUpdateCount, 5000);
-});
-
-// Event listener for clicking on a notification (assuming you have one)
-// $(document).on('click', '.notification-item', function() {
-//     var notificationId = $(this).data('id');
-//     markAsRead(notificationId);
-// });
-
-// Function to mark notification as read (assuming you have one)
-function markAsRead(notificationId) {
-    $.ajax({
-        url: '/markAsRead/' + notificationId, // Endpoint to mark notification as read
-        type: 'GET',
-        success: function(response) {
-            // Fetch notifications again after marking as read
-            fetchNotificationsAndUpdateCount();
-        }
-    });
-}
-
-function checkNotificationDetails(notificationId) {
-    $.ajax({
-        url: '/checkNotificationDetails/' + notificationId, // Endpoint to mark notification as read
-        type: 'GET',
-        success: function(response) {
-            // Fetch notifications again after marking as read
-            fetchNotificationsAndUpdateCount();
-        }
-    });
-}
-
+    // Function to mark notification as read
+    function markAsRead(notificationId) {
+        $.ajax({
+            url: '/markAsRead/' + notificationId, // Endpoint to mark notification as read
+            type: 'GET',
+            success: function(response) {
+                // Fetch notifications again after marking as read
+                fetchNotificationsAndUpdateCount();
+            }
+        });
+    }
 </script>
+
 
 
 </html>

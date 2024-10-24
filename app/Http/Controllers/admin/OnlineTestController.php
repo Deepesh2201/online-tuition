@@ -805,6 +805,7 @@ class OnlineTestController extends Controller
             ->where('assign_tests.tutor_id', session('userid')
                 ->id)->where('assign_tests.is_active', 1)
             ->get();
+
         return view('tutor.assigntest', get_defined_vars());
     }
     function assigntestdata(Request $request)
@@ -835,6 +836,41 @@ class OnlineTestController extends Controller
         $res = $assigntest->save();
 
         if ($res) {
+            //////////////// Here I need to pass notification into db
+            $notificationdata = new Notification();
+            $notificationdata->alert_type = 4;
+            $notificationdata->notification = 'Test Assigned By '.session('userid')->name;
+            $notificationdata->initiator_id = session('userid')->id;
+            $notificationdata->initiator_role = session('userid')->role_id;
+            $notificationdata->event_id = $request->testid;
+            // Sending to admin
+            // if($request->receiver_role_id == 1){
+            //     $notificationdata->show_to_admin = 1;
+            //     $notificationdata->show_to_admin_id = $request->receiver_id;
+            //     // $notificationdata->show_to_all_admin = 1;
+            // }
+            // Sending to tutor
+            // if($request->receiver_role_id == 2){
+                // $notificationdata->show_to_tutor = 1;
+                // $notificationdata->show_to_tutor_id = $tutor_id->tutor_id;
+                // $notificationdata->show_to_all_tutor = 0;
+            // }
+            // Sending to student
+            // if($request->receiver_role_id == 3){
+                $notificationdata->show_to_student = 1;
+                $notificationdata->show_to_student_id = $request->student;
+            //     // $notificationdata->show_to_all_student = 0;
+            // }
+            // // Sending to parent
+            // if($request->receiver_role_id == 3){
+            //     $notificationdata->show_to_parent = 1;
+            //     $notificationdata->show_to_parent_id = $request->receiver_id;
+            //     // $notificationdata->show_to_all_parent = 0;
+            // }
+            $notificationdata->read_status = 0;
+
+            $notified = $notificationdata->save();
+            broadcast(new RealTimeMessage('$notification'));
             return back()->with('success', 'Student assigned to test successfully!');
         } else {
             return back()->with('fail', 'Something went wrong. Please try again later');

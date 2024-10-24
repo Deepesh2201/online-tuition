@@ -257,7 +257,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['AdminAuthenticate']], funct
     Route::post('demolist-search', [DemoController::class, 'demolistsearch'])->name('admin.demolist-search');
     Route::post('scheduledclass-search', [ClassController::class, 'scheduledsearch'])->name('admin.scheduledclass-search');
     // student profile from admin side
-    Route::get('studentprofile/{id}', [StudentProfileController::class, 'studentprofile'])->name('admin.studentprofile');
+    Route::get('studentprofile/{id}', [StudentProfileController::class, 'adminstudentprofile'])->name('admin.studentprofile');
+    Route::get('studentdelete/{id}', [StudentProfileController::class, 'studentdelete'])->name('admin.studentdelete');
     Route::get('students', [StudentProfileController::class, 'studentslist'])->name('admin.students');
     Route::get('students/status', [StudentProfileController::class, 'status'])->name('admin.students.status');
     Route::post('students-search', [StudentProfileController::class, 'studentslistsearch'])->name('admin.students-search');

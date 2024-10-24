@@ -249,6 +249,7 @@ class DashboardController extends Controller
             ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
             ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
             ->where('tutorregistrations.is_active', 1)
+            ->orderby('tutorregistrations.created_at','desc')
             ->groupBy(
                 'tutorprofiles.tutor_id',
                 'tutorprofiles.name',
@@ -260,7 +261,7 @@ class DashboardController extends Controller
                 'tutorprofiles.admin_commission',
                 'tutorprofiles.profile_pic'
             )
-            ->get();
+            ->get(10);
 
         // Subject lists with category
         $subjectlistsdata = DB::table('subjects')

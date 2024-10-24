@@ -70,6 +70,7 @@ class HomeController extends Controller
         ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
         ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
         ->where('tutorregistrations.is_active', 1)
+        ->orderby('tutorregistrations.created_at','desc')
         ->groupBy(
             'tutorprofiles.tutor_id',
             'tutorprofiles.name',
@@ -173,6 +174,7 @@ class HomeController extends Controller
             ->where('tutorregistrations.is_active', 1)
             ->where('subjects.id', 'like', '%' . $subjectid . '%') // LIKE search for subject
             ->where('classes.id', 'like', '%' . $classid . '%') // LIKE search for class
+            ->orderby('tutorregistrations.created_at','desc')
             ->groupBy(
                 'tutorprofiles.tutor_id',
                 'tutorprofiles.name',
@@ -441,6 +443,7 @@ class HomeController extends Controller
         ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
         ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
         ->where('tutorregistrations.is_active', 1)
+        ->orderby('tutorregistrations.created_at','desc')
         ->groupBy(
             'tutorprofiles.tutor_id',
             'tutorprofiles.name',
@@ -543,43 +546,6 @@ class HomeController extends Controller
             ->where('tutor_id', $id)
             ->first();
 
-            // $othertutors = tutorprofile::select(
-            //     'tutorprofiles.tutor_id as tutor_id',
-            //     'tutorprofiles.name',
-            //     'tutorprofiles.headline',
-            //     'tutorprofiles.qualification as tutor_qualification',
-            //     'tutorprofiles.intro_video_link',
-            //     'tutorprofiles.experience',
-            //     DB::raw('(tutorprofiles.rateperhour + (tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100)) as rateperhour'),
-            //     'tutorprofiles.profile_pic',
-            //     DB::raw('GROUP_CONCAT(DISTINCT subjects.name ORDER BY subjects.name SEPARATOR ", ") as subject'),
-            //     DB::raw('ROUND(COALESCE(AVG(tutorreviews.ratings), 0), 1) AS avg_rating'), // Calculate average rating and round it
-            //     DB::raw('COUNT(tutorreviews.id) AS review_count'), // Count of reviews
-            //     DB::raw('COUNT(DISTINCT topics.name) as total_topics'),
-            //     DB::raw('COUNT(DISTINCT zoom_classes.id) as total_classes_done')
-            // )
-            // ->join('teacherclassmappings', 'teacherclassmappings.teacher_id', '=', 'tutorprofiles.tutor_id')
-            // ->join('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
-            // ->join('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
-            // ->join('classes', 'classes.id', '=', 'tutorsubjectmappings.class_id')
-            // ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id')
-            // ->join('topics', 'topics.subject_id', '=', 'subjects.id')
-            // ->join('tutorregistrations', 'tutorregistrations.id', '=', 'tutorprofiles.tutor_id')
-            // ->leftJoin('zoom_classes', 'zoom_classes.tutor_id', '=', 'tutorprofiles.tutor_id') // Adding join for zoom_classes
-            // ->where('tutorregistrations.is_active', 1)
-            // ->where('tutorsubjectmappings.subject_id', '=', $primarysubjects->subject_id)
-            // ->groupBy(
-            //     'tutorprofiles.tutor_id',
-            //     'tutorprofiles.name',
-            //     'tutorprofiles.headline',
-            //     'tutorprofiles.qualification',
-            //     'tutorprofiles.intro_video_link',
-            //     'tutorprofiles.experience',
-            //     'tutorprofiles.rateperhour',
-            //     'tutorprofiles.admin_commission',
-            //     'tutorprofiles.profile_pic'
-            // )
-            // ->get();
             $othertutors = tutorprofile::select(
                 'tutorprofiles.tutor_id as tutor_id',
                 'tutorprofiles.name',
@@ -1108,8 +1074,31 @@ class HomeController extends Controller
                 $studentRegistration->mobile_otp = '1234';
                 // $studentRegistration->mobile_otp = $otp;
                 $studentRegistration->save();
+                // switch ($user->role_id) {
+                //     case 1:
+                //         echo "Admin - Under development";
+                //         dd($user->role_id);
+                //         break;
+                //     case 2:
+                //         return redirect('tutor/dashboard');
+                //     case 3:
+                //         return redirect('student/dashboard');
+                //     case 4:
+                //         echo "Parent";
+                //         dd($user->role_id);
 
-                return view('common.student-mobile-verify', compact('mobile'))->with('success', 'Registration successful. Please Login Now To Access More Features.');
+                //         break;
+                // }
+                $user = studentregistration::where('mobile', '=', $mobile)->first();
+
+                // if (Hash::check($request->password, $user->password)) {
+                //  event(new Registered($user));
+
+                $user_role = Auth::user();
+                // dd($user->role_id);
+                $request->session()->put('userid', $user);
+                return redirect('student/dashboard')->with('success','Registration successful. Explore tutors and book classes. Best Wishes!!');
+                // return view('common.student-mobile-verify', compact('mobile'))->with('success', 'Registration successful. Please Login Now To Access More Features.');
 
                 // return redirect('student/dashboard');
             } else {

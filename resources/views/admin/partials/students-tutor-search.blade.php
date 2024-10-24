@@ -4,9 +4,11 @@
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td><a href="studentprofile/{{$stdlist->student_id}}">{{ $stdlist->student_name }}</a></td>
+            <td>{{ $stdlist->email }}</td>
             <td>{{ $stdlist->student_mobile }}</td>
 
-            <td>{{ $stdlist->class_name }}</td>
+            <td>{{ \Carbon\Carbon::parse($stdlist->created_at)->format('d-m-Y h:i A') }}</td>
+
             <td>
                 <div class="form-check form-switch">
                     @if ($stdlist->student_status == 1)
@@ -19,6 +21,7 @@
                     @endif>
                 </div>
             </td>
+            <td><button class="btn btn-sm btn-danger" onclick="showDeleteWarning({{$stdlist->student_id}});">Delete</button></td>
 
             {{-- <td><button class="badge badge-success"
                     onclick="openconfirmmodal({{ $stdlist->demo_id }});">Confirm</button>

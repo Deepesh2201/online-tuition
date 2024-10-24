@@ -238,33 +238,56 @@ class TutorSearchController extends Controller
         return view('student.tutorprofile', compact('tutorpd', 'achievement', 'reviews','subjects'));
     }
 
-    public function admintutorprofile($id)
-    {
-        // dd($id);
-        $tutorpd = tutorprofile::select('tutorprofiles.*', 'subjects.name as subject', 'subjects.name as subject', DB::raw('(tutorsubjectmappings.rate + (tutorsubjectmappings.rate * tutorsubjectmappings.admin_commission / 100)) as rate'))
-            ->leftjoin('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
-            ->leftjoin('teacherclassmappings', 'teacherclassmappings.subject_mapping_id', '=', 'tutorsubjectmappings.id')
-            ->leftjoin('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
-            ->where('tutorsubjectmappings.tutor_id', '=', $id)
-            ->first();
+public function admintutorprofile($id)
+{
+    // Fetch the tutor's profile along with the associated subject and calculated rate
+    $tutorpd = tutorprofile::select(
+            'tutorprofiles.*',
+            'subjects.id as subjectid',
+            'subjects.name as subject',
+            \DB::raw('(tutorprofiles.rateperhour * tutorprofiles.admin_commission / 100) + tutorprofiles.rateperhour as rate'),
+            DB::raw('ROUND(COALESCE(AVG(tutorreviews.ratings), 0), 1) AS avg_rating'), // Average rating rounded to 1 decimal
+            DB::raw('COUNT(tutorreviews.id) AS total_reviews') // Total reviews count
+        )
+        ->leftJoin('tutorsubjectmappings', 'tutorsubjectmappings.tutor_id', '=', 'tutorprofiles.tutor_id')
+        ->leftJoin('teacherclassmappings', 'teacherclassmappings.subject_mapping_id', '=', 'tutorsubjectmappings.id')
+        ->leftJoin('subjects', 'subjects.id', '=', 'tutorsubjectmappings.subject_id')
+        ->leftJoin('tutorreviews', 'tutorreviews.tutor_id', '=', 'tutorprofiles.tutor_id') // Join for reviews to get ratings
+        ->where('tutorsubjectmappings.tutor_id', '=', $id)
+        ->groupBy('tutorprofiles.tutor_id','tutorprofiles.id','tutorprofiles.goal','tutorprofiles.name','tutorprofiles.mobile','tutorprofiles.secondary_mobile','tutorprofiles.email','tutorprofiles.qualification','tutorprofiles.intro_video_link','tutorprofiles.profile_pic','tutorprofiles.expertise','tutorprofiles.experience','tutorprofiles.certification','tutorprofiles.headline','tutorprofiles.detail_1','tutorprofiles.detail_2','tutorprofiles.detail_3','tutorprofiles.keywords','tutorprofiles.created_at','tutorprofiles.updated_at','tutorprofiles.country_id','tutorprofiles.gender','tutorprofiles.rateperhour','tutorprofiles.admin_commission','tutorprofiles.rate','subjects.id','subjects.name') // Group by tutor ID to aggregate the ratings
+        ->first();
 
-// dd($tutorpd);
-        if ($tutorpd) {
-            $achievement = tutorachievements::select('*')->where('tutor_id', '=', $tutorpd->tutor_id)->get();
+    if ($tutorpd) {
+        // Fetch achievements for the tutor
+        $achievement = tutorachievements::select('*')->where('tutor_id', '=', $tutorpd->tutor_id)->get();
 
-            $reviews = tutorreviews::select('tutorreviews.id', 'tutorreviews.name', 'tutorreviews.ratings', 'studentprofiles.name as student_name', 'studentprofiles.profile_pic as student_pic', 'tutorreviews.subject_id', 'tutorreviews.tutor_id', 'subjects.name as subject')
-                ->leftjoin('subjects', 'subjects.id', '=', 'tutorreviews.subject_id')
-                ->leftjoin('studentprofiles', 'studentprofiles.student_id', '=', 'tutorreviews.student_id')
-                ->where('tutorreviews.tutor_id', '=', $tutorpd->id)->get();
-        }
-
-        if (!$tutorpd) {
-            return view('admin.tutorprofile')->with('fail', 'Something went wrong');
-        }
-        // echo $tutorpd;
-        //     dd();
-        return view('admin.tutorprofile', compact('tutorpd', 'achievement', 'reviews'));
+        // Fetch detailed reviews for the tutor
+        $reviews = tutorreviews::select(
+                'tutorreviews.id',
+                'tutorreviews.name',
+                'tutorreviews.ratings',
+                'studentprofiles.name as student_name',
+                'studentprofiles.profile_pic as student_pic',
+                'tutorreviews.subject_id',
+                'tutorreviews.tutor_id',
+                'subjects.name as subject'
+            )
+            ->leftJoin('subjects', 'subjects.id', '=', 'tutorreviews.subject_id')
+            ->leftJoin('studentprofiles', 'studentprofiles.student_id', '=', 'tutorreviews.student_id')
+            ->where('tutorreviews.tutor_id', '=', $tutorpd->tutor_id)
+            ->get();
     }
+
+    if (!$tutorpd) {
+        return view('admin.tutorprofile')->with('fail', 'Something went wrong');
+    }
+    $subjects = tutorSubjectMapping::select('tutorsubjectmappings.*', 'subjects.name as subject_name')
+    ->join('subjects', 'subjects.id', 'tutorsubjectmappings.subject_id')
+    ->where('tutor_id', $id)
+    ->get();
+
+    return view('admin.tutorprofile', compact('tutorpd', 'achievement', 'reviews','subjects'));
+}
 
     public function tutoradvs(Request $request)
     {

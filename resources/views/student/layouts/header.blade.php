@@ -814,30 +814,18 @@ $studentprofile = studentprofile::where('student_id', session('userid')->id)->fi
             </li>
 
             <li class="nav-item">
-                @php
-                $isStudyMaterialsActive =
-                Request::is('student/mylearnings') || Request::is('student/assignments');
-                @endphp
-                <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
-                    aria-expanded="{{ $isStudyMaterialsActive ? 'true' : 'false' }}" aria-controls="sidebarLanding">
-                    <img src="/images/Student-dashboard-menu-icon/Study Materials.svg" alt="">&nbsp;<span
-                        data-key="t-landing">Study Materials</span>
-                </a>
-                <div class="collapse menu-dropdown {{ $isStudyMaterialsActive ? 'show' : '' }}" id="sidebarLanding">
-                    <ul class="nav nav-sm flex-column">
-                        <li class="nav-item">
-                            <a href="{{ route('student.mylearnings') }}"
-                                class="nav-link menu-link {{ Request::is('student/mylearnings') ? 'active' : '' }}"
-                                data-key="t-one-page">Learning Contents</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('student.assignments.list') }}"
-                                class="nav-link menu-link {{ Request::is('student/assignments') ? 'active' : '' }}"
-                                data-key="t-one-page">Assignments</a>
-                        </li>
-                    </ul>
-                </div>
+                <a href="{{ route('student.mylearnings') }}"
+                                class="nav-link menu-link {{ Request::is('student/mylearnings') ? 'active' : '' }}"><img src="/images/Student-dashboard-menu-icon/Study Materials.svg" alt="">&nbsp; <span
+                                data-key="t-dashboards">Learning Contents</a>
+
             </li>
+            <li class="nav-item">
+                <a href="{{ route('student.assignments.list') }}"
+                                class="nav-link menu-link {{ Request::is('student/assignments') ? 'active' : '' }}"><img src="/images/Student-dashboard-menu-icon/Study Materials.svg" alt="">&nbsp; <span
+                                data-key="t-dashboards">Assignments</a>
+
+            </li>
+
 
 
 

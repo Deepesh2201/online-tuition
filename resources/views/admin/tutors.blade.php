@@ -98,11 +98,11 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        @if ($ttrlist->subject_name)
+                                        {{-- @if ($ttrlist->subject_name) --}}
                                             <a href="tutorprofile/{{ $ttrlist->tutor_id }}">{{ $ttrlist->tutor_name }}</a>
-                                        @else
+                                        {{-- @else
                                             {{ $ttrlist->tutor_name }}
-                                        @endif
+                                        @endif --}}
                                     </td>
                                     <td>{{ $ttrlist->tutor_email }}</td>
                                     <td>{{ $ttrlist->tutor_mobile }}</td>

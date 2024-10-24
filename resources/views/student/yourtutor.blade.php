@@ -74,19 +74,19 @@
 
 
                         $first_purchase_date = paymentstudents::where('student_id', session('userid')->id)
-                        ->where('class_id', $tutorlist->class_id)
+                        // ->where('class_id', $tutorlist->class_id)
                         ->where('tutor_id', $tutorlist->tutor_id)
-                        ->where('subject_id', $tutorlist->subjectid)
+                        // ->where('subject_id', $tutorlist->subjectid)
                         ->select('created_at')
                         ->orderBy('created_at', 'asc') // Assuming you want to order by creation date to get the first purchase
                         ->first();
-                        $formatted_date = ($first_purchase_date) ? $first_purchase_date->created_at->format('d/m/Y h:i a') : null;
+                        $formatted_date = ($first_purchase_date) ? $first_purchase_date->created_at->format('d-m-Y h:i a') : null;
 
 
                         $class_attended = studentattendance::where('student_id', session('userid')->id)
-                        ->where('class_id', $tutorlist->class_id)
+                        // ->where('class_id', $tutorlist->class_id)
                         ->where('tutor_id', $tutorlist->tutor_id)
-                        ->where('subject_id', $tutorlist->subjectid)
+                        // ->where('subject_id', $tutorlist->subjectid)
                         ->count();
 
 

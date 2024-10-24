@@ -459,7 +459,7 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
                         <h6 class="dropdown-header">Welcome {{session('userid')->name}}</h6>
-                        <a class="dropdown-item" href="{{url('admin/profile')}}"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
+                        {{-- <a class="dropdown-item" href="{{url('admin/profile')}}"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a> --}}
                         <a class="dropdown-item" href="{{route('admin.messages')}}"><i class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Messages</span></a>
                         {{-- <a class="dropdown-item" href="apps-tasks-kanban.html"><i class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Taskboard</span></a> --}}
                         {{-- <a class="dropdown-item" href="pages-faqs.html"><i class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Help</span></a> --}}
@@ -527,7 +527,7 @@
                 </button>
             </div>
 
-            <div id="scrollbar"> 
+            <div id="scrollbar">
                 <div class="container-fluid sidemenu">
 
                     <div id="two-column-menu">
@@ -544,7 +544,7 @@
                         @php
                             $isMasterActive = Request::is('admin/class') || Request::is('admin/subject');
                         @endphp
-                       
+
                             <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isMasterActive ? 'true' : 'false' }}" aria-controls="sidebarPages">
                                 <i class="ri-pages-line"></i> <span data-key="t-pages">Master</span>
                             </a>
@@ -553,38 +553,13 @@
                                     <li class="nav-item ">
                                         <a href="{{route('admin.class')}}" class="nav-link {{ Request::is('admin/class') ? 'active' : '' }}" data-key="t-starter"> Grade </a>
                                     </li>
-                                    {{-- <li class="nav-item">
-                                        <a href="{{route('admin.subjectcategory')}}" class="nav-link" data-key="t-team"> Subject Category </a>
-                                    </li> --}}
                                     <li class="nav-item">
                                         <a href="{{route('admin.subject')}}" class="nav-link {{ Request::is('admin/subject') ? 'active' : '' }}" data-key="t-team"> Subject </a>
                                     </li>
-                                    {{-- <li class="nav-item">
-                                        <a href="{{route('admin.topic')}}" class="nav-link" data-key="t-timeline"> Topic </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.batch')}}" class="nav-link" data-key="t-faqs"> Batch </a>
-                                    </li> --}}
 
                                 </ul>
                             </div>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
-                                <i class="ri-apps-2-line"></i> <span data-key="t-apps">Apps</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="sidebarApps">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.messages')}}" class="nav-link" data-key="t-chat"> Chat </a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </li> --}}
-
-
-                       
 
                         <li class="nav-item">
                             <a class="nav-link menu-link{{ Request::is('admin/demolist') ? 'active' : '' }}" href="{{route('admin.demolist')}}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
@@ -607,7 +582,7 @@
 
                         </li>
 
-                      
+
 
                          <li class="nav-item">
                             <a class="nav-link menu-link {{ Request::is('admin/students') ? 'active' : '' }}" href="{{route('admin.students')}}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
@@ -617,14 +592,14 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link {{ Request::is('admin/tutor') ? 'active' : '' }}" href="/admin/tutors" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <a class="nav-link menu-link {{ Request::is('admin/tutors') ? 'active' : '' }}" href="/admin/tutors" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                                 <i class="ri-rocket-line"></i> <span data-key="t-dashboards">Tutor List</span>
                             </a>
 
                         </li>
 
 
-                       
+
 
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Contents</span></li>
                         <li class="nav-item">
@@ -681,7 +656,7 @@
                         @php
                             $isPayActive = Request::is('admin/tutorpaymentslist') || Request::is('admin/payments')|| Request::is('admin/blogs');
                             @endphp
-                        
+
                             <a class="nav-link menu-link" href="#sidebarFormsPay" data-bs-toggle="collapse" role="button" aria-expanded="{{ $isPayActive ? 'true' : 'false' }}" aria-controls="sidebarForms">
                                 <i class="ri-file-list-3-line"></i> <span data-key="t-forms">Payments</span>
                             </a>
@@ -696,9 +671,9 @@
                                     <li class="nav-item">
                                         <a href="{{route('admin.payments')}}" class="nav-link {{ Request::is('admin/payments') ? 'active' : '' }}" data-key="t-checkboxs-radios"> Student Payment </a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a href="#" class="nav-link {{ Request::is('admin/blogs') ? 'active' : '' }}" data-key="t-pickers"> Transactions List </a>
-                                    </li>
+                                    </li> --}}
 
                                 </ul>
                             </div>

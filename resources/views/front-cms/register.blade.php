@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="number">Mobile:<span class="reqrd">*</span>(must start with 07)</label>
+                                <label for="number">Mobile:<span class="reqrd">*</span></label>
                                 <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Your mobile number"
                                        value="{{ old('mobile') }}" maxlength="11"
                                        oninput="validateMobile(this)">
@@ -189,10 +189,7 @@
             // Remove any non-numeric characters
             input.value = mobile.replace(/[^0-9]/g, '');
 
-            // Check if mobile starts with '07' and is 11 characters long
-            if (mobile.length > 0 && !mobile.startsWith('07')) {
-                document.getElementById('mobile-error').innerText = "Mobile number must start with '07'.";
-            } else if (mobile.length > 11) {
+            if (mobile.length > 11) {
                 document.getElementById('mobile-error').innerText = "Mobile number must be exactly 11 digits.";
             } else if (mobile.length < 11) {
                 document.getElementById('mobile-error').innerText = "Mobile number must be exactly 11 digits.";

@@ -111,7 +111,7 @@ class ClassController extends Controller
             ->join('tutorregistrations', 'tutorregistrations.id', 'zoom_classes.tutor_id')
             ->where('zoom_classes.is_active', 1)
             ->where('slot_bookings.student_id', session('userid')->id)
-            ->where('zoom_classes.is_completed', 0)
+            // ->where('zoom_classes.is_completed', 0)
             ->get();
         $subjects = subjects::where('is_active', 1)->get();
         $batches = batches::where('is_active', 1)->get();

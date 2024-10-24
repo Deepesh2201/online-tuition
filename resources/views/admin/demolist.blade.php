@@ -168,9 +168,31 @@
                                             <span class="badge bg-primary">{{ $demo->currentstatus }}</span>
                                         @endif
                                     </td>
-                                    <td><span style="color: black;">{{ date('d-m-Y', strtotime($demo->slot_1)) }}</span> <span style="color: #299CDB;">{{ date('h:i A', strtotime($demo->slot_1)) }}</span></td>
-                                    <td><span style="color: black;">{{ date('d-m-Y', strtotime($demo->slot_2)) }}</span> <span style="color: #299CDB;">{{ date('h:i A', strtotime($demo->slot_2)) }}</span></td>
-                                    <td><span style="color: black;">{{ date('d-m-Y', strtotime($demo->slot_3)) }}</span> <span style="color: #299CDB;">{{ date('h:i A', strtotime($demo->slot_3)) }}</span></td>
+                                    <td>
+                                        <span style="color: black;">
+                                            {{ $demo->slot_1 ? date('d-m-Y', strtotime($demo->slot_1)) : '' }}
+                                        </span>
+                                        <span style="color: #299CDB;">
+                                            {{ $demo->slot_1 ? date('h:i A', strtotime($demo->slot_1)) : '' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span style="color: black;">
+                                            {{ $demo->slot_2 ? date('d-m-Y', strtotime($demo->slot_2)) : '' }}
+                                        </span>
+                                        <span style="color: #299CDB;">
+                                            {{ $demo->slot_2 ? date('h:i A', strtotime($demo->slot_2)) : '' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span style="color: black;">
+                                            {{ $demo->slot_3 ? date('d-m-Y', strtotime($demo->slot_3)) : '' }}
+                                        </span>
+                                        <span style="color: #299CDB;">
+                                            {{ $demo->slot_3 ? date('h:i A', strtotime($demo->slot_3)) : '' }}
+                                        </span>
+                                    </td>
+
                                     <td>
                                         @if ($demo->slot_confirmed)
                                             <span style="color: black;">{{ date('d-m-Y', strtotime($demo->slot_confirmed)) }}</span> <span style="color: #299CDB;">{{ date('h:i A', strtotime($demo->slot_confirmed)) }}</span>
