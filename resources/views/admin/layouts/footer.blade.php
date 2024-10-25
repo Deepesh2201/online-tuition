@@ -15,64 +15,81 @@
     </div>
 </footer>
 </div>
+<!-- Styles for Notification Popup -->
 <style>
     .notification-popup {
-        display: none; /* Hide by default */
+        display: none;
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: #333;
+        background: rgba(0, 0, 0, 0.7);
         color: #fff;
         padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
+        width: 300px;
+        border-radius: 12px;
         text-align: center;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        animation: fadeIn 0.5s ease;
     }
 
-    .notification-popup button {
-        margin-top: 10px;
-        padding: 5px 10px;
-        background-color: #ff0000;
-        color: #fff;
+    .notification-ok-btn {
+        background-color: #ff4081;
         border: none;
-        border-radius: 3px;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 8px;
         cursor: pointer;
+        margin-top: 12px;
+        transition: background 0.3s;
     }
 
-    .notification-popup button:hover {
-        background-color: #cc0000;
+    .notification-ok-btn:hover {
+        background-color: #e0356b;
     }
-    </style>
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -60%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+</style>
 
 
 
-<!-- end main content-->
-<div id="notification-popup" class="notification-popup" style="display: none;">
-    <p id="notificationpopupdata">Your notification message here.</p>
-    <button onclick="closeNotification()">Close</button>
-    <audio id="notification-sound" src="{{url('sounds/notification.mp3')}}" preload="auto"></audio>
+<!-- Beautiful Notification Popup -->
+<div id="notification-popup" class="notification-popup">
+    <p id="notificationpopupdata"></p>
+    <button onclick="closeNotification()" class="notification-ok-btn">OK</button>
+    <audio id="notification-sound" src="{{ url('sounds/notification.mp3') }}" preload="auto"></audio>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if the notification has been acknowledged
-    if (!sessionStorage.getItem('notificationAcknowledged')) {
-        // Show the notification popup
-        document.getElementById('notification-popup').style.display = 'block';
-        document.getElementById('notification-sound').play(); // Play notification sound
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if the notification has been acknowledged
+        if (!sessionStorage.getItem('notificationAcknowledged')) {
+            // Show the notification popup
+            document.getElementById('notification-popup').style.display = 'block';
+            document.getElementById('notification-sound').play(); // Play notification sound
+        }
+    });
+
+    // Function to close the notification
+    function closeNotification() {
+        // Set a session storage item to remember the acknowledgment
+        sessionStorage.setItem('notificationAcknowledged', 'true');
+
+        // Hide the notification popup
+        document.getElementById('notification-popup').style.display = 'none';
     }
-});
-
-// Function to close the notification
-function closeNotification() {
-    // Set a session storage item to remember the acknowledgment
-    sessionStorage.setItem('notificationAcknowledged', 'true');
-
-    // Hide the notification popup
-    document.getElementById('notification-popup').style.display = 'none';
-}
 </script>
 
 
@@ -80,7 +97,7 @@ function closeNotification() {
     function showNotification(count) {
         var popup = document.getElementById('notification-popup');
         var sound = document.getElementById('notification-sound');
-        document.getElementById('notificationpopupdata').innerHTML='You have '+ count +' unread notifications';
+        document.getElementById('notificationpopupdata').innerHTML = 'You have ' + count + ' unread notifications';
 
         popup.style.display = 'block';
         sound.play();
@@ -93,7 +110,7 @@ function closeNotification() {
 
     // Call the function to show the notification
     // showNotification();
-    </script>
+</script>
 
 
 
@@ -155,16 +172,25 @@ function closeNotification() {
             type: 'GET',
             success: function(response) {
                 var unreadCount = response.unread_count;
+                var previousCount = sessionStorage.getItem('previousNotificationCount') || 0;
 
-                // Only show the notification if it hasn't been acknowledged
-                if (unreadCount > 0 && !sessionStorage.getItem('notificationAcknowledged')) {
-                    showNotification(unreadCount);
-                } else {
-                    closeNotification();
+                // Check if the count has changed and show the popup only if it has
+                if (unreadCount != previousCount) {
+                    sessionStorage.setItem('previousNotificationCount', unreadCount); // Update stored count
+
+                    // Show notification only if there are unread notifications
+                    if (unreadCount > 0) {
+                        document.getElementById('notificationpopupdata').innerHTML = 'You have ' +
+                            unreadCount + ' unread notifications';
+                        document.getElementById('notification-popup').style.display = 'block';
+                        document.getElementById('notification-sound').play();
+                    }
                 }
 
+                // Update the badge count in the header
                 $('#unreadNotificationCount').text(unreadCount);
-                // Update the class of the badge to visually indicate unread count
+
+                // Badge color update based on unread count
                 if (unreadCount > 0) {
                     $('#unreadNotificationCount').removeClass('bg-danger').addClass('bg-primary');
                 } else {
@@ -174,56 +200,56 @@ function closeNotification() {
                 // Clear previous notifications
                 var notificationList = $('#all-noti-tab .pe-2');
                 notificationList.empty();
-                console.log(response.notifications);
-                // Loop through the notifications and append them to the appropriate tab
+
+                // Populate notifications in the list
                 $.each(response.notifications, function(index, notification) {
                     let createdAt = new Date(notification.created_at);
+                    let formattedDateTime = createdAt.toLocaleString();
 
-                    // Extracting hours, minutes, seconds, day, month, and year
-                    let hours = createdAt.getHours();
-                    let minutes = createdAt.getMinutes();
-                    let seconds = createdAt.getSeconds();
-                    let day = createdAt.getDate();
-                    let month = createdAt.getMonth() + 1; // Months are zero-indexed, so add 1
-                    let year = createdAt.getFullYear();
-
-                    // Padding single digits with leading zeros
-                    hours = ('0' + hours).slice(-2);
-                    minutes = ('0' + minutes).slice(-2);
-                    seconds = ('0' + seconds).slice(-2);
-                    day = ('0' + day).slice(-2);
-                    month = ('0' + month).slice(-2);
-                    let formattedDateTime = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
                     var notificationItem = `
-                        <div class="text-reset notification-item d-block dropdown-item position-relative">
-                            <div class="d-flex">
-                                <div class="avatar-xs me-3 flex-shrink-0">
-                                    <span class="avatar-title bg-info-subtle rounded-circle fs-16">
-                                        <img src="/images/students/profilepics/${notification.initiator_pic}" class="">
-                                    </span>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <a onclick="markAsRead(${notification.id})" href="/checkNotificationDetails/${notification.id}" class="stretched-link">
-                                        <h6 class="mt-0 mb-2 lh-base">${notification.notification}</h6>
-                                    </a>
-                                    <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                        <span><i class="mdi mdi-clock-outline"></i> ${formattedDateTime} - ${notification.initiator_name} - (${notification.initiator_role})</span>
-                                    </p>
-                                </div>
-                                <div class="px-2 fs-15">
-                                    <div class="form-check notification-check">
-                                        <input class="form-check-input" title="Mark as read" onclick="markAsRead('${notification.id}')" type="radio" value="" id="notification-check-${index}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    notificationList.append(notificationItem); // Append to All tab regardless of type
+    <div class="text-reset notification-item d-block dropdown-item position-relative">
+        <div class="d-flex">
+            <div class="avatar-xs me-3 flex-shrink-0">
+                <span class="avatar-title bg-info-subtle rounded-circle fs-16">
+                    <img src="/images/${notification.initiator_role.trim() === 'Student' ? 'students' : 'tutors'}/profilepics/${notification.initiator_pic}"
+                         class=""
+                         onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
+                </span>
+            </div>
+            <div class="flex-grow-1">
+                <a onclick="markAsRead(${notification.id})" href="/checkNotificationDetails/${notification.id}" class="stretched-link">
+                    <h6 class="mt-0 mb-2 lh-base">${notification.notification}</h6>
+                </a>
+                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                    <span><i class="mdi mdi-clock-outline"></i> ${formattedDateTime} - ${notification.initiator_name} - (${notification.initiator_role})</span>
+                </p>
+            </div>
+            <div class="px-2 fs-15">
+                <div class="form-check notification-check">
+                    <input class="form-check-input" title="Mark as read" onclick="markAsRead('${notification.id}')" type="radio" value="" id="notification-check-${index}">
+                </div>
+            </div>
+        </div>
+    </div>
+`;
+
+                    notificationList.append(
+                    notificationItem); // Append to All tab regardless of type
                 });
             }
         });
     }
 
+    // Function to close the notification popup
+    function closeNotification() {
+        document.getElementById('notification-popup').style.display = 'none';
+    }
+
+    // Initial fetch and interval for updates
+    $(document).ready(function() {
+        fetchNotificationsAndUpdateCount();
+        setInterval(fetchNotificationsAndUpdateCount, 5000);
+    });
     // Show notification function
     function showNotification(count) {
         var popup = document.getElementById('notification-popup');
@@ -234,23 +260,7 @@ function closeNotification() {
         sound.play();
     }
 
-    // Function to close the notification
-    function closeNotification() {
-        // Set a session storage item to remember the acknowledgment
-        sessionStorage.setItem('notificationAcknowledged', 'true');
 
-        // Hide the notification popup
-        document.getElementById('notification-popup').style.display = 'none';
-    }
-
-    // Fetch notifications and update count on page load
-    $(document).ready(function() {
-        // Call the function immediately once the document is ready
-        fetchNotificationsAndUpdateCount();
-
-        // Set an interval to call the function every 5 seconds (5000 milliseconds)
-        setInterval(fetchNotificationsAndUpdateCount, 5000);
-    });
 
     // Function to mark notification as read
     function markAsRead(notificationId) {

@@ -15,45 +15,59 @@
     </div>
 </footer>
 </div>
-<!-- end main content-->
+<!-- Styles for Notification Popup -->
 <style>
     .notification-popup {
         display: none;
-        /* Hide by default */
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: #333;
+        background: rgba(0, 0, 0, 0.7);
         color: #fff;
         padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
+        width: 300px;
+        border-radius: 12px;
         text-align: center;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        animation: fadeIn 0.5s ease;
     }
 
-    .notification-popup button {
-        margin-top: 10px;
-        padding: 5px 10px;
-        background-color: #ff0000;
-        color: #fff;
+    .notification-ok-btn {
+        background-color: #ff4081;
         border: none;
-        border-radius: 3px;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 8px;
         cursor: pointer;
+        margin-top: 12px;
+        transition: background 0.3s;
     }
 
-    .notification-popup button:hover {
-        background-color: #cc0000;
+    .notification-ok-btn:hover {
+        background-color: #e0356b;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -60%);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
     }
 </style>
 
 
 
-<!-- end main content-->
+<!-- Beautiful Notification Popup -->
 <div id="notification-popup" class="notification-popup">
     <p id="notificationpopupdata"></p>
-    <button onclick="closeNotification()">Close</button>
+    <button onclick="closeNotification()" class="notification-ok-btn">OK</button>
     <audio id="notification-sound" src="{{ url('sounds/notification.mp3') }}" preload="auto"></audio>
 </div>
 
@@ -133,27 +147,33 @@
 <!-- End custom js for this page-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </body>
+
 <script>
     // Function to fetch notifications and update unread count
-    function fetchNotificationsAndUpdateCount() {
+function fetchNotificationsAndUpdateCount() {
     $.ajax({
         url: '/notifications', // Update this URL to your endpoint that fetches notifications
         type: 'GET',
         success: function(response) {
             var unreadCount = response.unread_count;
-            var notificationShown = sessionStorage.getItem('notificationShown');
+            var previousCount = sessionStorage.getItem('previousNotificationCount') || 0;
 
-            // Check if the notification popup should be shown
-            if (response.unread_count > 0 && !notificationShown) {
-                showNotification(response.unread_count); // Show notification popup
-                sessionStorage.setItem('notificationShown', 'true'); // Set flag to indicate popup has been shown
-            } else {
-                closeNotification();
+            // Check if the count has changed and show the popup only if it has
+            if (unreadCount != previousCount) {
+                sessionStorage.setItem('previousNotificationCount', unreadCount); // Update stored count
+
+                // Show notification only if there are unread notifications
+                if (unreadCount > 0) {
+                    document.getElementById('notificationpopupdata').innerHTML = 'You have ' + unreadCount + ' unread notifications';
+                    document.getElementById('notification-popup').style.display = 'block';
+                    document.getElementById('notification-sound').play();
+                }
             }
 
+            // Update the badge count in the header
             $('#unreadNotificationCount').text(unreadCount);
 
-            // Update the class of the badge to visually indicate unread count
+            // Badge color update based on unread count
             if (unreadCount > 0) {
                 $('#unreadNotificationCount').removeClass('bg-danger').addClass('bg-primary');
             } else {
@@ -164,31 +184,17 @@
             var notificationList = $('#all-noti-tab .pe-2');
             notificationList.empty();
 
+            // Populate notifications in the list
             $.each(response.notifications, function(index, notification) {
                 let createdAt = new Date(notification.created_at);
-
-                // Extracting hours, minutes, seconds, day, month, and year
-                let hours = createdAt.getHours();
-                let minutes = createdAt.getMinutes();
-                let seconds = createdAt.getSeconds();
-                let day = createdAt.getDate();
-                let month = createdAt.getMonth() + 1; // Months are zero-indexed, so add 1
-                let year = createdAt.getFullYear();
-
-                // Padding single digits with leading zeros
-                hours = ('0' + hours).slice(-2);
-                minutes = ('0' + minutes).slice(-2);
-                seconds = ('0' + seconds).slice(-2);
-                day = ('0' + day).slice(-2);
-                month = ('0' + month).slice(-2);
-                let formattedDateTime = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
+                let formattedDateTime = createdAt.toLocaleString();
 
                 var notificationItem = `
                     <div class="text-reset notification-item d-block dropdown-item position-relative">
                         <div class="d-flex">
                             <div class="avatar-xs me-3 flex-shrink-0">
                                 <span class="avatar-title bg-info-subtle rounded-circle fs-16">
-                                    <img src="/images/students/profilepics/${notification.initiator_pic}" class="">
+                                    <img src="/images/students/profilepics/${notification.initiator_pic}" class="" onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
                                 </span>
                             </div>
                             <div class="flex-grow-1">
@@ -207,88 +213,41 @@
                         </div>
                     </div>
                 `;
-
                 notificationList.append(notificationItem); // Append to All tab regardless of type
             });
         }
     });
 }
 
-// Function to clear the notification shown flag (call this when the user logs out or the session ends)
-function clearNotificationFlag() {
-    sessionStorage.removeItem('notificationShown');
+// Function to close the notification popup
+function closeNotification() {
+    document.getElementById('notification-popup').style.display = 'none';
 }
 
-
-
-    // Fetch notifications and update count on page load
-
-    // $(document).ready(function() {
-    //     fetchNotificationsAndUpdateCount();
-    // });
-    $(document).ready(function() {
-        // Call the function immediately once the document is ready
-        fetchNotificationsAndUpdateCount();
-
-        // Set an interval to call the function every 5 seconds (5000 milliseconds)
-        setInterval(fetchNotificationsAndUpdateCount, 5000);
-    });
-    // Event listener for clicking on a notification (assuming you have one)
-    // $(document).on('click', '.notification-item', function() {
-    //     var notificationId = $(this).data('id');
-    //     markAsRead(notificationId);
-    // });
-
-    // Function to mark notification as read (assuming you have one)
-    function markAsRead(notificationId) {
+// Initial fetch and interval for updates
+$(document).ready(function() {
+    fetchNotificationsAndUpdateCount();
+    setInterval(fetchNotificationsAndUpdateCount, 5000);
+});
+function markAsRead(notificationId) {
         $.ajax({
-            url: '/markAsRead/' + notificationId, // Endpoint to mark notification as read
+            url: '/markAsRead/' + notificationId,
             type: 'GET',
-            success: function(response) {
-                // Fetch notifications again after marking as read
+            success: function() {
                 fetchNotificationsAndUpdateCount();
             }
         });
     }
-
-
 
     function checkNotificationDetails(notificationId) {
         $.ajax({
-            url: '/checkNotificationDetails/' + notificationId, // Endpoint to mark notification as read
+            url: '/checkNotificationDetails/' + notificationId,
             type: 'GET',
-            success: function(response) {
-                // Fetch notifications again after marking as read
+            success: function() {
                 fetchNotificationsAndUpdateCount();
             }
         });
     }
+
 </script>
-
-@if (session('show_popup'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                title: 'Profile Update Required',
-                html: '<li>Kindly update your profile</li> <br><li>Get approval from admin via call/chat</li> <br><li>Create slots in "Slot Management"</li>',
-                icon: 'warning',
-                confirmButtonText: 'Update Now',
-                confirmButtonColor: '#3085d6',
-                backdrop: `
-                    rgba(0,0,123,0.4)
-                    url("/images/your-image.jpg")
-                    center center
-                    no-repeat
-                `
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '{{ url('tutor/profileupdate') }}';
-                }
-            });
-        });
-    </script>
-@endif
-
-
-
 </html>
