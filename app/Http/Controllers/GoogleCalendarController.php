@@ -315,7 +315,6 @@ class GoogleCalendarController extends Controller
         $demodata = democlasses::select('*')->where('id', $request->confirmid)->first();
         $demostudent = studentprofile::select('*')->where('student_id', $demodata->student_id)->first();
 
-        dd($demodata->slot_1);
         $client = new Google_Client();
         $client->setClientId('676549087074-1ueuq9ch025rdru9tu8043qfg8o54cso.apps.googleusercontent.com');
         $client->setClientSecret('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');
