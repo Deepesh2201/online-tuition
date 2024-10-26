@@ -18,6 +18,9 @@
         .ck-balloon-panel_position_border-side_right{
             border: none !important;
         }
+        .cke_notification.cke_notification_warning {
+        display: none !important; /* Hides the notification */
+    }
 
     </style>
     <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
@@ -76,7 +79,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="">Subject<i style="color:red">*</i></label>
-                        <select type="text" class="form-control" id="subject" name="subject" 
+                        <select type="text" class="form-control" id="subject" name="subject"
                             required>
                             @if ($qdata ?? '')
                                 @foreach ($subjects as $subject)

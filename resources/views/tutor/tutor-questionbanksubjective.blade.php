@@ -20,6 +20,9 @@ input[type='radio'] {
 .ck-balloon-panel_position_border-side_right {
     border: none !important;
 }
+.cke_notification.cke_notification_warning {
+        display: none !important; /* Hides the notification */
+    }
 </style>
 <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
 
@@ -128,9 +131,7 @@ input[type='radio'] {
                 <div class="form-group row">
                     <div class="col-md-12 mt-4">
                         <label for="">Remarks</label>
-                        <textarea type="text" class="form-control" id="remarks" name="remarks">
-                            {{$qdata->remarks ?? ''}}
-                        </textarea>
+                        <textarea type="text" class="form-control" id="remarks" name="remarks">{{$qdata->remarks ?? ''}}</textarea>
 
                     </div>
 

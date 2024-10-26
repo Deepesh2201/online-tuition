@@ -148,7 +148,7 @@
                                         class="checkbox" @if ($testlist->test_status == 1) then checked @endif>
                                     </div>
                                 </td>
-                                
+
                                 <td>
                                     <div class="text-center"><a class="btn btn-sm btn-danger"
                                             href="{{ url('tutor/onlinetests') . '/' . $testlist->test_id }}">View/Update</a>
@@ -159,6 +159,7 @@
                     </tbody>
                 </table>
             </div>
+            <br>
             <div class="d-flex justify-content-center" id="paginationContainer">
                 {!! $testlists->links() !!}
             </div>
@@ -214,7 +215,7 @@
 
                          <button type="submit" class="btn btn-sm btn-success mr-1 moveRight"
                              data-dismiss="modal" onclick=""><span class="fa fa-check"></span> Submit</button>
-                         
+
                          <button type="button" class="btn btn-sm btn-danger mr-1 moveRight" style="margin-right: 5px"
                              data-dismiss="modal" onclick="closeassignmodal()"><span class="fa fa-times"></span> Close</button>
 

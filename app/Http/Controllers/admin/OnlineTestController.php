@@ -270,10 +270,11 @@ class OnlineTestController extends Controller
     {
 
         $onlineTest = OnlineTests::where('id', $id)
-            ->where('class_id', session('userid')->class_id)
+            // ->where('class_id', session('userid')->class_id)
             ->first();
 
         // echo session('userid')->class_id;
+        // echo $id;
         // dd($onlineTest);
         // Decode the JSON string to an array
         $questionIds = json_decode($onlineTest->question_id);
