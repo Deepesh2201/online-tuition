@@ -238,40 +238,40 @@ class GoogleCalendarController extends Controller
                 $slotbooking->update();
 
                 //////////////// Here I need to pass notification into db
-    $notificationdata = new Notification();
-    $notificationdata->alert_type = 7;
-    $notificationdata->notification = "You slots has been confirmed";
-    $notificationdata->initiator_id = session('userid')->id;
-    $notificationdata->initiator_role = session('userid')->role_id;
-    $notificationdata->event_id = $request->classslotid;
-    // Sending to admin
-    // if($request->receiver_role_id == 1){
-    //     $notificationdata->show_to_admin = 1;
-    //     $notificationdata->show_to_admin_id = $request->receiver_id;
-    //     // $notificationdata->show_to_all_admin = 1;
-    // }
-    // // Sending to tutor
-    // if($request->receiver_role_id == 2){
-    //     $notificationdata->show_to_tutor = 1;
-    //     $notificationdata->show_to_tutor_id = $request->receiver_id;
-    //     // $notificationdata->show_to_all_tutor = 0;
-    // }
-    // Sending to student
-    // if($request->receiver_role_id == 3){
-        $notificationdata->show_to_student = 1;
-        $notificationdata->show_to_student_id = $student->id;
-        // $notificationdata->show_to_all_student = 0;
-    // }
-    // Sending to parent
-    // if($request->receiver_role_id == 3){
-    //     $notificationdata->show_to_parent = 1;
-    //     $notificationdata->show_to_parent_id = $request->receiver_id;
-    //     // $notificationdata->show_to_all_parent = 0;
-    // }
-    $notificationdata->read_status = 0;
+                $notificationdata = new Notification();
+                $notificationdata->alert_type = 7;
+                $notificationdata->notification = "You slots has been confirmed";
+                $notificationdata->initiator_id = session('userid')->id;
+                $notificationdata->initiator_role = session('userid')->role_id;
+                $notificationdata->event_id = $request->classslotid;
+                // Sending to admin
+                // if($request->receiver_role_id == 1){
+                //     $notificationdata->show_to_admin = 1;
+                //     $notificationdata->show_to_admin_id = $request->receiver_id;
+                //     // $notificationdata->show_to_all_admin = 1;
+                // }
+                // // Sending to tutor
+                // if($request->receiver_role_id == 2){
+                //     $notificationdata->show_to_tutor = 1;
+                //     $notificationdata->show_to_tutor_id = $request->receiver_id;
+                //     // $notificationdata->show_to_all_tutor = 0;
+                // }
+                // Sending to student
+                // if($request->receiver_role_id == 3){
+                $notificationdata->show_to_student = 1;
+                $notificationdata->show_to_student_id = $student->id;
+                // $notificationdata->show_to_all_student = 0;
+                // }
+                // Sending to parent
+                // if($request->receiver_role_id == 3){
+                //     $notificationdata->show_to_parent = 1;
+                //     $notificationdata->show_to_parent_id = $request->receiver_id;
+                //     // $notificationdata->show_to_all_parent = 0;
+                // }
+                $notificationdata->read_status = 0;
 
-    $notified = $notificationdata->save();
-    broadcast(new RealTimeMessage('$notification'));
+                $notified = $notificationdata->save();
+                broadcast(new RealTimeMessage('$notification'));
 
                 return redirect()->to('/tutor/classschedule')->with('success', 'Class scheduled successfully!');
             } else {
@@ -307,103 +307,103 @@ class GoogleCalendarController extends Controller
         return redirect()->route('error')->with('message', 'Authentication failed.');
     }
     public function democonfirm(Request $request)
-{
-    $request->validate([
-        'slot' => 'required',
-    ]);
+    {
+        $request->validate([
+            'slot' => 'required',
+        ]);
 
-    $demodata = democlasses::select('*')->where('id', $request->confirmid)->first();
-    $demostudent = studentprofile::select('*')->where('student_id', $demodata->student_id)->first();
+        $demodata = democlasses::select('*')->where('id', $request->confirmid)->first();
+        $demostudent = studentprofile::select('*')->where('student_id', $demodata->student_id)->first();
 
-    $client = new Google_Client();
-    $client->setClientId('676549087074-1ueuq9ch025rdru9tu8043qfg8o54cso.apps.googleusercontent.com');
-    $client->setClientSecret('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');
-    $client->setRedirectUri('https://mychoicetutor.com/tutor/dashboard/oauth2callback');
-    $client->addScope('https://www.googleapis.com/auth/calendar');
-    $client->setAccessType('offline');
+        dd($demodata->slot_1);
+        $client = new Google_Client();
+        $client->setClientId('676549087074-1ueuq9ch025rdru9tu8043qfg8o54cso.apps.googleusercontent.com');
+        $client->setClientSecret('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');
+        $client->setRedirectUri('https://mychoicetutor.com/tutor/dashboard/oauth2callback');
+        $client->addScope('https://www.googleapis.com/auth/calendar');
+        $client->setAccessType('offline');
 
-    if (!$request->session()->has('access_token')) {
-        $authUrl = $client->createAuthUrl();
-        return redirect()->away($authUrl);
-    }
-
-    $client->setAccessToken($request->session()->get('access_token'));
-    $service = new Google_Service_Calendar($client);
-
-    $classstarttime = $request->input('slot');
-    $classduration = 60;
-    $classpassword = '12345678';
-    $attendees[] = ['email' => $demostudent->email];
-
-    $subjectdata = subjects::select('*')->where('id', $demodata->subject_id)->first();
-    $batchdata = batches::select('*')->where('id', $request->batchid)->first();
-
-    $event = new Google_Service_Calendar_Event([
-        'summary' => 'Demo Class('.$subjectdata->name.')',
-        'description' => $subjectdata->name,
-        'start' => [
-            'dateTime' => date('c', strtotime($classstarttime)),
-            'timeZone' => 'Asia/Kolkata',
-        ],
-        'end' => [
-            'dateTime' => date('c', strtotime($classstarttime . ' + ' . $classduration . ' minutes')),
-            'timeZone' => 'Asia/Kolkata',
-        ],
-        'conferenceData' => [
-            'createRequest' => [
-                'requestId' => uniqid(),
-            ],
-            'password' => $classpassword
-        ],
-        'attendees' => $attendees,
-    ]);
-
-    $calendarId = 'primary';
-    $response = $service->events->insert($calendarId, $event, ['conferenceDataVersion' => 1]);
-
-    if ($response->status == 'confirmed') {
-        $dcnf = democlasses::find($request->confirmid);
-        $dcnf->slot_1 = $demodata->slot_1;
-        $dcnf->slot_confirmed = $request->slot;
-        $dcnf->slot_confirmed_at = Carbon::now();
-        $dcnf->slot_confirmed_by = session('userid')->id;
-        $dcnf->demo_link = $response->hangoutLink;
-        $dcnf->remarks = $request->demoremarks;
-        $dcnf->status = 3;
-        $res = $dcnf->save();
-
-        $details = [
-            'name' => $demostudent->name,
-            'confirmed_slot' => $request->slot,
-            'tutor_name' => session('userid')->name,
-            'mailtype' => 3
-        ];
-        Mail::to($demostudent->email)->send(new SendMail($details));
-
-        if ($res) {
-            $notificationdata = new Notification();
-            $notificationdata->alert_type = 2;
-            $notificationdata->notification = 'Trial Class Confirmed By ' . session('userid')->name;
-            $notificationdata->initiator_id = session('userid')->id;
-            $notificationdata->initiator_role = session('userid')->role_id;
-            $notificationdata->event_id = $dcnf->id;
-            $notificationdata->show_to_admin = 1;
-            $notificationdata->show_to_all_admin = 1;
-            $notificationdata->show_to_student = 1;
-            $notificationdata->show_to_student_id = $demodata->student_id;
-            $notificationdata->read_status = 0;
-            $notified = $notificationdata->save();
-
-            broadcast(new RealTimeMessage('$notification'));
-
-            return redirect()->to('/tutor/demolist')->with('success', 'Trial confirmed successfully');
-        } else {
-            return back()->with('fail', 'Something went wrong. Please try again later');
+        if (!$request->session()->has('access_token')) {
+            $authUrl = $client->createAuthUrl();
+            return redirect()->away($authUrl);
         }
-    } else {
-        return response()->json(['error' => 'Failed to confirm demo'], 500);
+
+        $client->setAccessToken($request->session()->get('access_token'));
+        $service = new Google_Service_Calendar($client);
+
+        $classstarttime = $request->input('slot');
+        $classduration = 60;
+        $classpassword = '12345678';
+        $attendees[] = ['email' => $demostudent->email];
+
+        $subjectdata = subjects::select('*')->where('id', $demodata->subject_id)->first();
+        $batchdata = batches::select('*')->where('id', $request->batchid)->first();
+
+        $event = new Google_Service_Calendar_Event([
+            'summary' => 'Demo Class(' . $subjectdata->name . ')',
+            'description' => $subjectdata->name,
+            'start' => [
+                'dateTime' => date('c', strtotime($classstarttime)),
+                'timeZone' => 'Asia/Kolkata',
+            ],
+            'end' => [
+                'dateTime' => date('c', strtotime($classstarttime . ' + ' . $classduration . ' minutes')),
+                'timeZone' => 'Asia/Kolkata',
+            ],
+            'conferenceData' => [
+                'createRequest' => [
+                    'requestId' => uniqid(),
+                ],
+                'password' => $classpassword,
+            ],
+            'attendees' => $attendees,
+        ]);
+
+        $calendarId = 'primary';
+        $response = $service->events->insert($calendarId, $event, ['conferenceDataVersion' => 1]);
+
+        if ($response->status == 'confirmed') {
+            $dcnf = democlasses::find($request->confirmid);
+            $dcnf->slot_confirmed = $request->slot;
+            $dcnf->slot_confirmed_at = Carbon::now();
+            $dcnf->slot_confirmed_by = session('userid')->id;
+            $dcnf->demo_link = $response->hangoutLink;
+            $dcnf->remarks = $request->demoremarks;
+            $dcnf->status = 3;
+            $res = $dcnf->save();
+
+            $details = [
+                'name' => $demostudent->name,
+                'confirmed_slot' => $request->slot,
+                'tutor_name' => session('userid')->name,
+                'mailtype' => 3,
+            ];
+            Mail::to($demostudent->email)->send(new SendMail($details));
+
+            if ($res) {
+                $notificationdata = new Notification();
+                $notificationdata->alert_type = 2;
+                $notificationdata->notification = 'Trial Class Confirmed By ' . session('userid')->name;
+                $notificationdata->initiator_id = session('userid')->id;
+                $notificationdata->initiator_role = session('userid')->role_id;
+                $notificationdata->event_id = $dcnf->id;
+                $notificationdata->show_to_admin = 1;
+                $notificationdata->show_to_all_admin = 1;
+                $notificationdata->show_to_student = 1;
+                $notificationdata->show_to_student_id = $demodata->student_id;
+                $notificationdata->read_status = 0;
+                $notified = $notificationdata->save();
+
+                broadcast(new RealTimeMessage('$notification'));
+
+                return redirect()->to('/tutor/demolist')->with('success', 'Trial confirmed successfully');
+            } else {
+                return back()->with('fail', 'Something went wrong. Please try again later');
+            }
+        } else {
+            return response()->json(['error' => 'Failed to confirm demo'], 500);
+        }
     }
-}
     public function demoend(Request $request)
     {
 
