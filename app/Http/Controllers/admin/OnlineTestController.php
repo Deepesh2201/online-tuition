@@ -186,6 +186,7 @@ class OnlineTestController extends Controller
             ->where('assign_tests.status', 1)
             ->where('assign_tests.is_attempted', 0)
             ->where('assign_tests.student_id', session('userid')->id)
+            ->orderBy('assign_tests.created_at','desc')
             // ->paginate(10);
             ->get();
         // dd($exams);

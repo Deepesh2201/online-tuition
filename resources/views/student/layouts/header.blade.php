@@ -844,7 +844,7 @@ $studentprofile = studentprofile::where('student_id', session('userid')->id)->fi
                         <li class="nav-item">
                             <a href="{{ route('student.exams') }}"
                                 class="nav-link {{ Request::is('student/exams') ? 'active' : '' }}"
-                                data-key="t-alerts">Quizes</a>
+                                data-key="t-alerts">Online Tests</a>
                         </li>
                     </ul>
                 </div>
