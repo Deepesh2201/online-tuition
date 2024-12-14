@@ -82,6 +82,7 @@
                             <td>
                                 @if($response->status ==1 )
                                     <a href="#"><button class="btn btn-sm btn-primary" disabled>completed</button></a>
+                                    {{-- <a href="{{url('tutor/onlinetests/responses/student')}}/{{$response->id}}"><button class="btn btn-sm btn-primary">View</button></a> --}}
                                 @else
                                     <a href="{{url('tutor/onlinetests/responses/student')}}/{{$response->id}}"><button class="btn btn-sm btn-primary">View</button></a>
                                 @endif

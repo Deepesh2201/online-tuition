@@ -72,47 +72,6 @@
     <audio id="notification-sound" src="{{ url('sounds/notification.mp3') }}" preload="auto"></audio>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Check if the notification has been acknowledged
-        if (!sessionStorage.getItem('notificationAcknowledged')) {
-            // Show the notification popup
-            document.getElementById('notification-popup').style.display = 'block';
-            document.getElementById('notification-sound').play(); // Play notification sound
-        }
-    });
-
-    // Function to close the notification
-    function closeNotification() {
-        // Set a session storage item to remember the acknowledgment
-        sessionStorage.setItem('notificationAcknowledged', 'true');
-
-        // Hide the notification popup
-        document.getElementById('notification-popup').style.display = 'none';
-    }
-</script>
-
-
-<script>
-    function showNotification(count) {
-        var popup = document.getElementById('notification-popup');
-        var sound = document.getElementById('notification-sound');
-        document.getElementById('notificationpopupdata').innerHTML = 'You have ' + count + ' unread notifications';
-
-        popup.style.display = 'block';
-        sound.play();
-    }
-
-    function closeNotification() {
-        var popup = document.getElementById('notification-popup');
-        popup.style.display = 'none';
-    }
-
-    // Call the function to show the notification
-    // showNotification();
-</script>
-
-
 
 <!-- JAVASCRIPT -->
 @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -165,6 +124,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </body>
 <script>
+    document.getElementById('notification-popup').style.display = 'none';
+
     // Function to fetch notifications and update unread count
     function fetchNotificationsAndUpdateCount() {
         $.ajax({
@@ -172,19 +133,22 @@
             type: 'GET',
             success: function(response) {
                 var unreadCount = response.unread_count;
-                var previousCount = sessionStorage.getItem('previousNotificationCount') || 0;
 
-                // Check if the count has changed and show the popup only if it has
-                if (unreadCount != previousCount) {
-                    sessionStorage.setItem('previousNotificationCount', unreadCount); // Update stored count
+                // Get the previously stored unread count from localStorage
+                var previousCount = localStorage.getItem('previousUnreadCount');
 
-                    // Show notification only if there are unread notifications
-                    if (unreadCount > 0) {
-                        document.getElementById('notificationpopupdata').innerHTML = 'You have ' +
-                            unreadCount + ' unread notifications';
-                        document.getElementById('notification-popup').style.display = 'block';
-                        document.getElementById('notification-sound').play();
-                    }
+                // Reset acknowledgment if the count has increased
+                if (unreadCount > previousCount) {
+                    localStorage.removeItem('notificationAcknowledged');
+                }
+
+                // Show the popup only if the user hasn't acknowledged notifications
+                if (unreadCount > 0 && !localStorage.getItem('notificationAcknowledged')) {
+                    document.getElementById('notificationpopupdata').innerHTML = 'You have ' + unreadCount + ' unread notifications';
+                    document.getElementById('notification-popup').style.display = 'block';
+                    document.getElementById('notification-sound').play();
+                } else {
+                    document.getElementById('notification-popup').style.display = 'none';
                 }
 
                 // Update the badge count in the header
@@ -207,41 +171,47 @@
                     let formattedDateTime = createdAt.toLocaleString();
 
                     var notificationItem = `
-    <div class="text-reset notification-item d-block dropdown-item position-relative">
-        <div class="d-flex">
-            <div class="avatar-xs me-3 flex-shrink-0">
-                <span class="avatar-title bg-info-subtle rounded-circle fs-16">
-                    <img src="/images/${notification.initiator_role.trim() === 'Student' ? 'students' : 'tutors'}/profilepics/${notification.initiator_pic}"
-                         class=""
-                         onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
-                </span>
-            </div>
-            <div class="flex-grow-1">
-                <a onclick="markAsRead(${notification.id})" href="/checkNotificationDetails/${notification.id}" class="stretched-link">
-                    <h6 class="mt-0 mb-2 lh-base">${notification.notification}</h6>
-                </a>
-                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                    <span><i class="mdi mdi-clock-outline"></i> ${formattedDateTime} - ${notification.initiator_name} - (${notification.initiator_role})</span>
-                </p>
-            </div>
-            <div class="px-2 fs-15">
-                <div class="form-check notification-check">
-                    <input class="form-check-input" title="Mark as read" onclick="markAsRead('${notification.id}')" type="radio" value="" id="notification-check-${index}">
-                </div>
-            </div>
-        </div>
-    </div>
-`;
+                        <div class="text-reset notification-item d-block dropdown-item position-relative">
+                            <div class="d-flex">
+                                <div class="avatar-xs me-3 flex-shrink-0">
+                                    <span class="avatar-title bg-info-subtle rounded-circle fs-16">
+                                        <img src="/images/${notification.initiator_role.trim() === 'Student' ? 'students' : 'tutors'}/profilepics/${notification.initiator_pic}"
+                                            class=""
+                                            onerror="this.onerror=null;this.src='https://mychoicetutor.com/images/avatar/default_avatar_img.jpg';">
+                                    </span>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <a onclick="markAsRead(${notification.id})" href="/checkNotificationDetails/${notification.id}" class="stretched-link">
+                                        <h6 class="mt-0 mb-2 lh-base">${notification.notification}</h6>
+                                    </a>
+                                    <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                        <span><i class="mdi mdi-clock-outline"></i> ${formattedDateTime} - ${notification.initiator_name} - (${notification.initiator_role})</span>
+                                    </p>
+                                </div>
+                                <div class="px-2 fs-15">
+                                    <div class="form-check notification-check">
+                                        <input class="form-check-input" title="Mark as read" onclick="markAsRead('${notification.id}')" type="radio" value="" id="notification-check-${index}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
 
-                    notificationList.append(
-                    notificationItem); // Append to All tab regardless of type
+                    notificationList.append(notificationItem);
                 });
+
+                // Update the previous count in localStorage
+                localStorage.setItem('previousUnreadCount', unreadCount);
             }
         });
     }
 
     // Function to close the notification popup
     function closeNotification() {
+        // Mark the notification as acknowledged
+        localStorage.setItem('notificationAcknowledged', 'true');
+
+        // Hide the notification popup
         document.getElementById('notification-popup').style.display = 'none';
     }
 
@@ -250,17 +220,6 @@
         fetchNotificationsAndUpdateCount();
         setInterval(fetchNotificationsAndUpdateCount, 5000);
     });
-    // Show notification function
-    function showNotification(count) {
-        var popup = document.getElementById('notification-popup');
-        var sound = document.getElementById('notification-sound');
-        document.getElementById('notificationpopupdata').innerHTML = 'You have ' + count + ' unread notifications';
-
-        popup.style.display = 'block';
-        sound.play();
-    }
-
-
 
     // Function to mark notification as read
     function markAsRead(notificationId) {
@@ -274,6 +233,8 @@
         });
     }
 </script>
+
+
 
 
 

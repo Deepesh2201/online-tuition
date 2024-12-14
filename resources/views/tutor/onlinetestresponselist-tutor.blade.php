@@ -85,7 +85,7 @@
                         <th scope="col">S.No</th>
                         <th scope="col">Class</th>
                         <th scope="col">Subject</th>
-                        <th scope="col">Topic</th>
+                        {{-- <th scope="col">Topic</th> --}}
                         <th scope="col">Test Name</th>
                         <th scope="col">Test Date</th>
                         <th scope="col">Response</th>
@@ -99,7 +99,7 @@
                             <td>{{$test->class_name}}</td>
                             <td>{{$test->sub_name}}</td>
                             <td>{{$test->topic_name}}</td>
-                            <td>{{$test->name}}</td>
+                            {{-- <td>{{$test->name}}</td> --}}
                             <td>{{ \Carbon\Carbon::parse($test->test_start_date)->format('d M Y') }}</td>
                             <td>
                                 <a href="{{url('tutor/onlinetests/responses')}}/{{$test->id}}"><button class="btn btn-sm btn-primary">View</button></a>
@@ -111,7 +111,7 @@
             </table>
             </div>
 
-           
+
 
             <div class="d-flex justify-content-center" id="paginationContainer">
                 {!! $onlineTests->links() !!}

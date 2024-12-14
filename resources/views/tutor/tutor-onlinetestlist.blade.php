@@ -103,7 +103,7 @@
             <hr>
 
             <div class="table-responsive">
-                <table class="table table-hover table-striped align-middle table-nowrap mb-0 users-table">
+                <table class="table table-hover table-striped align-middlemb-0 ">
                     <thead>
                         <tr>
                             <th scope="col">S.No</th>

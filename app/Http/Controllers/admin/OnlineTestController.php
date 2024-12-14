@@ -277,6 +277,7 @@ class OnlineTestController extends Controller
         // echo $id;
         // dd($onlineTest);
         // Decode the JSON string to an array
+
         $questionIds = json_decode($onlineTest->question_id);
 
         // Fetch the related questions using the decoded question_ids array
@@ -287,15 +288,16 @@ class OnlineTestController extends Controller
     }
     public function taketestsubjective($id)
     {
-
+        // echo $id;
         $onlineTest = OnlineTests::where('id', $id)
-            ->where('class_id', session('userid')->class_id)
+            // ->where('class_id', session('userid')->class_id)
             ->first();
 
         // echo session('userid')->class_id;
         // dd($onlineTest);
         // Decode the JSON string to an array
         $questionIds = json_decode($onlineTest->question_id);
+        // dd($onlineTest);
         // Fetch the related questions using the decoded question_ids array
         $questions = Questionbank::whereIn('id', $questionIds)->get();
 
@@ -588,25 +590,37 @@ class OnlineTestController extends Controller
     public function onlinetestresponseslistTutor()
     {
         $subs = tutorsubjectmapping::where('tutor_id', session('userid')->id)->pluck('subject_id')->toArray();
-        if ($subs) {
-            $onlineTests = OnlineTests::select('online_tests.*', 'subjects.name as sub_name', 'classes.name as class_name', 'online_tests.topic_name as topic_name')
-            ->join('classes', 'classes.id', 'online_tests.class_id')
-            ->join('subjects', 'subjects.id', 'online_tests.subject_id')
-            ->join('testattempteds','testattempteds.test_id','online_tests.id')
-            ->join('paymentstudents','paymentstudents.student_id','testattempteds.student_id')
-            ->where('online_tests.subject_id', 'paymentstudents.subject_id')
-            ->where('online_tests.test_type', 2)
-            ->where('paymentstudents.tutor_id', session('userid')->id)
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-            $classes = classes::where('is_active', 1)->get();
-            $subjects = subjects::where('is_active', 1)->get();
-            $topics = topics::where('is_active', 1)->get();
-            // dd();
-            return view('tutor.onlinetestresponselist-tutor', get_defined_vars());
-        } else {
-            return back()->with('fail', 'No tests Found');
-        }
+if ($subs) {
+    $onlineTests = OnlineTests::select(
+        'online_tests.id',
+        'online_tests.class_id',
+        'online_tests.subject_id',
+        'online_tests.test_type',
+        'online_tests.created_at',
+        'online_tests.updated_at',
+        'subjects.name as sub_name',
+        'classes.name as class_name',
+        'online_tests.topic_name as topic_name'
+    )
+    ->join('classes', 'classes.id', '=', 'online_tests.class_id')
+    ->join('subjects', 'subjects.id', '=', 'online_tests.subject_id')
+    ->join('testattempteds', 'testattempteds.test_id', '=', 'online_tests.id')
+    ->join('paymentstudents', 'paymentstudents.student_id', '=', 'testattempteds.student_id')
+    ->where('online_tests.test_type', 2)
+    ->where('paymentstudents.tutor_id', session('userid')->id)
+    ->groupBy('online_tests.id') // Group by the test ID to ensure uniqueness
+    ->orderBy('online_tests.created_at', 'desc')
+    ->paginate(10);
+
+    $classes = Classes::where('is_active', 1)->get();
+    $subjects = Subjects::where('is_active', 1)->get();
+    $topics = Topics::where('is_active', 1)->get();
+
+    return view('tutor.onlinetestresponselist-tutor', get_defined_vars());
+} else {
+    return back()->with('fail', 'No tests Found');
+}
+
     }
 
     public function subjTestsSearch(Request $request)
@@ -1161,17 +1175,19 @@ class OnlineTestController extends Controller
             return view('tutor.testreport', compact('onlineTest', 'questionsCount', 'responsesCount', 'correctResponsesCount', 'mergedData'));
         } else {
 
-            $assigntdata = AssignTest::find($id);
-            $onlineTest = OnlineTests::where('id', $assigntdata->test_id)->first();
-            $testid = testattempted::where('test_id', $onlineTest->id)->where('student_id', $assigntdata->student_id)->first();
+            // $assigntdata = AssignTest::find($id);
+            // $onlineTest = OnlineTests::where('id', $assigntdata->test_id)->first();
+            // $testid = testattempted::where('test_id', $onlineTest->id)->where('student_id', $assigntdata->student_id)->first();
 
-            $response = testattempted::find($testid);
-            if ($response && $response->isNotEmpty()) {
+            $response = testattempted::where('test_id', $assigntdata->test_id)->first();
+
+            if ($response) {
                 // Access the first item in the collection
                 $firstResponse = $response->first();
 
                 $responseIds = json_decode($firstResponse->answer);
 
+                dd($firstResponse);
                 $finalResponses = SubjectiveResponse::select('subjective_responses.*', 'questionbanks.question')
                     ->join('questionbanks', 'questionbanks.id', 'subjective_responses.question_id')
                     ->whereIn('subjective_responses.id', $responseIds)

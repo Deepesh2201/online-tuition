@@ -68,8 +68,8 @@
 
 
 
-            <div class="table-responsive">
-                <table class="table table-hover table-striped align-middle table-nowrap mb-0 users-table">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped align-middlemb-0 ">
                     <thead class="">
                         <tr>
                             <th scope="col">S.No.</th>
@@ -141,7 +141,7 @@
             </div>
 
             <div class="table-responsive">
-                <table class="table table-hover table-striped align-middle table-nowrap mb-0">
+                <table class="table table-hover table-striped align-middlemb-0 ">
                     <thead class="">
                         <tr>
                             <th scope="col">S.No.</th>

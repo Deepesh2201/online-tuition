@@ -145,18 +145,33 @@ class DashboardController extends Controller
                 ->where('class_id', session('userid')->class_id)
                 ->first();
 
-            // Decode the JSON string to an array
-            $questionIds = json_decode($onlineTest->question_id, true); // Ensure it's decoded as an associative array
-            $responseIds = json_decode($testid->response_id, true); // Ensure it's decoded as an associative array
+                if ($onlineTest && $testid) {
+                    // Decode the JSON strings to arrays
+                    $questionIds = json_decode($onlineTest->question_id, true);
+                    $responseIds = json_decode($testid->response_id, true);
 
-            $questionsCount = is_array($questionIds) ? count($questionIds) : 0;
-            $responsesCount = is_array($responseIds) ? count($responseIds) : 0;
-            $correctResponsesCount = is_array($responseIds) ? count(array_filter($responseIds, function ($responseId) {
-                // You may need to adjust this filtering logic based on your data structure
-                return testresponssheet::where('id', $responseId)
-                    ->whereColumn('correct_option', 'marked_option')
-                    ->exists();
-            })) : 0;
+                    // Ensure both are valid arrays before proceeding
+                    $questionsCount = is_array($questionIds) ? count($questionIds) : 0;
+                    $responsesCount = is_array($responseIds) ? count($responseIds) : 0;
+
+                    // Calculate correct responses
+                    $correctResponsesCount = is_array($responseIds) ? count(array_filter($responseIds, function ($responseId) {
+                        // Ensure proper filtering logic
+                        return testresponssheet::where('id', $responseId)
+                            ->whereColumn('correct_option', 'marked_option')
+                            ->exists();
+                    })) : 0;
+
+                    // Proceed with your logic or return the counts
+                    return [
+                        'questionsCount' => $questionsCount,
+                        'responsesCount' => $responsesCount,
+                        'correctResponsesCount' => $correctResponsesCount,
+                    ];
+                } else {
+                    return back()->with('fail', 'Test or response data not found.');
+                }
+
 
 
             // Assign counts to the quiz object

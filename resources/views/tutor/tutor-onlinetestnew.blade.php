@@ -118,7 +118,7 @@
                         <label for="">Test Type<i style="color: red">*</i></label>
                         <select class="form-control" id="test-type" name="test_type" onchange="fetchQuestions()">
                             @if ($tdata ?? '')
-                            
+
                             <option value="1" @if ($tdata->test_type == 1) selected @endif>Objective</option>
                             <option value="2" @if ($tdata->test_type == 2) selected @endif>Subjective</option>
                             @else
@@ -240,7 +240,7 @@
 
                 <div class="form-group row mt-2">
                     <div class="col-md-12">
-                        <label for="">Questions<i style="color: red">*</i></label>
+                        <label for="">Press and hold the CTRL (Windows) or CMD (Mac) key to select multiple questions from the list below.<i style="color: red">*</i></label>
 
                         <select class="form-control select-checkbox-fa" style="height: 300px" id="questiondata"
                             name="questiondata[]"  multiple required>

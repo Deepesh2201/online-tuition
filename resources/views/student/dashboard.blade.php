@@ -471,14 +471,14 @@
                                         @if ($count >= 5)
                                         @break
                                         @endif
-                                        <tr>
+                                        {{-- <tr>
                                             <td>{{ $pastQuiz->exam_name }}</td>
                                             <td>{{ $pastQuiz->questionsCount }}</td>
                                             <td>{{ $pastQuiz->correctResponsesCount }}</td>
                                             <td style="width:23%"><a
                                                     href="/student/exam/report/{{ $pastQuiz->id }}"><span
                                                         class="assign">View Details</span></a></td>
-                                        </tr>
+                                        </tr> --}}
                                         @php $count++; @endphp
                                         @endforeach
 
