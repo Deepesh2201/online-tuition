@@ -104,7 +104,7 @@ class DashboardController extends Controller
                 $query->where('democlasses.slot_confirmed', '>', Carbon::now())
                     ->orWhere('statuses.name', '=', 'started');
             })
-            ->orderBy('democlasses.slot_confirmed', 'asc')
+            ->orderBy('democlasses.slot_confirmed', 'desc')
             ->take(5)
             ->get()
             ->each(function ($item) {

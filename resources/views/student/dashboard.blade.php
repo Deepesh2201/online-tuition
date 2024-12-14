@@ -162,7 +162,8 @@
                                     @endphp
 
                                     <div class="circular-progress " data-inner-circle-color="lightgrey"
-                                        data-percentage="{{round($progressperc)}}" data-progress-color="#88B0F1"
+                                        data-percentage="{{80}}" data-progress-color="#88B0F1"
+                                        {{-- data-percentage="{{round($progressperc)}}" data-progress-color="#88B0F1" --}}
                                         data-bg-color="white">
                                         <div class="inner-circle"></div>
                                         <p class="percentage">0%</p>
@@ -272,8 +273,8 @@
                                         <tr>
                                             <td>
                                                 <div class="namePic">
-                                                    <img src="/images/tutors/profilepics/{{ $democlass->profile_pic }}"
-                                                        alt="">
+                                                    {{-- <img src="/images/tutors/profilepics/{{ $democlass->profile_pic }}"
+                                                        alt=""> --}}
                                                     <span>{{ $democlass->tutor_name }}</span>
                                                 </div>
                                             </td>
@@ -294,7 +295,8 @@
                                                     }
                                                     @endphp
                                                     <span>{{ $message }}</span>
-                                                    <small>{{ $startDateTime->format('Y-m-d H:i:s') }}</small>
+                                                    {{-- <small>{{ $startDateTime->format('Y-m-d H:i:s') }}</small> --}}
+                                                    <small><td>{{ \Carbon\Carbon::parse($startDateTime)->format('d-m-Y h:i A') }}</td></small>
                                                 </div>
                                             </td>
 
