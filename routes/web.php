@@ -34,6 +34,7 @@ use App\Http\Controllers\tutor\ClassScheduleController;
 use App\Http\Controllers\TutorreviewsController;
 use App\Http\Controllers\ZoomClassesController;
 use App\Http\Controllers\SlotBookingController;
+use App\Http\Controllers\WorldPayController;
 use App\Models\classes;
 use App\Models\SlotBooking;
 use App\Models\tutorreviews;
@@ -603,3 +604,20 @@ Route::get('termsandconditions', function(){
 Route::get('contact', function(){
     return view('front-cms/contact');
 });
+
+// WorldPay Payment Gateway
+Route::get('/worldpay/payment/{orderId}', [WorldPayController::class, 'showPaymentPage'])->name('worldpay.payment');
+Route::post('/worldpay/callback', [WorldPayController::class, 'handleCallback'])->name('worldpay.callback');
+
+// Optional: Success, cancel, and failed routes
+Route::get('/payment/success', function () {
+    return 'Payment successful!';
+})->name('payment.success');
+
+Route::get('/payment/cancel', function () {
+    return 'Payment cancelled.';
+})->name('payment.cancel');
+
+Route::get('/payment/failed', function () {
+    return 'Payment failed.';
+})->name('payment.failed');
