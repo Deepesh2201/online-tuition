@@ -606,8 +606,9 @@ Route::get('contact', function(){
 });
 
 // WorldPay Payment Gateway
-Route::get('/worldpay/payment/{orderId}', [WorldPayController::class, 'showPaymentPage'])->name('worldpay.payment');
-Route::post('/worldpay/callback', [WorldPayController::class, 'handleCallback'])->name('worldpay.callback');
+Route::get('/worldpay/payment/', [WorldPayController::class, 'showPaymentPage'])->name('worldpay.payment.page');
+Route::post('/worldpay/initiate', [WorldPayController::class, 'initiatePayment'])->name('worldpay.payment');
+// Route::get('/initiate-payment', [PaymentController::class, 'initiatePayment'])->name('initiate.payment');
 
 // Optional: Success, cancel, and failed routes
 Route::get('/payment/success', function () {

@@ -102,12 +102,11 @@
                                 value="{{ $enrollment->subject_id }}"> --}}
                             {{-- <input type="text" class="form-control readonly" name="subjectenroll" id="subjectenroll"
                                 readonly value="{{ $enrollment->subject_name }}"> --}}
-                                <Select type="text" class="form-control" name="subjectenrollid" id="subjectenrollid">
-                                    @foreach ($subjects as $subject)
-
-                                    <option value="{{$subject->id}}">{{$subject->name}}</option>
-                                    @endforeach
-                                </Select>
+                            <Select type="text" class="form-control" name="subjectenrollid" id="subjectenrollid">
+                                @foreach ($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                @endforeach
+                            </Select>
                             <span class="text-danger">
                                 @error('subjectenrollid')
                                     {{ $message }}
@@ -198,8 +197,9 @@
                 </form>
             </div>
             <div class="">
-                <p style="color: #99A7AE">Subject selection is a formality—you can take any subject by mutual agreement with your tutor.</p>
-                </div>
+                <p style="color: #99A7AE">Subject selection is a formality—you can take any subject by mutual agreement with
+                    your tutor.</p>
+            </div>
         </div>
     </div>
 
@@ -226,62 +226,68 @@
             });
 
             // Button click event handler
-$('.slot-btn').on('click', function () {
-    var $button = $(this);
-    var date = $button.data('date');
-    var time = $button.data('time');
-    var slotId = $button.data('slot-id'); // Added to get the slot ID
+            $('.slot-btn').on('click', function() {
+                var $button = $(this);
+                var date = $button.data('date');
+                var time = $button.data('time');
+                var slotId = $button.data('slot-id'); // Added to get the slot ID
 
-    // Get the required number of classes from the input field
-    var requiredClasses = parseInt(document.getElementById('requiredclassenroll').value);
+                // Get the required number of classes from the input field
+                var requiredClasses = parseInt(document.getElementById('requiredclassenroll').value);
 
-    // Check if the input value is valid
-    if (isNaN(requiredClasses) || requiredClasses < 1) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Invalid Input',
-            text: 'Please enter a valid number of required classes.',
-            confirmButtonText: 'OK'
-        });
-        return false;
-    }
+                // Check if the input value is valid
+                if (isNaN(requiredClasses) || requiredClasses < 1) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Invalid Input',
+                        text: 'Please enter a valid number of required classes.',
+                        confirmButtonText: 'OK'
+                    });
+                    return false;
+                }
 
-    // Check if the slot is not selected
-    if (!$button.hasClass('selected')) {
-        // Check if the number of selected slots has reached the required number
-        if (selectedSlots.length >= requiredClasses) {
-            Swal.fire({
-                icon: 'info',
-                title: 'Limit Reached',
-                text: 'You already selected ' + selectedSlots.length + ' slots as per your required classes.',
-                confirmButtonText: 'OK'
+                // Check if the slot is not selected
+                if (!$button.hasClass('selected')) {
+                    // Check if the number of selected slots has reached the required number
+                    if (selectedSlots.length >= requiredClasses) {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Limit Reached',
+                            text: 'You already selected ' + selectedSlots.length +
+                                ' slots as per your required classes.',
+                            confirmButtonText: 'OK'
+                        });
+                        return false;
+                    }
+
+                    // Add the slot to the selectedSlots array
+                    selectedSlots.push({
+                        date: date,
+                        time: time,
+                        slotId: slotId
+                    });
+                    // Toggle the selected class
+                    $button.addClass('selected');
+                    // Change the button color to blue
+                    $button.removeClass('btn-success').addClass('btn-primary');
+                } else {
+                    // Remove the slot from the selectedSlots array
+                    selectedSlots = selectedSlots.filter(function(slot) {
+                        return !(slot.date === date && slot.time === time && slot.slotId ===
+                            slotId);
+                    });
+                    // Toggle the selected class
+                    $button.removeClass('selected');
+                    // Change the button color back to its original color
+                    $button.removeClass('btn-primary').addClass('btn-success');
+                }
+
+                // Update the slotids input field
+                updateSlotIdsInput();
+
+                // Log the selected slots (you can customize this part based on your requirements)
+                console.log('Selected Slots:', selectedSlots);
             });
-            return false;
-        }
-
-        // Add the slot to the selectedSlots array
-        selectedSlots.push({ date: date, time: time, slotId: slotId });
-        // Toggle the selected class
-        $button.addClass('selected');
-        // Change the button color to blue
-        $button.removeClass('btn-success').addClass('btn-primary');
-    } else {
-        // Remove the slot from the selectedSlots array
-        selectedSlots = selectedSlots.filter(function (slot) {
-            return !(slot.date === date && slot.time === time && slot.slotId === slotId);
-        });
-        // Toggle the selected class
-        $button.removeClass('selected');
-        // Change the button color back to its original color
-        $button.removeClass('btn-primary').addClass('btn-success');
-    }
-
-    // Update the slotids input field
-    updateSlotIdsInput();
-
-    // Log the selected slots (you can customize this part based on your requirements)
-    console.log('Selected Slots:', selectedSlots);
-});
 
 
             // Function to update the slotids input field

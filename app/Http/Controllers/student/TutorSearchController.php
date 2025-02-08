@@ -21,6 +21,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
 
 class TutorSearchController extends Controller
 {
@@ -524,14 +525,65 @@ public function admintutorprofile($id)
             'totalamountenroll' => 'required', //nn
         ]);
 
+        $totalamt = intval($request->totalamountenroll) * 100;
+        // dd($totalamt);
         $selectedSlotIds = $request->slotids;
         $contactadmin = $request->contactadmin;
 
-        // Temp. Order Id
-        $order_id = '1234-5678-qqyz-aspa-zqkp1o2';
+        // Generate a unique order ID
+        $order_id = substr(uniqid(date('YmdHis')), 0, 20);
 
         $classId = subjects::select('*')->where('id', $request->subjectenrollid)->first();
         $tutorname = tutorprofile::select('*')->where('tutor_id', $request->tutorenrollid)->first();
+// dd($order_id);
+        // initiate payment gateway
+        // Retrieve credentials from the .env file
+    $username = env('WORLDPAY_USERNAME');
+    $password = env('WORLDPAY_PASSWORD');
+    $apiUrl = env('WORLDPAY_API_URL');
+
+    $response = Http::withBasicAuth($username, $password)
+        ->withHeaders([
+            'Content-Type' => 'application/vnd.worldpay.payment_pages-v1.hal+json',
+            'Accept' => 'application/vnd.worldpay.payment_pages-v1.hal+json',
+        ])
+        ->post($apiUrl, [
+            'transactionReference' => $order_id,
+            'merchant' => [
+                'entity' => 'PO4068001058',
+            ],
+            "description"=> "Payment for $request->requiredclassenroll class",
+            'narrative' => [
+                'line1' => implode(', ', [
+                    $request->tutorenrollid,
+                    $request->subjectenrollid,
+                    $request->requiredclassenroll,
+                    $request->rateperhourenroll,
+                    $request->totalamountenroll
+                ])
+            ],
+            'value' => [
+                'currency' => 'GBP',
+                'amount' =>$totalamt,
+            ],
+
+
+        ]);
+
+    if ($response->successful()) {
+        $responseData = $response->json();
+        $paymentUrl = $responseData['url'];
+
+        // Pass the payment URL to the view
+        // return view('worldpay.paymentpage', compact('paymentUrl'));
+        return redirect()->away($paymentUrl); // Redirect the user to Worldpay payment page
+    }
+
+    return response()->json(['error' => 'Payment initiation failed'], 500);
+
+
+
+
 
         // Step 1: Save the paymentdetails record
         $paymentdetails = new paymentdetails();

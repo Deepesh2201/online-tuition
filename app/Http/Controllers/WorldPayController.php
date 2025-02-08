@@ -3,33 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class WorldPayController extends Controller
 {
-    public function showPaymentPage($orderId)
+    public function showPaymentPage()
     {
-        // $order = Order::findOrFail($orderId); // Replace with your order model
-        $order = $orderId;
-        return view('worldpay.hpp', compact('order'));
+
+        return view('worldpay.hpp');
     }
 
-    public function handleCallback(Request $request)
+    public function initiatePayment(Request $request)
     {
-        // Validate and process the callback data
-        $status = $request->input('transStatus'); // Get the transaction status
-        $orderId = $request->input('cartId');
+        $username = 'XlHabGuPr1ge66w1'; // Replace with your Worldpay username
+        $password = '0SoTaQx8yOET8F2aHjJ8CcbW5au7frpjeVnE0T1DJ1mv9kxEkDgyjV0Zh8uiixDH'; // Replace with your Worldpay password
 
-        if ($status === 'Y') {
-            // Payment successful
-            $order = Order::findOrFail($orderId);
-            $order->update(['status' => 'paid']);
-            return redirect()->route('payment.success');
-        } elseif ($status === 'C') {
-            // Payment cancelled
-            return redirect()->route('payment.cancel');
-        } else {
-            // Payment failed
-            return redirect()->route('payment.failed');
+        $response = Http::withBasicAuth($username, $password)
+            ->withHeaders([
+                'Content-Type' => 'application/vnd.worldpay.payment_pages-v1.hal+json',
+                'Accept' => 'application/vnd.worldpay.payment_pages-v1.hal+json',
+            ])
+            ->post('https://try.access.worldpay.com/payment_pages', [
+                'transactionReference' => 'Class_Purchased',
+                'merchant' => [
+                    'entity' => 'PO4068001058',
+                ],
+                'narrative' => [
+                    'line1' => 'Deepesh-001',
+                ],
+                'value' => [
+                    'currency' => 'GBP',
+                    'amount' => 100, // Replace with dynamic amount
+                ],
+            ]);
+
+        if ($response->successful()) {
+            $responseData = $response->json();
+            $paymentUrl = $responseData['url'];
+            return redirect()->away($paymentUrl); // Redirect the user to Worldpay payment page
         }
+
+        return response()->json(['error' => 'Payment initiation failed'], 500);
     }
 }

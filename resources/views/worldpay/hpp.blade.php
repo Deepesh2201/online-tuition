@@ -6,20 +6,14 @@
     <title>WorldPay Payment</title>
 </head>
 <body>
-    <form action="https://secure.worldpay.com/wcc/purchase" method="post">
+    <form action="{{route('worldpay.payment')}}" method="post">
+        @csrf
         <!-- Mandatory Fields -->
-        <input type="" name="instId" value="{{ env('WORLDPAY_INSTALLATION_ID') }}">
-        {{-- <input type="hidden" name="cartId" value="{{ $order->id }}"> --}}
-        <input type="" name="cartId" value="1">
-        <input type="" name="amount" value="101">
-        <input type="" name="currency" value="GBP">
-        <input type="" name="desc" value="Order Payment for 1">
+        <input type="text" name="orderid" value="" placeholder="enter orderid">
+        <input type="" name="amount" value="" placeholder="enter amount">
+        <input type="" name="currency" value="GBP" readonly disabled placeholder="enter currency">
+        <input type="text" name="purpose" placeholder="enter purpose">
 
-        <!-- Optional Fields -->
-        <input type="" name="testMode" value="{{ env('WORLDPAY_TEST_MODE') ? '100' : '0' }}">
-        <input type="" name="MC_callback" value="{{ route('worldpay.callback') }}">
-
-        <!-- Submit Button -->
         <button type="submit">Pay Now</button>
     </form>
 </body>
