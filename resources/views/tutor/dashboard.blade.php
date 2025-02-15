@@ -207,8 +207,6 @@
                                         @foreach ($upcoming_demos as $demo)
                                         <tr>
                                             <td><div class="namePic">
-                                                    <img src="/images/students/profilepics/{{$demo->student_img}}"
-                                                        alt="">
                                                     <span>{{$demo->student}}</span>
                                                 </div>
                                             </td>
