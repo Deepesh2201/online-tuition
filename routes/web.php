@@ -194,6 +194,9 @@ Route::group(['prefix' => 'student', 'middleware' => ['StudentAuthenticate']], f
     // Student Fees/Payments
     Route::get('studentpayments', [PaymentsController::class, 'studentpayments'])->name('student.studentpayments');
     Route::post('studentpayments-search', [PaymentsController::class, 'studentpaymentsSearch'])->name('student.payments-search');
+    Route::get('dashboard/payment_process/{id}', [PaymentsController::class, 'payment_process']);
+    // Route::get('dashboard/payment_process/{id}', [PaymentsController::class, 'payment_process']);
+
     // Online tests/exams
     Route::get('exams', [OnlineTestController::class, 'studentexams'])->name('student.exams');
     Route::post('exams-search', [OnlineTestController::class, 'studentexamsSearch'])->name('student.exams-search');

@@ -524,8 +524,8 @@ public function admintutorprofile($id)
             'rateperhourenroll' => 'required', //nn
             'totalamountenroll' => 'required', //nn
         ]);
+        $totalamt = floatval($request->totalamountenroll) * 100;
 
-        $totalamt = intval($request->totalamountenroll) * 100;
         // dd($totalamt);
         $selectedSlotIds = $request->slotids;
         $contactadmin = $request->contactadmin;
@@ -535,7 +535,7 @@ public function admintutorprofile($id)
 
         $classId = subjects::select('*')->where('id', $request->subjectenrollid)->first();
         $tutorname = tutorprofile::select('*')->where('tutor_id', $request->tutorenrollid)->first();
-// dd($order_id);
+
         // initiate payment gateway
         // Retrieve credentials from the .env file
     $username = env('WORLDPAY_USERNAME');
@@ -566,7 +566,14 @@ public function admintutorprofile($id)
                 'currency' => 'GBP',
                 'amount' =>$totalamt,
             ],
-
+            "resultURLs" => array(
+                "successURL" => "http://127.0.0.1:8000/student/dashboard/payment_process/$order_id",
+                "pendingURL" => "http://127.0.0.1:8000/student/dashboard/payment_pending/$order_id",
+                "failureURL" => "http://127.0.0.1:8000/student/dashboard/payment_failure",
+                "errorURL"  =>   "http://127.0.0.1:8000/student/dashboard/payment_error",
+                "cancelURL" =>  "http://127.0.0.1:8000/student/dashboard/payment_cancel",
+                "expiryURL" =>  "http://127.0.0.1:8000/student/dashboard/payment_expiry"
+              ),
 
         ]);
 
@@ -574,9 +581,18 @@ public function admintutorprofile($id)
         $responseData = $response->json();
         $paymentUrl = $responseData['url'];
 
-        // Pass the payment URL to the view
-        // return view('worldpay.paymentpage', compact('paymentUrl'));
-        return redirect()->away($paymentUrl); // Redirect the user to Worldpay payment page
+        session([
+            'order_id' => $order_id,
+            'tutorenrollid' => $request->tutorenrollid,
+            'subjectenrollid' => $request->subjectenrollid,
+            'requiredclassenroll' => $request->requiredclassenroll,
+            'rateperhourenroll' => $request->rateperhourenroll,
+            'totalamountenroll' => $request->totalamountenroll,
+            'slotids' => $request->slotids,
+            'contactadmin' => $request->contactadmin,
+        ]);
+
+        return redirect()->away($paymentUrl);
     }
 
     return response()->json(['error' => 'Payment initiation failed'], 500);
@@ -585,145 +601,172 @@ public function admintutorprofile($id)
 
 
 
-        // Step 1: Save the paymentdetails record
-        $paymentdetails = new paymentdetails();
-        $paymentdetails->transaction_id = $order_id;
-        $paymentdetails->payment_mode = 'Credit Card';
-        $paymentdetails->amount = $request->totalamountenroll;
-        $paymentdetails->status = 1;
-        $test = $paymentdetails->save();
+        // // Step 1: Save the paymentdetails record
+        // $paymentdetails = new paymentdetails();
+        // $paymentdetails->transaction_id = $order_id;
+        // $paymentdetails->payment_mode = 'Credit Card';
+        // $paymentdetails->amount = $request->totalamountenroll;
+        // $paymentdetails->status = 1;
+        // $test = $paymentdetails->save();
 
-        // Step 2: Save the studentpayment record
-        $studentpayment = new paymentstudents();
-        $studentpayment->transaction_id = $order_id;
-        $studentpayment->student_id = session('userid')->id;
-        $studentpayment->class_id = $classId->class_id;
-        $studentpayment->subject_id = $request->subjectenrollid;
-        $studentpayment->tutor_id = $request->tutorenrollid;
-        $studentpayment->classes_purchased = $request->requiredclassenroll;
-        $studentpayment->rate_per_hr = $request->rateperhourenroll;
-        $spdres = $studentpayment->save();
+        // // Step 2: Save the studentpayment record
+        // $studentpayment = new paymentstudents();
+        // $studentpayment->transaction_id = $order_id;
+        // $studentpayment->student_id = session('userid')->id;
+        // $studentpayment->class_id = $classId->class_id;
+        // $studentpayment->subject_id = $request->subjectenrollid;
+        // $studentpayment->tutor_id = $request->tutorenrollid;
+        // $studentpayment->classes_purchased = $request->requiredclassenroll;
+        // $studentpayment->rate_per_hr = $request->rateperhourenroll;
+        // $spdres = $studentpayment->save();
 
-        // Send welcome mail
-        $details = [
-            'name' => session('userid')->name,
-            'total_classes' => $request->requiredclassenroll,
-            'tutor_name' => $tutorname->name,
-            'mailtype' => 4,
-        ];
+        // // Send welcome mail
+        // $details = [
+        //     'name' => session('userid')->name,
+        //     'total_classes' => $request->requiredclassenroll,
+        //     'tutor_name' => $tutorname->name,
+        //     'mailtype' => 4,
+        // ];
 
-        Mail::to(session('userid')->email)->send(new SendMail($details));
-        // Send welcome mail ends here ..
+        // Mail::to(session('userid')->email)->send(new SendMail($details));
+        // // Send welcome mail ends here ..
 
-        // Step 3: Update slotbooking records for each selected slot
-        // Converting comma-separated string to an array
-        $selectedSlotIdsArray = explode(',', $selectedSlotIds);
-        foreach ($selectedSlotIdsArray as $slotId) {
-            // Find the existing slotbooking record by id
-            $slotbooking = SlotBooking::find($slotId);
+        // // Step 3: Update slotbooking records for each selected slot
+        // // Converting comma-separated string to an array
+        // $selectedSlotIdsArray = explode(',', $selectedSlotIds);
+        // foreach ($selectedSlotIdsArray as $slotId) {
+        //     // Find the existing slotbooking record by id
+        //     $slotbooking = SlotBooking::find($slotId);
 
-            // Check if the record exists
-            if ($slotbooking) {
-                // Update the fields as needed
-                $slotbooking->student_id = session('userid')->id;
-                $slotbooking->booked_at = Carbon::now();
-                $slotbooking->transaction_id = $order_id;
-                $slotbooking->subject_id = $request->subjectenrollid;
-                $slotbooking->status = 1;
-                $slotbooking->contact_admin = $request->contactadmin == 'on' ? 1 : 0;
-                $slotbooking->class_schedule_id = $studentpayment->id;
-                // $slotbooking->slot_id = $slotId;
+        //     // Check if the record exists
+        //     if ($slotbooking) {
+        //         // Update the fields as needed
+        //         $slotbooking->student_id = session('userid')->id;
+        //         $slotbooking->booked_at = Carbon::now();
+        //         $slotbooking->transaction_id = $order_id;
+        //         $slotbooking->subject_id = $request->subjectenrollid;
+        //         $slotbooking->status = 1;
+        //         $slotbooking->contact_admin = $request->contactadmin == 'on' ? 1 : 0;
+        //         $slotbooking->class_schedule_id = $studentpayment->id;
+        //         // $slotbooking->slot_id = $slotId;
 
-                // Save the changes
-                $slotbooking->save();
-            }
-        }
-        if ($contactadmin == 'on') {
+        //         // Save the changes
+        //         $slotbooking->save();
+        //     }
+        // }
+        // if ($contactadmin == 'on') {
 
-            //////////////// Here I need to pass notification into db
-            $notificationdata = new Notification();
-            $notificationdata->alert_type = 6;
-            $notificationdata->notification = session('userid')->name . ' Need your help in slot booking';
-            $notificationdata->initiator_id = session('userid')->id;
-            $notificationdata->initiator_role = session('userid')->role_id;
-            $notificationdata->event_id = $request->tutorenrollid;
-            // Sending to admin
-            // if($request->receiver_role_id == 1){
-            //     $notificationdata->show_to_admin = 1;
-            //     $notificationdata->show_to_admin_id = $request->receiver_id;
-            $notificationdata->show_to_all_admin = 1;
-            // }
-            // Sending to tutor
-            // if($request->receiver_role_id == 2){
-            // $notificationdata->show_to_tutor = 1;
-            // $notificationdata->show_to_tutor_id = $tutor_id->tutor_id;
-            // $notificationdata->show_to_all_tutor = 0;
-            // }
-            // Sending to student
-            // if($request->receiver_role_id == 3){
-            //     $notificationdata->show_to_student = 1;
-            //     $notificationdata->show_to_student_id = $request->receiver_id;
-            //     // $notificationdata->show_to_all_student = 0;
-            // }
-            // // Sending to parent
-            // if($request->receiver_role_id == 3){
-            //     $notificationdata->show_to_parent = 1;
-            //     $notificationdata->show_to_parent_id = $request->receiver_id;
-            //     // $notificationdata->show_to_all_parent = 0;
-            // }
-            $notificationdata->read_status = 0;
+        //     //////////////// Here I need to pass notification into db
+        //     $notificationdata = new Notification();
+        //     $notificationdata->alert_type = 6;
+        //     $notificationdata->notification = session('userid')->name . ' Need your help in slot booking';
+        //     $notificationdata->initiator_id = session('userid')->id;
+        //     $notificationdata->initiator_role = session('userid')->role_id;
+        //     $notificationdata->event_id = $request->tutorenrollid;
+        //     // Sending to admin
+        //     // if($request->receiver_role_id == 1){
+        //     //     $notificationdata->show_to_admin = 1;
+        //     //     $notificationdata->show_to_admin_id = $request->receiver_id;
+        //     $notificationdata->show_to_all_admin = 1;
+        //     // }
+        //     // Sending to tutor
+        //     // if($request->receiver_role_id == 2){
+        //     // $notificationdata->show_to_tutor = 1;
+        //     // $notificationdata->show_to_tutor_id = $tutor_id->tutor_id;
+        //     // $notificationdata->show_to_all_tutor = 0;
+        //     // }
+        //     // Sending to student
+        //     // if($request->receiver_role_id == 3){
+        //     //     $notificationdata->show_to_student = 1;
+        //     //     $notificationdata->show_to_student_id = $request->receiver_id;
+        //     //     // $notificationdata->show_to_all_student = 0;
+        //     // }
+        //     // // Sending to parent
+        //     // if($request->receiver_role_id == 3){
+        //     //     $notificationdata->show_to_parent = 1;
+        //     //     $notificationdata->show_to_parent_id = $request->receiver_id;
+        //     //     // $notificationdata->show_to_all_parent = 0;
+        //     // }
+        //     $notificationdata->read_status = 0;
 
-            $notified = $notificationdata->save();
-            broadcast(new RealTimeMessage('$notification'));
+        //     $notified = $notificationdata->save();
+        //     broadcast(new RealTimeMessage('$notification'));
 
-            $msg = 'Enrollment completed. Please have patience, admin you contact you soon.';
-        } else {
-            $msg = 'Enrollment Completed & Slots confirmed. Kindly use your registered Email Id to join class.';
-        }
+        //     $msg = 'Enrollment completed. Please have patience, admin you contact you soon.';
+        // } else {
+        //     $msg = 'Enrollment Completed & Slots confirmed. Kindly use your registered Email Id to join class.';
+        // }
 
-        if ($spdres) {
+        // if ($spdres) {
 
-            //////////////// Here I need to pass notification into db
-            $notificationdata = new Notification();
-            $notificationdata->alert_type = 7;
-            $notificationdata->notification = session('userid')->name . ' Enrolled for classes';
-            $notificationdata->initiator_id = session('userid')->id;
-            $notificationdata->initiator_role = session('userid')->role_id;
-            $notificationdata->event_id = $request->tutorenrollid;
-            // Sending to admin
-            // if($request->receiver_role_id == 1){
-            //     $notificationdata->show_to_admin = 1;
-            //     $notificationdata->show_to_admin_id = $request->receiver_id;
-            //     // $notificationdata->show_to_all_admin = 1;
-            // }
-            // Sending to tutor
-            // if($request->receiver_role_id == 2){
-            $notificationdata->show_to_tutor = 1;
-            $notificationdata->show_to_tutor_id = $request->tutorenrollid;
-            // $notificationdata->show_to_all_tutor = 0;
-            // }
-            // Sending to student
-            // if($request->receiver_role_id == 3){
-            //     $notificationdata->show_to_student = 1;
-            //     $notificationdata->show_to_student_id = $request->receiver_id;
-            //     // $notificationdata->show_to_all_student = 0;
-            // }
-            // // Sending to parent
-            // if($request->receiver_role_id == 3){
-            //     $notificationdata->show_to_parent = 1;
-            //     $notificationdata->show_to_parent_id = $request->receiver_id;
-            //     // $notificationdata->show_to_all_parent = 0;
-            // }
-            $notificationdata->read_status = 0;
+        //     //////////////// Here I need to pass notification into db
+        //     $notificationdata = new Notification();
+        //     $notificationdata->alert_type = 7;
+        //     $notificationdata->notification = session('userid')->name . ' Enrolled for classes';
+        //     $notificationdata->initiator_id = session('userid')->id;
+        //     $notificationdata->initiator_role = session('userid')->role_id;
+        //     $notificationdata->event_id = $request->tutorenrollid;
+        //     // Sending to admin
+        //     // if($request->receiver_role_id == 1){
+        //     //     $notificationdata->show_to_admin = 1;
+        //     //     $notificationdata->show_to_admin_id = $request->receiver_id;
+        //     //     // $notificationdata->show_to_all_admin = 1;
+        //     // }
+        //     // Sending to tutor
+        //     // if($request->receiver_role_id == 2){
+        //     $notificationdata->show_to_tutor = 1;
+        //     $notificationdata->show_to_tutor_id = $request->tutorenrollid;
+        //     // $notificationdata->show_to_all_tutor = 0;
+        //     // }
+        //     // Sending to student
+        //     // if($request->receiver_role_id == 3){
+        //     //     $notificationdata->show_to_student = 1;
+        //     //     $notificationdata->show_to_student_id = $request->receiver_id;
+        //     //     // $notificationdata->show_to_all_student = 0;
+        //     // }
+        //     // // Sending to parent
+        //     // if($request->receiver_role_id == 3){
+        //     //     $notificationdata->show_to_parent = 1;
+        //     //     $notificationdata->show_to_parent_id = $request->receiver_id;
+        //     //     // $notificationdata->show_to_all_parent = 0;
+        //     // }
+        //     $notificationdata->read_status = 0;
 
-            $notified = $notificationdata->save();
-            broadcast(new RealTimeMessage('$notification'));
+        //     $notified = $notificationdata->save();
+        //     broadcast(new RealTimeMessage('$notification'));
 
-            // return back()->with('success', $msg);
-            return redirect()->to('student/enrollsuccess');
-        } else {
-            return back()->with('fail', 'Something Went Wrong. Try Again Later');
-        }
+        //     // return back()->with('success', $msg);
+        //     return redirect()->to('student/enrollsuccess');
+        // } else {
+        //     return back()->with('fail', 'Something Went Wrong. Try Again Later');
+        // }
+    }
+    public function paymentSuccess(Request $request)
+    {
+        dd($request->all());
+        // Retrieve session data
+        $order_id = session('order_id');
+        $tutorenrollid = session('tutorenrollid');
+        $subjectenrollid = session('subjectenrollid');
+        $requiredclassenroll = session('requiredclassenroll');
+        $rateperhourenroll = session('rateperhourenroll');
+        $totalamountenroll = session('totalamountenroll');
+        $slotids = session('slotids');
+        $contactadmin = session('contactadmin');
+        $userid = session('userid');
+
+        // 🔒 Double-check with Worldpay (optional, depends on API)
+
+        // Save records only after successful payment confirmation
+        // Same DB logic here for paymentdetails, paymentstudents, slotbooking...
+
+        // Clear session variables if needed
+        session()->forget([
+            'order_id', 'tutorenrollid', 'subjectenrollid', 'requiredclassenroll',
+            'rateperhourenroll', 'totalamountenroll', 'slotids', 'contactadmin'
+        ]);
+
+        return redirect('/student/dashboard')->with('success', 'Payment successful. Slots booked.');
     }
 
     public function tutorslist()

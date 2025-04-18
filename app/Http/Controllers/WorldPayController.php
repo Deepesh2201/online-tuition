@@ -24,7 +24,7 @@ class WorldPayController extends Controller
                 'Accept' => 'application/vnd.worldpay.payment_pages-v1.hal+json',
             ])
             ->post('https://try.access.worldpay.com/payment_pages', [
-                'transactionReference' => 'Class_Purchased',
+                'transactionReference' => 'Class_Purchased3',
                 'merchant' => [
                     'entity' => 'PO4068001058',
                 ],
@@ -35,7 +35,15 @@ class WorldPayController extends Controller
                     'currency' => 'GBP',
                     'amount' => 100, // Replace with dynamic amount
                 ],
-            ]);
+                "resultURLs" => array(
+                    "successURL" => "http://127.0.0.1:8000/student/studentpayments/?success",
+                    "pendingURL" => "http://127.0.0.1:8000/student/studentpayments/?pending",
+                    "failureURL" => "http://127.0.0.1:8000/student/studentpayments/?failure",
+                    "errorURL"  =>   "http://127.0.0.1:8000/student/studentpayments/?error",
+                    "cancelURL" =>  "http://127.0.0.1:8000/student/studentpayments/?cancel",
+                    "expiryURL" =>  "http://127.0.0.1:8000/student/studentpayments/?expiry"
+                  ),
+                ]);
 
         if ($response->successful()) {
             $responseData = $response->json();
